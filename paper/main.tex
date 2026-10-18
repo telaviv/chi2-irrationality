@@ -48,7 +48,7 @@
 
 \author{Shawn Krisman}
 
-\subjclass[2020]{Primary 11J72; Secondary 11J82, 31A15, 15A15, 68V20}
+\subjclass[2020]{Primary 11J72; Secondary 33B30, 41A21, 31A15, 68V20}
 \keywords{Legendre chi function, dilogarithm, irrationality, Hankel determinants, Pad\'e approximation,
 logarithmic potential theory, formal verification, Lean}
 
@@ -65,8 +65,7 @@ Lagrange-basis bound for the small ones, and separate arguments for the primes $
 the size of $\Delta_h(\chi_2(1/q))$ by a discrete log-gas argument against an explicit dual certificate,
 and prove that $\Delta_h(a/b)\ne0$ for every rational $a/b$ and infinitely many $h$, through a reduction modulo
 an auxiliary prime $\ell=h/3$. The margins are below $-0.054$ ($q=3$) and $-0.256$ ($q=5$) per $h^2$. The whole
-proof, including
-the prime number theorem and both numerical certificates, has been formalised in Lean~4 with Mathlib
+proof, including the prime number theorem and both numerical certificates, has been formalised in Lean~4 with Mathlib
 and checked by the Lean kernel, using only Lean's three standard axioms.
 \end{abstract}
 
@@ -103,8 +102,8 @@ We know of no earlier proof that $\chi_2(1/q)$ is irrational for any small integ
   $\operatorname{lcm}$ of the odd numbers up to $2n$, which suggests that it is not covered [heuristic]. The explicit
   criterion of David, Hirata-Kohno and Kawashima \cite[Thm.~2.1]{DHK2022} for the shift $\frac12$, depths $\le2$, at the
   single point $1/q^2$ requires $\log q^2>2\log2+6\log3+8$, i.e.\ $q\ge2949$. Their multi-point criterion
-  \cite{DHK2020}, applied to $\chi_2(z)=\Li_2(z)-\frac14\Li_2(z^2)$ at the two points $1/q$, $1/q^2$, also requires $q$ to
-  be very large.
+  \cite[Thm.~2.1]{DHK2020} does not apply to $\chi_2(z)=\Li_2(z)-\frac14\Li_2(z^2)$ at the two points $1/q$, $1/q^2$ for
+  any $q$, because it requires all points to be of comparable size.
 \item \emph{Single dilogarithm values do not suffice.} Hata \cite{Hata1993} proved $\Li_2(-1/5)\notin\QQ$. The
   irrationality of $\Li_2(1/5)$ has been claimed recently by Prellberg \cite{Prellberg2026} and in S.~Liu's Lean
   repository \cite{LiuLi2}; neither is refereed. In any case two irrational numbers can have a rational
