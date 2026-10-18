@@ -35,9 +35,12 @@ numerical certificate is evaluated by the Lean kernel. See [TRUST.md](TRUST.md).
 
 We know of no earlier proof that χ₂(1/q) is irrational for any small integer q.
 
-- **Large q.** χ₂(1/q) = (1/q)(1 + ¼Φ(1/q², 2, ½)) is a single Lerch value. Irrationality for all sufficiently large q
-  follows from Hata (J. Math. Pures Appl. 69, 1990) and from the explicit criteria of David, Hirata-Kohno and Kawashima
-  (Acta Arith. 206, 2022). By our evaluation, those criteria need q in the thousands.
+- **Large q.** χ₂(1/q) = (4q)⁻¹Φ(1/q², 2, ½) is a single value of Lerch's transcendent (a shift-½ dilogarithm at
+  1/q²). Irrationality for all sufficiently large q follows from Hata (J. Math. Pures Appl. 69, 1990) and from the
+  explicit criteria of David, Hirata-Kohno and Kawashima (Acta Arith. 206, 2022); by our evaluation the latter need
+  q ≥ 2949. Hata's headline application (Li₂(1/Q) ∉ ℚ for Q ≥ 12) is for the easier shift 0, so q = 3 (Q = q² = 9) is
+  presumably outside his range. We have not determined his explicit range for the shift ½, which decides whether
+  q = 5 (Q = 25) was within reach of his method; heuristically it is not.
 - **Separate dilogarithm values do not suffice.** Li₂(−1/5) ∉ ℚ is due to Hata (Trans. AMS 336, 1993), and
   Li₂(1/5) ∉ ℚ was proved recently (Prellberg, arXiv:2609.06895; S. Liu's Lean repository
   [Li2Rational](https://github.com/siqiliu-tsinghua/Li2Rational); both

@@ -1,0 +1,1307 @@
+\documentclass[11pt]{amsart}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{hyperref}
+
+% ---------------------------------------------------------------------------
+% Theorem environments
+% ---------------------------------------------------------------------------
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\numberwithin{equation}{section}
+\setlength{\emergencystretch}{2em}
+
+% ---------------------------------------------------------------------------
+% Macros
+% ---------------------------------------------------------------------------
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\FF}{\mathbb{F}}
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cR}{\mathcal{R}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\ind}[1]{[\,#1\,]}
+\newcommand{\lev}{\operatorname{lev}}
+\newcommand{\cb}{\operatorname{cb}}
+\newcommand{\red}{\operatorname{red}}
+\newcommand{\Li}{\operatorname{Li}}
+\newcommand{\Ed}{\deg_E}
+\newcommand{\lean}[1]{{\def\_{\textunderscore\allowbreak}\texttt{#1}}}
+
+\begin{document}
+
+\title{\texorpdfstring{$\chi_2(1/3)$ and $\chi_2(1/5)$ are irrational}{chi2(1/3) and chi2(1/5) are irrational}}
+
+\author{Shawn Krisman}
+
+\subjclass[2020]{Primary 11J72; Secondary 11J82, 31A15, 15A15, 68V20}
+\keywords{Legendre chi function, dilogarithm, irrationality, Hankel determinants, Pad\'e approximation,
+logarithmic potential theory, formal verification, Lean}
+
+\date{\today}
+
+\begin{abstract}
+Let $\chi_2(z)=\sum_{n\ge0}z^{2n+1}/(2n+1)^2$ be Legendre's chi function. We prove that $\chi_2(1/3)$ and
+$\chi_2(1/5)$ are irrational. Equivalently, $\Li_2(1/q)-\Li_2(-1/q)\notin\QQ$ for $q=3,5$. The proof uses
+the Hankel determinants $\Delta_h(\chi_2(1/q))$ of the moment functional
+$g\mapsto\sum_{t\ge1}q^{-2t}\bigl(g(u)\,u/D_h(u)\bigr)'|_{u=t}$, where $D_h(u)=\prod_{k<h}(u+k+\frac12)$.
+These determinants are values of polynomials $\Delta_h(X)\in\QQ[X]$ of degree at most $h$. We bound the
+denominators of $\Delta_h(X)$ prime by prime: a bound adapted to residue classes for the large primes, a
+Lagrange-basis bound for the small ones, and separate arguments for the primes $2$, $3$ and $q$. We bound
+the size of $\Delta_h(\chi_2(1/q))$ by a discrete log-gas argument against an explicit dual certificate,
+and prove that $\Delta_h(a/b)\ne0$ for every rational $a/b$ and infinitely many $h$, through a reduction modulo
+an auxiliary prime $\ell=h/3$. The margins are below $-0.054$ ($q=3$) and $-0.256$ ($q=5$) per $h^2$. The whole
+proof, including
+the prime number theorem and both numerical certificates, has been formalised in Lean~4 with Mathlib
+and checked by the Lean kernel, using only Lean's three standard axioms.
+\end{abstract}
+
+\maketitle
+
+\tableofcontents
+
+% ===========================================================================
+\section{Introduction}\label{sec:intro}
+% ===========================================================================
+
+For $|z|\le1$ let
+\[
+  \chi_2(z)=\sum_{n=0}^{\infty}\frac{z^{2n+1}}{(2n+1)^2}=\tfrac12\bigl(\Li_2(z)-\Li_2(-z)\bigr)
+\]
+be Legendre's chi function \cite[\S1.8]{Lewin1981}.
+
+\begin{theorem}\label{thm:main}
+The numbers $\chi_2(1/3)=0.33762317823243597996\ldots$ and $\chi_2(1/5)=0.20090195660862019582\ldots$ are
+irrational.
+\end{theorem}
+
+\subsection{Context}
+We know of no earlier proof that $\chi_2(1/q)$ is irrational for any small integer $q\ge2$.
+\begin{itemize}
+\item \emph{Large $q$.} We have $\chi_2(1/q)=(4q)^{-1}\Phi(q^{-2},2,\tfrac12)=\frac q4L(\tfrac12,2;q^{-2})$, where
+  $\Phi$ is Lerch's transcendent and $L(\alpha,k;x)=\sum_{n\ge1}x^n/(n-\alpha)^k$. Hata \cite{Hata1990} proved
+  linear independence measures for values $L(\alpha_j,k_j;1/Q)$ with rational shifts, for $|Q|>Q_0$ with explicit $Q_0$.
+  The application to $\chi_2(1/q)$ has $Q=q^2$, so $Q=9$ and $Q=25$ here. Hata's headline application,
+  $\Li_2(1/Q)\notin\QQ$ for $Q\ge12$ or $Q\le-8$, is for the shift $0$, which is easier than the shift $\frac12$,
+  so $q=3$ ($Q=9$) is presumably outside his range. We have not determined his $Q_0$ for the shift $\frac12$, which
+  decides whether his method covers $q=5$ ($Q=25$).
+  Heuristically the half shift costs a factor of about $e^2$ in $Q$, because the denominators become
+  $\operatorname{lcm}$ of the odd numbers up to $2n$, which suggests that it is not covered [heuristic]. The explicit
+  criterion of David, Hirata-Kohno and Kawashima \cite[Thm.~2.1]{DHK2022} for the shift $\frac12$, depths $\le2$, at the
+  single point $1/q^2$ requires $\log q^2>2\log2+6\log3+8$, i.e.\ $q\ge2949$. Their multi-point criterion
+  \cite{DHK2020}, applied to $\chi_2(z)=\Li_2(z)-\frac14\Li_2(z^2)$ at the two points $1/q$, $1/q^2$, also requires $q$ to
+  be very large.
+\item \emph{Single dilogarithm values do not suffice.} Hata \cite{Hata1993} proved $\Li_2(-1/5)\notin\QQ$. The
+  irrationality of $\Li_2(1/5)$ has been claimed recently by Prellberg \cite{Prellberg2026} and in S.~Liu's Lean
+  repository \cite{LiuLi2}; neither is refereed. In any case two irrational numbers can have a rational
+  difference, so neither result says anything about $\chi_2(1/5)=\frac12(\Li_2(\frac15)-\Li_2(-\frac15))$. The
+  linear independence results of Rhin--Viola \cite{RhinViola2005} (one point $1/z$) and Viola--Zudilin
+  \cite{ViolaZudilin2018} (the two points $1/z$ and $1/(1-z)$) do not cover the pair $\pm\frac15$ either.
+\item \emph{Identities do not suffice.} Landen's identity \cite[App.~A.2.1, (24)]{Lewin1981}
+  $\chi_2\bigl(\tfrac{1-x}{1+x}\bigr)+\chi_2(x)=\tfrac{\pi^2}{8}+\tfrac12\log x\,\log\tfrac{1+x}{1-x}$ gives, for
+  example, $\chi_2(\frac13)+\chi_2(\frac12)=\frac{\pi^2}8-\frac12\log2\log3$. Both $\chi_2(\frac12)$ and $\log2\log3$
+  are open.
+\end{itemize}
+Our search for prior work covered the web, arXiv and recent Lean repositories, but not MathSciNet or zbMATH.
+
+\subsection{The method}\label{sec:method}
+Fix an integer $q\ge2$ and put $w:=q^{-2}$. For $h\ge1$ let $x_k:=-(k+\frac12)$ for $0\le k<h$,
+$D(u):=\prod_{k<h}(u-x_k)$ and
+\begin{equation}\label{eq:Lambda}
+  \Lambda(g):=\sum_{t\ge1}w^t\Bigl(\frac{g(u)\,u}{D(u)}\Bigr)'\Big|_{u=t}\qquad(g\in\QQ[u]).
+\end{equation}
+Partial fractions show that $\Lambda(g)=A(g)+\chi_2(1/q)\,B(g)$ with explicit rational functionals $A$ and $B$
+(Lemma~\ref{lem:pole}). Hence the Hankel determinant $\det(\Lambda(u^{i+j}))_{i,j<h}$ is the value at
+$X=\chi_2(1/q)$ of
+\[
+  \Delta_h(X):=\det\bigl(A(u^{i+j})+X\,B(u^{i+j})\bigr)_{0\le i,j<h}\in\QQ[X],\qquad \deg\Delta_h\le h.
+\]
+This is a Pad\'e-type construction of the kind that Q.~Tang used for $\Li_2(1/2)$ \cite{TangLi2}; the
+half-integer poles are what make $\chi_2$ appear. The proof has three inputs.
+\begin{enumerate}
+\item \emph{Denominators} (Sections~\ref{sec:arith1}--\ref{sec:arith2}). There are rationals $d_h>0$ with
+  $d_h\Delta_h\in\ZZ[X]$ and
+  \[
+    \limsup_{h\to\infty}\frac{\log d_h}{h^2}\le\alpha_q:=\frac{133}{60}+\frac{\log2}{4}+\ind{q=5}\frac{\log3}{4}-\frac{\log q}{3}.
+  \]
+  The term $133/60=\frac45+\frac{17}{12}$ comes from the primes $p\nmid 2q(q^2-1)$. Primes $p<2h/5$ are handled
+  by a Lagrange-basis bound and primes $p\ge2h/5$ by a bound adapted to the residue classes modulo $p$; the
+  prime number theorem then sums the two contributions. The prime $q$ gives a \emph{gain}: a reflection of the functional
+  shows that every coefficient of $\Delta_h$ has $v_q\ge\lfloor(h^2-7h)/3\rfloor-O(h\log h)$. The primes $2$ and
+  $3\mid q^2-1$ occur in the denominators with exponents at most $\frac14h^2+O(h\log h)$.
+\item \emph{Size} (Sections~\ref{sec:analytic}--\ref{sec:cert}). For every \emph{dual certificate} (a step
+  density $\mu$ with cell bounds on its potential) $\limsup h^{-2}\log|\Delta_h(\chi_2(1/q))|\le\Phi$, an
+  explicit exponent computed from the certificate.
+  The proof treats $\Delta_h(\chi_2(1/q))$ as the partition function of a discrete log-gas with at most two
+  particles per integer node, and compares it with $\mu$ through a lattice energy inequality of P\'olya type.
+  Explicit certificates, checked by exact rational interval arithmetic, give $\Phi<-2.078$ for $q=3$ and
+  $\Phi<-2.385$ for $q=5$.
+\item \emph{Nonvanishing} (Section~\ref{sec:nonvan}). For every rational $a/b$, $\Delta_h(a/b)\ne0$ for infinitely
+  many $h$. We take $h=3\ell$ with $\ell$ a large prime. In a Lagrange basis and after an $\ell$-adic rescaling,
+  the Gram matrix of $\Lambda_{a/b}=A+\frac ab B$ is $\ell$-integral and block upper triangular modulo~$\ell$, with
+  explicit $3\times3$ diagonal blocks of three types. Their determinants are three fixed nonzero rationals
+  for each $q$, so they are units for all large $\ell$.
+\end{enumerate}
+Since $\alpha_3=2.0237\ldots$ and $\alpha_5=2.1281\ldots$, the margins are
+\[
+  \alpha_3-2.078<-0.054,\qquad \alpha_5-2.385<-0.256,
+\]
+and the standard argument (Proposition~\ref{prop:criterion}) concludes. Table~\ref{tab:budget} lists the
+contributions.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{@{}lccl@{}}
+\toprule
+contribution (per $h^2$) & $q=3$ & $q=5$ & source\\
+\midrule
+primes $p\nmid2q(q^2-1)$: $\frac{133}{60}$ & $2.21667$ & $2.21667$ & Thm.~\ref{thm:generic}\\
+$p=2$: $\frac14\log2$ & $0.17329$ & $0.17329$ & Lemma~\ref{lem:two}\\
+$p=3\mid q^2-1$: $\frac14\log3$ & --- & $0.27465$ & Lemma~\ref{lem:poleorder}\\
+$p=q$ (gain): $-\frac13\log q$ & $-0.36620$ & $-0.53648$ & Lemma~\ref{lem:qadic}\\
+\midrule
+arithmetic $\alpha_q$ & $2.02375$ & $2.12813$ & \\
+analytic $\Phi$ & $<-2.07832$ & $<-2.38515$ & Thms.~\ref{thm:B}, \ref{thm:cert}\\
+\midrule
+margin $\alpha_q+\Phi$ & $<-0.0545$ & $<-0.2570$ & \\
+\bottomrule
+\end{tabular}
+\caption{The exponential budget. The analytic values are those of the certificates of
+Section~\ref{sec:cert}; the main theorem only uses $\Phi<-2.078$ and $\Phi<-2.385$.}\label{tab:budget}
+\end{table}
+
+\subsection{The formalisation}
+The statement of Theorem~\ref{thm:main} and its complete proof are formalised in Lean~4 \cite{LeanFour} with
+Mathlib \cite{Mathlib} and checked by the Lean kernel. This includes the prime number theorem, the two dual
+certificates and the block determinants. The proof depends only on Lean's three standard axioms
+(\lean{propext}, \lean{Classical.choice}, \lean{Quot.sound}). It contains no \lean{sorry} and no
+\lean{native\_decide}: every proof, including every computation, is checked by the kernel. The repository is
+\url{https://github.com/telaviv/chi2-irrationality} \cite{Chi2Repo}; Section~\ref{sec:lean} describes it.
+
+The prose proof below is self-contained and can be read without the formalisation, except that two
+kinds of finite computation are only described, not reproduced: the two dual certificates (Theorem~\ref{thm:cert}),
+which are decidable statements about rational data proved by \lean{decide +kernel}, and the six block
+determinants of Section~\ref{sec:nonvan}, which are evaluated exactly by \lean{norm\_num}.
+
+\subsection{Organisation and notation}
+Section~\ref{sec:construction} sets up the functional and proves the pole expansion. Section~\ref{sec:criterion}
+states the criterion and reduces Theorem~\ref{thm:main} to the three inputs.
+Sections~\ref{sec:arith1} and~\ref{sec:arith2} bound the denominators, Sections~\ref{sec:analytic}
+and~\ref{sec:cert} bound the size, and Section~\ref{sec:nonvan} proves nonvanishing.
+Section~\ref{sec:lean} describes the formalisation and Section~\ref{sec:remarks} contains remarks, including
+why $\chi_2(1/2)$ is out of reach of this construction.
+
+Throughout, $p$ and $\ell$ denote primes; $v_p$ is the $p$-adic valuation on $\QQ$ and $|x|_p=p^{-v_p(x)}$.
+$\lfloor\cdot\rfloor$ and $\lceil\cdot\rceil$ are the floor and ceiling, $(x)_+=\max(x,0)$, and $\ind{P}$ is $1$ if
+$P$ holds and $0$ otherwise. For a sequence $f$ on $\ZZ_{\ge0}$, $\Delta f(t)=f(t+1)-f(t)$ is the forward
+difference. We write $\theta(x)=\sum_{p\le x}\log p$.
+
+% ===========================================================================
+\section{The construction}\label{sec:construction}
+% ===========================================================================
+
+\subsection{Data}\label{sec:data}
+Fix an integer $q\ge2$; later $q\in\{3,5\}$. Put
+\[
+  z:=1/q,\qquad w:=z^2=q^{-2},\qquad \chi:=\chi_2(z).
+\]
+For $h\ge1$ we use $h$ poles $x_k:=-(k+\frac12)$, $0\le k<h$, and put
+\[
+  D(u):=\prod_{k<h}(u-x_k),\qquad \omega_k:=\frac{x_k}{D'(x_k)},
+\]
+where $D'(x_k)=\prod_{m\ne k}(x_k-x_m)=\prod_{m\ne k}(m-k)=(-1)^kk!\,(h-1-k)!$. We also need the partial sums
+\[
+  S_k(q):=\sum_{j=0}^{k}\frac{q^{2(k-j)}}{(2j+1)^2}=q^{2k+1}T(2k+1),\qquad T(M):=\sum_{\substack{s\le M\\ s\text{ odd}}}\frac{z^s}{s^2},
+\]
+with $T(M)=0$ for $M<1$. For a rational function $F$ regular at the positive integers and of polynomial growth put
+\[
+  \mu(F):=\sum_{t\ge1}w^tF'(t),
+\]
+an absolutely convergent series since $0<w<1$. The functional \eqref{eq:Lambda} is $\Lambda(g)=\mu(g\varphi)$ with
+$\varphi(u):=u/D(u)$.
+
+\subsection{The polynomial part}
+For a polynomial $R$, $\mu(R)$ is rational. Indeed $\mu(u^d)=d\sum_{t\ge1}t^{d-1}w^t$, and the power sums
+$\sigma_n:=\sum_{t\ge1}t^nw^t$ satisfy $\sigma_0=w/(1-w)$ and
+\begin{equation}\label{eq:powsum}
+  (1-w)\,\sigma_{n+1}=\sum_{j=0}^{n}\binom{n+1}{j}(-1)^{n-j}\sigma_j ,
+\end{equation}
+by expanding $\sum_t t^{n+1}w^t-\sum_t(t-1)^{n+1}w^{t}=(1-w)\sigma_{n+1}$. We shall also use the Newton form
+\begin{equation}\label{eq:newton}
+  \mu(R)=\sum_{b\ge0}\Delta^b[R'](0)\,\Omega_b,\qquad
+  \Omega_b:=\sum_{t\ge1}\binom tbw^t=\begin{cases}\dfrac{1}{q^2-1},&b=0,\\[6pt] \dfrac{q^2}{(q^2-1)^{b+1}},&b\ge1,\end{cases}
+\end{equation}
+which follows from $R'(t)=\sum_b\Delta^b[R'](0)\binom tb$. Here
+\[
+  \Delta^b[R'](0)=\sum_{k\le b}(-1)^{b-k}\binom bk\,R'(k),
+\]
+and the sum over $b$ is finite ($b<\deg R$).
+
+\subsection{The pole expansion}
+
+\begin{lemma}[Lemma~1, pole expansion]\label{lem:pole}
+For $g\in\QQ[u]$ write $g(u)u=D(u)R_g(u)+r_g(u)$ with $\deg r_g<h$. Then
+\[
+  \Lambda(g)=A(g)+\chi\,B(g),
+\]
+where
+\[
+  A(g):=\mu(R_g)+4\sum_{k<h}g(x_k)\,\omega_k\,S_k(q),\qquad
+  B(g):=-4\sum_{k<h}g(x_k)\,\omega_k\,q^{2k+1}.
+\]
+Both are rational and $\QQ$-linear in $g$.
+\end{lemma}
+
+\begin{proof}
+By Lagrange interpolation at the $h$ nodes $x_k$,
+\[
+  r_g(u)=\sum_k\frac{r_g(x_k)\,D(u)}{D'(x_k)\,(u-x_k)},\qquad r_g(x_k)=g(x_k)\,x_k .
+\]
+Hence $g\varphi=R_g+\sum_kg(x_k)\omega_k/(u-x_k)$. For the pole terms,
+\[
+  \mu\Bigl(\frac1{u-x_k}\Bigr)=-\sum_{t\ge1}\frac{w^t}{(t+k+\frac12)^2}=-4\sum_{t\ge1}\frac{z^{2t}}{(2t+2k+1)^2}.
+\]
+With $s=2t+2k+1$ (odd, $s\ge2k+3$) and $z^{2t}=q^{2k+1}z^s$ this equals
+$-4q^{2k+1}\bigl(\chi-T(2k+1)\bigr)=-4\bigl(q^{2k+1}\chi-S_k(q)\bigr)$. All series converge absolutely, so we may
+sum termwise.
+\end{proof}
+
+For an indeterminate $X$ put $\Lambda_X:=A+X\,B$ and
+\[
+  H(X):=\bigl(\Lambda_X(u^{i+j})\bigr)_{0\le i,j<h},\qquad \Delta_h(X):=\det H(X)\in\QQ[X].
+\]
+The entries are linear in $X$, so $\deg\Delta_h\le h$, and by Lemma~\ref{lem:pole}
+\begin{equation}\label{eq:value}
+  \Delta_h(\chi)=\det\bigl(\Lambda(u^{i+j})\bigr)_{0\le i,j<h}.
+\end{equation}
+
+\subsection{Change of basis}
+If $a_0,\dots,a_{h-1}$ and $b_0,\dots,b_{h-1}$ are polynomials of degree $<h$ with coefficient matrices $C_a$ and $C_b$
+(rows indexed by $i$, columns by the monomials $u^0,\dots,u^{h-1}$), then by linearity of $\Lambda_X$
+\begin{equation}\label{eq:gram}
+  \bigl(\Lambda_X(a_ib_j)\bigr)_{i,j}=C_a\,H(X)\,C_b^{\mathsf T},\qquad
+  \det\bigl(\Lambda_X(a_ib_j)\bigr)=\det C_a\det C_b\,\Delta_h(X).
+\end{equation}
+We use three bases. The \emph{Lagrange basis} $f_i:=D/(u-x_i)$ has $f_i(x_k)=\ind{i=k}D'(x_i)$. Write $V=(x_k^d)_{d,k<h}$
+for the Vandermonde matrix. Then $C_fV=\operatorname{diag}(D'(x_i))$, and
+$\prod_iD'(x_i)=\pm(\det V)^2$ with $\det V=\prod_{k<k'}(x_{k'}-x_k)=\pm\prod_{k<k'}(k'-k)$. The \emph{anchored basis}
+\[
+  a_i:=\prod_{m<i}(u-x_m),\qquad b_j:=\prod_{h-j\le m<h}(u-x_m)
+\]
+consists of monic polynomials of degrees $i$ and $j$, so $C_a$ and $C_b$ are unitriangular and
+$\det(\Lambda_X(a_ib_j))=\Delta_h(X)$. The third basis, adapted to residue classes, is introduced in
+Section~\ref{sec:classbound}.
+
+% ===========================================================================
+\section{The criterion and the structure of the proof}\label{sec:criterion}
+% ===========================================================================
+
+\begin{proposition}[Lemma~E]\label{prop:criterion}
+Let $\xi\in\RR$, and for $h\ge1$ let $P_h\in\QQ[X]$ with $\deg P_h\le h$ and let $d_h>0$ be rationals with
+$d_hP_h\in\ZZ[X]$. Suppose that there is $c>0$ with $d_h|P_h(\xi)|\le e^{-ch^2}$ for all large $h$, and that for
+every $a\in\ZZ$ and $b\ge1$ we have $P_h(a/b)\ne0$ for infinitely many $h$. Then $\xi$ is irrational.
+\end{proposition}
+
+\begin{proof}
+Suppose $\xi=a/b$. For every $h$, $N_h:=b^hd_hP_h(a/b)$ is an integer, because $d_hP_h$ has integer coefficients
+and degree $\le h$. Choose $h$ with $P_h(a/b)\ne0$, $d_h|P_h(\xi)|\le e^{-ch^2}$ and $b^he^{-ch^2}<1$. Then
+$1\le|N_h|<1$, a contradiction.
+\end{proof}
+
+\begin{theorem}\label{thm:conditional}
+Let $q\ge2$. Suppose there are rationals $d_h>0$ and real numbers $\alpha,\beta$ with $\alpha+\beta<0$ such that
+\begin{enumerate}
+\item $d_h\Delta_h\in\ZZ[X]$ for every $h$, and for every $\eps>0$, $\log d_h\le(\alpha+\eps)h^2$ for all large $h$;
+\item for every $\eps>0$, $|\Delta_h(\chi_2(1/q))|\le e^{(\beta+\eps)h^2}$ for all large $h$;
+\item for every $a\in\ZZ$ and $b\ge1$, $\Delta_h(a/b)\ne0$ for infinitely many $h$.
+\end{enumerate}
+Then $\chi_2(1/q)$ is irrational.
+\end{theorem}
+
+\begin{proof}
+Apply Proposition~\ref{prop:criterion} with $P_h=\Delta_h$ and $c=-(\alpha+\beta)/2$, using (i) and (ii) with
+$\eps=c/2$.
+\end{proof}
+
+For $q=3$ and $q=5$ the three hypotheses are Theorem~\ref{thm:arith} with $\alpha=\alpha_q$,
+Theorems~\ref{thm:B} and~\ref{thm:cert} with $\beta=-2.078$ and $\beta=-2.385$, and
+Theorem~\ref{thm:nonvan}. The final assembly is in Section~\ref{sec:proof}.
+
+% ===========================================================================
+\section{Denominators I: the symbolic machine and the generic primes}\label{sec:arith1}
+% ===========================================================================
+
+\subsection{The free ring}\label{sec:free}
+It is convenient to treat $q$ and $1/(q^2-1)$ as independent indeterminates. Let $\cR:=\QQ[q,E]$ be the polynomial
+ring in two variables. In $\cR$ put $\Omega_0:=E$ and $\Omega_b:=q^2E^{b+1}$ for $b\ge1$, and for $R\in\QQ[u]$ define
+$\mu^{\cR}(R):=\sum_b\Delta^b[R'](0)\,\Omega_b\in\cR$ as in \eqref{eq:newton}. Replacing $\mu$ by $\mu^{\cR}$, and
+reading $S_k(q)$ and $q^{2k+1}$ as elements of $\QQ[q]$, Lemma~\ref{lem:pole} defines functionals $A^{\cR},B^{\cR}$ and
+\[
+  \Delta^{\cR}_h(X):=\det\bigl(A^{\cR}(u^{i+j})+X\,B^{\cR}(u^{i+j})\bigr)_{i,j<h}\in\cR[X].
+\]
+For an integer $q_0\ge2$, the ring homomorphism $\operatorname{ev}_{q_0}\colon\cR\to\QQ$ with $q\mapsto q_0$ and
+$E\mapsto1/(q_0^2-1)$ maps $\Omega_b$ to the value \eqref{eq:newton}, hence $\mu^{\cR}$ to $\mu$ and
+$\Delta^{\cR}_h$ to $\Delta_h$ (computed with $q=q_0$).
+
+\emph{Gauss norms.} For a prime $p$ and $f\in\cR$ let $\|f\|_p$ be the maximum of $|c|_p$ over the rational
+coefficients $c$ of $f$, and extend this coefficientwise to $\cR[X]$. Then $\|f+g\|_p\le\max(\|f\|_p,\|g\|_p)$ and
+$\|fg\|_p\le\|f\|_p\|g\|_p$. If $|v_0|_p\le1$ and $|v_1|_p\le1$, the evaluation $q\mapsto v_0$, $E\mapsto v_1$
+does not increase the norm. By the Leibniz expansion:
+
+\begin{lemma}\label{lem:leibniz}
+Let $M$ be an $h\times h$ matrix over $\cR[X]$ with $\|M_{ij}\|_p\le\rho_i\kappa_j$ for some $\rho_i,\kappa_j\ge0$. Then
+$\|\det M\|_p\le\prod_i\rho_i\prod_j\kappa_j$.
+\end{lemma}
+
+Two facts carry all the dependence on $q$:
+\begin{itemize}
+\item[(F1)] $\|\Omega_b\|_p=1$ for all $b$ and $p$, so for $R\in\QQ[u]$ we have
+  $\|\mu^{\cR}(R)\|_p\le\sup_{t\in\ZZ_{\ge0}}|R'(t)|_p$, because $\Delta^b[R'](0)$ is an integer combination of
+  $R'(0),\dots,R'(b)$;
+\item[(F2)] $\|q^{2k+1}X-S_k(q)\|_p\le p^{2\#\{e\ge1:\,p^e\le2k+1\}}$, since the coefficients of $S_k$ are $1/s^2$
+  with $s$ odd, $s\le2k+1$, and $v_p(s)\le\#\{e\ge1:p^e\le s\}$.
+\end{itemize}
+
+\emph{The Gram identity.} Write $\Lambda^{\cR}_X:=A^{\cR}+XB^{\cR}$, a $\QQ$-linear map $\QQ[u]\to\cR[X]$. By the argument
+of \eqref{eq:gram}, for any family $(e_m)_{m<h}$ of polynomials of degree $<h$ with coefficient matrix $C_e$,
+\begin{equation}\label{eq:gramR}
+  \det\bigl(\Lambda^{\cR}_X(e_me_{m'})\bigr)_{m,m'<h}=(\det C_e)^2\,\Delta^{\cR}_h(X).
+\end{equation}
+For a pole $x_l$ we have, by the proof of Lemma~\ref{lem:pole}, $\Lambda^{\cR}_X(g)=\mu^{\cR}(R)-4c\,(q^{2l+1}X-S_l(q))$
+whenever $g\varphi=R+c/(u-x_l)$ with $R$ a polynomial; more generally the pole parts add up.
+
+Below, $\lev(p):=\#\{e\ge1:p^e\le2h-1\}$. For $t\in\ZZ_{\ge0}$ and $m<h$ we have $t-x_m=(2t+2m+1)/2$, and for $p$ odd
+$v_p(t-x_m)=v_p(2t+2m+1)$. The numbers $2t+2m+1$, $m<h$, are $h$ consecutive odd integers, so for each level
+$d=p^e$ those divisible by $d$ are the $m$ in one residue class modulo $d$.
+
+\subsection{All odd primes: the Lagrange basis}
+
+\begin{lemma}[Lemma~9]\label{lem:nine}
+For every odd prime $p$ and every $h\ge1$, $\|\Delta^{\cR}_h\|_p\le p^{2h\lev(p)}$.
+\end{lemma}
+
+\begin{proof}
+Use the Lagrange basis $f_i=D/(u-x_i)$ and put $G_{ij}:=\Lambda^{\cR}_X(f_if_j)$. Since $C_fV=\operatorname{diag}(D'(x_i))$
+and $\prod_iD'(x_i)=\pm(\det V)^2$, we get $(\det C_f)^2=\pm\prod_iD'(x_i)$, so by \eqref{eq:gramR}
+\[
+  \|\Delta^{\cR}_h\|_p=\|\det G\|_p\Big/\prod_i|D'(x_i)|_p .
+\]
+By Lemma~\ref{lem:leibniz} it suffices to prove the \emph{row claim} $\|G_{ij}\|_p\le|D'(x_i)|_p\,p^{2\lev(p)}$. For a
+level $e\ge1$ put $N_e(i):=\#\{m<h:m\ne i,\ p^e\mid m-i\}$; then $v_p(D'(x_i))=\sum_eN_e(i)$, and $N_e(i)=0$ unless
+$p^e\le h-1$. So it suffices to show that every value $R'(t)$ entering (F1) has
+\begin{equation}\label{eq:rowclaim}
+  v_p(R'(t))\ge\sum_e\bigl(N_e(i)-2\ind{N_e(i)\ge1}\bigr),
+\end{equation}
+and that the pole part obeys the same bound.
+
+Fix $t\in\ZZ_{\ge0}$ and a level $d=p^e$, and let $m_0$ be the residue class mod $d$ of the indices $m$ with
+$d\mid2t+2m+1$. The class of $i$ has $N_e(i)+1$ elements in $[0,h)$, and residue classes mod $d$ in $[0,h)$ differ in
+size by at most one, so the class $m_0$ has at least $N_e(i)$ elements.
+
+\emph{Off-diagonal entries} ($i\ne j$). Here $f_if_j\varphi=F_{ij}:=u\prod_{m\ne i,j}(u-x_m)$ is a polynomial, so
+$G_{ij}=\mu^{\cR}(F_{ij})$. Each term of $F'_{ij}(t)$ is a product of all factors but one. At level $d$ the factors
+$t-x_m$ divisible by $d$ are those with $m\equiv m_0$, $m\ne i,j$; omitting one factor leaves at least
+$N_e(i)-2$ of them in both cases $m_0\equiv i$ and $m_0\not\equiv i$. Summing over levels ($v_p$ of a product is
+$\sum_e$ of the number of factors divisible by $p^e$) gives \eqref{eq:rowclaim}.
+
+\emph{Diagonal entries.} Put $g_i:=u\prod_{m\ne i}(u-x_m)$. Then $f_i^2\varphi=g_i/(u-x_i)=Q_i+g_i(x_i)/(u-x_i)$ with
+$Q_i:=(g_i(u)-g_i(x_i))/(u-x_i)$ and $g_i(x_i)=x_iD'(x_i)$. The pole part is $-4x_iD'(x_i)(q^{2i+1}X-S_i)$; by (F2),
+$|x_i|_p\le1$ and $2i+1\le2h-1$, its norm is at most $|D'(x_i)|_p\,p^{2\lev(p)}$. For the polynomial part, list the
+$h$ roots $\{x_m:m\ne i\}\cup\{0\}$ of $g_i$ as $\alpha_1,\dots,\alpha_h$; telescoping
+$(u-\alpha_r)-(x_i-\alpha_r)=u-x_i$ gives
+\[
+  Q_i(u)=\sum_{r=1}^{h}\prod_{s<r}(x_i-\alpha_s)\prod_{s>r}(u-\alpha_s).
+\]
+Order the roots by decreasing $v_p(m-i)$, with $0$ last. Then for every level $e$ simultaneously, the $\alpha_s=x_m$ with
+$p^e\mid m-i$ form an initial segment of length $N_e(i)$ (note $x_i-x_m=m-i$). Fix $t$, a level $d=p^e$ and a term
+$r$ of $Q_i'(t)$ (a product with one more factor omitted). If $r>N_e(i)$, the first product already has $N_e(i)$
+factors divisible by $d$. If $r\le N_e(i)$, it has $r-1$; if moreover $m_0\equiv i$, the remaining $N_e(i)-r$ class
+members sit at positions $s>r$ and at most one of them is omitted, giving at least $N_e(i)-2$ in total; if
+$m_0\not\equiv i$, the whole class $m_0$ (at least $N_e(i)$ members, all with $v_p(m-i)<e$) sits at positions
+$s>N_e(i)\ge r$, giving at least $N_e(i)-1$. So \eqref{eq:rowclaim} holds for $Q_i'(t)$ as well. Finally
+$\#\{e:N_e(i)\ge1\}\le\lev(p)$.
+\end{proof}
+
+\subsection{One-level primes: a basis adapted to residue classes}\label{sec:classbound}
+For a modulus $d$ and $m<h$ write $r_m:=\lfloor m/d\rfloor$ (the rank of $m$ in its class), $n_m$ for the size of the
+class of $m$ modulo $d$ in $[0,h)$, and put
+\begin{gather*}
+  w_d(l):=2\ind{d\le2l+1}-\ind{d\mid2l+1},\\
+  M_m:=\max\{w_d(l):l\le m,\ l\equiv m\ (d)\},\\
+  \cb(h,d):=\sum_{m<h}\bigl(2r_m+1+M_m-n_m\bigr)_+ .
+\end{gather*}
+
+\begin{proposition}[class bound]\label{prop:classbound}
+Let $p$ be an odd prime with $p^2>2h$. Then $\|\Delta^{\cR}_h\|_p\le p^{\cb(h,p)}$.
+\end{proposition}
+
+\begin{proof}
+Since $p^2>2h$, every difference $m-l$ of distinct indices and every odd $s\le2h-1$ has $v_p\le1$; so
+$v_p(m-l)=\ind{p\mid m-l}$ and $v_p(2l+1)=\ind{p\mid2l+1}$. For $m<h$ let $\operatorname{seg}(m):=\{l\le m:l\equiv m\ (p)\}$
+(it has $r_m+1$ elements), and put
+\[
+  e_m:=s_m\,\frac{D(u)}{\prod_{l\in\operatorname{seg}(m)}(u-x_l)},\qquad s_m:=\prod_{l\in\operatorname{seg}(m),\,l<m}(x_m-x_l).
+\]
+Then $\deg e_m=h-r_m-1<h$ and $v_p(s_m)=r_m$. The polynomial $e_m$ vanishes at $x_k$ unless $k\in\operatorname{seg}(m)$, and
+$e_m(x_m)=D'(x_m)$. So the evaluation matrix $(e_m(x_k))=C_eV$ is lower triangular with diagonal $D'(x_m)$, hence
+$\det C_e\det V=\prod_mD'(x_m)=\pm(\det V)^2$ and $\det C_e=\pm\det V$. By \eqref{eq:gramR},
+$\|\Delta^{\cR}_h\|_p=\|\det G^e\|_p/|\det V|_p^2$ with $G^e_{mm'}:=\Lambda^{\cR}_X(e_me_{m'})$, and
+$2v_p(\det V)=2\#\{k<k':p\mid k'-k\}=2\sum_mr_m$.
+
+Let $\cA:=\operatorname{seg}(m)$, $\mathcal B:=\operatorname{seg}(m')$, $r=r_m$, $r'=r_{m'}$. Then
+\[
+  e_me_{m'}\varphi=s_ms_{m'}\,u\,\frac{\prod_{l\notin\cA\cup\mathcal B}(u-x_l)}{\prod_{l\in\cA\cap\mathcal B}(u-x_l)} .
+\]
+If $m$ and $m'$ lie in different classes, $\cA\cap\mathcal B=\emptyset$, the right side is $s_ms_{m'}$ times a polynomial in
+$\ZZ[\frac12][u]$, and (F1) gives $v_p(G^e_{mm'})\ge r+r'$. If they lie in the same class, of size $n$, say with
+$r\le r'$, then $\cA\subseteq\mathcal B$. Division by the monic polynomial $\prod_{l\in\cA}(u-x_l)\in\ZZ[\frac12][u]$ leaves a
+$p$-integral polynomial part, again of valuation $\ge r+r'$. The residue at $x_l$, $l\in\cA$, is
+\begin{gather*}
+  c_l=s_ms_{m'}\,x_l\,\frac{\prod_{k\notin\mathcal B}(x_l-x_k)}{\prod_{k\in\cA,\,k\ne l}(x_l-x_k)},\\
+  v_p(c_l)=r+r'+\ind{p\mid2l+1}+(n-1-r')-r,
+\end{gather*}
+because exactly the $n-1-r'$ class members after $m'$ lie outside $\mathcal B$, and the $r$ other elements of $\cA$ lie in
+the class. By (F2) and the single level, the pole factor $q^{2l+1}X-S_l$ has norm at most $p^{2\ind{p\le2l+1}}$. Hence
+\[
+  v_p(G^e_{mm'})\ge r+r'+\beta(r,r'),\qquad \beta(a,b):=\min\bigl(0,\ n-1-a-b-\widehat M_{\min(a,b)}\bigr),
+\]
+where $\widehat M_a$ is the largest weight $w_p(l)$ among the class members of rank $\le a$. Since $\widehat M$ is
+nondecreasing and $x\mapsto\min(0,x)$ is concave, $\beta(a,b)\ge\frac12(\beta(a,a)+\beta(b,b))$. So every entry, in
+the same class or not, satisfies $v_p(G^e_{mm'})\ge\rho_m+\rho_{m'}$ with $\rho_m:=r_m+\frac12\beta(r_m,r_m)\le r_m$.
+Lemma~\ref{lem:leibniz} gives $v_p(\det G^e)\ge2\sum_m\rho_m$, and therefore
+\[
+  v_p(\Delta^{\cR}_h)\ge\sum_m\beta(r_m,r_m)=-\sum_m(2r_m+1+M_m-n_m)_+=-\cb(h,p).\qedhere
+\]
+\end{proof}
+
+\subsection{The class count}
+Let $\varphi_1$ be the continuous, piecewise linear, nonincreasing function on $[2/5,\infty)$ with
+\[
+  \varphi_1(x)=\begin{cases}3-\tfrac52x,&\tfrac25\le x\le\tfrac12,\\ 2-\tfrac12x,&\tfrac12\le x\le\tfrac23,\\
+  3-2x,&\tfrac23\le x\le1,\\ 2-x,&1\le x\le2,\end{cases}
+\]
+and $\varphi_1(x)=0$ for $x\ge2$. Then $\int_{2/5}^{2}\varphi_1=\frac3{16}+\frac{41}{144}+\frac49+\frac12=\frac{17}{12}$.
+
+\begin{lemma}[Lemma~8A, class count]\label{lem:classcount}
+Let $h\ge2$ and let $d$ be odd. If $2h\le5d$ and $d<2h$ then $\cb(h,d)\le h\,\varphi_1(d/h)$; more precisely
+$\cb(h,d)=h\varphi_1(d/h)-\frac32$ if $d\le(2h-1)/3$ and $\cb(h,d)=h\varphi_1(d/h)$ otherwise. If $d\ge2h$ then $\cb(h,d)=0$.
+(The formal version assumes $h\ge13$, which is needed only in Theorem~\ref{thm:generic}.)
+\end{lemma}
+
+\begin{proof}
+Write $K=h$ and $\kappa=(d-1)/2$. If $d\ge2K$, every atom $l<K$ has $2l+1<d$, so all weights vanish, every class is a
+singleton and every term is $(1+0-1)_+=0$. Now let $2K\le5d$ and $d<2K$; as $d$ is odd, $5d\ge2K+1$ and $3d\ne2K$. The
+odd multiples of $d$ below $2K$ are $d$ and possibly $3d$. Hence an atom $l$ has weight $0$ if $l<\kappa$ (we call it
+\emph{small}), weight $1$ if $l=\kappa$ or $l=\kappa+d$, and weight $2$ otherwise. Every atom after the first in its
+class is $\ge d>\kappa$, so only the first atom $c$ of a class can be small. We evaluate $\cb$ class by class; a class
+$\{c,c+d,\dots\}$ of size $n$ contributes $\sum_r(2r+1+M-n)_+$ over its atoms.
+\begin{itemize}
+\item[(IV)] $K<d<2K$. All classes are singletons, contributing their weights: $2(K-\kappa)-1=2K-d$.
+\item[(III)] $(2K+1)/3\le d\le K$. Classes $c<K-d$ are pairs, with $c<\kappa$ small; they contribute $0+(1+2)=3$.
+  The other classes $c\in[K-d,d-1]$ are singletons; those with $c\ge\kappa$ ($(d+1)/2$ of them, one of weight $1$)
+  contribute $d$ in total. The atom $\kappa+d$ is $\ge K$. Total $3(K-d)+d=3K-2d$.
+\item[(II)] $K/2\le d\le(2K-1)/3$. Classes $c<K-d$ are pairs and $c\in[K-d,d-1]$ singletons, all of weight $2$ (as
+  $\kappa<K-d$). A pair contributes $(w(c)-1)_++1+M$: this is $3$ for $c<\kappa$, $2$ for $c=\kappa$ (weights
+  $1,1$), and $4$ for $\kappa<c<K-d$. Total $3\kappa+2+4(K-d-\kappa-1)+2(2d-K)=2K-\frac d2-\frac32$.
+\item[(I)] $(2K+1)/5\le d\le K/2$. Classes $c<K-2d$ are triples, with $c<\kappa$ (as $K-2d\le\kappa$), contributing
+  $0+2+4=6$. Classes $c\in[K-2d,d-1]$ are pairs, contributing $3$ for $c<\kappa$ ($\frac{5d-1}2-K$ of them), $2$ for
+  $c=\kappa$, and $4$ for $c>\kappa$ ($\frac{d-1}2$ of them). Total $3K-\frac52d-\frac32$.
+\end{itemize}
+In the four regions $K\varphi_1(d/K)$ equals $2K-d$, $3K-2d$, $2K-\frac d2$ and $3K-\frac52d$.
+\end{proof}
+
+\subsection{The generic primes}
+For odd $p$ put
+\[
+  e(h,p):=\begin{cases}\cb(h,p),& p^2>2h\text{ and }5p\ge2h,\\ 2h\lev(p),&\text{otherwise.}\end{cases}
+\]
+
+\begin{theorem}[generic primes]\label{thm:generic}
+For every odd prime $p$ and every $h$, $\|\Delta^{\cR}_h\|_p\le p^{e(h,p)}$. For every $\eps>0$ and all large $h$,
+\[
+  \sum_{p\text{ odd}}e(h,p)\log p\le\Bigl(\frac{133}{60}+\eps\Bigr)h^2 .
+\]
+\end{theorem}
+
+\begin{proof}
+The first statement is Proposition~\ref{prop:classbound} or Lemma~\ref{lem:nine}. For the sum let $h\ge13$. If
+$5p\ge2h$ then $p^2\ge4h^2/25>2h$, so $e(h,p)=\cb(h,p)$, which vanishes for $p\ge2h$ and is at most $h\varphi_1(p/h)$
+for $2h/5\le p<2h$ (Lemma~\ref{lem:classcount}). So the sum is at most
+\[
+  \sum_{p<2h/5}2h\lev(p)\log p+\sum_{2h/5\le p<2h}h\,\varphi_1(p/h)\log p .
+\]
+For the first sum, $\lev(p)\le1$ when $p^2>2h-1$ and $\lev(p)\log p\le\log(2h)$ always, so it is at most
+$2h\bigl(\theta(2h/5)+(\sqrt{2h}+1)\log(2h)\bigr)=(\frac45+o(1))h^2$ by the prime number theorem $\theta(x)\sim x$.
+For the second, cut $[2/5,2]$ into $M$ equal cells. On each cell $\varphi_1$ is at most its value at the left end,
+and $\sum_{p\in hI}\log p=h|I|+o(h)$ for each fixed cell $I$. Hence the second sum is at most
+$h^2\bigl(\int_{2/5}^2\varphi_1+\frac{16}{5M}\bigr)+o(h^2)$, and $M$ is arbitrary.
+\end{proof}
+
+% ===========================================================================
+\section{\texorpdfstring{Denominators II: the primes $q$, $2$ and the divisors of $q^2-1$}{Denominators II: the primes q, 2 and the divisors of q^2-1}}\label{sec:arith2}
+% ===========================================================================
+
+\subsection{The pole order at \texorpdfstring{$q^2=1$}{q^2=1}}
+For $f\in\cR$ let $\Ed f$ be its degree in $E$. Put
+\begin{gather*}
+  \rho_i:=(i+1-\lceil h/2\rceil)_+,\qquad \kappa_j:=(j-\lfloor h/2\rfloor)_+,\\
+  \beta_h:=\sum_{i<h}\rho_i+\sum_{j<h}\kappa_j=\lfloor h^2/4\rfloor\le\frac{h^2+2h}4 .
+\end{gather*}
+
+\begin{lemma}[Lemma~5]\label{lem:poleorder}
+Every coefficient of $\Delta^{\cR}_h\in\cR[X]$ has $E$-degree at most $\beta_h$.
+\end{lemma}
+
+\begin{proof}
+In the monomial basis, the entry $(i,j)$ is $\mu^{\cR}(R)$ plus pole terms that do not involve $E$, where $R$ is the
+quotient of $u^{i+j+1}$ by $D$, of degree $i+j+1-h$ (and $R=0$ if $i+j+1<h$). In $\mu^{\cR}(R)=\sum_{b<\deg R}\Delta^b[R'](0)\Omega_b$
+each $\Omega_b$ has $E$-degree $b+1\le\deg R$. So the entry has $E$-degree at most $(i+j+1-h)_+\le\rho_i+\kappa_j$, and
+the Leibniz expansion gives the claim. The value of $\beta_h$ is an elementary sum.
+\end{proof}
+
+\emph{Clearing $E$.} For $f=\sum c_{a,b}q^aE^b\in\cR$ with $\Ed f\le\beta$ put
+$\operatorname{cl}_\beta(f):=\sum c_{a,b}\,q^a(q^2-1)^{\beta-b}\in\QQ[q]$. Since $(q^2-1)^k$ has integer coefficients,
+$\|\operatorname{cl}_\beta f\|_p\le\|f\|_p$ for every $p$. If $v_1(v_0^2-1)=1$, then evaluating at $q=v_0$, $E=v_1$ gives
+\begin{equation}\label{eq:clear}
+  \operatorname{ev}\bigl(\operatorname{cl}_\beta f\bigr)=(v_0^2-1)^\beta\,\operatorname{ev}(f).
+\end{equation}
+
+\subsection{The \texorpdfstring{$q$}{q}-adic gain}
+Let $\psi\colon\cR\to\QQ[[q]]$ be the ring homomorphism with $q\mapsto q$ and $E\mapsto1/(q^2-1)=-\sum_{n\ge0}q^{2n}$. Put
+\[
+  a_h:=\max\Bigl(0,\Bigl\lfloor\frac{h(h-1)-6h}{3}\Bigr\rfloor\Bigr)\ge\frac{h^2-7h-2}{3} .
+\]
+
+\begin{lemma}[Lemma~4$'$]\label{lem:qadic}
+Every coefficient of $\psi(\Delta^{\cR}_h)\in\QQ[[q]][X]$ is divisible by $q^{a_h}$. Consequently, for every $k$, all
+monomials of $\operatorname{cl}_{\beta_h}\bigl([X^k]\Delta^{\cR}_h\bigr)\in\QQ[q]$ have degree at least $a_h$.
+\end{lemma}
+
+\begin{proof}
+\emph{Reflection.} From $\psi(\Omega_b)=(-1)^{b+1}q^2(1-q^2)^{-b-1}$ for $b\ge1$ and $\psi(\Omega_0)=-(1-q^2)^{-1}$, the
+coefficient of $q^{2m}$ in $\psi(\Omega_b)$ is $-(-1)^b\binom{m+b-1}{b}$, and odd powers do not occur. Newton's backward
+formula $f(-m)=\sum_b(-1)^b\binom{m+b-1}b\Delta^bf(0)$ for polynomials $f$ then gives
+\begin{equation}\label{eq:reflect}
+  \psi\bigl(\mu^{\cR}(R)\bigr)=-\sum_{m\ge0}q^{2m}R'(-m)\qquad(R\in\QQ[u]).
+\end{equation}
+\emph{Recombination.} For a polynomial $g$ write $g\varphi=R+\sum_kc_k/(u-x_k)$, $c_k=g(x_k)\omega_k$. Since
+$\bigl((u-x_k)^{-1}\bigr)'(-m)=-4/(2k+1-2m)^2$ and
+\[
+  \sum_{m\ge0}\frac{q^{2m}}{(2k+1-2m)^2}=S_k(q)+q^{2k+1}\chi_2(q),
+\]
+where $\chi_2(q)=\sum_{j\ge0}q^{2j+1}/(2j+1)^2\in\QQ[[q]]$ (the terms $m\le k$ give $S_k$, the terms $m>k$ give $q^{2k+1}\chi_2(q)$), \eqref{eq:reflect} and Lemma~\ref{lem:pole}
+combine to
+\begin{equation}\label{eq:recomb}
+  \psi\bigl(\Lambda^{\cR}_X(g)\bigr)=-\sum_{m\ge0}q^{2m}(g\varphi)'(-m)-4\,(X+\chi_2(q))\sum_{k<h}g(x_k)\,\omega_k\,q^{2k+1}.
+\end{equation}
+\emph{Slots.} For $g=u^{i+j}$ we have
+$(g\varphi)'(-m)=\varphi'(-m)\,t^it^j+\varphi(-m)\bigl(it^{i-1}\bigr)t^j+\varphi(-m)\,t^i\bigl(jt^{j-1}\bigr)$ at $t=-m$, and
+$g(x_k)=x_k^ix_k^j$. So the matrix $\psi(H)$ is a sum of rank-one matrices $c\,xy^{\mathsf T}$, where the row vector $x$ is
+either a \emph{value row} $(t^i)_i$ or a \emph{derivative row} $(it^{i-1})_i$ at a node $t=-m$, or a pole row
+$(x_k^i)_i$. A node $-m$ carries the factor $q^{2m}$ and a pole $k$ carries $q^{2k+1}$. Give these row types the
+\emph{keys} $(m,\mathrm{val})$, $(m,\mathrm{der})$ and $k$, with \emph{prices} $2m$, $2m$ and $2k+1$.
+
+\emph{Truncation and Andreief.} Let $M:=a_h+1$ and let $H_M$ be the same sum restricted to the nodes $m<M$. Then
+$\psi(H)\equiv H_M$ entrywise modulo $q^{2M}$, so $\psi(\Delta^{\cR}_h)=\det\psi(H)\equiv\det H_M\pmod{q^{2M}}$. For a finite
+sum of rank-one matrices, the Andreief (Cauchy--Binet) identity \cite{Andreief,Forrester2019} reads
+\begin{equation}\label{eq:andreief}
+  h!\,\det\Bigl(\sum_\iota c_\iota x_\iota y_\iota^{\mathsf T}\Bigr)
+  =\sum_{f\colon[h]\to I}\Bigl(\prod_ic_{f(i)}\Bigr)\det\bigl(x_{f(i)}(j)\bigr)_{i,j}\det\bigl(y_{f(i)}(j)\bigr)_{i,j}.
+\end{equation}
+Here the rank-one terms are indexed by $\iota\in I$; the row vector $x_\iota$ and the power of $q$ in $c_\iota$ depend only
+on the key of $\iota$ (the two terms $\varphi'(-m)\,t^it^j$ and $\varphi(-m)\,t^i(jt^{j-1})$ of a node share the key
+$(m,\mathrm{val})$). A term of \eqref{eq:andreief} vanishes unless the rows $x_{f(i)}$ are pairwise distinct, so unless
+the $h$ keys of $f(0),\dots,f(h-1)$ are pairwise distinct. The term is then divisible by $q$ to the sum of their prices. The map $(m,\mathrm{val})\mapsto3m$, $(m,\mathrm{der})\mapsto3m+2$,
+$k\mapsto3k+1$ is injective and satisfies $2\cdot(\text{image})\le3\cdot\text{price}+6$. The images of $h$ distinct keys
+are $h$ distinct naturals, with sum $\ge h(h-1)/2$; hence the prices sum to at least $(h(h-1)-6h)/3\ge a_h$. Since $h!$
+is invertible and $2M>a_h$, $q^{a_h}$ divides every coefficient of $\psi(\Delta^{\cR}_h)$.
+
+\emph{Clearing.} Let $f=[X^k]\Delta^{\cR}_h$. By Lemma~\ref{lem:poleorder} and \eqref{eq:clear} (with $v=(q,1/(q^2-1))$ in
+$\QQ[[q]]$), $\operatorname{cl}_{\beta_h}f=(q^2-1)^{\beta_h}\psi(f)$ in $\QQ[[q]]$, which is divisible by $q^{a_h}$. As
+$\operatorname{cl}_{\beta_h}f$ is a polynomial in $q$, its monomials of degree $<a_h$ vanish.
+\end{proof}
+
+\subsection{The prime 2}
+
+\begin{lemma}[Lemma~10]\label{lem:two}
+Let $q\in\{3,5\}$. For every $h\ge1$ and $k\ge0$, $\bigl|[X^k]\Delta_h\bigr|_2\le2^{\beta_h+h(\lfloor\log_2h\rfloor+6)}$.
+\end{lemma}
+
+The only property of $q$ used is $v_2(q^2-1)=3$. We work directly over $\QQ$ with the anchored basis, for which
+$\det(\Lambda_X(a_ib_j))=\Delta_h(X)$. Put $L:=\lfloor\log_2h\rfloor$ and write $|\cdot|_2$ coefficientwise on $\QQ[X]$.
+
+\begin{lemma}\label{lem:fdseq}
+Let $T\colon\ZZ_{\ge0}\to\QQ$ satisfy $T(l+1)=Q\,T(l)+e\,(s+2l)^{-2}$ with $v_2(Q-1)\ge2$, $v_2(e)\ge0$, $v_2(T(0))\ge0$
+and $s$ odd. Then $v_2(\Delta^mT(0))\ge v_2(m!)+m-2-\lfloor\log_2m\rfloor$ for $m\ge1$.
+\end{lemma}
+
+\begin{proof}
+Put $\eta=Q-1$ and $g(l)=(s+2l)^{-2}$. Then $\Delta T=\eta T+eg$, and iterating,
+$\Delta^mT(0)=\eta^mT(0)+e\sum_{k<m}\eta^{m-1-k}\Delta^kg(0)$. By induction on $k$,
+$\Delta^kg(0)=(-2)^kk!\,H_k(s)/P_k(s)$ with $P_k(s)=\prod_{a\le k}(s+2a)$ odd and $H_k(s)=\sum_{a\le k}(s+2a)^{-1}$
+$2$-integral, so $v_2(\Delta^kg(0))\ge k+v_2(k!)$. Using $k-1-\lfloor\log_2k\rfloor\le v_2(k!)$ and $v_2(m!)\le m-1$, each
+term has valuation at least $2(m-1-k)+2k-1-\lfloor\log_2k\rfloor\ge v_2(m!)+m-2-\lfloor\log_2m\rfloor$, and
+$v_2(\eta^mT(0))\ge2m$ is larger.
+\end{proof}
+
+\begin{proof}[Proof of Lemma~\ref{lem:two}]
+We show that each entry satisfies
+\begin{equation}\label{eq:twoentry}
+  v_2\bigl(\Lambda_X(a_ib_j)\bigr)\ge h-(i+j+1)-(i+j+1-h)_+-L-6 .
+\end{equation}
+\emph{Entries with $\pi:=i+j+1-h\ge1$.} Then $a_ib_j=D\cdot P$ with $P=\prod_{h-j\le m<i}(u-x_m)$, so $a_ib_j\varphi=uP$
+is a polynomial: $B(a_ib_j)=0$ and $A(a_ib_j)=\mu(uP)$. We have $uP=2^{-\pi}H(2u)$ with $H\in\ZZ[T]$ of degree $\pi$.
+Since $\Delta^b[(2t)^n](0)=2^nb!\,S(n,b)$ (Stirling numbers of the second kind) vanishes for $n<b$,
+$v_2(\Delta^b[(uP)'](0))\ge1-\pi+b+v_2(b!)$. And $v_2(\Omega_b)=-3(b+1)$. By \eqref{eq:newton} and
+$v_2(b!)\ge b-1-\lfloor\log_2b\rfloor$,
+\[
+  v_2(A(a_ib_j))\ge\min_{b<\pi}\bigl(-\pi-2-2b+v_2(b!)\bigr)\ge-2\pi-2-\lfloor\log_2\pi\rfloor ,
+\]
+which implies \eqref{eq:twoentry}.
+
+\emph{Entries with $N:=h-1-i-j\ge0$.} Then $a_ib_j\varphi=u/\prod_{l=0}^{N}(u-\xi_l)$ with $\xi_l:=x_{i+l}=-c/2-l$,
+$c:=2i+1$. Since $\xi_l-\xi_m=m-l$, its partial fractions are a constant (which $\mu$ kills) plus
+$\sum_l(-1)^l\binom Nl\xi_l/(N!\,(u-\xi_l))$. By the proof of Lemma~\ref{lem:pole}, both $A(a_ib_j)$ and $B(a_ib_j)$ have the form
+$\pm\frac4{N!}\sum_l(-1)^l\binom Nl\xi_lT(l)=\pm\frac4{N!}\Delta^N[\xi_lT(l)](0)$, with $T(l)=S_{i+l}(q)$ or
+$T(l)=q^{2(i+l)+1}$. Both satisfy the recursion of Lemma~\ref{lem:fdseq} with $Q=q^2$: $S_{i+l+1}=q^2S_{i+l}+(2i+3+2l)^{-2}$
+($e=1$, $s=2i+3$), and $q^{2(i+l+1)+1}=q^2\cdot q^{2(i+l)+1}$ ($e=0$). From $\Delta^N[l\,T(l)](0)=N\,\Delta^{N-1}[T(\cdot+1)](0)$, and
+since $T(\cdot+1)$ satisfies a recursion of the same kind,
+\begin{multline*}
+  v_2\Bigl(\frac4{N!}\Delta^N[\xi_lT(l)](0)\Bigr)\ge2-v_2(N!)\\
+  +\min\Bigl(-1+v_2(N!)+N-2-\lfloor\log_2N\rfloor,\ v_2(N!)+N-3-\lfloor\log_2(N-1)\rfloor\Bigr),
+\end{multline*}
+for $N\ge2$, which is at least $N-1-\lfloor\log_2N\rfloor$. For $N\le1$ the entry is $\pm4\,\xi_0T(0)$ or
+$\pm4\bigl(\xi_0\Delta T(0)-T(1)\bigr)$, of valuation $\ge1$, since $v_2(\xi_0)=-1$ and $T(0),T(1),\Delta T(0)$ are
+$2$-integral. This implies \eqref{eq:twoentry}.
+
+\emph{Assembly.} Since $(i+j+1-h)_+\le\rho_i+\kappa_j$, \eqref{eq:twoentry} gives
+$|\Lambda_X(a_ib_j)|_2\le\bigl(2^{i+1+\rho_i+L+6-h}\bigr)\bigl(2^{j+\kappa_j}\bigr)$. The Leibniz expansion, now over
+$\QQ[X]$ with the coefficientwise $2$-adic norm, gives
+$|[X^k]\Delta_h|_2\le2^{\sum_i(i+1)+\sum_jj+\beta_h+h(L+6)-h^2}=2^{\beta_h+h(L+6)}$.
+\end{proof}
+
+\subsection{The denominator}
+
+\begin{theorem}[arithmetic bound]\label{thm:arith}
+Let $q\in\{3,5\}$. There are rationals $d_h>0$ with $d_h\Delta_h\in\ZZ[X]$ for every $h\ge1$, such that for every
+$\eps>0$ and all large $h$,
+\[
+  \log d_h\le(\alpha_q+\eps)h^2,\qquad
+  \alpha_q=\frac{133}{60}+\frac{\log2}4+\ind{q=5}\frac{\log3}4-\frac{\log q}3 .
+\]
+\end{theorem}
+
+\begin{proof}
+Let $c$ be a coefficient of $\Delta_h$; then $c=\operatorname{ev}_q(f)$ with $f$ the corresponding coefficient of
+$\Delta^{\cR}_h$. We bound $|c|_p$ for every prime $p$.
+\begin{itemize}
+\item $p=2$: $|c|_2\le2^{\beta_h+h(L+6)}$ by Lemma~\ref{lem:two}.
+\item $p=q$: by \eqref{eq:clear}, $c=\operatorname{ev}(\operatorname{cl}_{\beta_h}f)/(q^2-1)^{\beta_h}$, and $q^2-1$ is a $q$-unit.
+  By Lemma~\ref{lem:qadic} every monomial of $\operatorname{cl}_{\beta_h}f$ has degree $\ge a_h$, so
+  $|c|_q\le\|\operatorname{cl}_{\beta_h}f\|_q\,q^{-a_h}\le\|f\|_q\,q^{-a_h}\le q^{2h\lev(q)-a_h}$ by Lemma~\ref{lem:nine}.
+\item $p$ odd with $p\mid q^2-1$ (so $p=3$, $q=5$): by Lemma~\ref{lem:poleorder} and \eqref{eq:clear},
+  $|c|_p=|\operatorname{ev}(\operatorname{cl}_{\beta_h}f)|_p\,|q^2-1|_p^{-\beta_h}\le\|f\|_p\,|q^2-1|_p^{-\beta_h}\le
+  p^{2h\lev(p)+v_p(q^2-1)\beta_h}$, by Lemma~\ref{lem:nine}.
+\item every other $p$: $q$ and $1/(q^2-1)$ are $p$-integral, so $|c|_p\le\|f\|_p\le p^{e(h,p)}$ by
+  Theorem~\ref{thm:generic}.
+\end{itemize}
+Let $N_h:=\prod_pp^{e_p}$, where $e_2=\beta_h+h(L+6)$, $e_q=2h\lev(q)$, $e_3=2h\lev(3)+\beta_h$ if $q=5$, and $e_p=e(h,p)$
+otherwise. Only primes $p<2h+q^2$ occur, because $e(h,p)=0$ for $p\ge2h$. Put $d_h:=N_h/q^{a_h}$. Then
+$|d_hc|_p\le1$ for every prime $p$, so $d_hc\in\ZZ$. Finally
+\begin{multline*}
+  \log d_h\le\sum_{p\nmid2q(q^2-1)}e(h,p)\log p+\Bigl(\frac{h^2+2h}4+h(L+6)\Bigr)\log2\\
+  +\ind{q=5}\frac{h^2+2h}4\log3-a_h\log q+O(h\log h),
+\end{multline*}
+where the $O(h\log h)$ collects the terms $2h\lev(p)\log p\le2h\log(2h)$ for $p\in\{3,q\}$. Theorem~\ref{thm:generic}
+and $a_h\ge(h^2-7h-2)/3$ give the claim.
+\end{proof}
+
+% ===========================================================================
+\section{The size of \texorpdfstring{$\Delta_h(\chi)$}{Delta_h(chi)}: Theorem B}\label{sec:analytic}
+% ===========================================================================
+
+\subsection{Dual certificates}
+Let $\psi(u):=u\log|u|-u$ (with $\psi(0)=0$), an antiderivative of $\log|u|$, so that
+$\int_\alpha^\beta\log|x-y|\,dy=\psi(x-\alpha)-\psi(x-\beta)$. Put
+\[
+  V(x):=x\log w-\psi(x+1)+\psi(x)=x\log w-(x+1)\log(x+1)+x\log x+1
+\]
+for $x\ge0$.
+A \emph{step density} is $\mu=\sum_{j<J}c_j\mathbf 1_{[a_j,a_{j+1})}$ with $0=a_0\le a_1\le\dots\le a_J$, $0\le c_j\le2$ and
+$\int\mu=1$. Its potential and energy are
+\[
+  U^\mu(x):=\int\log|x-y|\,\mu(y)\,dy,\qquad E(\mu):=\iint\log|x-y|\,\mu(x)\mu(y)\,dx\,dy .
+\]
+
+\begin{definition}\label{def:cert}
+A \emph{dual certificate} for $q$ consists of a step density $\mu$, a real number $\lambda$, integers $L,X,N\ge1$ with
+$a_J\le N\le X$, and real numbers $S_k$ ($0\le k<XL$) such that
+\begin{enumerate}
+\item $F(x):=2U^\mu(x)+V(x)\le S_k$ for $x\in[k/L,(k+1)/L]$, for every $k<XL$;
+\item $1/X+\log w<0$ and $\log X+X\log w<\lambda$.
+\end{enumerate}
+Its \emph{exponent} is $\Phi:=-E(\mu)+\lambda+\frac2L\sum_{k<XL}(S_k-\lambda)_+$.
+\end{definition}
+
+\begin{theorem}[Theorem~B]\label{thm:B}
+For every dual certificate for $q$, as $h\to\infty$,
+\[
+  \log|\Delta_h(\chi_2(1/q))|\le\Phi h^2+O(h\log h).
+\]
+\end{theorem}
+
+The constant in $O(h\log h)$ depends on the certificate. The heuristic behind the theorem: by \eqref{eq:value},
+$\Delta_h(\chi)$ is a Hankel determinant of a positive-weight functional on the nodes $t=1,2,\dots$ with the
+derivative structure of $(g\varphi)'$, i.e.\ a discrete log-gas in the external field $V$ with at most two
+particles per node. The dual certificate is a feasible point of the dual of the corresponding constrained
+equilibrium problem \cite[Ch.~I]{SaffTotik}, and the proof below is a discrete version of weak duality.
+
+\subsection{Node expansion}
+We have $\Lambda(u^n)=\sum_{s\ge1}w^s\bigl(ns^{n-1}\varphi(s)+s^n\varphi'(s)\bigr)$. Let $H^{(T)}$ be the matrix of
+truncated sums over $1\le s\le T$. Then $H^{(T)}\to(\Lambda(u^{i+j}))_{i,j}$ entrywise, so by continuity of the
+determinant $|\Delta_h(\chi)|\le\sup_T|\det H^{(T)}|$. Expanding $(i+j)s^{i+j-1}=(is^{i-1})s^j+s^i(js^{j-1})$,
+\[
+  H^{(T)}=\sum_{s\le T}\Bigl(w^s\varphi'(s)\,v_sv_s^{\mathsf T}+w^s\varphi(s)\,v'_sv_s^{\mathsf T}+w^s\varphi(s)\,v_sv_s'^{\mathsf T}\Bigr),
+\]
+with the value row $v_s=(s^j)_{j<h}$ and the derivative row $v'_s=(js^{j-1})_{j<h}$. We call $(s,\mathrm{val})$ and
+$(s,\mathrm{der})$ the two \emph{slots} of the node $s$. Since $\varphi'/\varphi=1/s-\sum_k1/(s-x_k)$ is a difference of two
+numbers in $[0,h]$ for $s\ge1$, all three coefficients are bounded by
+\[
+  b(s):=w^s\,h\,\varphi(s).
+\]
+
+\begin{lemma}[minors with derivative rows]\label{lem:slotdet}
+Let $h\ge2$ and let $(s_i,\tau_i)_{i<h}$ be slots at integer nodes $s_i\ge0$. Then
+\[
+  \bigl|\det(\text{row of slot }(s_i,\tau_i))_{i<h}\bigr|\le h^h\Bigl(1+\frac2h\Bigr)^{h^2}\prod_{i<j}\operatorname{pf}(s_i,s_j),
+\]
+where $\operatorname{pf}(a,b)=|a-b|$ for $a\ne b$ and $\operatorname{pf}(a,a)=1$.
+\end{lemma}
+
+\begin{proof}
+Let $\zeta$ be a primitive $h$-th root of unity and $r=1/h$. For $j<h$,
+$\sum_{l<h}\zeta^{l(h-1)}(t+r\zeta^l)^j=h\,r\,jt^{j-1}$ (only the binomial term with $h\mid h-1+m$, i.e.\ $m=1$, survives;
+this needs $h\ge2$). Since $hr=1$, the derivative row at $t$ is the sum
+$\sum_l\zeta^{l(h-1)}(\text{value row at }t+r\zeta^l)$. By multilinearity the determinant is a sum of at most
+$h^{\#\mathrm{der}}$ Vandermonde determinants at points $z_i$ with $|z_i-s_i|\le r$, each with a coefficient of modulus
+$1$. Since the nodes are integers, each Vandermonde factor satisfies
+$|z_j-z_i|\le|s_j-s_i|+2r\le(1+2r)\operatorname{pf}(s_i,s_j)$.
+So the determinant is at most $h^h(1+2/h)^{h(h-1)/2}\prod_{i<j}\operatorname{pf}(s_i,s_j)$.
+\end{proof}
+
+Apply \eqref{eq:andreief} to $H^{(T)}$, indexing the rank-one terms by triples (node, type). A term with two equal
+row vectors vanishes, so only assignments $f$ whose \emph{x-slots} are distinct contribute; in particular each node
+carries at most two of the $h$ indices. With Lemma~\ref{lem:slotdet} for both determinants,
+\begin{equation}\label{eq:pattern}
+  |\det H^{(T)}|\le\frac{K_h^2}{h!}\sum_{f}\ \prod_{i<h}b(s_i)\prod_{i<j}\operatorname{pf}(s_i,s_j)^2,\qquad K_h:=h^h(1+2/h)^{h^2},
+\end{equation}
+where $f$ runs over the assignments $i\mapsto(s_i,\tau_i)$ with distinct x-slots and $s_i$ is the node of $f(i)$.
+
+\subsection{A lattice energy inequality}
+
+\begin{lemma}[P\'olya-type inequality]\label{lem:polya}
+For $M\ge1$ and real $\nu_0,\dots,\nu_{M-1}$,
+\[
+  \sum_{i\ne j}\nu_i\nu_j\log|i-j|\le\log2\sum_i\nu_i^2+\log M\Bigl(\sum_i\nu_i\Bigr)^2 .
+\]
+\end{lemma}
+
+\begin{proof}
+For $M=1$ the claim reads $0\le\log2\,\nu_0^2$. Let $M\ge2$. We follow P\'olya's criterion for positive definite
+functions \cite{Polya1949} in a finite form. Let $f(0)=\log M+\log2$, $f(d)=\log(M/d)$ for $1\le d\le M$, and $f(d)=0$
+for $d>M$. Then $f$ is convex on
+$\ZZ_{\ge0}$ (this uses $\log(k-1)+\log(k+1)\le2\log k$ for $2\le k<M$, $f(M-1)-2f(M)+f(M+1)=\log\frac M{M-1}\ge0$,
+and $f(0)-2f(1)+f(2)=0$ when $M\ge2$).
+Hence $f(d)=\sum_{k=1}^{M}\Delta^2f(k-1)\,(k-d)_+$ with $\Delta^2f\ge0$. Each triangle kernel $(k-|i-j|)_+$ is the
+number of windows of length $k$ containing both $i$ and $j$, hence positive semidefinite. So
+$\sum_{i,j}\nu_i\nu_jf(|i-j|)\ge0$, which rearranges to the claim.
+\end{proof}
+
+For a reference sequence $m=(m_s)_{s\ge0}$ with finite support, $\sum_sm_s=h$, put
+\[
+  P_m(s):=\sum_{s'\ne s}m_{s'}\log|s-s'|,\qquad E_m:=\sum_{s\ne s'}m_sm_{s'}\log|s-s'|.
+\]
+
+\begin{lemma}[discrete weak duality]\label{lem:dual}
+Let $m$ be as above with $\sum_sm_s^2\le2h$, and let $\lambda'\in\RR$. Put $g(s):=\log b(s)+2P_m(s)-\lambda'$. For every assignment $f$ in \eqref{eq:pattern},
+\[
+  \prod_ib(s_i)\prod_{i<j}\operatorname{pf}(s_i,s_j)^2\le\exp\Bigl(-E_m+\lambda'h+8h\log2+\sum_ig(s_i)\Bigr).
+\]
+\end{lemma}
+
+\begin{proof}
+Let $n_s:=\#\{i:s_i=s\}\le2$, so $\sum_sn_s=h$ and $\sum_sn_s^2\le2h$. Pairs at the same node contribute
+$\operatorname{pf}=1$, so $2\sum_{i<j}\log\operatorname{pf}(s_i,s_j)=\sum_{s\ne s'}n_sn_{s'}\log|s-s'|$. With $\nu:=n-m$ (total mass $0$),
+\[
+  \sum_{s\ne s'}n_sn_{s'}\log|s-s'|=-E_m+2\sum_sn_sP_m(s)+\sum_{s\ne s'}\nu_s\nu_{s'}\log|s-s'| ,
+\]
+and by Lemma~\ref{lem:polya} the last sum is at most $\log2\sum\nu_s^2\le2\log2(\sum n_s^2+\sum m_s^2)\le8h\log2$.
+Finally $\sum_sn_sP_m(s)=\sum_iP_m(s_i)$.
+\end{proof}
+
+\subsection{Discretization}
+Given a step density $\mu$ supported in $[0,N]$, let $m_s:=h\int_{(s-1)/h}^{s/h}\mu$ for $s\ge1$ and $m_0:=0$ (cell
+averages). Then $\sum m_s=h$, $0\le m_s\le2$ (so $\sum m_s^2\le2h$), and $m_s=0$ for $s>Nh$.
+
+\begin{lemma}\label{lem:discrete}
+With these $m_s$, for all $h\ge2$ and $s\ge1$:
+\begin{enumerate}
+\item $\log b(s)\le\log h+\log s-h\log h+h\,V(s/h)$;
+\item $P_m(s)\le h\,U^\mu(s/h)+h\log h+4+2\log(Nh+1)$;
+\item $E_m\ge h^2E(\mu)+h^2\log h-4h\bigl(1+\log(Nh+1)\bigr)$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(i) By concavity of $\log$, $\log(c+\frac12)\ge\int_c^{c+1}\log y\,dy=\psi(c+1)-\psi(c)$ for $c\ge0$, so
+$\log D(s)=\sum_{k<h}\log(s+k+\frac12)\ge\psi(s+h)-\psi(s)=h\bigl(\psi(x+1)-\psi(x)\bigr)+h\log h$ with $x=s/h$. Insert this into
+$\log b(s)=s\log w+\log h+\log s-\log D(s)$.
+
+(ii) We have $h\,U^\mu(s/h)=\sum_{s'}\int_{I_{s'}}\log|s-u|\,\rho(u)\,du-h\log h$, where $I_{s'}=[s'-1,s']$ and
+$\rho(u):=\mu(u/h)$; this density has mass $m_{s'}$ on $I_{s'}$, total mass $h$, and is bounded by $2$. For
+$s'<s$ and $u\in I_{s'}$, $\log|s-u|\ge\log(s-s')$, so these cells contribute with the right sign. For $s'=s$ the
+discrete term is $0$ and $\int_{I_s}(-\log|s-u|)\,\rho\le2$. For $s'=s+d$, $d\ge1$, the deficit is at most
+$2\int_{d-1}^{d}(\log d-\log u)\,du=2\bigl(1-(d-1)\log\tfrac d{d-1}\bigr)\le2/d$. Summing over $d\le Nh$ gives (ii).
+
+(iii) Similarly $h^2E(\mu)+h^2\log h=\sum_{s,s'}\iint_{I_s\times I_{s'}}\log|u-u'|\,\rho(u)\rho(u')$. The diagonal cells
+contribute $\le0$ because $|u-u'|\le1$ there. For $|s-s'|=d\ge1$ we have $\log|u-u'|\le\log(d+1)\le\log d+1/d$. Since $m_{s'}\le2$, summing
+$m_sm_{s'}/d$ over the pairs gives at most $\sum_sm_s\cdot2\cdot2\sum_{d\le Nh}1/d\le4h(1+\log(Nh+1))$.
+\end{proof}
+
+\subsection{Proof of Theorem~\ref{thm:B}}
+Fix a certificate and $h\ge2$. Take $m$ as above and $\lambda':=h\lambda+h\log h$. By Lemma~\ref{lem:discrete}, with
+$\epsilon_h:=4+2\log(Nh+1)$ and $x=s/h$,
+\begin{gather}
+  g(s)\le h\bigl(F(x)-\lambda\bigr)+\log h+\log s+2\epsilon_h,\label{eq:gbound}\\
+  -E_m+\lambda'h\le h^2\bigl(\lambda-E(\mu)\bigr)+O(h\log h).\notag
+\end{gather}
+\emph{Near and far nodes.} Let $S_0:=Xh$. Since each node carries at most two indices,
+$\sum_ig(s_i)\le2\sum_{1\le s\le S_0}g(s)_++\sum_{i:\,s_i>S_0}g(s_i)$. Summing over $f$ in \eqref{eq:pattern} with
+Lemma~\ref{lem:dual} therefore gives
+\[
+  |\det H^{(T)}|\le\frac{K_h^2}{h!}\,e^{-E_m+\lambda'h+8h\log2+2\sum_{s\le S_0}g(s)_+}\Bigl(3S_0+3\sum_{s>S_0}e^{g(s)}\Bigr)^h .
+\]
+\emph{Near nodes.} Each $x=s/h\le X$ lies in a cell $[k/L,(k+1)/L]$ with $k<XL$, where $F\le S_k$; each cell contains at
+most $h/L+1$ points $s/h$. By \eqref{eq:gbound},
+$\sum_{s\le S_0}g(s)_+\le h(h/L+1)\sum_k(S_k-\lambda)_++S_0(\log h+\log S_0+2\epsilon_h)$.
+
+\emph{Far nodes.} Put $\delta:=-\max\bigl(1/X+\log w,\ (\log X+X\log w-\lambda)/X\bigr)>0$. For $x\ge N$,
+$U^\mu(x)\le\log x$, and $V(x)\le x\log w-\log x$ (because $1-x\log(1+1/x)\le1/(x+1)\le\log(1+1/x)$). Hence, using
+$\log x\le\log X+(x-X)/X$, for $x\ge X$
+\begin{align*}
+  F(x)-\lambda&\le\log x+x\log w-\lambda\\
+  &\le(\log X+X\log w-\lambda)+(x-X)(1/X+\log w)\le-\delta x .
+\end{align*}
+So $e^{g(s)}\le h\,s\,e^{2\epsilon_h}e^{-\delta s}\le\frac2\delta h\,e^{2\epsilon_h}e^{-\delta s/2}$ for $s>S_0$, and the
+far sum is $e^{O(\log h)}$.
+
+\emph{Assembly.} $\log(K_h^2/h!)=O(h\log h)$, and $\log\bigl(3S_0+3\sum_{s>S_0}e^{g(s)}\bigr)=O(\log h)$. Collecting,
+\[
+  \log|\det H^{(T)}|\le h^2\Bigl(-E(\mu)+\lambda+\frac2L\sum_k(S_k-\lambda)_+\Bigr)+O(h\log h)
+\]
+uniformly in $T$, and the theorem follows from $|\Delta_h(\chi)|\le\sup_T|\det H^{(T)}|$. \qed
+
+\begin{remark}
+Let $C(w):=\sup\{E(\rho)+\int V\rho\}$ over densities $\rho$ on $[0,\infty)$ with compact support, $0\le\rho\le2$ and
+$\int\rho=1$ (the constrained equilibrium constant). For such $\rho$, $E(\rho-\mu)\le0$ \cite[Lemma~I.1.8]{SaffTotik},
+so $E(\rho)+\int V\rho\le-E(\mu)+\int F\rho\le-E(\mu)+\lambda+2\int_0^X(F-\lambda)_+\le\Phi$, using $\rho\le2$, $F<\lambda$
+beyond $X$ and $F\le S_k$ on the cells. Hence
+$\Phi\ge C(w)$. Numerically $C(1/9)\approx-2.1003$ and
+$C(1/25)\approx-2.4565$. The finite-$h$ values $h^{-2}\log|\Delta_h(\chi)|$, computed in ball arithmetic up to $h=320$,
+approach these constants [numerical], so Theorem~\ref{thm:B} is essentially sharp for this construction. Only the
+form with an explicit certificate is used.
+\end{remark}
+
+% ===========================================================================
+\section{The two certificates}\label{sec:cert}
+% ===========================================================================
+
+\begin{theorem}\label{thm:cert}
+There are dual certificates with exponent $\Phi<-2.078$ for $q=3$ and $\Phi<-2.385$ for $q=5$.
+\end{theorem}
+
+The certificates are explicit rational data (Table~\ref{tab:cert}). The density $\mu$ is constant on the $J$ cells
+$[js/L,(j+1)s/L)$ with dyadic heights $c_j\in[0,2]$ (denominator $2^{16}$) and exact mass
+$\sum_jc_j\,s/L=1$. The bounds $S_k$ are rationals. All checks are inequalities between explicit rational numbers
+and finitely many values of $\log$ at rational points, and are verified as follows.
+\begin{itemize}
+\item \emph{Logarithms.} A table of dyadic intervals of width $2\cdot2^{-40}$ for $\log n$, $n\le n_{\max}$, each checked
+  against the series of $\log(1-x)$ with an explicit tail bound, after reducing the argument by powers of $2$; $\log2$
+  is enclosed to width $2^{-100}$.
+\item \emph{Potential.} By summation by parts,
+  $2U^\mu(x)+V(x)=\sum_jD_j\,\psi(x-\alpha_j/L)+x\log w$, with $D_j=2(c_j-c_{j-1})$ at $\alpha_j=js$, plus the terms
+  $\psi(x)$ and $-\psi(x+1)$ of $V$. On each grid cell $[k/L,(k+1)/L]$ every term is bounded above by an affine
+  function: by the chord where the term is convex, and by a tangent (at the midpoint, or at the endpoint away from
+  $\alpha_j/L$) where it is concave. Summing the affine bounds and taking the larger endpoint value bounds $F$ on the
+  cell. All values are rational enclosures.
+\item \emph{Energy.} $E(\mu)=\sum_{j,j'}c_jc_{j'}\iint\log|x-y|$ over pairs of cells, and the double integral over
+  $[a_1,b_1]\times[a_2,b_2]$ equals $-\Psi(b_1-b_2)+\Psi(b_1-a_2)+\Psi(a_1-b_2)-\Psi(a_1-a_2)$ with
+  $\Psi(u)=\frac12u^2\log|u|-\frac34u^2$. A rational lower bound $E_{\mathrm{lo}}\le E(\mu)$ is computed in interval
+  arithmetic.
+\item \emph{Tail.} $1/X+\log w<0$ and $\log X+X\log w<\lambda$, from the enclosures of $\log X$ and $\log q$.
+\end{itemize}
+The certified exponent is the rational number $\Phi_{\mathbb Q}:=-E_{\mathrm{lo}}+\lambda+\frac2L\sum_k(S_k-\lambda)_+\ge\Phi$.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{@{}lcc@{}}
+\toprule
+ & $q=3$ & $q=5$\\
+\midrule
+grid width $1/L$ & $1/100$ & $1/40$\\
+near region $[0,X]$ (cells $XL$) & $[0,3]$ ($300$) & $[0,2]$ ($80$)\\
+density: $J$ cells of width $s/L$ & $30\times\frac1{20}$ & $23\times\frac1{20}$\\
+$N$; entries of the log table & $2$; $804$ & $2$; $244$\\
+$-E_{\mathrm{lo}}$ & $1.532174204$ & $1.768055783$\\
+$\lambda$ & $-3.900735042$ & $-4.649276378$\\
+$\frac2L\sum_k(S_k-\lambda)_+$ & $0.290234795$ & $0.496069677$\\
+$\Phi_{\mathbb Q}$ & $-2.0783260426\ldots$ & $-2.3851509182\ldots$\\
+\bottomrule
+\end{tabular}
+\caption{The two dual certificates (decimal values rounded).}\label{tab:cert}
+\end{table}
+
+Exactly, $\Phi_{\mathbb Q}=-25979075532629/12500000000000$ for $q=3$ and $\Phi_{\mathbb Q}=-9540603672893/4000000000000$
+for $q=5$.
+
+The data are generated by a script that optimises the density in floating point, rounds it to dyadic rationals,
+and then replicates the interval arithmetic exactly in rational arithmetic. The script is not trusted: in the
+formalisation every check above is a decidable statement about the data, proved by evaluation in the Lean kernel
+(Section~\ref{sec:lean}).
+
+% ===========================================================================
+\section{Nonvanishing: Lemma P}\label{sec:nonvan}
+% ===========================================================================
+
+\subsection{Statement}
+For $r\in\{0,1,2\}$ put $c_r:=1/\prod_{a\in\{0,1,2\},a\ne r}(a-r)$, so $(c_0,c_1,c_2)=(\frac12,-1,\frac12)$. Recall
+$T(M)=\sum_{s\le M,\,s\text{ odd}}z^s/s^2$. Define three $3\times3$ rational matrices, indexed by $r,s\in\{0,1,2\}$:
+\begin{align*}
+  M_S(q)_{rs}&=\frac{c_r}{1-w}+\ind{r=s}\,4q^{2r+1}T(2r-1),\\
+  M_L(q)_{rs}&=\frac{w\,c_r}{1-w}+\ind{r=s}\,4q^{2r+1}T(2r+1),\\
+  M_D(q)_{rs}&=w\,c_r\Bigl(\frac{e_{rs}}{1-w}+\frac{2w}{(1-w)^2}\Bigr)-\ind{r=s}\,4\bigl(r+\tfrac12\bigr)q^{2r+1}T(2r+1),
+\end{align*}
+where $e_{rs}=\frac{11}2-2r$ if $r=s$ and $e_{rs}=(3-r-s)+\frac52$ if $r\ne s$.
+
+\begin{theorem}[Lemma~P]\label{thm:lemmaP}
+Let $q\ge2$ and let $\ell\ge7$ be a prime with $\ell\nmid q(q^2-1)$ such that $\det M_S(q)$, $\det M_L(q)$ and
+$\det M_D(q)$ are $\ell$-adic units. Then $\Delta_{3\ell}(a/b)\ne0$ for all $a\in\ZZ$ and $b\ge1$ with $\ell\nmid b$.
+\end{theorem}
+
+\begin{theorem}\label{thm:nonvan}
+For $q\in\{3,5\}$ and every $a\in\ZZ$, $b\ge1$, we have $\Delta_h(a/b)\ne0$ for infinitely many $h$.
+\end{theorem}
+
+\begin{proof}
+Exact evaluation gives
+\[
+\begin{array}{lccc}
+ & \det M_S & \det M_L & \det M_D\\[2pt]
+q=3: & 6642 & \frac{10896962}{225} & -\frac{5947389}{80}\\[4pt]
+q=5: & \frac{3531250}{27} & \frac{246357730}{243} & -\frac{6934894375}{3888}
+\end{array}
+\]
+(the factor $9q^2+1$ of $\det M_S=8q^6(9q^2+1)/(9(q^2-1))$ comes from $T(3)=z+z^3/9$). Every prime $\ell$ larger than
+all these numerators and denominators, than $q^2$, and than $b$, satisfies the hypotheses of Theorem~\ref{thm:lemmaP}
+and $\ell\nmid b$. There are infinitely many such primes, and each gives $h=3\ell$.
+\end{proof}
+
+The rest of this section proves Theorem~\ref{thm:lemmaP}. Fix $q,\ell$ as there and $h=3\ell$; then $\ell^2\ge7\ell>2h$.
+Let $\ZZ_{(\ell)}$ be the ring of $\ell$-integral rationals and $\bar{\cdot}\colon\ZZ_{(\ell)}\to\FF_\ell$ the reduction. Put
+$\kappa:=(\ell-1)/2$. The indices $i<h$ fall into the classes $C_\gamma=\{\gamma,\gamma+\ell,\gamma+2\ell\}$, $\gamma<\ell$;
+we write $i=\gamma+r\ell$ with $r\in\{0,1,2\}$. The class $\gamma$ has \emph{type} S if $\gamma<\kappa$, D if $\gamma=\kappa$, and L if
+$\gamma>\kappa$. Note that $\ell\mid2i+1$ iff $i\in C_\kappa$; put $\delta_i:=\ind{i\in C_\kappa}$.
+
+\subsection{Steps 1--2: the Lagrange Gram matrix}
+For $r_0\in\QQ$ let $\Lambda_{r_0}:=A+r_0B$ and $G(r_0)_{ij}:=\Lambda_{r_0}(f_if_j)$, with the Lagrange basis $f_i=D/(u-x_i)$. By
+\eqref{eq:gram}, $\det G(r_0)=(\det C_f)^2\Delta_h(r_0)$. Put
+\[
+  \mathcal E(r_0)_{ij}:=\nu_i\,G(r_0)_{ij}\,\ell^{-\delta_j},\qquad \nu_i:=\ell^2/D'(x_i).
+\]
+Then $\det\mathcal E(r_0)\ne0$ implies $\Delta_h(r_0)\ne0$; no value of $\det C_f$ is needed. As in the proof of
+Lemma~\ref{lem:nine}, for $i\ne j$ we have $G(r_0)_{ij}=\mu(F_{ij})$ with $F_{ij}=u\prod_{m\ne i,j}(u-x_m)$, and
+$G(r_0)_{ii}=\mu(Q_i)+4x_iD'(x_i)\bigl(S_i(q)-r_0q^{2i+1}\bigr)$. Hence
+\[
+  \mathcal E(r_0)=\mathcal E(0)+r_0\operatorname{diag}(d_i),\qquad d_i=-4\ell^{2-\delta_i}x_iq^{2i+1},\qquad v_\ell(d_i)=2 .
+\]
+If $\mathcal E(0)$ is $\ell$-integral and $\ell\nmid b$, then $\mathcal E(a/b)$ is $\ell$-integral with the same reduction as $\mathcal E(0)$.
+So it suffices to show that $\mathcal E(0)$ is $\ell$-integral and $\det\overline{\mathcal E(0)}\ne0$.
+
+\subsection{Step 3: splitting by progressions}
+For $|v|<1$ and a polynomial $g$, $\sigma(v,g):=\sum_{j\ge0}v^jg(j)=\sum_b\Delta^bg(0)\,v^b/(1-v)^{b+1}$. Since $w$, $w^\ell$ and
+$1-w^\ell\equiv1-w=(q^2-1)/q^2$ are $\ell$-units, we get the following. If $g$ has $\ell$-integral values on $\ZZ_{\ge0}$, then
+$\sigma(w^\ell,g)$ is $\ell$-integral. If moreover $\bar g(j)=g_0(j)$ for all $j$, for a polynomial $g_0$ over $\FF_\ell$, then
+$\overline{\sigma(w^\ell,g)}=\sum_b\Delta^bg_0(0)\,\bar w^b/(1-\bar w)^{b+1}$ (use $\bar w^\ell=\bar w$). Splitting $t\ge1$ into the
+residue classes modulo $\ell$,
+\[
+  \mu(F)=\sum_{\gamma<\ell}w^{t_\gamma}\,\sigma\bigl(w^\ell,\ j\mapsto F'(t_\gamma+j\ell)\bigr),
+\]
+where the \emph{progression of $\gamma$} is $\{t\ge1:\ell\mid2t+2\gamma+1\}$ and $t_\gamma$ is its least element: $t_\gamma=\kappa-\gamma$
+(type S), $\kappa-\gamma+\ell$ (type L), and $\ell$ (type D). On the progression of $\gamma$, $\ell\mid t-x_m$ iff $m\in C_\gamma$,
+and $\ell\mid t$ iff $\gamma=\kappa$. Since $\ell^2>2h$, all these divisibilities are simple.
+
+\subsection{Step 4: integrality and block triangularity}
+We have $D'(x_i)=\prod_{m\ne i}(m-i)=\ell^2\,c_r^{-1}\,U_i$ with $U_i:=\prod_{m\notin C_\gamma}(x_i-x_m)$ an $\ell$-unit, so
+$\nu_i=c_rU_i^{-1}$ is a unit. Let $\gamma_i,\gamma_j$ be the classes of $i,j$ and consider the contribution of the
+progression of $\gamma$.
+
+\emph{Off-diagonal entries.} At $t$ on the progression of $\gamma$, the factors of $F_{ij}$ divisible by $\ell$ number
+$N_\gamma=3-\ind{\gamma=\gamma_i}-\ind{\gamma=\gamma_j}+\ind{\gamma=\kappa}$, and every term of $F'_{ij}(t)$ keeps at least $N_\gamma-1$ of
+them. So the contribution has valuation $\ge N_\gamma-1-\delta_j\ge0$, with equality only if $\gamma=\gamma_i=\gamma_j$ (inside a
+diagonal block) or $\gamma=\gamma_i\ne\gamma_j=\kappa$ (a non-D row against a D column).
+
+\emph{Diagonal entries.} Off its own progression, $|t-x_i|_\ell=1$ and
+$Q_i'(t)=\bigl(g_i'(t)(t-x_i)-g_i(t)+g_i(x_i)\bigr)/(t-x_i)^2$ with $g_i$ having at least three roots $\ell$-adically close to $t$,
+so $v_\ell(Q_i'(t))\ge2$ and the contribution has valuation $\ge2-\delta_i\ge1$. The pole term
+$4\ell^{2-\delta_i}x_iS_i(q)$ is integral, since $v_\ell(x_i)=\delta_i$ and the denominators $s^2$ of $S_i$ have $v_\ell(s)\le1$.
+The own-progression contributions are integral by Step~5.
+
+Hence $\mathcal E(0)$ is $\ell$-integral. Ordering the classes with $\kappa$ last, $\overline{\mathcal E(0)}$ is block upper triangular,
+with $3\times3$ diagonal blocks $\overline{\mathcal E(0)}_{C_\gamma}$, and each diagonal block receives only its own progression
+and the pole terms.
+
+\subsection{Step 5: the diagonal blocks}
+Fix a class $\gamma$ and $i=\gamma+r\ell$, $j=\gamma+s\ell$. On the progression of $\gamma$ we have $t\equiv x_i\equiv x_\gamma\pmod\ell$.
+
+For $r\ne s$ let $c:=3-r-s$ be the rank of the third class member, and for $r=s$ let $c_1,c_2$ be the ranks of the
+other two members; we write $x_{(c)}:=x_{\gamma+c\ell}$. For a polynomial $P$ let $Q[P]:=(P(u)-P(x_i))/(u-x_i)$, so that
+$Q[PR]=Q[P]\,R+P(x_i)\,Q[R]$ and $Q_i=Q[g_i]$.
+
+\emph{Types S and L.} If $r\ne s$, then
+$F_{ij}=(u-x_{(c)})\cdot u\prod_{m\notin C_\gamma}(u-x_m)$, and modulo $\ell$, $F'_{ij}(t)\equiv t\prod_{m\notin C_\gamma}(t-x_m)\equiv x_iU_i$.
+If $r=s$, write $g_i=P\cdot R$ with $P=(u-x_{(c_1)})(u-x_{(c_2)})$ and $R=u\prod_{m\notin C_\gamma}(u-x_m)$. Then
+$Q_i'=Q[P]'R+Q[P]R'+P(x_i)Q[R]'$ with $Q[P]=u+x_i-x_{(c_1)}-x_{(c_2)}$. At $t$ we have $Q[P](t)\equiv0\pmod\ell$, and
+$\ell^2\mid P(x_i)$, so $Q_i'(t)\equiv R(t)\equiv x_iU_i\pmod\ell$. In both cases $\nu_i(\cdot)\equiv c_r\bar x_\gamma$, a constant along
+the progression. Summing with Step~3, and using $\bar w^\kappa=\bar q^{-(\ell-1)}=1$ and $\bar w^\ell=\bar w$, the progression
+contributes $\bar w^{t_\gamma}c_r\bar x_\gamma/(1-\bar w)$, where $\bar w^{t_\gamma}=\bar w^{-\gamma}$ (S) or $\bar w^{1-\gamma}$ (L). For
+the pole term only the odd $s=\ell s'$ survive in $\ell^2S_i$, and $q^\ell\equiv q$, so
+$\overline{\ell^2S_i}=\bar q^{2i+1}\,T(M)$ with $M$ the largest odd number $\le(2i+1)/\ell$: $M=2r-1$ (S) or $2r+1$ (L). Since
+$\bar q^{2i+1}=\bar q\,\bar w^{-\gamma}\bar w^{-r}$, the diagonal block is
+\[
+  \overline{\mathcal E(0)}_{C_\gamma}=\bar x_\gamma\,\bar w^{-\gamma}\,\overline{M_{\mathrm{type}(\gamma)}(q)} .
+\]
+\emph{Type D} ($\gamma=\kappa$). Here $x_i=-\ell(r+\frac12)$, the progression is $t=\ell(1+j')$, $j'\ge0$, and we put
+$y=t/\ell+\frac12=j'+\frac32$; then $t=\ell(y-\frac12)$ and $t-x_{(c)}=\ell(y+c)$. Let
+$R:=\prod_{m\notin C_\kappa}(u-x_m)$, so $R(t)\equiv R(x_i)=U_i\pmod\ell$. If $r\ne s$, two roots of $F_{ij}=u(u-x_{(c)})R$ are close
+to $t$, and $F'_{ij}(t)=(2t-x_{(c)})R(t)+t(t-x_{(c)})R'(t)\equiv\ell(2y+c-\frac12)\,U_i\pmod{\ell^2}$. If $r=s$, write
+$g_i=PR$ with $P=u(u-x_{(c_1)})(u-x_{(c_2)})$. Then $\ell^3\mid P(x_i)$; $Q[P](t)$ is a quadratic form in
+$t,x_i,x_{(c_1)},x_{(c_2)}$, all divisible by $\ell$, so $Q[P](t)\equiv0\pmod{\ell^2}$; and $Q[P]'(t)=2t+x_i-x_{(c_1)}-x_{(c_2)}=\ell(2y+\frac52-2r)$ (using $c_1+c_2=3-r$).
+Hence $Q_i'(t)\equiv\ell(2y+\frac52-2r)\,U_i\pmod{\ell^2}$. With $\nu_i=c_rU_i^{-1}$ and the column factor $\ell^{-1}$, the
+residues are $c_r(2y+c-\frac12)=c_r(2j'+e_{rs})$ for $r\ne s$ and $c_r(2y+\frac52-2r)=c_r(2j'+e_{rr})$ for $r=s$. Summing
+$c_r(2j'+e_{rs})$ against $\bar w^{1+j'}$ over $j'\ge0$ gives $\bar w\,c_r\bigl(e_{rs}/(1-\bar w)+2\bar w/(1-\bar w)^2\bigr)$.
+The pole term $4\ell x_iS_i=-4(r+\frac12)\ell^2S_i$ reduces to
+$-4(r+\frac12)\bar q^{2r+1}T(2r+1)$. So $\overline{\mathcal E(0)}_{C_\kappa}=\overline{M_D(q)}$.
+
+\subsection{Step 6: conclusion}
+By Steps 4 and 5,
+\[
+  \det\overline{\mathcal E(0)}=\prod_{\gamma\ne\kappa}\bigl(\bar x_\gamma\bar w^{-\gamma}\bigr)^3\,\overline{\det M_{\mathrm{type}(\gamma)}(q)}\cdot\overline{\det M_D(q)} .
+\]
+For $\gamma\ne\kappa$, $\bar x_\gamma=-(2\gamma+1)/2\ne0$, and the three determinants are units by hypothesis. So
+$\det\overline{\mathcal E(a/b)}=\det\overline{\mathcal E(0)}\ne0$ in $\FF_\ell$, hence $\det\mathcal E(a/b)\ne0$ and
+$\Delta_{3\ell}(a/b)\ne0$. This proves Theorem~\ref{thm:lemmaP}. \qed
+
+\begin{remark}
+The same analysis works for every $h$ with $h\bmod\ell\le\kappa$ and three or more atoms per class. One then needs a
+fourth block type with four atoms, and an explicit prime-gap theorem to find suitable $\ell$ near $h/3$ for all large
+$h$ [proof sketch]. For irrationality, infinitely many $h$ suffice, and $h=3\ell$ avoids both complications. With at
+most two atoms per class the analogous block constants of type S vanish identically in our computations, so primes
+$\ell>h/2$ did not give a usable nonvanishing statement [numerical].
+\end{remark}
+
+% ===========================================================================
+\section{Proof of Theorem~\ref{thm:main}}\label{sec:proof}
+% ===========================================================================
+
+Let $q\in\{3,5\}$. We verify the hypotheses of Theorem~\ref{thm:conditional}.
+\begin{enumerate}
+\item Theorem~\ref{thm:arith} gives $d_h$ with $\alpha=\alpha_q$.
+\item Theorem~\ref{thm:B}, applied to the certificate of Theorem~\ref{thm:cert}, gives (ii) with $\beta=-2.078$
+  ($q=3$) or $\beta=-2.385$ ($q=5$).
+\item Theorem~\ref{thm:nonvan} gives (iii).
+\end{enumerate}
+It remains to check $\alpha_q+\beta<0$, using only elementary bounds for logarithms: $0.6931471803<\log2<0.6931471808$,
+and, from $\log x\ge1-1/x$, $\log3\ge\log2+\frac13$, $\log3\le2\log2-\frac14$ and $\log5\ge2\log2+\frac15$. Then
+\[
+  \alpha_3-2.078\le\frac{133}{60}+\frac{\log2}4-\frac{\log2}3-\frac19-2.078<-0.030,
+\]
+\[
+  \alpha_5-2.385\le\frac{133}{60}+\frac{\log2}4+\frac{2\log2-\frac14}4-\frac{2\log2+\frac15}3-2.385<-0.23 .
+\]
+(The true values are $\alpha_3-2.078=-0.05425\ldots$ and $\alpha_5-2.385=-0.25687\ldots$.) Theorem~\ref{thm:conditional}
+shows that $\chi_2(1/3)$ and $\chi_2(1/5)$ are irrational. \qed
+
+% ===========================================================================
+\section{The formalisation}\label{sec:lean}
+% ===========================================================================
+
+\subsection{What is formalised}
+The repository \url{https://github.com/telaviv/chi2-irrationality} \cite{Chi2Repo} contains a proof of
+Theorem~\ref{thm:main} in Lean~4 \cite{LeanFour} (version v4.35.0) with Mathlib \cite{Mathlib} (version v4.35.0
+\cite{Mathlib4}). It has 61 Lean files under \lean{Chi2Irrational\slash{}}, with about $18{,}000$ lines. The formalisation covers every step of the proof,
+including the parts that a written proof would cite: the prime number theorem, the Andreief identity, the lattice
+energy inequality, both dual certificates and the block determinants. Paths below are relative to the folder
+\lean{Chi2Irrational\slash{}}, and all declarations are in the namespace \lean{Chi2Irr}.
+
+\subsection{The statement}
+The definitions that the reader has to check are, in \lean{Defs.lean} and \lean{Statement.lean}:
+\begin{quote}\ttfamily\footnotesize
+noncomputable def chi2Term (z : $\mathbb{R}$) (n : $\mathbb{N}$) : $\mathbb{R}$ :=\\
+\hspace*{2em}z \^{} (2 * n + 1) / (2 * (n : $\mathbb{R}$) + 1) \^{} 2\\[2pt]
+noncomputable def chi2 (z : $\mathbb{R}$) : $\mathbb{R}$ :=\\
+\hspace*{2em}$\sum$' n : $\mathbb{N}$, chi2Term z n\\[2pt]
+def Chi2OneThirdIrrational : Prop := Irrational (chi2 (1 / 3))\\
+def Chi2OneFifthIrrational : Prop := Irrational (chi2 (1 / 5))\\[2pt]
+theorem chi2\_one\_third\_irrational : Chi2OneThirdIrrational\\
+theorem chi2\_one\_fifth\_irrational : Chi2OneFifthIrrational
+\end{quote}
+The theorems are in \lean{Arith\slash{}Assembly.lean}. Here $\sum'$ is Mathlib's unconditional sum (\lean{tsum}).
+\lean{Defs.lean} proves that the series is summable for $|z|\le1$ (\lean{summable\_chi2Term}), so \lean{chi2 z} is the
+genuine value $\chi_2(z)$. \lean{Irrational x} is Mathlib's predicate $x\notin\QQ$.
+
+The command \lean{lake env lean Axioms.lean} prints
+\begin{quote}\ttfamily\small
+'Chi2Irr.chi2\_one\_third\_irrational' depends on axioms:\\
+\hspace*{2em}[propext, Classical.choice, Quot.sound]\\
+'Chi2Irr.chi2\_one\_fifth\_irrational' depends on axioms:\\
+\hspace*{2em}[propext, Classical.choice, Quot.sound]
+\end{quote}
+and the same list for each of the main ingredients listed in \lean{Axioms.lean}. These are Lean's three standard axioms,
+which Mathlib also uses. The development contains no \lean{sorry}, no added axiom, no \lean{native\_decide} and no
+\lean{implemented\_by}, so no step relies on compiled code.
+
+\subsection{Correspondence with the paper}
+Table~\ref{tab:lean} lists the main formal counterparts.
+
+\begin{table}[ht]
+\centering\small
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.27\textwidth}>{\raggedright\arraybackslash}p{0.69\textwidth}@{}}
+\toprule
+paper & Lean declaration (file) \\
+\midrule
+Lemma~\ref{lem:pole}, \eqref{eq:value} & \lean{powSum\_eq\_tsum}, \lean{pole\_series} (\lean{PoleSeries}); \lean{Lam\_eq}, \lean{aeval\_chi2\_Delta} (\lean{PoleExpansion})\\
+Prop.~\ref{prop:criterion}, Thm.~\ref{thm:conditional} & \lean{irrational\_of\_poly\_approx} (\lean{Criterion}); \lean{MachineBounds}, \lean{irrational\_of\_bounds} (\lean{MainCond})\\
+Section~\ref{sec:free} & \lean{map\_DeltaF} (\lean{Arith\slash{}Free}); \lean{det\_GLeX}, \lean{det\_GramF} (\lean{Arith\slash{}Gauss})\\
+Lemma~\ref{lem:nine} & \lean{lemma9\_DeltaF} (\lean{Arith\slash{}Lemma9})\\
+Prop.~\ref{prop:classbound}, Lemma~\ref{lem:classcount} & \lean{classBound\_DeltaF} (\lean{Arith\slash{}ClassBound}); \lean{classBd\_le\_phi1}, \lean{classBd\_eq\_zero} (\lean{Arith\slash{}ClassCount})\\
+Thm.~\ref{thm:generic} & \lean{eventually\_primeSum\_phi1\_le}, \lean{eventually\_primeSum\_lev\_le} (\lean{Arith\slash{}PrimeSums}); \lean{PNT.theta\_div\_tendsto} (\lean{PNT\slash{}Theta})\\
+Lemma~\ref{lem:poleorder}, \eqref{eq:clear} & \lean{EDeg\_DeltaF}, \lean{aeval\_clearE} (\lean{Arith\slash{}PoleOrder})\\
+Lemma~\ref{lem:qadic}, \eqref{eq:andreief} & \lean{ord\_DeltaP}, \lean{qdeg\_clearE\_DeltaF} (\lean{Arith\slash{}QAdic}); \lean{factorial\_smul\_det\_sum\_rankOne} (\lean{Analytic\slash{}Andreief})\\
+Lemmas~\ref{lem:two}, \ref{lem:fdseq} & \lean{twoAdic\_Delta} (\lean{Arith\slash{}TwoAdic}); \lean{V2\_fd\_seq}, \lean{V2\_U} (\lean{Arith\slash{}TwoAdicBasis}); \lean{V2\_entry} (\lean{Arith\slash{}TwoAdicEntries})\\
+Thm.~\ref{thm:arith} & \lean{denQ}, \lean{padicNorm\_Delta\_eN}, \lean{denQ\_int} (\lean{Arith\slash{}Special}); \lean{arith\_denQ} (\lean{Arith\slash{}Assembly})\\
+node expansion, Lemma~\ref{lem:slotdet} & \lean{HT\_rankOne}, \lean{abs\_Delta\_le\_of} (\lean{Analytic\slash{}Nodes}); \lean{abs\_det\_slot\_le} (\lean{Analytic\slash{}SlotDet})\\
+Lemmas~\ref{lem:polya}, \ref{lem:dual} & \lean{polya\_log} (\lean{Analytic\slash{}Polya}); \lean{pattern\_le}, \lean{abs\_det\_HT\_le\_dual} (\lean{Analytic\slash{}Dual})\\
+Lemma~\ref{lem:discrete} & \lean{log\_bN\_le}, \lean{StepData.Pm\_le}, \lean{StepData.Em\_ge} (\lean{Analytic\slash{}Discrete})\\
+Def.~\ref{def:cert}, Thm.~\ref{thm:B} & \lean{DualCert}, \lean{DualCert.det\_bound}, \lean{DualCert.analytic} (\lean{Analytic\slash{}TheoremB})\\
+Thm.~\ref{thm:cert} & \lean{CData.Valid}, \lean{CData.toCert}, \lean{CData.Phi\_le} (\lean{Cert\slash{}Instance}); \lean{Cert.Q3.analytic}, \lean{Cert.Q5.analytic} (\lean{Cert\slash{}Q3}, \lean{Cert\slash{}Q5})\\
+Thm.~\ref{thm:lemmaP} & \lean{Delta\_eval\_ne\_zero\_of\_det} (\lean{NonVan\slash{}Gram}); \lean{MS}, \lean{ML}, \lean{MD} (\lean{NonVan\slash{}BlockMat}); \lean{lemmaP} (\lean{NonVan\slash{}LemmaP})\\
+Thm.~\ref{thm:nonvan} & \lean{nonvan\_of}, \lean{nonvan\_three}, \lean{nonvan\_five} (\lean{NonVan\slash{}NonVanQ})\\
+Section~\ref{sec:proof} & \lean{margin\_three}, \lean{margin\_five}, \lean{boundsThree}, \lean{boundsFive}, \lean{chi2\_one\_third\_irrational}, \lean{chi2\_one\_fifth\_irrational} (\lean{Arith\slash{}Assembly})\\
+\bottomrule
+\end{tabular}
+\caption{Formal counterparts of the main steps.}\label{tab:lean}
+\end{table}
+
+A few arguments are organised differently in the formalisation.
+\begin{itemize}
+\item The prime number theorem $\theta(x)/x\to1$ is ported from the PrimeNumberTheoremAnd project \cite{PNTplus}
+  (Wiener--Ikehara route), through the port in the \lean{zeta5} repository of C\'esar Del Solar \cite{zeta5} and the
+  author's formalisation \cite{BetaRepo} of a result on Dirichlet beta values. The ported files keep their Apache
+  License~2.0.
+\item The discretization bounds of Lemma~\ref{lem:discrete}(ii)--(iii) are proved piece by piece of the step density,
+  with the antiderivatives $\psi$ and $\Psi$, and with the error terms $8J(1+\log h)+2\log(Nh+1)$ and $4h\log(Nh+1)$
+  instead of those stated here. Only their size $O(h\log h)$ matters.
+\item The value $\beta_h=\lfloor h^2/4\rfloor$ of Lemma~\ref{lem:poleorder} is not formalised; the formal proof uses
+  $4\beta_h\le h^2+2h$.
+\item The bound $a_h\ge(h^2-7h-2)/3$ and the two margins are proved with the elementary logarithm bounds of
+  Section~\ref{sec:proof}. The formal $a_h$ is $(h(h-1)-6h)/3$ in natural-number arithmetic, which is the
+  $\max(0,\cdot)$ of Section~\ref{sec:arith2}.
+\item The potential $U^\mu$ and the energy $E(\mu)$ of a step density are \emph{defined} in Lean by their closed forms
+  $\sum_jc_j(\psi(x-a_j)-\psi(x-a_{j+1}))$ and $\sum_{j,j'}c_jc_{j'}(\cdots)$ with $\Psi$, which equal the integrals of
+  Section~\ref{sec:analytic}. Both Theorem~\ref{thm:B} and the certificates use these closed forms.
+\end{itemize}
+
+\subsection{How the certificates are checked}
+The dual certificates are records of rational data (\lean{Cert\slash{}DataQ3.lean}, \lean{Cert\slash{}DataQ5.lean}): the
+log table as a list of integers in units of $2^{-40}$, the heights $c_j$, the bounds $S_k$, $\lambda$ and $E_{\mathrm{lo}}$.
+\lean{CData.Valid} collects every check of Section~\ref{sec:cert} as a Boolean computation, and \lean{Cert\slash{}Q3.lean}
+and \lean{Cert\slash{}Q5.lean} prove it by \lean{decide +kernel}, i.e.\ by evaluation in the Lean kernel. The interval
+arithmetic (\lean{Interval\slash{}}) has exact rational endpoints (only the log-table entries and the enclosure of $\log2$
+are dyadic by construction), and its soundness lemmas turn
+\lean{check = true} into real inequalities; the enclosure of $\log2$ is itself checked by \lean{decide +kernel}
+against Mathlib's series bound. The data were produced by the script \lean{scripts\slash{}gen\_cert.py}, which is not
+trusted: a wrong value would make the build fail but could not make a false statement provable. Re-running the
+script reproduces both data files byte for byte. The six block determinants of Theorem~\ref{thm:nonvan} are evaluated
+exactly by \lean{norm\_num}.
+
+\subsection{Cost}
+With Mathlib's prebuilt cache, a clean build of the project takes about ten minutes on a desktop computer. The two
+kernel-checked certificates are a small part of it.
+
+\subsection{What has to be trusted}
+Beyond the Lean kernel and the three axioms, the reader has to trust that the definitions displayed above express
+Theorem~\ref{thm:main}, and the Mathlib definitions they use (real numbers, \lean{tsum}, \lean{Irrational}). Nothing
+else, in particular no numerical data and no generating script, needs to be trusted. A reader who does not want to
+trust the elaborator's environment handling can replay the environment with \lean{lean4checker}; we have not done so. Apart from the check
+by the Lean kernel, all verification of the formalisation so far was carried out by AI systems; no human expert has
+yet reviewed the Lean code.
+
+% ===========================================================================
+\section{Remarks}\label{sec:remarks}
+% ===========================================================================
+
+\subsection{The margins}
+For $q=3$ the exponent that must be negative is $\alpha_3+\Phi_{\mathbb Q}\approx-0.0546$ per $h^2$ with the certificate
+value $\Phi_{\mathbb Q}$ ($-0.0543$ with the rounded value $-2.078$ used in Section~\ref{sec:proof}). The arithmetic part is
+$2.02375$, so the margin is under $3\%$ of it. A $2$-adic constant larger than about $0.33$ instead of $\frac14$ in
+Lemma~\ref{lem:two} would have consumed it. For $q=5$ the margin is $-0.257$, and no single constant is critical. With the
+sharpest available analytic constant, the equilibrium value $C(w)$, the margins would be about $-0.077$ and $-0.328$
+[numerical].
+
+\subsection{Effectivity}
+Every bound in the proof is effective except the prime number theorem, which is used without an error term in
+Theorem~\ref{thm:generic}. Even with an explicit form, the $O(h\log h)$ terms and the prime-power contributions of
+Lemma~\ref{lem:nine} decay slowly relative to the margin for $q=3$. The irrationality statement is not affected.
+
+\subsection{Other values of \texorpdfstring{$q$}{q}}
+The construction works verbatim for every integer $q\ge2$. The arithmetic part is
+$\frac{133}{60}+c_2(q)\log2+\sum_{p\mid q^2-1,\,p\text{ odd}}\frac{v_p(q^2-1)}4\log p-\frac13\log q$, where $c_2(q)$ is the
+$2$-adic constant ($c_2=\frac14$ when $v_2(q^2-1)=3$). The analytic part improves as $q$ grows [numerical]. We expect the method to prove $\chi_2(1/q)\notin\QQ$ for
+every $q\ge3$ once these constants are made explicit, with $q=3$ the hardest case [heuristic]. We have not carried
+this out.
+
+\subsection{\texorpdfstring{$\chi_2(1/2)$}{chi2(1/2)}}
+At $q=2$ ($w=\frac14$) the same construction fails [numerical]. The analytic part is only about $C(\frac14)\approx-1.744$,
+the generic primes still cost $\frac{133}{60}$, and the prime $3\mid q^2-1$ costs $\frac14\log3$. The $2$-adic gain
+($-\frac13\log2$) does not compensate. The limiting exponent is about $+0.52$ per $h^2$, and exact computations up to
+$h=64$ confirm the trend. Variations of the external field (pole sets, numerator zeros, node regions) gained at most
+$0.01$ in our experiments. Since $\chi_2(\frac13)+\chi_2(\frac12)=\frac{\pi^2}8-\frac12\log2\log3$, a proof that
+$\chi_2(1/2)$ is irrational, together with Theorem~\ref{thm:main}, would still not decide the irrationality of
+$\log2\log3$.
+
+\section*{Acknowledgements and disclosure}
+The construction, the proofs, the certificate programs, the Lean formalisation and the text of this paper were produced
+largely by AI models (Claude, Anthropic), working under the direction of the author. Apart from the check by the Lean
+kernel, all verification so far, including the internal reviews of the argument, was carried out by AI systems. No
+human expert has yet reviewed the mathematics or the Lean code; we would be grateful for corrections. The prime number
+theorem in the formalisation is ported from the PrimeNumberTheoremAnd project of A.~Kontorovich, T.~Tao and
+collaborators, through the \lean{zeta5} repository of C\'esar Del Solar.
+
+\bibliographystyle{amsplain}
+\bibliography{references}
+
+\end{document}

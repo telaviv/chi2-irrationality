@@ -1,0 +1,477 @@
+% Bibliography for "chi_2(1/3) and chi_2(1/5) are irrational".
+% Entries Hata1990 ... CDT were checked on 2026-10-18 (see the comment above each entry); the Lean/Mathlib/PNT
+% entries are copied from the bibliography of the beta(4..36) paper, checked on 2026-10-16.
+
+% references_verified.bib
+% Bibliography for "chi_2(1/3) and chi_2(1/5) are irrational".
+% Compiled and checked 2026-10-18. Every entry carries a comment saying what was checked.
+% Conventions: "Crossref" = api.crossref.org/works/<DOI>; "doi.org" = the DOI handle was resolved
+% via https://doi.org/api/handles/<DOI>; "zbMATH" = api.zbmath.org record.
+% Use with biblatex or a BibTeX style that knows the eprint/doi/url fields
+% (e.g. amsplain-nodoi or plainurl); plain BibTeX ignores unknown fields.
+
+% ---------------------------------------------------------------------------
+% [1] Hata 1990
+% Checked 2026-10-18:
+%   zbMATH API record Zbl 0712.11040 (https://zbmath.org/4171026): title, J. Math. Pures Appl. (9)
+%     vol. 69, no. 2, pp. 133--173, 1990. No DOI is registered (Crossref search finds none; do not add one).
+%   Same title/volume/pages in the bibliography of David--Hirata-Kohno--Kawashima, arXiv:1912.03811, ref. [15].
+%   Content (from F. Beukers' zbMATH review; the paper itself was NOT read): the paper treats
+%     L(alpha,k;x) = sum_{n>=1} x^n/(n-alpha)^k for rational alpha_1,...,alpha_m in [0,1) and
+%     k_j in N, and proves an effective lower bound |n_0 + sum n_j L(alpha_j,k_j;1/q)| >= H^{-xi-eps}
+%     for integers |q| > q_0. Stated application: L_2(1/q) irrational for q >= 12 or q <= -8.
+%   Use for our claim: with alpha = 1/2, k = 2, x = 1/q^2,
+%     L(1/2,2;1/q^2) = sum_{n>=1} q^{-2n}/(n-1/2)^2 = (4/q) chi_2(1/q),
+%     so Hata's theorem (applied with q^2 in place of q) gives chi_2(1/q) irrational for all
+%     sufficiently large integers q. This is the correct Hata paper for that claim (the 1993 TAMS
+%     paper is about Li_2 only). The exact theorem number in the paper was not checked.
+@article{Hata1990,
+  author   = {Hata, Masayoshi},
+  title    = {On the linear independence of the values of polylogarithmic functions},
+  journal  = {J. Math. Pures Appl. (9)},
+  volume   = {69},
+  number   = {2},
+  year     = {1990},
+  pages    = {133--173},
+  note     = {Zbl 0712.11040},
+}
+
+% ---------------------------------------------------------------------------
+% [2] Hata 1993
+% Checked 2026-10-18:
+%   Crossref + doi.org for 10.1090/S0002-9947-1993-1147401-5 (resolves to
+%     https://www.ams.org/tran/1993-336-01/S0002-9947-1993-1147401-5/): title, author, TAMS 336, no. 1,
+%     pp. 363--387, 1993. MR 1147401 (MR number = DOI suffix; also given in search snippets).
+%   A JSTOR DOI 10.2307/2154351 also resolves (zbMATH lists that one); we use the AMS DOI.
+%   zbMATH Zbl 0768.11022 review: L_2(1/k) is irrational for all integers k outside [-4, 6], with
+%     irrationality measures for 7 <= k <= 18 and -16 <= k <= -5. Hence k = -5, i.e. Li_2(-1/5),
+%     is covered. Consistent with Rhin--Viola 2005 and Prellberg arXiv:2609.06895 ("s <= -5 and s >= 7").
+%   Title is singular "dilogarithm" (arXiv:1912.03811 misprints it as "dilogarithms").
+@article{Hata1993,
+  author   = {Hata, Masayoshi},
+  title    = {Rational approximations to the dilogarithm},
+  journal  = {Trans. Amer. Math. Soc.},
+  volume   = {336},
+  number   = {1},
+  year     = {1993},
+  pages    = {363--387},
+  doi      = {10.1090/S0002-9947-1993-1147401-5},
+  note     = {MR 1147401},
+}
+
+% ---------------------------------------------------------------------------
+% [3a] David--Hirata-Kohno--Kawashima, Acta Arith. 2022
+% Checked 2026-10-18:
+%   IMPAN article page https://impan.pl/en/publishing-house/journals-and-series/acta-arithmetica/all/206/2/114953/
+%     and Crossref + doi.org for 10.4064/aa220307-18-10: title, three authors, Acta Arith. 206, no. 2,
+%     pp. 127--169, 2022 (published online 12 Dec 2022).
+%   arXiv API: arXiv:2202.13931 (v1 28 Feb 2022, v2 5 Jan 2023), journal-ref "Acta Arithmetica, 206 (2), (2022), 127--169".
+%   Content (abstract): linear independence over a number field K of 1 and Lerch values
+%     Phi_{s_j}(x_j, alpha_i) with distinct rational shifts 0 <= x_1 < ... < x_d < 1, at algebraic
+%     alpha_i close to 0 at a fixed place (metric condition). Shifts like x = 1/2 are allowed.
+%   Note: the title is "...generalized polylogarithms with distinct shifts" (not "G-functions/hypergeometric").
+@article{DHK2022,
+  author        = {David, Sinnou and Hirata-Kohno, Noriko and Kawashima, Makoto},
+  title         = {Linear independence criteria for generalized polylogarithms with distinct shifts},
+  journal       = {Acta Arith.},
+  volume        = {206},
+  number        = {2},
+  year          = {2022},
+  pages         = {127--169},
+  doi           = {10.4064/aa220307-18-10},
+  eprint        = {2202.13931},
+  archivePrefix = {arXiv},
+  primaryClass  = {math.NT},
+}
+
+% ---------------------------------------------------------------------------
+% [3b] David--Hirata-Kohno--Kawashima, Moscow J. Combin. Number Theory 2020
+% Checked 2026-10-18:
+%   MSP page https://msp.org/cnt/2020/9-4/p05.xhtml and Crossref + doi.org for 10.2140/moscow.2020.9.389:
+%     title, three authors, vol. 9, no. 4, pp. 389--406, published 5 Nov 2020.
+%   arXiv API: arXiv:1912.03811 (v2 5 Jan 2023), journal-ref "Moscow J. Comb. Number Th. 9 (2020) 389-406".
+%   Content (abstract): linear independence criterion for values of Lerch functions Phi_s(x,z),
+%     x rational in [0,1), s = 1..r, at distinct algebraic points of a number field.
+@article{DHK2020,
+  author        = {David, Sinnou and Hirata-Kohno, Noriko and Kawashima, Makoto},
+  title         = {Can polylogarithms at algebraic points be linearly independent?},
+  journal       = {Mosc. J. Comb. Number Theory},
+  volume        = {9},
+  number        = {4},
+  year          = {2020},
+  pages         = {389--406},
+  doi           = {10.2140/moscow.2020.9.389},
+  eprint        = {1912.03811},
+  archivePrefix = {arXiv},
+  primaryClass  = {math.NT},
+}
+
+% ---------------------------------------------------------------------------
+% [4] Prellberg 2026 (UNREFEREED PREPRINT)
+% Checked 2026-10-18:
+%   https://arxiv.org/abs/2609.06895 and arXiv API: sole author Thomas Prellberg (Queen Mary University
+%     of London, per the PDF), v1 submitted 7 Sep 2026, only version; no journal-ref; math.NT;
+%     MSC 11J72 (11J82, 33B30); 28 pages; ancillary verification scripts/certificates.
+%   PDF read: Theorem 1.1 states that Li_2(-1/4), Li_2(1/5), Li_2(-1/3) are irrational.
+%     Section 5.3 "Review boundary" lists the parts still needing independent vetting.
+%     The paper has a "Statement on computational and AI assistance": ChatGPT used extensively
+%     (parameter search, calculations, auditing, drafting), Claude used for adversarial checking.
+%   Status: unrefereed, AI-assisted arXiv preprint; not formalised in Lean (as far as checked).
+%   DOI is the arXiv-issued DataCite DOI (resolves via doi.org to the abs page).
+@misc{Prellberg2026,
+  author        = {Prellberg, Thomas},
+  title         = {Three irrationality results for the dilogarithm: {R}hin--{V}iola and {V}iola--{Z}udilin constructions at $-1/4$, $1/5$, and $-1/3$},
+  year          = {2026},
+  eprint        = {2609.06895},
+  archivePrefix = {arXiv},
+  primaryClass  = {math.NT},
+  doi           = {10.48550/arXiv.2609.06895},
+  note          = {Preprint, September 7, 2026; not peer reviewed (AI-assisted, see the paper's statement on AI assistance)},
+}
+
+% ---------------------------------------------------------------------------
+% [5] Liu, Li2Rational (Lean repository; UNREFEREED)
+% Checked 2026-10-18:
+%   https://github.com/siqiliu-tsinghua/Li2Rational resolves (HTTP 200); GitHub API: created
+%     2026-09-29, Apache-2.0, last commit b2a61c46c157 (2026-09-29). Owner profile name "Si-Qi Liu",
+%     Tsinghua University; commits authored by "Si-Qi Liu".
+%   README claims (Lean 4 v4.30.0-rc2 + Mathlib, theorem Li2RationalAcceptance.originalStatement in
+%     lean/RationalCheck.lean, standard axioms only, checked with comparator + nanoda):
+%     Li_2(1/k) irrational for k >= 2 and Li_2(-1/k) for k >= 1; Li_2(+-p/q) for explicit ranges
+%     (e.g. Li_2(2/k), k >= 13; general p >= 5 with q >= 0.1851 p^{84/17}). Method: extends Qian Tang's
+%     Fauzan-style method. README says it was done with assistance of GPT-6-Astra and Claude Opus 5.5.
+%   Status: Lean-checked repository, no paper, not peer reviewed. We did NOT build it ourselves.
+@misc{LiuLi2,
+  author       = {Liu, Si-Qi},
+  title        = {{Li2Rational}: {L}ean 4 proofs of the irrationality of $\mathrm{Li}_2(r)$ at certain rational points $r$},
+  year         = {2026},
+  howpublished = {GitHub repository, \url{https://github.com/siqiliu-tsinghua/Li2Rational}},
+  note         = {Accessed 2026-10-18 (commit b2a61c4). Lean formalisation, not peer reviewed; AI-assisted per README},
+}
+
+% ---------------------------------------------------------------------------
+% [6] Tang, li2-half-irrationality (Lean repository; UNREFEREED)
+% Checked 2026-10-18:
+%   https://github.com/dtq1997/li2-half-irrationality resolves (HTTP 200); created 2026-09-28,
+%     Apache-2.0, last commit 950ee9d53914 (2026-09-28).
+%   Author name: GitHub profile dtq1997 shows no real name, but formalization.yaml lists
+%     authors: "Qian Tang", some commits are authored "Qian Tang", and Liu's README cites
+%     "Qian Tang (GitHub: dtq1997)". So "Qian Tang" is confirmed from the repository itself.
+%   Claims: theorem li2_one_half_irrational in Li2Half.lean,
+%     Irrational (sum' k, (1/2)^(k+1)/(k+1)^2); Lean v4.35.0-rc3; axioms propext, Classical.choice,
+%     Quot.sound; checked with comparator and nanoda. formalization.yaml: method inspired by Fauzan's
+%     zeta(5) proof and Firsching's mo271/Zeta5, with "random matrix theory" (Hankel/Andreief-type)
+%     decay and p-adic valuations + PNT.
+%   arXiv paper by Tang on Li_2(1/2): NONE FOUND (arXiv API author search "Tang_Qian", arXiv keyword
+%     search, web search, 2026-10-18). The repo contains no paper/PDF.
+@misc{TangLi2,
+  author       = {Tang, Qian},
+  title        = {Irrationality of $\mathrm{Li}_2(1/2)$: a {L}ean 4 proof},
+  year         = {2026},
+  howpublished = {GitHub repository, \url{https://github.com/dtq1997/li2-half-irrationality}},
+  note         = {Accessed 2026-10-18 (commit 950ee9d). Lean formalisation, no accompanying paper found, not peer reviewed},
+}
+
+% ---------------------------------------------------------------------------
+% [7] Saff--Totik
+% Checked 2026-10-18:
+%   1st ed.: Crossref + doi.org for 10.1007/978-3-662-03329-6: title, Saff, Edward B. and Totik, Vilmos,
+%     Springer Berlin Heidelberg, 1997, series Grundlehren der mathematischen Wissenschaften;
+%     volume 316 per the citing papers below.
+%   Lemma number: "Lemma I.1.8" (Chapter I, Section 1) of the 1st edition is cited for exactly this
+%     statement by two independent papers whose PDFs were read:
+%       Beckermann--Kalyagin--Matos--Wielonsky, arXiv:1105.3088, Lemma 2.1: for positive measures
+%         mu, nu with mu(C) = nu(C), I(mu - nu) >= 0, with equality iff mu = nu;
+%         "See [24, Lemma I.1.8] for measures with compact support".
+%       Bloom--Levenberg--Totik--Wielonsky, arXiv:1502.06925 (co-authored by Totik): for two measures
+%         with finite energies and equal mass on compact K, I(mu_1 - mu_2) >= 0, = 0 iff equal
+%         ("cf., Lemma I.1.8 in [18]").
+%     Here I(nu) = iint log(1/|z-t|) dnu(z) dnu(t), so equivalently E(nu) = iint log|x-y| dnu dnu <= 0.
+%     Hypotheses: compact support, nu = nu_1 - nu_2 with nu_1, nu_2 positive of equal total mass and
+%     FINITE logarithmic energy. The book itself was not opened.
+%   2nd ed.: Crossref for 10.1007/978-3-031-65133-5: Springer Cham, 2024, Grundlehren 316
+%     (ISBN 978-3-031-65132-8 hardcover / 978-3-031-65133-5 eBook; XVI+594 pp.). The 2nd edition is
+%     reorganised (new chapter, three parts), so its lemma numbering is UNVERIFIED; cite the 1st ed. lemma.
+@book{SaffTotik,
+  author    = {Saff, Edward B. and Totik, Vilmos},
+  title     = {Logarithmic Potentials with External Fields},
+  series    = {Grundlehren der mathematischen Wissenschaften},
+  volume    = {316},
+  publisher = {Springer-Verlag},
+  address   = {Berlin},
+  year      = {1997},
+  doi       = {10.1007/978-3-662-03329-6},
+}
+
+@book{SaffTotik2024,
+  author    = {Saff, Edward B. and Totik, Vilmos},
+  title     = {Logarithmic Potentials with External Fields},
+  edition   = {Second},
+  series    = {Grundlehren der mathematischen Wissenschaften},
+  volume    = {316},
+  publisher = {Springer},
+  address   = {Cham},
+  year      = {2024},
+  doi       = {10.1007/978-3-031-65133-5},
+}
+
+% ---------------------------------------------------------------------------
+% [8a] Andreief
+% Checked 2026-10-18 (secondary only; original not seen):
+%   Forrester, arXiv:1806.10411 (PDF read), abstract and ref. [5]:
+%     "C. Andreief, Note sur une relation entre les integrales definies des produits des fonctions,
+%      Mem. Soc. Sci. Phys. Nat. Bordeaux (3) 2 (1886), 1--14."
+%   Forrester shows the volume appeared in 1886 although the paper is signed "Kharkof, le decembre 1883";
+%   most of the literature wrongly cites 1883. The author is K. A. Andreev. The identity is on p. 1.
+%   UNVERIFIED: the original volume was not inspected; details rely on Forrester.
+@article{Andreief,
+  author   = {Andr{\'e}ief, C.},
+  title    = {Note sur une relation entre les int{\'e}grales d{\'e}finies des produits des fonctions},
+  journal  = {M{\'e}m. Soc. Sci. Phys. Nat. Bordeaux (3)},
+  volume   = {2},
+  year     = {1886},
+  pages    = {1--14},
+  note     = {Signed Kharkov, December 1883; often cited with the year 1883 (see Forrester, Random Matrices Theory Appl. 8 (2019) 1930001)},
+}
+
+% [8b] Forrester survey
+% Checked 2026-10-18: Crossref for 10.1142/S2010326319300018: Peter J. Forrester, "Meet Andreief,
+%   Bordeaux 1886, and Andreev, Kharkov 1882--1883", Random Matrices Theory Appl. 8 (2019), no. 2,
+%   article 1930001 (issued April 2019). arXiv:1806.10411 (v1 27 Jun 2018; arXiv title ends "1882-83").
+%   The Andreief integration formula (continuous Cauchy--Binet) is eq. (1.7) of the arXiv version,
+%   with a proof in Section 2.2.
+@article{Forrester2019,
+  author        = {Forrester, Peter J.},
+  title         = {Meet {A}ndr{\'e}ief, {B}ordeaux 1886, and {A}ndreev, {K}harkov 1882--1883},
+  journal       = {Random Matrices Theory Appl.},
+  volume        = {8},
+  number        = {2},
+  year          = {2019},
+  pages         = {1930001},
+  doi           = {10.1142/S2010326319300018},
+  eprint        = {1806.10411},
+  archivePrefix = {arXiv},
+  primaryClass  = {math-ph},
+}
+
+% ---------------------------------------------------------------------------
+% [9] Polya 1949
+% Checked 2026-10-18:
+%   Project Euclid chapter page (open access):
+%     https://projecteuclid.org/proceedings/berkeley-symposium-on-mathematical-statistics-and-probability/Proceedings-of-the-First-Berkeley-Symposium-on-Mathematical-Statistics-and/Chapter/Remarks-on-Characteristic-Functions/bsmsp/1166219202
+%     (search metadata: G. Polya, ed. Jerzy Neyman, pp. 115--123, 1949; page body did not render on fetch).
+%   zbMATH Zbl 0038.28707: "Remarks on characteristic functions", Proc. Berkeley Sympos. Math. Statist.
+%     and Probability (August 1945 and January 1946), 115--123 (1949).
+%   Content (via secondary sources, e.g. Pacific J. Math. 58 (1975) no. 2): an even phi with phi(0) = 1,
+%     convex on (0, inf), phi -> 0 at infinity, is the characteristic function of an absolutely
+%     continuous distribution (hence positive definite). The paper itself was not read.
+%   Some sources misquote the title as "Remark on characteristic functions".
+@inproceedings{Polya1949,
+  author    = {P{\'o}lya, George},
+  title     = {Remarks on characteristic functions},
+  booktitle = {Proceedings of the [First] Berkeley Symposium on Mathematical Statistics and Probability (August 1945 and January 1946)},
+  editor    = {Neyman, Jerzy},
+  publisher = {University of California Press},
+  address   = {Berkeley and Los Angeles},
+  year      = {1949},
+  pages     = {115--123},
+  note      = {Zbl 0038.28707},
+}
+
+% ---------------------------------------------------------------------------
+% [10] Lewin 1981
+% Checked 2026-10-18:
+%   zbMATH Zbl 0465.33001: Leonard Lewin, Polylogarithms and associated functions, New York, Oxford:
+%     North Holland, 1981, XVII+359 pp.
+%   Scan of title page + Appendix (https://www.experimentalmath.info/othersites/Lewin-polylog.pdf, read):
+%     Appendix A.2 "List of selected formulas", A.2.1 "The Dilogarithm", formula (24), p. 284:
+%       chi_2(x) + chi_2((1-x)/(1+x)) = pi^2/8 + (1/2) log((1+x)/(1-x)) log x
+%     [ (23) is the definition/series of chi_2, (25) is chi_2(1) = pi^2/8 ]. The appendix says
+%     "Other numerical relations for chi_2(x) are given in Section 1.8."
+%   CORRECTION: there is no separate chapter on Legendre's chi function; it is Section 1.8
+%     ("Legendre's chi-function") of Chapter 1 ("The dilogarithm"). The equation number of the identity
+%     inside Section 1.8 was NOT verified; cite "[Lewin1981, Appendix A.2.1, eq. (24), p. 284]" or "Section 1.8".
+@book{Lewin1981,
+  author    = {Lewin, Leonard},
+  title     = {Polylogarithms and Associated Functions},
+  publisher = {North-Holland},
+  address   = {New York and Oxford},
+  year      = {1981},
+  note      = {Zbl 0465.33001},
+}
+
+% ---------------------------------------------------------------------------
+% [11] Rhin--Viola 2005
+% Checked 2026-10-18: Numdam https://www.numdam.org/item/ASNSP_2005_5_4_3_389_0/ :
+%   Georges Rhin, Carlo Viola, Ann. Sc. Norm. Super. Pisa Cl. Sci. (5) 4 (2005), no. 3, 389--437;
+%   MR 2185863, Zbl 1170.11316. No DOI listed (none added). Abstract: permutation group method for
+%   dilogarithm double integrals; improves irrationality results for dilogarithms of positive rationals.
+@article{RhinViola2005,
+  author   = {Rhin, Georges and Viola, Carlo},
+  title    = {The permutation group method for the dilogarithm},
+  journal  = {Ann. Sc. Norm. Super. Pisa Cl. Sci. (5)},
+  volume   = {4},
+  number   = {3},
+  year     = {2005},
+  pages    = {389--437},
+  note     = {MR 2185863, Zbl 1170.11316},
+}
+
+% ---------------------------------------------------------------------------
+% [12] Viola--Zudilin 2018
+% Checked 2026-10-18: Crossref for 10.1515/crelle-2015-0030: Carlo Viola, Wadim Zudilin, J. Reine Angew.
+%   Math. 736 (2018), 193--223 (online 2 July 2015). No arXiv version found; preprint version is
+%   MPIM Preprint 2014-26 (https://archive.mpim-bonn.mpg.de/id/eprint/1914/).
+@article{ViolaZudilin2018,
+  author   = {Viola, Carlo and Zudilin, Wadim},
+  title    = {Linear independence of dilogarithmic values},
+  journal  = {J. Reine Angew. Math.},
+  volume   = {736},
+  year     = {2018},
+  pages    = {193--223},
+  doi      = {10.1515/crelle-2015-0030},
+}
+
+% ---------------------------------------------------------------------------
+% [13] Calegari--Dimitrov--Tang
+% Checked 2026-10-18: https://arxiv.org/abs/2408.15403 + arXiv API: Frank Calegari, Vesselin Dimitrov,
+%   Yunqing Tang; v1 27 Aug 2024, v2 16 Sep 2024 (current; "submitted version", 218 pages);
+%   no journal-ref or publisher DOI found. Status: preprint by established authors (not AI-generated),
+%   refereed publication not found as of 2026-10-18. (Prellberg cites it as "revised 2026"; the arXiv
+%   page still shows v2 only.)
+@misc{CDT,
+  author        = {Calegari, Frank and Dimitrov, Vesselin and Tang, Yunqing},
+  title         = {The linear independence of $1$, $\zeta(2)$, and $L(2,\chi_{-3})$},
+  year          = {2024},
+  eprint        = {2408.15403},
+  archivePrefix = {arXiv},
+  primaryClass  = {math.NT},
+  note          = {Preprint},
+}
+
+% ---------------------------------------------------------------------------
+% [14] OpenAI Catalan (reused verbatim as instructed; not re-checked here)
+@misc{OpenAICatalan2026, author = {{OpenAI}}, title = {Catalan's constant is irrational}, howpublished = {OpenAI Math Release preprint, \url{https://github.com/openai/math}, file \texttt{preprints/Catalans-constant-is-irrational-September-24-2026/paper.pdf}}, year = {2026}, note = {September 24, 2026. AI-generated and not peer reviewed; Lean formalisation described in \texttt{lean/docs/005.md} of the same repository}}
+
+% ===========================================================================
+% VERIFICATION SUMMARY (2026-10-18)
+% ---------------------------------------------------------------------------
+%  1 Hata1990       PARTIALLY VERIFIED. Bibliographic data verified (zbMATH; matches DHK 2020 refs).
+%                   Title is "On the linear independence of the values of polylogarithmic functions",
+%                   JMPA (9) 69 (1990) no. 2, 133-173; no DOI. Content verified only via Beukers' zbMATH
+%                   review: covers L(alpha,k;1/q), alpha rational in [0,1), so alpha = 1/2, k = 2,
+%                   x = 1/q^2 gives chi_2(1/q) irrational for q large. This IS the right Hata paper.
+%                   Theorem number not checked. Refereed.
+%  2 Hata1993       VERIFIED. TAMS 336 (1993) no. 1, 363-387, DOI 10.1090/S0002-9947-1993-1147401-5,
+%                   MR 1147401. Li_2(1/k) irrational for k <= -5 or k >= 7, so Li_2(-1/5) is included.
+%                   Refereed.
+%  3 DHK2022        VERIFIED. Title "Linear independence criteria for generalized polylogarithms with
+%                   distinct shifts", Acta Arith. 206 (2022) no. 2, 127-169, DOI 10.4064/aa220307-18-10,
+%                   arXiv:2202.13931. Refereed.
+%    DHK2020        VERIFIED. "Can polylogarithms at algebraic points be linearly independent?",
+%                   Mosc. J. Comb. Number Theory 9 (2020) no. 4, 389-406, DOI 10.2140/moscow.2020.9.389,
+%                   arXiv:1912.03811. Refereed.
+%  4 Prellberg2026  VERIFIED (metadata and claimed theorem). Author confirmed: Thomas Prellberg (sole).
+%                   arXiv:2609.06895v1, 7 Sep 2026. Theorem 1.1: Li_2(-1/4), Li_2(1/5), Li_2(-1/3) irrational.
+%                   UNREFEREED preprint, AI-assisted per its own statement; correctness not checked.
+%  5 LiuLi2         VERIFIED (URL resolves, claims read). Author name: Si-Qi Liu (Tsinghua). Claims
+%                   Li_2(1/k), k >= 2, and Li_2(-1/k), k >= 1, plus more, in Lean 4 with standard axioms.
+%                   Note this covers Prellberg's three values. Lean repo only, no paper, NOT peer
+%                   reviewed, AI-assisted per README; not built by us.
+%  6 TangLi2        VERIFIED (URL resolves). Author name Qian Tang (from formalization.yaml, commit
+%                   author, Liu's README). Lean proof of Li_2(1/2) irrational. No arXiv paper by Tang
+%                   on Li_2(1/2) (Hankel or otherwise) found. Lean repo only, NOT peer reviewed.
+%  7 SaffTotik      PARTIALLY VERIFIED. 1st ed. 1997 (DOI 10.1007/978-3-662-03329-6) and 2nd ed. 2024
+%                   (Springer Cham, DOI 10.1007/978-3-031-65133-5, same Grundlehren 316) both exist.
+%                   "Lemma I.1.8" (1st ed.) is confirmed as the right number by two independent citing
+%                   papers, one co-authored by Totik: I(mu - nu) >= 0 for mu, nu with compact support, equal
+%                   mass and FINITE energy (I with -log kernel), with equality iff mu = nu. Book not opened;
+%                   2nd-edition numbering unknown (book reorganised), so cite the 1st edition.
+%  8 Andreief       PARTIALLY VERIFIED (via Forrester only). Year should be 1886, NOT 1883 (paper signed
+%                   Dec 1883, volume issued 1886): Mem. Soc. Sci. Phys. Nat. Bordeaux (3) 2 (1886), 1-14.
+%    Forrester2019  VERIFIED. RMTA 8 (2019) no. 2, 1930001, DOI 10.1142/S2010326319300018, arXiv:1806.10411;
+%                   Andreief identity is its eq. (1.7). Refereed.
+%  9 Polya1949      VERIFIED (metadata). Title "Remarks on characteristic functions", Proc. [First] Berkeley
+%                   Symp. Math. Statist. Probab. (Aug 1945 and Jan 1946), ed. Neyman, Univ. California
+%                   Press, 1949, 115-123; Zbl 0038.28707; Project Euclid bsmsp/1166219202. Statement of
+%                   Polya's criterion confirmed only via secondary sources. No DOI.
+% 10 Lewin1981      VERIFIED, WITH A CORRECTION. North-Holland, New York-Oxford, 1981, XVII+359 pp.,
+%                   Zbl 0465.33001. Correction: Legendre's chi is not a chapter but Section 1.8 of
+%                   Chapter 1. The Landen-type identity is Appendix A.2.1, formula (24), p. 284 (read in a
+%                   scan). Its equation number inside Section 1.8 was not verified.
+% 11 RhinViola2005  VERIFIED. Ann. Sc. Norm. Super. Pisa Cl. Sci. (5) 4 (2005) no. 3, 389-437; MR 2185863;
+%                   Zbl 1170.11316; no DOI. Refereed.
+% 12 ViolaZudilin2018 VERIFIED. J. Reine Angew. Math. 736 (2018) 193-223, DOI 10.1515/crelle-2015-0030
+%                   (online 2015). No arXiv version; MPIM preprint 2014-26. Refereed.
+% 13 CDT            VERIFIED (arXiv). arXiv:2408.15403 v2 (16 Sep 2024); no journal publication found.
+%                   Preprint by established authors (not AI-generated).
+% 14 OpenAICatalan2026 Reused verbatim as instructed; not re-checked. AI-generated, not peer reviewed.
+% ===========================================================================
+
+
+% arXiv:1910.09336; DOI 10.1145/3372885.3373824 (CPP 2020).
+@inproceedings{Mathlib,
+  author    = {{The mathlib Community}},
+  title     = {The {L}ean mathematical library},
+  booktitle = {Proceedings of the 9th ACM SIGPLAN International Conference on Certified Programs and Proofs (CPP 2020)},
+  publisher = {ACM},
+  year      = {2020},
+  pages     = {367--381},
+  doi       = {10.1145/3372885.3373824},
+  note      = {arXiv:1910.09336}
+}
+
+@misc{Mathlib4,
+  author       = {{The mathlib Community}},
+  title        = {mathlib4},
+  howpublished = {\url{https://github.com/leanprover-community/mathlib4}},
+  year         = {2026},
+  note         = {Tag v4.35.0, commit 56a005855ea17e0b0958f73ec801ae140b0a1679}
+}
+
+@inproceedings{LeanFour,
+  author    = {de Moura, Leonardo and Ullrich, Sebastian},
+  title     = {The {L}ean 4 Theorem Prover and Programming Language},
+  booktitle = {Automated Deduction -- CADE 28},
+  series    = {Lecture Notes in Comput. Sci.},
+  volume    = {12699},
+  publisher = {Springer},
+  year      = {2021},
+  pages     = {625--635},
+  doi       = {10.1007/978-3-030-79876-5_37}
+}
+
+@misc{PNTplus,
+  author       = {Kontorovich, Alex and Tao, Terence and others},
+  title        = {{PrimeNumberTheoremAnd}},
+  howpublished = {\url{https://github.com/AlexKontorovich/PrimeNumberTheoremAnd}},
+  year         = {2026},
+  note         = {Lean project, Apache License 2.0; the formalisation uses files from commit
+                  a5154676af9aa3095150ee410cdda80555aa0642 (30 August 2026)}
+}
+
+% Repository owner on GitHub: domino14 (no other contributors listed). Formalises A. Fauzan, "zeta(5) is irrational".
+@misc{zeta5,
+  author       = {Del Solar, C\'esar},
+  title        = {$\zeta(5)$ is irrational: a {L}ean~4 formalization},
+  howpublished = {\url{https://github.com/domino14/zeta5}},
+  year         = {2026},
+  note         = {Source of the port of the prime number theorem used here
+                  (commit 3da8eb1b91f9a90a1c0b7959e845c060dbd16256, 23 September 2026)}
+}
+
+@misc{BetaRepo,
+  author       = {Krisman, Shawn},
+  title        = {Lean formalisation: one of $\beta(4),\beta(6),\dots,\beta(36)$ is irrational},
+  howpublished = {\url{https://github.com/telaviv/beta-irrationality}},
+  year         = {2026},
+  note         = {Release v1.0, commit f8df497467901e09fa497553f00d8ffa4480a46d}
+}
+
+@misc{Chi2Repo,
+  author       = {Krisman, Shawn},
+  title        = {Lean formalisation: $\chi_2(1/3)$ and $\chi_2(1/5)$ are irrational},
+  howpublished = {\url{https://github.com/telaviv/chi2-irrationality}},
+  year         = {2026},
+  note         = {Commit 0d781d258e496d32c8997746654b6b42cb35fd89}
+}
