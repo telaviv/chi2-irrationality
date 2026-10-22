@@ -1254,8 +1254,11 @@ kernel-checked certificates are a small part of it.
 \subsection{What has to be trusted}
 Beyond the Lean kernel and the three axioms, the reader has to trust that the definitions displayed above express
 Theorem~\ref{thm:main}, and the Mathlib definitions they use (real numbers, \lean{tsum}, \lean{Irrational}). Nothing
-else, in particular no numerical data and no generating script, needs to be trusted. A reader who does not want to
-trust the elaborator's environment handling can replay the environment with \lean{lean4checker}; we have not done so. Apart from the check
+else, in particular no numerical data and no generating script, needs to be trusted. To avoid trusting the
+elaborator's handling of the environment, we replayed every declaration of the $61$ project modules through the
+kernel with \lean{leanchecker} (the \lean{lean4checker} tool shipped with the Lean toolchain), run on each module
+against the compiled environment of its imports; it reported no errors. Mathlib itself was not replayed from scratch
+(\lean{--fresh}). Apart from the check
 by the Lean kernel, all verification of the formalisation so far was carried out by AI systems; no human expert has
 yet reviewed the Lean code.
 

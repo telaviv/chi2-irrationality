@@ -18,6 +18,22 @@ the kernel:
   (`Interval/Log.lean`);
 - the six block determinants of Lemma P are evaluated exactly by `norm_num` (`NonVan/NonVanQ.lean`).
 
+## Environment replay
+
+`lake build` checks each declaration in the kernel as it is added. To avoid trusting the elaborator's handling of the
+stored environment, every declaration of the 61 project modules was also replayed through the kernel with
+`leanchecker`, the lean4checker tool shipped with the Lean toolchain:
+
+```sh
+for m in $(find Chi2Irrational -name "*.lean" | sed 's/\.lean$//; s#/#.#g'); do lake env leanchecker "$m"; done
+```
+
+All 61 modules pass (about two hours on the author's machine). Each module is replayed against the compiled environment
+of its imports, so Mathlib itself is not re-checked; that would need `leanchecker --fresh`, which we have not run.
+Running `leanchecker` on the root module `Chi2Irrational`, which has no declarations of its own, fails on Windows while
+loading Mathlib `.olean` files (a different file on each attempt, all present on disk), which we attribute to resource
+limits rather than to a kernel error.
+
 ## The statement
 
 The kernel checks the proof. It cannot check that the statement means what we claim, so read these definitions yourself:
