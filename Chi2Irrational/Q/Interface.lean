@@ -27,7 +27,7 @@ namespace Q
 
 open Polynomial Filter
 
-/-! ## The ingredients (stubs) -/
+/-! ## The ingredients (each proved as `<name>_proof`) -/
 
 /-- **Arithmetic bound for general `q`** (RESULT §1, §4): given a 2-adic bound on the coefficients of `Δ_h` with limit
 constant `c₂`, a common denominator of size `≤ (alphaCore q + c₂ + ε) h²` (odd primes: Theorem A, Lemma 5 + Corollary 9.1
@@ -45,7 +45,7 @@ theorem twoAdic_odd (q : ℕ) (hq : 3 ≤ q) (ho : Odd q) :
       ∀ ε > 0, ∀ᶠ h : ℕ in atTop, (n2 h : ℝ) * Real.log 2 ≤ (c2Odd q + ε) * (h : ℝ) ^ 2 :=
   twoAdic_odd_proof q hq ho
 
-/-- **Lemma 10₀** (RESULT §4.1): at even `q`, `n₂ ≤ −a(h) v₂(q) + ⌊h²/2⌋ − h`. -/
+/-- **Lemma 10₀** (RESULT §4.1): at even `q`, `n₂ ≤ −a(h) v₂(q) + h²/2 + O(h)` (RESULT has `⌊h²/2⌋ − h`; the Lean proof `Q/TwoAdicEven.lean` uses a cruder `h²/2 + O(h)`, same limit `c2Even q`). -/
 theorem twoAdic_even (q : ℕ) (hq : 3 ≤ q) (he : Even q) :
     ∃ n2 : ℕ → ℤ, (∀ h k, padicNorm 2 ((Delta q h).coeff k) ≤ (2 : ℚ) ^ (n2 h)) ∧
       ∀ ε > 0, ∀ᶠ h : ℕ in atTop, (n2 h : ℝ) * Real.log 2 ≤ (c2Even q + ε) * (h : ℝ) ^ 2 :=

@@ -1,0 +1,25 @@
+odd q in [3,5001]: count 2500 worst q = 3 margin upper = -0.0542506344160502
+even q in [14,5000]: count 2494 worst q = 14 margin upper = -0.0281956299508435
+non-negative margins: []
+max |Lean alpha+c2 - paper alpha| over both ranges: 2.240285500030011e-59
+ odd q=3  Lean margin <= -0.0542506344160502   paper alpha=2.02374936558395  paper margin(Phi3 shift)=-0.0749910731160502
+ odd q=5  Lean margin <= -0.205285582054015   paper alpha=2.12812722982898  paper margin(Phi3 shift)=-0.226026020754015
+ odd q=7  Lean margin <= -0.312392317431706   paper alpha=2.1892566127619  paper margin(Phi3 shift)=-0.333132756131706
+ odd q=9  Lean margin <= -0.394114601724297   paper alpha=2.23319154260976  paper margin(Phi3 shift)=-0.414855040424297
+ odd q=11  Lean margin <= -0.459973904249048   paper alpha=2.26766758781608  paper margin(Phi3 shift)=-0.480714342949048
+ odd q=15  Lean margin <= -0.562397767234   paper alpha=2.32032118898305  paper margin(Phi3 shift)=-0.583138205934
+ odd q=21  Lean margin <= -0.67400912898736   paper alpha=2.3769459455403  paper margin(Phi3 shift)=-0.69474956768736
+ odd q=51  Lean margin <= -0.969305458880463   paper alpha=2.52530121314765  paper margin(Phi3 shift)=-0.990045897580463
+ odd q=101  Lean margin <= -1.19699879349554   paper alpha=2.63925532059103  paper margin(Phi3 shift)=-1.21773923219554
+ odd q=199  Lean margin <= -1.42304203390569   paper alpha=2.75230423412251  paper margin(Phi3 shift)=-1.44378247260569
+ even q=12 Lean margin(betaEven) <= 0.0227245378292452   paper alpha_even=2.97564919791562
+ even q=14 Lean margin(betaEven) <= -0.0281956299508435   paper alpha_even=3.00180437004916
+ even q=16 Lean margin(betaEven) <= -0.0724057938226092   paper alpha_even=3.02435990248965
+ even q=20 Lean margin(betaEven) <= -0.146434285318258   paper alpha_even=3.06190318665111
+ even q=100 Lean margin(betaEven) <= -0.682312808158512   paper alpha_even=3.3307436200279
+odd closed-form constant 133/60-2.078-log2/2+log3/6 = -0.0248048755019544
+even closed-form constant 133/60-3.03+7/6 log2 = -0.00466162268006381
+paper closed-form 133/60-log2/2+log3/2-2.0987404387 = 0.320658782020749
+Lean closed-form 133/60-log2/2+log3/2-2.078 = 0.341399220720749
+Chi2Irrational/Cert/DataQ3.lean q = 3 L = 100 #Sks = 300 PhiQ = -2.07832604261032 PhiQ <= -2.078: True PhiQ <= -3.03: False
+Chi2Irrational/Cert/DataQ14.lean q = 14 L = 200 #Sks = 400 PhiQ = -3.03723942607862 PhiQ <= -2.078: True PhiQ <= -3.03: True

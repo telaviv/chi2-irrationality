@@ -1,35 +1,50 @@
-# χ₂(1/3) and χ₂(1/5) are irrational: a Lean 4 proof
+# χ₂(1/q) is irrational for every integer q ≥ 3 except possibly 4, 6, 8, 10, 12: a Lean 4 proof
 
 This repository contains a complete, machine-checked proof in [Lean 4](https://lean-lang.org/) and
-[Mathlib](https://github.com/leanprover-community/mathlib4) of the following theorem.
+[Mathlib](https://github.com/leanprover-community/mathlib4) of the following theorems. Here χ₂(z) = Σ_{n≥0}
+z^{2n+1}/(2n+1)² = ½(Li₂(z) − Li₂(−z)) is Legendre's chi function.
 
-> **Theorem.** Let χ₂(z) = Σ_{n≥0} z^{2n+1}/(2n+1)² be Legendre's chi function. Then χ₂(1/3) and χ₂(1/5) are
-> irrational.
+> **Theorem Q.** For every integer q ≥ 3 with q ∉ {4, 6, 8, 10, 12}, the number χ₂(1/q) is irrational.
 
-Equivalently, χ₂(z) = ½(Li₂(z) − Li₂(−z)). The two numbers are χ₂(1/3) = 0.33762317823243597996… and
-χ₂(1/5) = 0.20090195660862019582….
+> **Theorem (q = 3, 5).** χ₂(1/3) = 0.33762317823243597996… and χ₂(1/5) = 0.20090195660862019582… are irrational.
+
+The second theorem was the first result of this repository and is kept as two separate Lean theorems, with their own
+proof; Theorem Q contains it. Theorem Q covers every odd q ≥ 3 and every even q ≥ 14. The five even values
+q = 4, 6, 8, 10, 12 are open: there the 2-adic bound that the proof uses for even q is too weak, and for q = 4 the
+margin would be positive (by our computations) even with an ideal 2-adic bound. q = 2, i.e. χ₂(1/2), is also open (the
+construction fails there). q = 1 gives χ₂(1) = π²/8, which is classical and not part of the statement.
 
 In Lean:
 
 ```lean
--- Chi2Irrational/Defs.lean, Chi2Irrational/Statement.lean
+-- Chi2Irrational/Defs.lean
 noncomputable def chi2Term (z : ℝ) (n : ℕ) : ℝ := z ^ (2 * n + 1) / (2 * (n : ℝ) + 1) ^ 2
 noncomputable def chi2 (z : ℝ) : ℝ := ∑' n : ℕ, chi2Term z n
+
+-- Chi2Irrational/Q/Defs.lean, Chi2Irrational/Q/Interface.lean
+def Chi2Irr.Q.TheoremQ : Prop :=
+  ∀ q : ℕ, 3 ≤ q → q ∉ ({4, 6, 8, 10, 12} : Finset ℕ) → Irrational (chi2 (1 / (q : ℝ)))
+theorem Chi2Irr.Q.theoremQ : Chi2Irr.Q.TheoremQ
+
+-- Chi2Irrational/Statement.lean, Chi2Irrational/Arith/Assembly.lean
 def Chi2OneThirdIrrational : Prop := Irrational (chi2 (1 / 3))
 def Chi2OneFifthIrrational : Prop := Irrational (chi2 (1 / 5))
-
--- Chi2Irrational/Arith/Assembly.lean
 theorem Chi2Irr.chi2_one_third_irrational : Chi2OneThirdIrrational
 theorem Chi2Irr.chi2_one_fifth_irrational : Chi2OneFifthIrrational
 ```
 
 ```
+'Chi2Irr.Q.theoremQ' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Chi2Irr.chi2_one_third_irrational' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Chi2Irr.chi2_one_fifth_irrational' depends on axioms: [propext, Classical.choice, Quot.sound]
 ```
 
 The proof uses only Lean's three standard axioms. There is no `sorry`, no added `axiom` and no `native_decide`: every
 numerical certificate is evaluated by the Lean kernel. See [TRUST.md](TRUST.md).
+
+The paper "χ₂(1/3) and χ₂(1/5) are irrational" is [`paper/chi2-irrationality.pdf`](paper/chi2-irrationality.pdf)
+(source `paper/main.tex`). It proves the case q = 3, 5 in full and describes the formalisation of Theorem Q, whose
+written proof is not part of it.
 
 ## Context
 
@@ -38,9 +53,10 @@ We know of no earlier proof that χ₂(1/q) is irrational for any small integer 
 - **Large q.** χ₂(1/q) = (4q)⁻¹Φ(1/q², 2, ½) is a single value of Lerch's transcendent (a shift-½ dilogarithm at
   1/q²). Irrationality for all sufficiently large q follows from Hata (J. Math. Pures Appl. 69, 1990) and from the
   explicit criteria of David, Hirata-Kohno and Kawashima (Acta Arith. 206, 2022); by our evaluation the latter need
-  q ≥ 2949. Hata's headline application (Li₂(1/Q) ∉ ℚ for Q ≥ 12) is for the easier shift 0, so q = 3 (Q = q² = 9) is
-  presumably outside his range. We have not determined his explicit range for the shift ½, which decides whether
-  q = 5 (Q = 25) was within reach of his method; heuristically it is not.
+  q ≥ 2949. So Theorem Q is new for 3 ≤ q < 2949 **unless Hata's method reaches lower**: we have not read Hata 1990
+  and have not determined his explicit range for the shift ½. Hata's headline application (Li₂(1/Q) ∉ ℚ for Q ≥ 12)
+  is for the easier shift 0, so q = 3 (Q = q² = 9) is presumably outside his range; whether q = 5 (Q = 25) or larger
+  q are within it is open to us (heuristically q = 5 is not).
 - **Separate dilogarithm values do not suffice.** Li₂(−1/5) ∉ ℚ is due to Hata (Trans. AMS 336, 1993), and
   Li₂(1/5) ∉ ℚ was proved recently (Prellberg, arXiv:2609.06895; S. Liu's Lean repository
   [Li2Rational](https://github.com/siqiliu-tsinghua/Li2Rational); both
@@ -53,13 +69,14 @@ of prior work.
 
 ## Outline of the proof
 
-Fix q ∈ {3, 5} and put w = q⁻². For each h ≥ 1 take the h poles x_k = −(k + ½), k < h, put D(u) = Π_{k<h}(u − x_k),
-and consider the functional
+Fix an integer q ≥ 2 and put w = q⁻². Steps 1–5 describe the proof for q ∈ {3, 5}; step 6 describes what changes for
+general q (Theorem Q). For each h ≥ 1 take the h poles x_k = −(k + ½), k < h, put D(u) = Π_{k<h}(u − x_k), and consider
+the functional
 
     Λ(g) = Σ_{t≥1} w^t · (g(u) · u / D(u))′ |_{u=t}      (g ∈ ℚ[u]).
 
 Its Hankel determinant Δ_h(X) = det(A(u^{i+j}) + X·B(u^{i+j}))_{i,j<h} is a polynomial of degree ≤ h with rational
-coefficients (`Machine.lean`). Five steps prove the theorem.
+coefficients (`Machine.lean`). The machine, step 1, Theorem B (step 3) and Lemma E (step 5) are formalised for general q.
 
 1. **Pole expansion (Lemma 1).**
    - Λ(g) = A(g) + χ₂(1/q)·B(g) with explicit rational functionals A and B, so Δ_h(χ₂(1/q)) = det(Λ(u^{i+j})).
@@ -70,8 +87,8 @@ coefficients (`Machine.lean`). Five steps prove the theorem.
 
        α = 133/60 + ¼ log 2 [+ ¼ log 3 if q = 5] − ⅓ log q   (α = 2.0237… for q = 3, 2.1281… for q = 5).
 
-   The machine is first built over the free ring ℚ[q, E], with E standing for 1/(q² − 1) (`Arith/Free.lean`). Δ_h is
-   then bounded prime by prime:
+   (For general q, α is given in step 6.) The machine is first built over the free ring ℚ[q, E], with E standing for
+   1/(q² − 1) (`Arith/Free.lean`). Δ_h is then bounded prime by prime:
    - **Odd p ≥ 2h/5, the class bound.** A basis adapted to the residue classes mod p, together with an explicit count
      (Lemma 8A), gives exponent ≤ h·φ₁(p/h) for a piecewise-linear φ₁ with ∫φ₁ = 17/12. Files: `Arith/ClassBound.lean`,
      `Arith/ClassCount.lean`.
@@ -90,20 +107,63 @@ coefficients (`Machine.lean`). Five steps prove the theorem.
    - **The bound.** Expand the truncated Hankel matrix as a sum of rank-one terms (Andreief) and bound the resulting
      minors with value and derivative rows. A discrete weak-duality inequality (a Pólya-type lattice energy inequality)
      then compares the log-gas energy of the nodes with the energy of μ. Files: `Analytic/`.
-   - **The certificates.** They give Φ ≤ −2.078 for q = 3 and Φ ≤ −2.385 for q = 5. Their data is checked by
-     `decide +kernel` using rational interval arithmetic and a kernel-verified table of logarithms. Files: `Cert/`,
-     `Interval/`.
+   - **The certificates.** They give Φ ≤ −2.078 for q = 3 and Φ ≤ −2.385 for q = 5 (and Φ ≤ −3.03 for q = 14, used
+     for Theorem Q, step 6). Their data is checked by `decide +kernel` using rational interval arithmetic and a
+     kernel-verified table of logarithms. Files: `Cert/`, `Interval/`.
 4. **Nonvanishing (Lemma P).** For every rational a/b, Δ_h(a/b) ≠ 0 for infinitely many h.
    - Take h = 3ℓ with ℓ a large prime. In a basis adapted to the classes mod ℓ, the Gram matrix reduced mod ℓ is block
      upper triangular.
    - Its diagonal blocks are invertible mod ℓ as soon as ℓ does not divide three fixed rational block determinants.
-     These are computed exactly by `norm_num` (`NonVan/NonVanQ.lean`).
+     For q = 3, 5 these are computed exactly by `norm_num` (`NonVan/NonVanQ.lean`); for general q they are rational
+     functions of q (step 6).
    - Since there are infinitely many primes, no prime-gap theorem is needed. Files: `NonVan/`.
 5. **Conclusion (Lemma E).**
    - α + Φ < 0: about −0.055 for q = 3 and −0.257 for q = 5 (`margin_three`, `margin_five`).
    - So den_h·Δ_h(χ₂(1/q)) → 0 faster than any b^{−h}. If χ₂(1/q) = a/b, then b^h·den_h·Δ_h(a/b) would be a
      nonzero integer for infinitely many h and would tend to 0: a contradiction.
    - Files: `Criterion.lean`, `MainCond.lean`, `Arith/Assembly.lean`.
+6. **General q (Theorem Q), files `Q/`.** Statement and constants in `Q/Defs.lean`, assembly in `Q/Interface.lean`.
+   - **Odd primes (`Q/Arith.lean`).** For every q ≥ 3 the odd primes cost at most `alphaCore q` per h², where
+
+         alphaCore q = 133/60 + ¼ log(oddPart(q² − 1)) − ⅓ log(oddPart(q)).
+
+     The generic primes give 133/60 as in step 2. An odd p | q² − 1 costs ¼ v_p(q² − 1) log p (Lemma 5 and Lemma 9).
+     An odd p | q gives the gain −⅓ v_p(q) log p: Lemma 4′ says that every monomial of a cleared coefficient has
+     q-degree ≥ a_h, and this is used prime by prime.
+   - **p = 2, odd q (`Q/TwoAdicEntries.lean`, `Q/TwoAdic.lean`).** Lemma 10 at general ν = v₂(q² − 1) ≥ 3: the cost
+     is c2Odd q = (ν − 2)/4 · log 2.
+   - **p = 2, even q (`Q/TwoAdicEven.lean`, Lemma 10₀).** A Gauss bound in the anchored basis gives 2-adic exponent
+     ≤ 2⌊h/2⌋(⌊h/2⌋ + 1) − v₂(q)·a_h ≤ h²/2 + h − v₂(q)·a_h, so the cost is c2Even q = (½ − v₂(q)/3) · log 2. This
+     includes the 2-adic share of the gain of Lemma 4′.
+   - **Arithmetic constant.** alphaCore q + c₂ is, for odd q, α(q) = 133/60 − ½ log 2 + ¼ log(q² − 1) − ⅓ log q
+     (α(3) = 2.0237…, α(5) = 2.1281…, as in step 2), and for even q, α(q) = 133/60 + ½ log 2 + ¼ log(q² − 1) − ⅓ log q.
+   - **Analytic constant (`Q/Shift.lean`, `Q/Analytic.lean`).** The shift lemma `DualCert.shift` turns a dual
+     certificate at q₀ into one at any q ≥ q₀, with Φ decreased by ½ log(q/q₀) − δ for any δ > 0 (the functional
+     depends on q only through w = q⁻²). Odd q use the q = 3 certificate: β = −2.078 − ½ log(q/3). Even q ≥ 14 use a
+     new certificate at q = 14 (`Cert/Q14.lean`, exact exponent PhiQ = −3.0372394…, used as Φ ≤ −3.03):
+     β = −3.03 − ½ log(q/14).
+   - **Nonvanishing (`Q/NonVan.lean`).** The three block determinants of step 4, in closed form in q:
+     det M(S) = 8q⁶(9q² + 1)/(9(q² − 1)), det M(L) = 8q²(16200q⁶ − 10575q⁴ − 6352q² + 905)/(2025(q² − 1)),
+     det M(D) = −q⁴(16200q⁶ − 51075q⁴ + 28523q² + 420)/(135(q² − 1)²). The numerators are nonzero at every integer
+     q ≥ 2.
+   - **Margins (`Q/Margin.lean`), by closed forms valid for all q.** For odd q ≥ 3, α(q) + β ≤ 133/60 − 2.078 − ½ log 2
+     + ⅙ log 3 < −0.023. For even q ≥ 14, α(q) + β ≤ 133/60 − 3.03 + (7/6) log 2 < −0.0046. The true margins decrease
+     in q (numerically); the worst are −0.0543 at q = 3 and −0.0282 at q = 14 (`scripts/q/margin_check.py`). With Lemma 10₀ the even
+     margin is positive for q ≤ 12 (numerically +0.0045 at q = 12 even with the best analytic constant), which is why
+     the even values below 14 are excluded.
+
+   The source is a written proof (one AI gate referee, PASS WITH FIXES) that is not part of this repository. Lean
+   departs from it as follows; none of the departures loses anything claimed:
+   - for odd q, Lean uses the existing q = 3 certificate (Φ ≤ −2.078) instead of the written proof's sharper
+     Φ₃ = −2.0987, and shifts every odd q from q = 3;
+   - for even q, Lean uses its own kernel-checked q = 14 certificate (Φ ≤ −3.03) instead of the written proof's
+     certificates (Φ ≤ −3.0444 and −3.0498), so the q = 14 margin is −0.0282 instead of −0.0426;
+   - the even 2-adic exponent is h²/2 + O(h) rather than the written proof's ⌊h²/2⌋ − h, with the same limit; and the
+     shift lemma is discretised (a Riemann-sum loss, absorbed into δ).
+
+Formalised: everything above, for every q in Theorem Q, including the general-ν form of Lemma 10 (the written proof
+recorded one half of it as proved on paper only at ν ≠ 3). Not formalised: explicit thresholds (an effective h₀); the
+even values q ≤ 12 are open.
 
 ## Building and checking
 
@@ -111,13 +171,20 @@ You need [elan](https://github.com/leanprover/elan). The toolchain (Lean v4.35.0
 `lean-toolchain` and `lakefile.toml`.
 
 ```sh
-lake exe cache get          # download prebuilt Mathlib
-lake build                  # about 10 minutes on a desktop once Mathlib is cached
-lake env lean Axioms.lean   # print the axioms of the main theorems and their ingredients
+lake exe cache get                 # download prebuilt Mathlib
+LEAN_NUM_THREADS=4 lake build      # 9121 jobs
+lake env lean Axioms.lean          # print the axioms of the main theorems and their ingredients
 ```
 
+Before Theorem Q was added, a clean build took about 10 minutes on a desktop once Mathlib was cached. The kernel check
+of the q = 14 certificate (`Cert/Q14.lean`) alone takes about 4 minutes (233 s); the full build has not been re-timed.
+The thread limit follows the author's larger Lean repositories, where a build at Lake's default concurrency once ran out
+of memory on Windows.
+
 The certificate data can be regenerated with `scripts/gen_cert.py` (Python with numpy, scipy and mpmath). The output is
-byte-identical to the committed `Cert/DataQ3.lean` and `Cert/DataQ5.lean`; the commands are in the script's docstring.
+byte-identical to the committed `Cert/DataQ3.lean`, `Cert/DataQ5.lean` and `Cert/DataQ14.lean`; the commands are in
+TRUST.md (for q = 3, 5 also in the script's docstring). The checks made while porting to general q (denominators,
+2-adic bounds, the shift lemma, the block determinants, the margins) are in `scripts/q/`.
 
 ## Repository layout
 
@@ -125,19 +192,25 @@ Paths are relative to `Chi2Irrational/`.
 
 | path | content |
 |---|---|
-| `Defs.lean`, `Statement.lean` | χ₂ and the two target statements |
+| `Defs.lean`, `Statement.lean` | χ₂ and the two target statements for q = 3, 5 |
 | `Machine.lean` | the functionals A, B and the polynomial Δ_h(X); deg Δ_h ≤ h |
 | `PoleSeries.lean`, `PoleExpansion.lean` | Lemma 1: Λ = A + χ₂(1/q)·B |
 | `Criterion.lean`, `MainCond.lean` | Lemma E and the conditional main theorem `irrational_of_bounds` |
-| `Arith/` | the arithmetic bound: free ring, Gauss norms, class bound, Lemmas 4′, 5, 9, 10, the denominator, final assembly |
+| `Arith/` | the arithmetic bound: free ring, Gauss norms, class bound, Lemmas 4′, 5, 9, 10, the denominator, final assembly (q = 3, 5) |
 | `PNT/` | prime number theorem (θ(x) ~ x) and prime sums with step weights |
 | `Analytic/` | Theorem B: node expansion, slot determinants, lattice energy inequality, discretization |
-| `Interval/`, `Cert/` | rational interval arithmetic, log enclosures, and the two kernel-checked dual certificates |
-| `NonVan/` | Lemma P: ℓ-adic reduction, progressions, class blocks, nonvanishing for q = 3, 5 |
+| `Interval/`, `Cert/` | rational interval arithmetic, log enclosures, and the three kernel-checked dual certificates (q = 3, 5, 14) |
+| `NonVan/` | Lemma P: ℓ-adic reduction, progressions, class blocks, nonvanishing for q = 3, 5 and the generic route `nonvan_of` |
+| `Q/` | Theorem Q: `Defs` (statement, constants), `Arith` (odd primes for general q), `TwoAdicEntries`, `TwoAdic` (Lemma 10 at general ν), `TwoAdicEven` (Lemma 10₀), `Shift` (shift lemma), `Analytic`, `NonVan` (block determinants in closed form), `Margin`, `Interface` (assembly) |
 | `../scripts/gen_cert.py` | generator for the certificate data (untrusted; see TRUST.md) |
+| `../scripts/q/` | checks made for Theorem Q; `referee/` holds the fidelity referee's independent margin recomputation |
+| `../scripts/axioms_q.txt`, `../scripts/leanchecker_q.log` | axiom output and per-module `leanchecker` results for the build with Theorem Q |
 | `../Axioms.lean` | axiom audit |
+| `../FIDELITY_REFEREE_Q.md` | AI referee report on the fidelity of the statement of Theorem Q |
 
-Every Lean file starts with a docstring saying what it proves and how.
+Every Lean file starts with a docstring saying what it proves and how. The files under `Q/` cite `RESULT §n` (or
+`pilot_q/RESULT.md`), the working proof note of Theorem Q, and `CHI2_IRRATIONALITY §n`, the working proof note for
+q = 3, 5; these notes belong to the development history and are not part of this repository.
 
 ## Status and caveats
 
@@ -146,7 +219,8 @@ Every Lean file starts with a docstring saying what it proves and how.
 - The construction, the proofs, the certificate programs and the Lean formalisation were produced largely by AI models
   (Claude, Anthropic), working under the direction of the author. Apart from the Lean kernel check, all verification so
   far has been done by AI systems.
-- The margin for q = 3 is thin (α + Φ ≈ −0.055 per h²). It is certified, not estimated.
+- The margins are thin: α + Φ ≈ −0.055 per h² for q = 3, and −0.0282 for q = 14, the worst even case of Theorem Q.
+  They are certified, not estimated.
 
 ## Acknowledgements
 

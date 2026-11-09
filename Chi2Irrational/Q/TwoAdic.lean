@@ -4,7 +4,7 @@
 Generalises `Arith/TwoAdic.lean` from `q₀ ∈ {3, 5}` to every odd `q ≥ 3`, `ν = nu q = v₂(q² − 1) ≥ 3`:
 * `twoAdic_Delta`: `‖[X^k] Δ_h‖₂ ≤ 2^{(ν − 2) βp(h) + h (⌊log₂ h⌋ + 6)}` (same Leibniz argument as the `q₀ ∈ {3, 5}`
   file, with `ρ_i = 2^{i+1+(ν−2) rPot i+⌊log₂ h⌋+6−h}`, `κ_j = 2^{j+(ν−2) cPot j}`);
-* `twoAdic_odd_proof`: the stub `Q.twoAdic_odd` of `Q/Interface.lean`, from `4 βp(h) ≤ h² + 2h` (`betaP_le`) and
+* `twoAdic_odd_proof`: the ingredient `Q.twoAdic_odd` of `Q/Interface.lean`, from `4 βp(h) ≤ h² + 2h` (`betaP_le`) and
   `30h + 6h log h = o(h²)` (`eventually_rem_le`).
 -/
 import Chi2Irrational.Q.TwoAdicEntries
@@ -105,7 +105,7 @@ theorem eventually_n2_le {q : ℕ} (hq : 3 ≤ q) (ho : Odd q) : ∀ ε > 0, ∀
     nlinarith
   nlinarith
 
-/-- **Lemma 10, general `ν`** (the stub `Q.twoAdic_odd`). -/
+/-- **Lemma 10, general `ν`** (the ingredient `Q.twoAdic_odd`). -/
 theorem twoAdic_odd_proof (q : ℕ) (hq : 3 ≤ q) (ho : Odd q) :
     ∃ n2 : ℕ → ℤ, (∀ h k, padicNorm 2 ((Delta q h).coeff k) ≤ (2 : ℚ) ^ (n2 h)) ∧
       ∀ ε > 0, ∀ᶠ h : ℕ in atTop, (n2 h : ℝ) * Real.log 2 ≤ (c2Odd q + ε) * (h : ℝ) ^ 2 :=
