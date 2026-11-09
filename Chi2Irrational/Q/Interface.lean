@@ -17,6 +17,7 @@ The ingredients below are stated for general `q`; each is proved as `<name>_proo
 import Chi2Irrational.Q.Defs
 import Chi2Irrational.Q.Margin
 import Chi2Irrational.Q.NonVan
+import Chi2Irrational.Q.TwoAdicEven
 
 namespace Chi2Irr
 namespace Q
@@ -44,8 +45,8 @@ theorem twoAdic_odd (q : ℕ) (hq : 3 ≤ q) (ho : Odd q) :
 /-- **Lemma 10₀** (RESULT §4.1): at even `q`, `n₂ ≤ −a(h) v₂(q) + ⌊h²/2⌋ − h`. -/
 theorem twoAdic_even (q : ℕ) (hq : 3 ≤ q) (he : Even q) :
     ∃ n2 : ℕ → ℤ, (∀ h k, padicNorm 2 ((Delta q h).coeff k) ≤ (2 : ℚ) ^ (n2 h)) ∧
-      ∀ ε > 0, ∀ᶠ h : ℕ in atTop, (n2 h : ℝ) * Real.log 2 ≤ (c2Even q + ε) * (h : ℝ) ^ 2 := by
-  sorry
+      ∀ ε > 0, ∀ᶠ h : ℕ in atTop, (n2 h : ℝ) * Real.log 2 ≤ (c2Even q + ε) * (h : ℝ) ^ 2 :=
+  twoAdic_even_proof q hq he
 
 /-- **Nonvanishing for general `q`** (RESULT §3): Lemma P along `h = 3ℓ` with the three block determinants as rational
 functions of `q`, nonzero at every integer `q ≥ 2` (the route `nonvan_of` of `NonVan/NonVanQ.lean`). -/
