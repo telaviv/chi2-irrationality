@@ -18,6 +18,9 @@ import Chi2Irrational.Q.Defs
 import Chi2Irrational.Q.Margin
 import Chi2Irrational.Q.NonVan
 import Chi2Irrational.Q.TwoAdicEven
+import Chi2Irrational.Q.TwoAdic
+import Chi2Irrational.Q.Arith
+import Chi2Irrational.Q.Analytic
 
 namespace Chi2Irr
 namespace Q
@@ -33,14 +36,14 @@ theorem arith_q (q : ℕ) (hq : 3 ≤ q) (n2 : ℕ → ℤ)
     (hn2 : ∀ h k, padicNorm 2 ((Delta q h).coeff k) ≤ (2 : ℚ) ^ (n2 h)) (c2 : ℝ)
     (hc2 : ∀ ε > 0, ∀ᶠ h : ℕ in atTop, (n2 h : ℝ) * Real.log 2 ≤ (c2 + ε) * (h : ℝ) ^ 2) :
     ∃ den : ℕ → ℚ, (∀ h, 0 < den h) ∧ (∀ h k, ∃ z : ℤ, den h * (Delta q h).coeff k = z) ∧
-      ∀ ε > 0, ∀ᶠ h : ℕ in atTop, Real.log (den h) ≤ (alphaCore q + c2 + ε) * (h : ℝ) ^ 2 := by
-  sorry
+      ∀ ε > 0, ∀ᶠ h : ℕ in atTop, Real.log (den h) ≤ (alphaCore q + c2 + ε) * (h : ℝ) ^ 2 :=
+  arith_q_proof q hq n2 hn2 c2 hc2
 
 /-- **Lemma 10, general ν** (RESULT §1; CHI2_IRRATIONALITY §4.3): at odd `q`, `ν = v₂(q² − 1) ≥ 3`. -/
 theorem twoAdic_odd (q : ℕ) (hq : 3 ≤ q) (ho : Odd q) :
     ∃ n2 : ℕ → ℤ, (∀ h k, padicNorm 2 ((Delta q h).coeff k) ≤ (2 : ℚ) ^ (n2 h)) ∧
-      ∀ ε > 0, ∀ᶠ h : ℕ in atTop, (n2 h : ℝ) * Real.log 2 ≤ (c2Odd q + ε) * (h : ℝ) ^ 2 := by
-  sorry
+      ∀ ε > 0, ∀ᶠ h : ℕ in atTop, (n2 h : ℝ) * Real.log 2 ≤ (c2Odd q + ε) * (h : ℝ) ^ 2 :=
+  twoAdic_odd_proof q hq ho
 
 /-- **Lemma 10₀** (RESULT §4.1): at even `q`, `n₂ ≤ −a(h) v₂(q) + ⌊h²/2⌋ − h`. -/
 theorem twoAdic_even (q : ℕ) (hq : 3 ≤ q) (he : Even q) :
@@ -57,13 +60,13 @@ theorem nonvan_q (q : ℕ) (hq : 3 ≤ q) (a : ℤ) (b : ℕ) (hb : 0 < b) :
 /-- **Analytic bound at odd `q`** (RESULT §2): the `q = 3` certificate moved by the shift lemma. Stated for every
 `q ≥ 3`. -/
 theorem analytic_odd (q : ℕ) (hq : 3 ≤ q) {δ : ℝ} (hδ : 0 < δ) : ∀ ε > 0, ∀ᶠ h : ℕ in atTop,
-    |aeval (chi2 (1 / (q : ℝ))) (Delta q h)| ≤ Real.exp ((betaOdd q + δ + ε) * (h : ℝ) ^ 2) := by
-  sorry
+    |aeval (chi2 (1 / (q : ℝ))) (Delta q h)| ≤ Real.exp ((betaOdd q + δ + ε) * (h : ℝ) ^ 2) :=
+  analytic_odd_proof q hq hδ
 
 /-- **Analytic bound at `q ≥ 14`** (RESULT §4.2): a certificate at `q = 14` with `Φ ≤ −3.03`, moved by the shift lemma. -/
 theorem analytic_even (q : ℕ) (hq : 14 ≤ q) {δ : ℝ} (hδ : 0 < δ) : ∀ ε > 0, ∀ᶠ h : ℕ in atTop,
-    |aeval (chi2 (1 / (q : ℝ))) (Delta q h)| ≤ Real.exp ((betaEven q + δ + ε) * (h : ℝ) ^ 2) := by
-  sorry
+    |aeval (chi2 (1 / (q : ℝ))) (Delta q h)| ≤ Real.exp ((betaEven q + δ + ε) * (h : ℝ) ^ 2) :=
+  analytic_even_proof q hq hδ
 
 /-- **Margin at odd `q`** (RESULT §2, closed form `0.3414 − ⅓ log q` with Lean's `Φ₃`). -/
 theorem margin_odd (q : ℕ) (hq : 3 ≤ q) (ho : Odd q) : alphaCore q + c2Odd q + betaOdd q < 0 :=
