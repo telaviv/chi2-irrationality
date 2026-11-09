@@ -1,0 +1,4 @@
+✔ [9066/9067] Built Chi2Irrational.Cert.DataQ14 (24s)
+✔ [9067/9067] Built Chi2Irrational.Cert.Q14 (233s)
+real	8m35.768s
+(real time includes rebuilding the Analytic/Cert dependencies; Cert.Q14 itself, i.e. the kernel checks: 233 s, LEAN_NUM_THREADS=4)

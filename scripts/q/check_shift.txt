@@ -1,0 +1,12 @@
+ell=0.000 r=1: Phi'-Phi = +0.000000  bound +0.000000  ok=True
+ell=0.000 r=2: Phi'-Phi = +0.000000  bound +0.000000  ok=True
+ell=0.000 r=5: Phi'-Phi = +0.000000  bound +0.000000  ok=True
+ell=0.267 r=1: Phi'-Phi = -0.066570  bound -0.066416  ok=True
+ell=0.267 r=2: Phi'-Phi = -0.066737  bound -0.066583  ok=True
+ell=0.267 r=5: Phi'-Phi = -0.066837  bound -0.066683  ok=True
+ell=1.000 r=1: Phi'-Phi = -0.248904  bound -0.248750  ok=True
+ell=1.000 r=2: Phi'-Phi = -0.249530  bound -0.249375  ok=True
+ell=1.000 r=5: Phi'-Phi = -0.249905  bound -0.249750  ok=True
+ell=5.000 r=1: Phi'-Phi = -1.243904  bound -1.243750  ok=True
+ell=5.000 r=2: Phi'-Phi = -1.247030  bound -1.246875  ok=True
+ell=5.000 r=5: Phi'-Phi = -1.248905  bound -1.248750  ok=True
