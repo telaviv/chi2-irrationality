@@ -15,6 +15,7 @@ The ingredients below are stated for general `q`; each is proved as `<name>_proo
 | `margin_odd`, `margin_even` | §2, §4.2 | `alphaCore q + c₂ + β < 0` |
 -/
 import Chi2Irrational.Q.Defs
+import Chi2Irrational.Q.Margin
 
 namespace Chi2Irr
 namespace Q
@@ -63,12 +64,12 @@ theorem analytic_even (q : ℕ) (hq : 14 ≤ q) {δ : ℝ} (hδ : 0 < δ) : ∀ 
   sorry
 
 /-- **Margin at odd `q`** (RESULT §2, closed form `0.3414 − ⅓ log q` with Lean's `Φ₃`). -/
-theorem margin_odd (q : ℕ) (hq : 3 ≤ q) (ho : Odd q) : alphaCore q + c2Odd q + betaOdd q < 0 := by
-  sorry
+theorem margin_odd (q : ℕ) (hq : 3 ≤ q) (ho : Odd q) : alphaCore q + c2Odd q + betaOdd q < 0 :=
+  margin_odd_proof q hq ho
 
 /-- **Margin at even `q ≥ 14`** (RESULT §4.2). -/
-theorem margin_even (q : ℕ) (hq : 14 ≤ q) (he : Even q) : alphaCore q + c2Even q + betaEven q < 0 := by
-  sorry
+theorem margin_even (q : ℕ) (hq : 14 ≤ q) (he : Even q) : alphaCore q + c2Even q + betaEven q < 0 :=
+  margin_even_proof q hq he
 
 /-! ## Assembly -/
 
