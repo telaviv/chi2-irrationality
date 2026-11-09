@@ -1,0 +1,145 @@
+q=  3 h= 1 n2=  -1 int=OK slack(special odd p)={3: 0}
+q=  3 h= 2 n2=   2 int=OK slack(special odd p)={3: 4}
+q=  3 h= 3 n2=   4 int=OK slack(special odd p)={3: 6}
+q=  3 h= 4 n2=   6 int=OK slack(special odd p)={3: 9}
+q=  3 h= 5 n2=  10 int=OK slack(special odd p)={3: 22}
+q=  3 h= 6 n2=  15 int=OK slack(special odd p)={3: 27}
+q=  3 h= 7 n2=  20 int=OK slack(special odd p)={3: 31}
+q=  3 h= 8 n2=  24 int=OK slack(special odd p)={3: 36}
+q=  3 h= 9 n2=  31 int=OK slack(special odd p)={3: 40}
+q=  3 h=10 n2=  39 int=OK slack(special odd p)={3: 45}
+q=  3 h=11 n2=  47 int=OK slack(special odd p)={3: 49}
+q=  3 h=12 n2=  56 int=OK slack(special odd p)={3: 52}
+q=  5 h= 1 n2=  -1 int=OK slack(special odd p)={3: 0, 5: 0}
+q=  5 h= 2 n2=   2 int=OK slack(special odd p)={3: 3, 5: 1}
+q=  5 h= 3 n2=   4 int=OK slack(special odd p)={3: 3, 5: 8}
+q=  5 h= 4 n2=   6 int=OK slack(special odd p)={3: 3, 5: 10}
+q=  5 h= 5 n2=  10 int=OK slack(special odd p)={3: 13, 5: 14}
+q=  5 h= 6 n2=  15 int=OK slack(special odd p)={3: 14, 5: 18}
+q=  5 h= 7 n2=  20 int=OK slack(special odd p)={3: 14, 5: 23}
+q=  5 h= 8 n2=  24 int=OK slack(special odd p)={3: 16, 5: 27}
+q=  5 h= 9 n2=  31 int=OK slack(special odd p)={3: 19, 5: 30}
+q=  5 h=10 n2=  39 int=OK slack(special odd p)={3: 17, 5: 33}
+q=  5 h=11 n2=  47 int=OK slack(special odd p)={3: 17, 5: 35}
+q=  5 h=12 n2=  56 int=OK slack(special odd p)={3: 19, 5: 37}
+q=  7 h= 1 n2=  -1 int=OK slack(special odd p)={3: 0, 7: 0}
+q=  7 h= 2 n2=   3 int=OK slack(special odd p)={3: 3, 7: 1}
+q=  7 h= 3 n2=   6 int=OK slack(special odd p)={3: 3, 7: 3}
+q=  7 h= 4 n2=  10 int=OK slack(special odd p)={3: 3, 7: 12}
+q=  7 h= 5 n2=  15 int=OK slack(special odd p)={3: 13, 7: 15}
+q=  7 h= 6 n2=  22 int=OK slack(special odd p)={3: 14, 7: 19}
+q=  7 h= 7 n2=  27 int=OK slack(special odd p)={3: 14, 7: 25}
+q=  7 h= 8 n2=  36 int=OK slack(special odd p)={3: 16, 7: 28}
+q=  7 h= 9 n2=  47 int=OK slack(special odd p)={3: 19, 7: 30}
+q=  7 h=10 n2=  60 int=OK slack(special odd p)={3: 18, 7: 33}
+q=  7 h=11 n2=  73 int=OK slack(special odd p)={3: 17, 7: 37}
+q=  7 h=12 n2=  87 int=OK slack(special odd p)={3: 18, 7: 40}
+q=  9 h= 1 n2=  -1 int=OK slack(special odd p)={3: 0, 5: 0}
+q=  9 h= 2 n2=   3 int=OK slack(special odd p)={3: 5, 5: 0}
+q=  9 h= 3 n2=   6 int=OK slack(special odd p)={3: 9, 5: 5}
+q=  9 h= 4 n2=  10 int=OK slack(special odd p)={3: 14, 5: 5}
+q=  9 h= 5 n2=  15 int=OK slack(special odd p)={3: 31, 5: 5}
+q=  9 h= 6 n2=  22 int=OK slack(special odd p)={3: 39, 5: 6}
+q=  9 h= 7 n2=  28 int=OK slack(special odd p)={3: 47, 5: 4}
+q=  9 h= 8 n2=  34 int=OK slack(special odd p)={3: 56, 5: 6}
+q=  9 h= 9 n2=  47 int=OK slack(special odd p)={3: 62, 5: 6}
+q=  9 h=10 n2=  60 int=OK slack(special odd p)={3: 69, 5: 7}
+q=  9 h=11 n2=  73 int=OK slack(special odd p)={3: 76, 5: 8}
+q=  9 h=12 n2=  87 int=OK slack(special odd p)={3: 80, 5: 10}
+q= 15 h= 1 n2=  -1 int=OK slack(special odd p)={3: 0, 5: 0, 7: 0}
+q= 15 h= 2 n2=   4 int=OK slack(special odd p)={3: 4, 5: 1, 7: 0}
+q= 15 h= 3 n2=   8 int=OK slack(special odd p)={3: 6, 5: 8, 7: 0}
+q= 15 h= 4 n2=  14 int=OK slack(special odd p)={3: 9, 5: 10, 7: 7}
+q= 15 h= 5 n2=  20 int=OK slack(special odd p)={3: 22, 5: 14, 7: 7}
+q= 15 h= 6 n2=  28 int=OK slack(special odd p)={3: 27, 5: 18, 7: 7}
+q= 15 h= 7 n2=  37 int=OK slack(special odd p)={3: 31, 5: 23, 7: 7}
+q= 15 h= 8 n2=  50 int=OK slack(special odd p)={3: 36, 5: 27, 7: 7}
+q= 15 h= 9 n2=  64 int=OK slack(special odd p)={3: 40, 5: 30, 7: 6}
+q= 15 h=10 n2=  80 int=OK slack(special odd p)={3: 45, 5: 33, 7: 6}
+q= 15 h=11 n2=  98 int=OK slack(special odd p)={3: 49, 5: 35, 7: 7}
+q= 15 h=12 n2= 119 int=OK slack(special odd p)={3: 52, 5: 37, 7: 8}
+q= 21 h= 1 n2=  -1 int=OK slack(special odd p)={3: 0, 5: 0, 7: 0, 11: 0}
+q= 21 h= 2 n2=   2 int=OK slack(special odd p)={3: 4, 5: 0, 7: 1, 11: 0}
+q= 21 h= 3 n2=   4 int=OK slack(special odd p)={3: 6, 5: 5, 7: 3, 11: 0}
+q= 21 h= 4 n2=   6 int=OK slack(special odd p)={3: 9, 5: 5, 7: 12, 11: 0}
+q= 21 h= 5 n2=  10 int=OK slack(special odd p)={3: 22, 5: 5, 7: 15, 11: 0}
+q= 21 h= 6 n2=  15 int=OK slack(special odd p)={3: 27, 5: 5, 7: 19, 11: 11}
+q= 21 h= 7 n2=  20 int=OK slack(special odd p)={3: 31, 5: 4, 7: 25, 11: 11}
+q= 21 h= 8 n2=  24 int=OK slack(special odd p)={3: 36, 5: 7, 7: 28, 11: 11}
+q= 21 h= 9 n2=  31 int=OK slack(special odd p)={3: 40, 5: 6, 7: 30, 11: 11}
+q= 21 h=10 n2=  39 int=OK slack(special odd p)={3: 45, 5: 7, 7: 33, 11: 11}
+q= 21 h=11 n2=  47 int=OK slack(special odd p)={3: 49, 5: 8, 7: 37, 11: 11}
+q= 21 h=12 n2=  56 int=OK slack(special odd p)={3: 52, 5: 11, 7: 40, 11: 11}
+q= 45 h= 1 n2=  -1 int=OK slack(special odd p)={3: 0, 5: 0, 11: 0, 23: 0}
+q= 45 h= 2 n2=   2 int=OK slack(special odd p)={3: 5, 5: 1, 11: 0, 23: 0}
+q= 45 h= 3 n2=   4 int=OK slack(special odd p)={3: 9, 5: 8, 11: 0, 23: 0}
+q= 45 h= 4 n2=   6 int=OK slack(special odd p)={3: 14, 5: 10, 11: 0, 23: 0}
+q= 45 h= 5 n2=  10 int=OK slack(special odd p)={3: 31, 5: 14, 11: 0, 23: 0}
+q= 45 h= 6 n2=  15 int=OK slack(special odd p)={3: 39, 5: 18, 11: 11, 23: 0}
+q= 45 h= 7 n2=  20 int=OK slack(special odd p)={3: 47, 5: 23, 11: 11, 23: 0}
+q= 45 h= 8 n2=  24 int=OK slack(special odd p)={3: 56, 5: 27, 11: 11, 23: 0}
+q= 45 h= 9 n2=  31 int=OK slack(special odd p)={3: 62, 5: 30, 11: 11, 23: 0}
+q= 45 h=10 n2=  39 int=OK slack(special odd p)={3: 69, 5: 33, 11: 11, 23: 0}
+q= 45 h=11 n2=  47 int=OK slack(special odd p)={3: 76, 5: 35, 11: 11, 23: 0}
+q= 45 h=12 n2=  56 int=OK slack(special odd p)={3: 80, 5: 37, 11: 11, 23: 23}
+q=  4 h= 1 n2=  -1 int=OK slack(special odd p)={3: 0, 5: 0}
+q=  4 h= 2 n2=  -3 int=OK slack(special odd p)={3: 3, 5: 0}
+q=  4 h= 3 n2=  -8 int=OK slack(special odd p)={3: 3, 5: 5}
+q=  4 h= 4 n2= -12 int=OK slack(special odd p)={3: 3, 5: 5}
+q=  4 h= 5 n2= -17 int=OK slack(special odd p)={3: 13, 5: 5}
+q=  4 h= 6 n2= -23 int=OK slack(special odd p)={3: 14, 5: 5}
+q=  4 h= 7 n2= -32 int=OK slack(special odd p)={3: 14, 5: 4}
+q=  4 h= 8 n2= -42 int=OK slack(special odd p)={3: 16, 5: 7}
+q=  4 h= 9 n2= -53 int=OK slack(special odd p)={3: 18, 5: 6}
+q=  4 h=10 n2= -65 int=OK slack(special odd p)={3: 17, 5: 7}
+q=  4 h=11 n2= -78 int=OK slack(special odd p)={3: 17, 5: 8}
+q=  4 h=12 n2= -94 int=OK slack(special odd p)={3: 20, 5: 11}
+q=  6 h= 1 n2=  -1 int=OK slack(special odd p)={3: 0, 5: 0, 7: 0}
+q=  6 h= 2 n2=  -2 int=OK slack(special odd p)={3: 4, 5: 0, 7: 0}
+q=  6 h= 3 n2=  -4 int=OK slack(special odd p)={3: 6, 5: 5, 7: 0}
+q=  6 h= 4 n2=  -6 int=OK slack(special odd p)={3: 9, 5: 5, 7: 7}
+q=  6 h= 5 n2=  -8 int=OK slack(special odd p)={3: 22, 5: 5, 7: 7}
+q=  6 h= 6 n2= -10 int=OK slack(special odd p)={3: 27, 5: 5, 7: 7}
+q=  6 h= 7 n2= -12 int=OK slack(special odd p)={3: 31, 5: 4, 7: 7}
+q=  6 h= 8 n2= -18 int=OK slack(special odd p)={3: 36, 5: 6, 7: 7}
+q=  6 h= 9 n2= -20 int=OK slack(special odd p)={3: 40, 5: 6, 7: 6}
+q=  6 h=10 n2= -24 int=OK slack(special odd p)={3: 45, 5: 7, 7: 6}
+q=  6 h=11 n2= -30 int=OK slack(special odd p)={3: 49, 5: 8, 7: 7}
+q=  6 h=12 n2= -35 int=OK slack(special odd p)={3: 52, 5: 10, 7: 8}
+q= 12 h= 1 n2=  -1 int=OK slack(special odd p)={3: 0, 11: 0, 13: 0}
+q= 12 h= 2 n2=  -3 int=OK slack(special odd p)={3: 4, 11: 0, 13: 0}
+q= 12 h= 3 n2=  -8 int=OK slack(special odd p)={3: 6, 11: 0, 13: 0}
+q= 12 h= 4 n2= -12 int=OK slack(special odd p)={3: 9, 11: 0, 13: 0}
+q= 12 h= 5 n2= -17 int=OK slack(special odd p)={3: 22, 11: 0, 13: 0}
+q= 12 h= 6 n2= -23 int=OK slack(special odd p)={3: 27, 11: 11, 13: 0}
+q= 12 h= 7 n2= -32 int=OK slack(special odd p)={3: 31, 11: 11, 13: 13}
+q= 12 h= 8 n2= -42 int=OK slack(special odd p)={3: 36, 11: 11, 13: 13}
+q= 12 h= 9 n2= -53 int=OK slack(special odd p)={3: 40, 11: 11, 13: 13}
+q= 12 h=10 n2= -65 int=OK slack(special odd p)={3: 45, 11: 11, 13: 13}
+q= 12 h=11 n2= -78 int=OK slack(special odd p)={3: 49, 11: 11, 13: 13}
+q= 12 h=12 n2= -94 int=OK slack(special odd p)={3: 52, 11: 11, 13: 13}
+q= 14 h= 1 n2=  -1 int=OK slack(special odd p)={3: 0, 5: 0, 7: 0, 13: 0}
+q= 14 h= 2 n2=  -2 int=OK slack(special odd p)={3: 3, 5: 0, 7: 1, 13: 0}
+q= 14 h= 3 n2=  -4 int=OK slack(special odd p)={3: 3, 5: 5, 7: 3, 13: 0}
+q= 14 h= 4 n2=  -6 int=OK slack(special odd p)={3: 3, 5: 5, 7: 12, 13: 0}
+q= 14 h= 5 n2=  -8 int=OK slack(special odd p)={3: 13, 5: 5, 7: 15, 13: 0}
+q= 14 h= 6 n2= -10 int=OK slack(special odd p)={3: 14, 5: 5, 7: 19, 13: 0}
+q= 14 h= 7 n2= -12 int=OK slack(special odd p)={3: 14, 5: 4, 7: 25, 13: 13}
+q= 14 h= 8 n2= -18 int=OK slack(special odd p)={3: 16, 5: 6, 7: 28, 13: 13}
+q= 14 h= 9 n2= -20 int=OK slack(special odd p)={3: 18, 5: 6, 7: 30, 13: 13}
+q= 14 h=10 n2= -24 int=OK slack(special odd p)={3: 17, 5: 7, 7: 33, 13: 13}
+q= 14 h=11 n2= -30 int=OK slack(special odd p)={3: 17, 5: 8, 7: 37, 13: 13}
+q= 14 h=12 n2= -35 int=OK slack(special odd p)={3: 19, 5: 10, 7: 40, 13: 13}
+q= 18 h= 1 n2=  -1 int=OK slack(special odd p)={3: 0, 17: 0, 19: 0}
+q= 18 h= 2 n2=  -2 int=OK slack(special odd p)={3: 5, 17: 0, 19: 0}
+q= 18 h= 3 n2=  -4 int=OK slack(special odd p)={3: 9, 17: 0, 19: 0}
+q= 18 h= 4 n2=  -6 int=OK slack(special odd p)={3: 14, 17: 0, 19: 0}
+q= 18 h= 5 n2=  -8 int=OK slack(special odd p)={3: 31, 17: 0, 19: 0}
+q= 18 h= 6 n2= -10 int=OK slack(special odd p)={3: 39, 17: 0, 19: 0}
+q= 18 h= 7 n2= -12 int=OK slack(special odd p)={3: 47, 17: 0, 19: 0}
+q= 18 h= 8 n2= -18 int=OK slack(special odd p)={3: 56, 17: 0, 19: 0}
+q= 18 h= 9 n2= -20 int=OK slack(special odd p)={3: 62, 17: 17, 19: 0}
+q= 18 h=10 n2= -24 int=OK slack(special odd p)={3: 69, 17: 17, 19: 19}
+q= 18 h=11 n2= -30 int=OK slack(special odd p)={3: 76, 17: 17, 19: 19}
+q= 18 h=12 n2= -35 int=OK slack(special odd p)={3: 80, 17: 17, 19: 19}
+ALL OK
