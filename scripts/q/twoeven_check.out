@@ -1,0 +1,88 @@
+q=  6 v2=1 h=  1 n2=    -1  RESULT bound=    -1 (holds=True)  Lean bound E-v*aQ=     0 holds=True  (n2+v*aQ)/h^2=-1.0000
+q=  6 v2=1 h=  2 n2=    -2  RESULT bound=     0 (holds=True)  Lean bound E-v*aQ=     4 holds=True  (n2+v*aQ)/h^2=-0.5000
+q=  6 v2=1 h=  3 n2=    -4  RESULT bound=     1 (holds=True)  Lean bound E-v*aQ=     4 holds=True  (n2+v*aQ)/h^2=-0.4444
+q=  6 v2=1 h=  4 n2=    -6  RESULT bound=     4 (holds=True)  Lean bound E-v*aQ=    12 holds=True  (n2+v*aQ)/h^2=-0.3750
+q=  6 v2=1 h=  5 n2=    -8  RESULT bound=     7 (holds=True)  Lean bound E-v*aQ=    12 holds=True  (n2+v*aQ)/h^2=-0.3200
+q=  6 v2=1 h=  6 n2=   -10  RESULT bound=    12 (holds=True)  Lean bound E-v*aQ=    24 holds=True  (n2+v*aQ)/h^2=-0.2778
+q=  6 v2=1 h=  7 n2=   -12  RESULT bound=    17 (holds=True)  Lean bound E-v*aQ=    24 holds=True  (n2+v*aQ)/h^2=-0.2449
+q=  6 v2=1 h=  8 n2=   -18  RESULT bound=    22 (holds=True)  Lean bound E-v*aQ=    38 holds=True  (n2+v*aQ)/h^2=-0.2500
+q=  6 v2=1 h=  9 n2=   -20  RESULT bound=    25 (holds=True)  Lean bound E-v*aQ=    34 holds=True  (n2+v*aQ)/h^2=-0.1728
+q=  6 v2=1 h= 10 n2=   -24  RESULT bound=    30 (holds=True)  Lean bound E-v*aQ=    50 holds=True  (n2+v*aQ)/h^2=-0.1400
+q=  6 v2=1 h= 11 n2=   -30  RESULT bound=    35 (holds=True)  Lean bound E-v*aQ=    46 holds=True  (n2+v*aQ)/h^2=-0.1322
+q=  6 v2=1 h= 12 n2=   -35  RESULT bound=    40 (holds=True)  Lean bound E-v*aQ=    64 holds=True  (n2+v*aQ)/h^2=-0.1042
+q=  6 v2=1 h= 13 n2=   -40  RESULT bound=    45 (holds=True)  Lean bound E-v*aQ=    58 holds=True  (n2+v*aQ)/h^2=-0.0828
+q=  6 v2=1 h= 14 n2=   -46  RESULT bound=    52 (holds=True)  Lean bound E-v*aQ=    80 holds=True  (n2+v*aQ)/h^2=-0.0714
+q=  6 v2=1 h= 15 n2=   -54  RESULT bound=    57 (holds=True)  Lean bound E-v*aQ=    72 holds=True  (n2+v*aQ)/h^2=-0.0622
+q=  6 v2=1 h= 16 n2=   -61  RESULT bound=    64 (holds=True)  Lean bound E-v*aQ=    96 holds=True  (n2+v*aQ)/h^2=-0.0508
+q= 14 v2=1 h=  1 n2=    -1  RESULT bound=    -1 (holds=True)  Lean bound E-v*aQ=     0 holds=True  (n2+v*aQ)/h^2=-1.0000
+q= 14 v2=1 h=  2 n2=    -2  RESULT bound=     0 (holds=True)  Lean bound E-v*aQ=     4 holds=True  (n2+v*aQ)/h^2=-0.5000
+q= 14 v2=1 h=  3 n2=    -4  RESULT bound=     1 (holds=True)  Lean bound E-v*aQ=     4 holds=True  (n2+v*aQ)/h^2=-0.4444
+q= 14 v2=1 h=  4 n2=    -6  RESULT bound=     4 (holds=True)  Lean bound E-v*aQ=    12 holds=True  (n2+v*aQ)/h^2=-0.3750
+q= 14 v2=1 h=  5 n2=    -8  RESULT bound=     7 (holds=True)  Lean bound E-v*aQ=    12 holds=True  (n2+v*aQ)/h^2=-0.3200
+q= 14 v2=1 h=  6 n2=   -10  RESULT bound=    12 (holds=True)  Lean bound E-v*aQ=    24 holds=True  (n2+v*aQ)/h^2=-0.2778
+q= 14 v2=1 h=  7 n2=   -12  RESULT bound=    17 (holds=True)  Lean bound E-v*aQ=    24 holds=True  (n2+v*aQ)/h^2=-0.2449
+q= 14 v2=1 h=  8 n2=   -18  RESULT bound=    22 (holds=True)  Lean bound E-v*aQ=    38 holds=True  (n2+v*aQ)/h^2=-0.2500
+q= 14 v2=1 h=  9 n2=   -20  RESULT bound=    25 (holds=True)  Lean bound E-v*aQ=    34 holds=True  (n2+v*aQ)/h^2=-0.1728
+q= 14 v2=1 h= 10 n2=   -24  RESULT bound=    30 (holds=True)  Lean bound E-v*aQ=    50 holds=True  (n2+v*aQ)/h^2=-0.1400
+q= 14 v2=1 h= 11 n2=   -30  RESULT bound=    35 (holds=True)  Lean bound E-v*aQ=    46 holds=True  (n2+v*aQ)/h^2=-0.1322
+q= 14 v2=1 h= 12 n2=   -35  RESULT bound=    40 (holds=True)  Lean bound E-v*aQ=    64 holds=True  (n2+v*aQ)/h^2=-0.1042
+q= 14 v2=1 h= 13 n2=   -40  RESULT bound=    45 (holds=True)  Lean bound E-v*aQ=    58 holds=True  (n2+v*aQ)/h^2=-0.0828
+q= 14 v2=1 h= 14 n2=   -46  RESULT bound=    52 (holds=True)  Lean bound E-v*aQ=    80 holds=True  (n2+v*aQ)/h^2=-0.0714
+q= 14 v2=1 h= 15 n2=   -54  RESULT bound=    57 (holds=True)  Lean bound E-v*aQ=    72 holds=True  (n2+v*aQ)/h^2=-0.0622
+q= 14 v2=1 h= 16 n2=   -61  RESULT bound=    64 (holds=True)  Lean bound E-v*aQ=    96 holds=True  (n2+v*aQ)/h^2=-0.0508
+q= 16 v2=4 h=  1 n2=    -1  RESULT bound=    -1 (holds=True)  Lean bound E-v*aQ=     0 holds=True  (n2+v*aQ)/h^2=-1.0000
+q= 16 v2=4 h=  2 n2=    -5  RESULT bound=     0 (holds=True)  Lean bound E-v*aQ=     4 holds=True  (n2+v*aQ)/h^2=-1.2500
+q= 16 v2=4 h=  3 n2=   -14  RESULT bound=     1 (holds=True)  Lean bound E-v*aQ=     4 holds=True  (n2+v*aQ)/h^2=-1.5556
+q= 16 v2=4 h=  4 n2=   -24  RESULT bound=     4 (holds=True)  Lean bound E-v*aQ=    12 holds=True  (n2+v*aQ)/h^2=-1.5000
+q= 16 v2=4 h=  5 n2=   -33  RESULT bound=     7 (holds=True)  Lean bound E-v*aQ=    12 holds=True  (n2+v*aQ)/h^2=-1.3200
+q= 16 v2=4 h=  6 n2=   -49  RESULT bound=    12 (holds=True)  Lean bound E-v*aQ=    24 holds=True  (n2+v*aQ)/h^2=-1.3611
+q= 16 v2=4 h=  7 n2=   -68  RESULT bound=    17 (holds=True)  Lean bound E-v*aQ=    24 holds=True  (n2+v*aQ)/h^2=-1.3878
+q= 16 v2=4 h=  8 n2=   -90  RESULT bound=    16 (holds=True)  Lean bound E-v*aQ=    32 holds=True  (n2+v*aQ)/h^2=-1.2812
+q= 16 v2=4 h=  9 n2=  -111  RESULT bound=     7 (holds=True)  Lean bound E-v*aQ=    16 holds=True  (n2+v*aQ)/h^2=-1.0741
+q= 16 v2=4 h= 10 n2=  -139  RESULT bound=     0 (holds=True)  Lean bound E-v*aQ=    20 holds=True  (n2+v*aQ)/h^2=-0.9900
+q= 16 v2=4 h= 11 n2=  -168  RESULT bound=    -7 (holds=True)  Lean bound E-v*aQ=     4 holds=True  (n2+v*aQ)/h^2=-0.9256
+q= 16 v2=4 h= 12 n2=  -200  RESULT bound=   -20 (holds=True)  Lean bound E-v*aQ=     4 holds=True  (n2+v*aQ)/h^2=-0.8333
+q= 16 v2=4 h= 13 n2=  -231  RESULT bound=   -33 (holds=True)  Lean bound E-v*aQ=   -20 holds=True  (n2+v*aQ)/h^2=-0.7515
+q= 16 v2=4 h= 14 n2=  -271  RESULT bound=   -44 (holds=True)  Lean bound E-v*aQ=   -16 holds=True  (n2+v*aQ)/h^2=-0.7296
+q= 16 v2=4 h= 15 n2=  -312  RESULT bound=   -63 (holds=True)  Lean bound E-v*aQ=   -48 holds=True  (n2+v*aQ)/h^2=-0.6756
+q= 16 v2=4 h= 16 n2=  -358  RESULT bound=   -80 (holds=True)  Lean bound E-v*aQ=   -48 holds=True  (n2+v*aQ)/h^2=-0.6484
+q=  4 v2=2 h=  1 n2=    -1  RESULT bound=    -1 (holds=True)  Lean bound E-v*aQ=     0 holds=True  (n2+v*aQ)/h^2=-1.0000
+q=  4 v2=2 h=  2 n2=    -3  RESULT bound=     0 (holds=True)  Lean bound E-v*aQ=     4 holds=True  (n2+v*aQ)/h^2=-0.7500
+q=  4 v2=2 h=  3 n2=    -8  RESULT bound=     1 (holds=True)  Lean bound E-v*aQ=     4 holds=True  (n2+v*aQ)/h^2=-0.8889
+q=  4 v2=2 h=  4 n2=   -12  RESULT bound=     4 (holds=True)  Lean bound E-v*aQ=    12 holds=True  (n2+v*aQ)/h^2=-0.7500
+q=  4 v2=2 h=  5 n2=   -17  RESULT bound=     7 (holds=True)  Lean bound E-v*aQ=    12 holds=True  (n2+v*aQ)/h^2=-0.6800
+q=  4 v2=2 h=  6 n2=   -23  RESULT bound=    12 (holds=True)  Lean bound E-v*aQ=    24 holds=True  (n2+v*aQ)/h^2=-0.6389
+q=  4 v2=2 h=  7 n2=   -32  RESULT bound=    17 (holds=True)  Lean bound E-v*aQ=    24 holds=True  (n2+v*aQ)/h^2=-0.6531
+q=  4 v2=2 h=  8 n2=   -42  RESULT bound=    20 (holds=True)  Lean bound E-v*aQ=    36 holds=True  (n2+v*aQ)/h^2=-0.5938
+q=  4 v2=2 h=  9 n2=   -53  RESULT bound=    19 (holds=True)  Lean bound E-v*aQ=    28 holds=True  (n2+v*aQ)/h^2=-0.5062
+q=  4 v2=2 h= 10 n2=   -65  RESULT bound=    20 (holds=True)  Lean bound E-v*aQ=    40 holds=True  (n2+v*aQ)/h^2=-0.4500
+q=  4 v2=2 h= 11 n2=   -78  RESULT bound=    21 (holds=True)  Lean bound E-v*aQ=    32 holds=True  (n2+v*aQ)/h^2=-0.4132
+q=  4 v2=2 h= 12 n2=   -94  RESULT bound=    20 (holds=True)  Lean bound E-v*aQ=    44 holds=True  (n2+v*aQ)/h^2=-0.3750
+q=  4 v2=2 h= 13 n2=  -109  RESULT bound=    19 (holds=True)  Lean bound E-v*aQ=    32 holds=True  (n2+v*aQ)/h^2=-0.3373
+q=  4 v2=2 h= 14 n2=  -125  RESULT bound=    20 (holds=True)  Lean bound E-v*aQ=    48 holds=True  (n2+v*aQ)/h^2=-0.3112
+q=  4 v2=2 h= 15 n2=  -142  RESULT bound=    17 (holds=True)  Lean bound E-v*aQ=    32 holds=True  (n2+v*aQ)/h^2=-0.2756
+q=  4 v2=2 h= 16 n2=  -166  RESULT bound=    16 (holds=True)  Lean bound E-v*aQ=    48 holds=True  (n2+v*aQ)/h^2=-0.2734
+q= 12 v2=2 h=  1 n2=    -1  RESULT bound=    -1 (holds=True)  Lean bound E-v*aQ=     0 holds=True  (n2+v*aQ)/h^2=-1.0000
+q= 12 v2=2 h=  2 n2=    -3  RESULT bound=     0 (holds=True)  Lean bound E-v*aQ=     4 holds=True  (n2+v*aQ)/h^2=-0.7500
+q= 12 v2=2 h=  3 n2=    -8  RESULT bound=     1 (holds=True)  Lean bound E-v*aQ=     4 holds=True  (n2+v*aQ)/h^2=-0.8889
+q= 12 v2=2 h=  4 n2=   -12  RESULT bound=     4 (holds=True)  Lean bound E-v*aQ=    12 holds=True  (n2+v*aQ)/h^2=-0.7500
+q= 12 v2=2 h=  5 n2=   -17  RESULT bound=     7 (holds=True)  Lean bound E-v*aQ=    12 holds=True  (n2+v*aQ)/h^2=-0.6800
+q= 12 v2=2 h=  6 n2=   -23  RESULT bound=    12 (holds=True)  Lean bound E-v*aQ=    24 holds=True  (n2+v*aQ)/h^2=-0.6389
+q= 12 v2=2 h=  7 n2=   -32  RESULT bound=    17 (holds=True)  Lean bound E-v*aQ=    24 holds=True  (n2+v*aQ)/h^2=-0.6531
+q= 12 v2=2 h=  8 n2=   -42  RESULT bound=    20 (holds=True)  Lean bound E-v*aQ=    36 holds=True  (n2+v*aQ)/h^2=-0.5938
+q= 12 v2=2 h=  9 n2=   -53  RESULT bound=    19 (holds=True)  Lean bound E-v*aQ=    28 holds=True  (n2+v*aQ)/h^2=-0.5062
+q= 12 v2=2 h= 10 n2=   -65  RESULT bound=    20 (holds=True)  Lean bound E-v*aQ=    40 holds=True  (n2+v*aQ)/h^2=-0.4500
+q= 12 v2=2 h= 11 n2=   -78  RESULT bound=    21 (holds=True)  Lean bound E-v*aQ=    32 holds=True  (n2+v*aQ)/h^2=-0.4132
+q= 12 v2=2 h= 12 n2=   -94  RESULT bound=    20 (holds=True)  Lean bound E-v*aQ=    44 holds=True  (n2+v*aQ)/h^2=-0.3750
+q= 12 v2=2 h= 13 n2=  -109  RESULT bound=    19 (holds=True)  Lean bound E-v*aQ=    32 holds=True  (n2+v*aQ)/h^2=-0.3373
+q= 12 v2=2 h= 14 n2=  -125  RESULT bound=    20 (holds=True)  Lean bound E-v*aQ=    48 holds=True  (n2+v*aQ)/h^2=-0.3112
+q= 12 v2=2 h= 15 n2=  -142  RESULT bound=    17 (holds=True)  Lean bound E-v*aQ=    32 holds=True  (n2+v*aQ)/h^2=-0.2756
+q= 12 v2=2 h= 16 n2=  -166  RESULT bound=    16 (holds=True)  Lean bound E-v*aQ=    48 holds=True  (n2+v*aQ)/h^2=-0.2734
+free ring h=1: Gauss v2(DeltaF)=1, -E(h)=0, RESULT -(floor(h^2/2)-h)=1, holds=True
+free ring h=2: Gauss v2(DeltaF)=1, -E(h)=-4, RESULT -(floor(h^2/2)-h)=0, holds=True
+free ring h=3: Gauss v2(DeltaF)=0, -E(h)=-4, RESULT -(floor(h^2/2)-h)=-1, holds=True
+free ring h=4: Gauss v2(DeltaF)=0, -E(h)=-12, RESULT -(floor(h^2/2)-h)=-4, holds=True
+free ring h=5: Gauss v2(DeltaF)=-3, -E(h)=-12, RESULT -(floor(h^2/2)-h)=-7, holds=True
+free ring h=6: Gauss v2(DeltaF)=-6, -E(h)=-24, RESULT -(floor(h^2/2)-h)=-12, holds=True
+free ring h=7: Gauss v2(DeltaF)=-8, -E(h)=-24, RESULT -(floor(h^2/2)-h)=-17, holds=True
+ALL OK
