@@ -16,6 +16,7 @@ The ingredients below are stated for general `q`; each is proved as `<name>_proo
 -/
 import Chi2Irrational.Q.Defs
 import Chi2Irrational.Q.Margin
+import Chi2Irrational.Q.NonVan
 
 namespace Chi2Irr
 namespace Q
@@ -49,8 +50,8 @@ theorem twoAdic_even (q : ℕ) (hq : 3 ≤ q) (he : Even q) :
 /-- **Nonvanishing for general `q`** (RESULT §3): Lemma P along `h = 3ℓ` with the three block determinants as rational
 functions of `q`, nonzero at every integer `q ≥ 2` (the route `nonvan_of` of `NonVan/NonVanQ.lean`). -/
 theorem nonvan_q (q : ℕ) (hq : 3 ≤ q) (a : ℤ) (b : ℕ) (hb : 0 < b) :
-    ∃ᶠ h : ℕ in atTop, (Delta q h).eval ((a : ℚ) / b) ≠ 0 := by
-  sorry
+    ∃ᶠ h : ℕ in atTop, (Delta q h).eval ((a : ℚ) / b) ≠ 0 :=
+  nonvan_q_proof q hq a b hb
 
 /-- **Analytic bound at odd `q`** (RESULT §2): the `q = 3` certificate moved by the shift lemma. Stated for every
 `q ≥ 3`. -/
