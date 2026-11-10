@@ -10,6 +10,7 @@ The rest is Theorem Q (`Q/Interface.lean`: `arith_q`, `nonvan_q`, `exists_bounds
 -/
 import Chi2Irrational.Q.Even.Defs
 import Chi2Irrational.Q.Interface
+import Chi2Irrational.Q.Even.Margin
 
 namespace Chi2Irr
 namespace Q
@@ -30,8 +31,8 @@ theorem cert_newQ {q : ℕ} (hq : q ∈ newQ) : ∃ C : DualCert q, C.Phi ≤ (P
   sorry
 
 /-- **The margins** at `q = 6, 8, 10, 12`. -/
-theorem margin_newQ {q : ℕ} (hq : q ∈ newQ) : alphaCore q + c2EvenSharp q + (PhiT q : ℝ) < 0 := by
-  sorry
+theorem margin_newQ {q : ℕ} (hq : q ∈ newQ) : alphaCore q + c2EvenSharp q + (PhiT q : ℝ) < 0 :=
+  margin_newQ_proof hq
 
 /-! ## Assembly -/
 
