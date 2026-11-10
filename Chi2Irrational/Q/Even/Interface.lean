@@ -12,20 +12,21 @@ import Chi2Irrational.Q.Even.Defs
 import Chi2Irrational.Q.Interface
 import Chi2Irrational.Q.Even.Margin
 import Chi2Irrational.Q.Even.Certs
+import Chi2Irrational.Q.Even.TwoAdicSharp
 
 namespace Chi2Irr
 namespace Q
 
 open Polynomial Filter
 
-/-! ## The new ingredients (stubs) -/
+/-! ## The new ingredients (each a one-line call to its `_proof` theorem) -/
 
 /-- **Lemma 10_e** (`pilot_qeven/RESULT.md`): at even `q₀`, `e = v₂(q₀)`,
 `n₂(Δ_h) ≤ −a(h)·e + c(e)·h² + O(h log h)`, `c(e) = (6 − 4e)/(3(3e + 8))`. -/
 theorem twoAdic_even_sharp (q : ℕ) (hq : 3 ≤ q) (he : Even q) :
     ∃ n2 : ℕ → ℤ, (∀ h k, padicNorm 2 ((Delta q h).coeff k) ≤ (2 : ℚ) ^ (n2 h)) ∧
-      ∀ ε > 0, ∀ᶠ h : ℕ in atTop, (n2 h : ℝ) * Real.log 2 ≤ (c2EvenSharp q + ε) * (h : ℝ) ^ 2 := by
-  sorry
+      ∀ ε > 0, ∀ᶠ h : ℕ in atTop, (n2 h : ℝ) * Real.log 2 ≤ (c2EvenSharp q + ε) * (h : ℝ) ^ 2 :=
+  twoAdic_even_sharp_proof q hq he
 
 /-- **Direct certificates** at `q = 6, 8, 10, 12`. -/
 theorem cert_newQ {q : ℕ} (hq : q ∈ newQ) : ∃ C : DualCert q, C.Phi ≤ (PhiT q : ℝ) :=

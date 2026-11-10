@@ -52,3 +52,7 @@ Run `lake env lean Axioms.lean`. Every line should print `[propext, Classical.ch
 #print axioms Chi2Irr.Q.analytic_even
 #print axioms Chi2Irr.Q.margin_odd
 #print axioms Chi2Irr.Q.margin_even
+#print axioms Chi2Irr.Q.theoremQ4
+#print axioms Chi2Irr.Q.twoAdic_even_sharp
+#print axioms Chi2Irr.Q.cert_newQ
+#print axioms Chi2Irr.Q.margin_newQ
