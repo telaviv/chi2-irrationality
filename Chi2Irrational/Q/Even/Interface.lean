@@ -11,6 +11,7 @@ The rest is Theorem Q (`Q/Interface.lean`: `arith_q`, `nonvan_q`, `exists_bounds
 import Chi2Irrational.Q.Even.Defs
 import Chi2Irrational.Q.Interface
 import Chi2Irrational.Q.Even.Margin
+import Chi2Irrational.Q.Even.Certs
 
 namespace Chi2Irr
 namespace Q
@@ -27,8 +28,8 @@ theorem twoAdic_even_sharp (q : ℕ) (hq : 3 ≤ q) (he : Even q) :
   sorry
 
 /-- **Direct certificates** at `q = 6, 8, 10, 12`. -/
-theorem cert_newQ {q : ℕ} (hq : q ∈ newQ) : ∃ C : DualCert q, C.Phi ≤ (PhiT q : ℝ) := by
-  sorry
+theorem cert_newQ {q : ℕ} (hq : q ∈ newQ) : ∃ C : DualCert q, C.Phi ≤ (PhiT q : ℝ) :=
+  cert_newQ_proof hq
 
 /-- **The margins** at `q = 6, 8, 10, 12`. -/
 theorem margin_newQ {q : ℕ} (hq : q ∈ newQ) : alphaCore q + c2EvenSharp q + (PhiT q : ℝ) < 0 :=
