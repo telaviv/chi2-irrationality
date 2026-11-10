@@ -1,0 +1,14 @@
+c(e) e=1..3: 2/33 -1/21 -2/17
+q= 6 e=1 oddPart(q^2-1)=35 oddPart(q)=3 cE=2/33 | Lean margin in [-0.0097405543363955, -0.0097405543363955]  (neg: True) | |Lean alpha - paper alpha_e| <= 1.4e-76 | paper margin (pilot Phi) <= -0.0201781543363955
+       PhiT must be < -2.5502594456636 for a negative margin
+q= 8 e=3 oddPart(q^2-1)=63 oddPart(q)=1 cE=-2/17 | Lean margin in [-0.242243559420095, -0.242243559420095]  (neg: True) | |Lean alpha - paper alpha_e| <= 1.7e-76 | paper margin (pilot Phi) <= -0.264072859420095
+       PhiT must be < -2.47775644057991 for a negative margin
+q=10 e=1 oddPart(q^2-1)=99 oddPart(q)=5 cE=2/33 | Lean margin in [-0.210072815097098, -0.210072815097098]  (neg: True) | |Lean alpha - paper alpha_e| <= 1.4e-76 | paper margin (pilot Phi) <= -0.229490515097098
+       PhiT must be < -2.6399271849029 for a negative margin
+q=12 e=2 oddPart(q^2-1)=143 oddPart(q)=3 cE=-1/21 | Lean margin in [-0.353931400962449, -0.353931400962449]  (neg: True) | |Lean alpha - paper alpha_e| <= 1.4e-76 | paper margin (pilot Phi) <= -0.374955600962449
+       PhiT must be < -2.59606859903755 for a negative margin
+q= 4 (excluded): paper margin with pilot Phi <= 0.0897626879708297
+DataQ6: q=6 L=400 #Sks=800 PhiQ=-2.5635463721  PhiQ <= PhiT: True  slack 0.003546
+DataQ8: q=8 L=200 #Sks=400 PhiQ=-2.7264892317  PhiQ <= PhiT: True  slack 0.006489
+DataQ10: q=10 L=200 #Sks=400 PhiQ=-2.8528812698  PhiQ <= PhiT: True  slack 0.002881
+DataQ12: q=12 L=200 #Sks=400 PhiQ=-2.9535971042  PhiQ <= PhiT: True  slack 0.003597
