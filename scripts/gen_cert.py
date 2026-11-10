@@ -241,6 +241,8 @@ with open(out, 'w', encoding='utf-8', newline=chr(10)) as f:
             f"Untrusted data: every number is re-checked by the kernel in `Cert/{name}.lean`.\n"
             f"Φ = {float(PhiV):.10f} (exact value `{name}.data.PhiQ`).\n-/\n")
     f.write("import Chi2Irrational.Cert.Instance\n\nnamespace Chi2Irr.Cert." + name + "\n\n")
+    if len(tab) > 1500:  # long list literals exceed the default maxRecDepth (added for q = 6, L = 400)
+        f.write(f"set_option maxRecDepth {8 * len(tab)} in" + chr(10))
     f.write("/-- The log table: entry `i` encloses `log (i+1)` in `[t, t+2]·2^{-40}`. -/\n")
     f.write("def tab : List ℤ := [" + ", ".join(str(t) for t in tab) + "]\n\n")
     f.write("/-- Heights of the step density (multiples of `2^{-16}`). -/\n")

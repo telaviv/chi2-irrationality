@@ -1,0 +1,11 @@
+Theorem Q4 certificates (LEAN_NUM_THREADS=4, one Lean process at a time), `lake build Chi2Irrational.Cert.Q<q>`:
+✔ Built Chi2Irrational.Cert.DataQ8 (17s)    ✔ Built Chi2Irrational.Cert.Q8 (191s)
+✔ Built Chi2Irrational.Cert.DataQ10 (16s)   ✔ Built Chi2Irrational.Cert.Q10 (170s)
+✔ Built Chi2Irrational.Cert.DataQ12 (15s)   ✔ Built Chi2Irrational.Cert.Q12 (171s)
+✔ Built Chi2Irrational.Cert.DataQ6 (18s)    ✔ Built Chi2Irrational.Cert.Q6 (502s)
+✔ Built Chi2Irrational.Q.Even.Certs (22s)
+(Cert.Q<q> times = the kernel checks. First DataQ6 attempt failed: the 2404-entry `tab` literal hit maxRecDepth;
+gen_cert.py now emits `set_option maxRecDepth (8·len) in` before `tab` when len > 1500; DataQ3/5/14 outputs unchanged.)
+
+Scratch check (not committed): `example : type_of% @Chi2Irr.Q.cert_newQ := @Chi2Irr.Q.cert_newQ_proof` elaborates;
+'Chi2Irr.Q.cert_newQ_proof' depends on axioms: [propext, Classical.choice, Quot.sound]
