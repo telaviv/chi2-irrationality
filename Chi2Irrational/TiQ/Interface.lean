@@ -20,6 +20,10 @@ import Chi2Irrational.Q.Shift
 import Chi2Irrational.TiQ.Arith
 import Chi2Irrational.TiQ.TwoAdicNu1
 import Chi2Irrational.TiQ.TwoAdicEven
+import Chi2Irrational.TiQ.NonVan.NonVanT
+import Chi2Irrational.TiQ.Analytic
+import Chi2Irrational.TiQ.Margin
+import Chi2Irrational.TiQ.Certs
 
 namespace Chi2Irr
 namespace TiQ
@@ -53,28 +57,28 @@ theorem twoAdic_even_t (q : ℕ) (hq : 3 ≤ q) (he : Even q) :
 /-- **Nonvanishing** (RESULT §5): Lemma P along `h = 3ℓ` with the block constants at `Q = −q²`. -/
 theorem nonvan_t (q : ℕ) (hq : 3 ≤ q) (a : ℤ) (b : ℕ) (hb : 0 < b) :
     ∃ᶠ h : ℕ in atTop, (DeltaT q h).eval ((a : ℚ) / b) ≠ 0 := by
-  sorry
+  exact nonvan_t_proof q hq a b hb
 
 /-- **Theorem B for the signed weight** (RESULT §4): a dual certificate for `|w| = q⁻²` bounds the Ti machine. -/
 theorem analytic_t {q : ℕ} (C : DualCert q) (hq : 2 ≤ q) : ∀ ε > 0, ∀ᶠ h : ℕ in atTop,
     |aeval (ti2 (1 / (q : ℝ))) (DeltaT q h)| ≤ Real.exp ((C.Phi + ε) * (h : ℝ) ^ 2) := by
-  sorry
+  exact analytic_t_proof C hq
 
 /-- **The `q = 6` certificate** (`L = 800`). -/
 theorem cert_t6 : ∃ C : DualCert 6, C.Phi ≤ (PhiT6 : ℝ) := by
-  sorry
+  exact cert_t6_proof
 
 /-- **Margin at `q = 6`** (direct certificate). -/
 theorem margin_t6 : alphaCoreT 6 + Q.c2EvenSharp 6 + (PhiT6 : ℝ) < 0 := by
-  sorry
+  exact margin_t6_proof
 
 /-- **Margin at odd `q ≥ 7`** (the `q = 6` certificate, shifted). -/
 theorem margin_t_odd (q : ℕ) (hq : 7 ≤ q) (ho : Odd q) : alphaCoreT q + c2TiOdd + betaT q < 0 := by
-  sorry
+  exact margin_t_odd_proof q hq ho
 
 /-- **Margin at even `q ≥ 8`** (the `q = 6` certificate, shifted). -/
 theorem margin_t_even (q : ℕ) (hq : 8 ≤ q) (he : Even q) : alphaCoreT q + Q.c2EvenSharp q + betaT q < 0 := by
-  sorry
+  exact margin_t_even_proof q hq he
 
 /-! ## Assembly -/
 
