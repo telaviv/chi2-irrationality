@@ -17,6 +17,9 @@ its own file under `Chi2Irrational/TiQ/`; the assembly (`theoremT`) feeds them t
 -/
 import Chi2Irrational.TiQ.MainCond
 import Chi2Irrational.Q.Shift
+import Chi2Irrational.TiQ.Arith
+import Chi2Irrational.TiQ.TwoAdicNu1
+import Chi2Irrational.TiQ.TwoAdicEven
 
 namespace Chi2Irr
 namespace TiQ
@@ -33,19 +36,19 @@ theorem arith_t (q : ℕ) (hq : 3 ≤ q) (n2 : ℕ → ℤ)
     (hc2 : ∀ ε > 0, ∀ᶠ h : ℕ in atTop, (n2 h : ℝ) * Real.log 2 ≤ (c2 + ε) * (h : ℝ) ^ 2) :
     ∃ den : ℕ → ℚ, (∀ h, 0 < den h) ∧ (∀ h k, ∃ z : ℤ, den h * (DeltaT q h).coeff k = z) ∧
       ∀ ε > 0, ∀ᶠ h : ℕ in atTop, Real.log (den h) ≤ (alphaCoreT q + c2 + ε) * (h : ℝ) ^ 2 := by
-  sorry
+  exact arith_t_proof q hq n2 hn2 c2 hc2
 
 /-- **Lemma 10₁** (RESULT §3): at odd `q`, `ν = v₂(q² + 1) = 1`, `n₂ ≤ ⌊h²/4⌋ + O(h log h)`. -/
 theorem twoAdic_odd_t (q : ℕ) (hq : 3 ≤ q) (ho : Odd q) :
     ∃ n2 : ℕ → ℤ, (∀ h k, padicNorm 2 ((DeltaT q h).coeff k) ≤ (2 : ℚ) ^ (n2 h)) ∧
       ∀ ε > 0, ∀ᶠ h : ℕ in atTop, (n2 h : ℝ) * Real.log 2 ≤ (c2TiOdd + ε) * (h : ℝ) ^ 2 := by
-  sorry
+  exact twoAdic_odd_t_proof q hq ho
 
 /-- **Lemma 10_e for Ti** (RESULT §2, table row "p = 2, even q"): the same bound as for χ₂. -/
 theorem twoAdic_even_t (q : ℕ) (hq : 3 ≤ q) (he : Even q) :
     ∃ n2 : ℕ → ℤ, (∀ h k, padicNorm 2 ((DeltaT q h).coeff k) ≤ (2 : ℚ) ^ (n2 h)) ∧
       ∀ ε > 0, ∀ᶠ h : ℕ in atTop, (n2 h : ℝ) * Real.log 2 ≤ (Q.c2EvenSharp q + ε) * (h : ℝ) ^ 2 := by
-  sorry
+  exact twoAdic_even_t_proof q hq he
 
 /-- **Nonvanishing** (RESULT §5): Lemma P along `h = 3ℓ` with the block constants at `Q = −q²`. -/
 theorem nonvan_t (q : ℕ) (hq : 3 ≤ q) (a : ℤ) (b : ℕ) (hb : 0 < b) :
