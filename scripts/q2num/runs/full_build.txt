@@ -1,0 +1,24 @@
+✔ [9146/9157] Built Chi2Irrational.QZ.Defs (24s)
+✔ [9147/9157] Built Chi2Irrational.QZ.CertDataQ175 (39s)
+⚠ [9148/9157] Built Chi2Irrational.QZ.Margin (29s)
+✔ [9149/9157] Built Chi2Irrational.QZ.TwoAdicEntries (29s)
+✔ [9150/9157] Built Chi2Irrational.QZ.Arith (45s)
+✔ [9151/9157] Built Chi2Irrational.QZ.TwoAdic (25s)
+✔ [9152/9157] Built Chi2Irrational.QZ.NonVan (33s)
+✔ [9153/9157] Built Chi2Irrational.QZ.CertQ175 (10697s)
+error: Chi2Irrational/QZ/Analytic.lean:58:46: unsolved goals
+error: Chi2Irrational/QZ/Analytic.lean:60:2: Type mismatch
+error: build failed
+
+real	195m1.735s
+user	0m7.311s
+sys	0m25.139s
+✔ [9154/9157] Built Chi2Irrational.QZ.Analytic (96s)
+✔ [9155/9157] Built Chi2Irrational.QZ.Interface (39s)
+Build completed successfully (9157 jobs).
+
+real	5m51.641s
+user	0m0.234s
+sys	0m0.607s
+
+(first pass: QZ/Analytic.lean still had the old PhiB literal -4005/1000; fixed to -4003/1000, second pass reused the built CertQ175. CertQ175 kernel checks: 10697 s wall, machine shared with another Lean session.)

@@ -67,4 +67,5 @@ import Chi2Irrational.PoleSeries
 import Chi2Irrational.Statement
 import Chi2Irrational.Q.Interface
 import Chi2Irrational.Q.Even.Interface
+import Chi2Irrational.QZ.Interface
 import Chi2Irrational.TiQ.Interface
