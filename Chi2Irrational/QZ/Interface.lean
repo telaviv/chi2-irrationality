@@ -17,6 +17,7 @@ import Chi2Irrational.QZ.MainCond
 import Chi2Irrational.QZ.Arith
 import Chi2Irrational.QZ.NonVan
 import Chi2Irrational.QZ.Margin
+import Chi2Irrational.QZ.TwoAdic
 
 namespace Chi2Irr
 namespace QZ
@@ -39,7 +40,7 @@ theorem arith_z (q : ℕ) (hq : 5 ≤ q) (ho : Odd q) (n2 : ℕ → ℤ)
 theorem twoAdic_num (q : ℕ) (hq : 3 ≤ q) (ho : Odd q) :
     ∃ n2 : ℕ → ℤ, (∀ h k, padicNorm 2 ((DeltaZ (zq q) h).coeff k) ≤ (2 : ℚ) ^ (n2 h)) ∧
       ∀ ε > 0, ∀ᶠ h : ℕ in atTop, (n2 h : ℝ) * Real.log 2 ≤ (c2Num + ε) * (h : ℝ) ^ 2 :=
-  sorry
+  twoAdic_num_proof q hq ho
 
 /-- **Nonvanishing at `ζ = q/2`** (RESULT §5): Lemma P along `h = 3ℓ`. -/
 theorem nonvan_z (q : ℕ) (hq : 5 ≤ q) (ho : Odd q) (a : ℤ) (b : ℕ) (hb : 0 < b) :
