@@ -1,0 +1,2 @@
+lake env lean (scratch: example : type_of% @Chi2Irr.TiQ.nonvan_t := @Chi2Irr.TiQ.nonvan_t_proof; #print axioms)
+'Chi2Irr.TiQ.nonvan_t_proof' depends on axioms: [propext, Classical.choice, Quot.sound]
