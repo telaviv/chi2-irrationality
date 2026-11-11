@@ -14,6 +14,9 @@ The machine is `DeltaZ (zq q)`, the `χ₂(1/q)` machine at `ζ = q/2` (RESULT �
 -/
 import Chi2Irrational.QZ.Defs
 import Chi2Irrational.QZ.MainCond
+import Chi2Irrational.QZ.Arith
+import Chi2Irrational.QZ.NonVan
+import Chi2Irrational.QZ.Margin
 
 namespace Chi2Irr
 namespace QZ
@@ -30,7 +33,7 @@ theorem arith_z (q : ℕ) (hq : 5 ≤ q) (ho : Odd q) (n2 : ℕ → ℤ)
     (hc2 : ∀ ε > 0, ∀ᶠ h : ℕ in atTop, (n2 h : ℝ) * Real.log 2 ≤ (c2 + ε) * (h : ℝ) ^ 2) :
     ∃ den : ℕ → ℚ, (∀ h, 0 < den h) ∧ (∀ h k, ∃ z : ℤ, den h * (DeltaZ (zq q) h).coeff k = z) ∧
       ∀ ε > 0, ∀ᶠ h : ℕ in atTop, Real.log (den h) ≤ (alphaZ q + c2 + ε) * (h : ℝ) ^ 2 :=
-  sorry
+  arith_z_proof q hq ho n2 hn2 c2 hc2
 
 /-- **Lemma 10″** (RESULT §2): at `ζ = q/2`, `q` odd, `n₂(Δ_h) ≤ (4/3) h² + O(h)`. -/
 theorem twoAdic_num (q : ℕ) (hq : 3 ≤ q) (ho : Odd q) :
@@ -41,7 +44,7 @@ theorem twoAdic_num (q : ℕ) (hq : 3 ≤ q) (ho : Odd q) :
 /-- **Nonvanishing at `ζ = q/2`** (RESULT §5): Lemma P along `h = 3ℓ`. -/
 theorem nonvan_z (q : ℕ) (hq : 5 ≤ q) (ho : Odd q) (a : ℤ) (b : ℕ) (hb : 0 < b) :
     ∃ᶠ h : ℕ in atTop, (DeltaZ (zq q) h).eval ((a : ℚ) / b) ≠ 0 :=
-  sorry
+  nonvan_z_proof q hq ho a b hb
 
 /-- **Analytic bound at `ζ = q/2`** (RESULT §3): the certificate at `w = 4/qB²` moved by the shift lemma. -/
 theorem analytic_z (q : ℕ) (hq : qB ≤ q) {δ : ℝ} (hδ : 0 < δ) : ∀ ε > 0, ∀ᶠ h : ℕ in atTop,
@@ -50,7 +53,7 @@ theorem analytic_z (q : ℕ) (hq : qB ≤ q) {δ : ℝ} (hδ : 0 < δ) : ∀ ε 
 
 /-- **Margin** (RESULT §4). -/
 theorem margin_z (q : ℕ) (hq : qB ≤ q) (ho : Odd q) : alphaZ q + c2Num + betaZ q < 0 :=
-  sorry
+  margin_z_proof q hq ho
 
 /-! ## Assembly -/
 
