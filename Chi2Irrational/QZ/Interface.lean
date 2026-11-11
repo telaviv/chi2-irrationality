@@ -37,7 +37,8 @@ theorem arith_z (q : ℕ) (hq : 5 ≤ q) (ho : Odd q) (n2 : ℕ → ℤ)
       ∀ ε > 0, ∀ᶠ h : ℕ in atTop, Real.log (den h) ≤ (alphaZ q + c2 + ε) * (h : ℝ) ^ 2 :=
   arith_z_proof q hq ho n2 hn2 c2 hc2
 
-/-- **Lemma 10″** (RESULT §2): at `ζ = q/2`, `q` odd, `n₂(Δ_h) ≤ (4/3) h² + O(h)`. -/
+/-- **Lemma 10″** (RESULT §2): at `ζ = q/2`, `q` odd, `n₂(Δ_h) ≤ (4/3) h² + O(h)`, stated in limit
+form (the proof's `n2Z` satisfies `3 n₂(h) ≤ 4h² + 4h + 4`, `QZ/TwoAdic.lean`). -/
 theorem twoAdic_num (q : ℕ) (hq : 3 ≤ q) (ho : Odd q) :
     ∃ n2 : ℕ → ℤ, (∀ h k, padicNorm 2 ((DeltaZ (zq q) h).coeff k) ≤ (2 : ℚ) ^ (n2 h)) ∧
       ∀ ε > 0, ∀ᶠ h : ℕ in atTop, (n2 h : ℝ) * Real.log 2 ≤ (c2Num + ε) * (h : ℝ) ^ 2 :=

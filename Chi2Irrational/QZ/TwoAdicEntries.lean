@@ -167,7 +167,7 @@ lemma V2_OmegaZ {q : ℕ} (hq : 3 ≤ q) (ho : Odd q) (b : ℕ) : V2 0 (evZ (zq 
     refine V2_mul' (V2_pow V2_zq 2) (V2_pow (V2_E hq ho) (b + 1)) ?_
     push_cast; omega
 
-/-- **(L) bound.** If `R = 2^{−n} H(2X)` with `H ∈ ℤ[X]` of degree `≤ n`, then `v₂(μ(R)) ≥ −n` at `ζ = q/2`. -/
+/-- **(L) bound.** If `R = 2^{−n} H(2X)` with `H` 2-integral (`ℤ₍₂₎[X]`, the predicate `IS n R`) of degree `≤ n`, then `v₂(μ(R)) ≥ −n` at `ζ = q/2`. -/
 theorem V2_muPolyZ {q : ℕ} (hq : 3 ≤ q) (ho : Odd q) {n : ℕ} {R : ℚ[X]} (hR : IS n R) :
     V2 (-(n : ℤ)) (muPoly (wtZ (zq q)) R) := by
   unfold muPoly

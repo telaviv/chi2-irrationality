@@ -3,7 +3,7 @@
 
 `analytic_z_proof`: the certificate at `w = 4/qB²` (`ζ_B = qB/2 = 175/2`, `QZ/CertQ175.lean`, `Φ ≤ PhiB = −4.003`)
 moved to `ζ = q/2` for every `q ≥ qB` by the shift lemma (`QZ/Shift.lean`, gain `½ log(ζ/ζ_B) = ½ log(q/qB)`), then
-Theorem B at `ζ` (`DualCertW.analyticZ`). This is the statement of the stub `analytic_z` in `QZ/Interface.lean`.
+Theorem B at `ζ` (`DualCertW.analyticZ`). This is the statement of `analytic_z` in `QZ/Interface.lean`.
 -/
 import Chi2Irrational.QZ.Defs
 import Chi2Irrational.QZ.Shift

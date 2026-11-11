@@ -4,7 +4,7 @@
 `DualCertW.shift`: from `C : DualCertW W₀`, `0 < W ≤ W₀` and `δ > 0`, a certificate `C' : DualCertW W` with
 `Φ(C') ≤ Φ(C) − ℓ/4 + δ`, `ℓ = log W₀ − log W`. Same construction as `Q/Shift.lean` (keep `μ`, `X`, `N`;
 `λ' = λ − ℓ/2`; refine the grid by `2r`, `S'_{k'} = S_{⌊k'/2r⌋} − ℓk'/L'`), which used `W = Wr q` only through
-`ℓ ≥ 0`. At `W = ζ⁻²`: `ℓ = 2 log(ζ/ζ₀)`, gain `½ log(ζ/ζ₀)` (`DualCertZ.shift`).
+`ℓ ≥ 0`. At `W = ζ⁻²`: `ℓ = 2 log(ζ/ζ₀)`, gain `½ log(ζ/ζ₀)` (`DualCertW.shift`; the ζ-form is `analytic_of_certZ` in `QZ/Analytic.lean`).
 -/
 import Chi2Irrational.QZ.TheoremB
 import Chi2Irrational.Q.Shift

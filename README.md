@@ -10,6 +10,16 @@ z^{2n+1}/(2n+1)² = ½(Li₂(z) − Li₂(−z)) is Legendre's chi function.
 
 > **Theorem (q = 3, 5).** χ₂(1/3) = 0.33762317823243597996… and χ₂(1/5) = 0.20090195660862019582… are irrational.
 
+> **Theorem Q4′ (numerator 2).** For every odd integer q ≥ 175, the number χ₂(2/q) is irrational.
+> (`Chi2Irr.QZ.theoremQ4num`, files `Chi2Irrational/QZ/*`.)
+
+Theorem Q4′ is separate from the chain below. Its machine is the χ₂(1/q) machine read at the rational point ζ = q/2.
+The paper proof gives q ≥ 173; Lean's certificate format is coarser, so the base certificate sits at w = 4/175²
+(Φ ≤ −4.0033; q = 173 would need Φ(4/173²) < −3.99971). Departures from the paper proof
+(`../handoff/log2log3/pilot_chi2_2q/RESULT.md`, all declared in the files): weaker 2-adic entry bounds in Lemma 10″
+(same constant 4/3), the base at q = 175, and Lemma P transferred ℓ-adically from an integer q′ ≡ q/2 (mod ℓ^M)
+instead of being re-read at rational ζ. Fidelity report: `FIDELITY_REFEREE_Q2NUM.md`.
+
 Theorem Q₄ is the main result. Each theorem in this list contains the next one, and each is kept as its own Lean
 theorem:
 - the case q = 3, 5 was the first result of this repository and keeps its own proof;

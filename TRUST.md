@@ -11,14 +11,17 @@
 'Chi2Irr.chi2_one_fifth_irrational' depends on axioms: [propext, Classical.choice, Quot.sound]
 ```
 
-and the same list for each of the 41 declarations in `Axioms.lean` (the output of the run with Theorem Q₄ is
+and the same list for each of the 41 declarations in `Axioms.lean` (50 with Theorem Q4′, `Chi2Irr.QZ.theoremQ4num`
+and its ingredients: `scripts/q2num/runs/axioms_q2num.txt`) (the output of the run with Theorem Q₄ is
 `scripts/axioms_q4.txt`; that of the earlier run with Theorem Q, 37 declarations, is `scripts/axioms_q.txt`). These are Lean's three standard axioms, the same ones Mathlib uses. The project contains no
 `sorry`, no `axiom` declaration, no `native_decide` and no `implemented_by`, so nothing relies on the compiler. Every
 proof is checked by the kernel:
 - the dual certificates of Theorem B are decidable statements about rational data, proved by `decide +kernel`
   (`Cert/Q3.lean`, `Cert/Q5.lean`, for Theorem Q `Cert/Q14.lean`, and for Theorem Q₄ `Cert/Q6.lean`, `Cert/Q8.lean`,
-  `Cert/Q10.lean`, `Cert/Q12.lean`). The only option set in these files is `set_option maxRecDepth` on the log-table
-  literal of `Cert/DataQ6.lean`, an elaborator recursion limit that does not affect the kernel;
+  `Cert/Q10.lean`, `Cert/Q12.lean`, and for Theorem Q4′ `QZ/CertQ175.lean`, data `QZ/CertDataQ175.lean` from
+  `scripts/q2num/gen_cert_z.py 2 175 1200 12 70 1 1`, PhiQ = −4.0033242, kernel checks 10697 s wall). The only option set in these files is `set_option maxRecDepth` on the log-table
+  literal of `Cert/DataQ6.lean` (and of `QZ/CertDataQ175.lean`), an elaborator recursion limit that does not affect the
+  kernel; `QZ/Margin.lean` sets `exponentiation.threshold` so that `norm_num` evaluates `175^104 < 2^775`;
 - the dyadic enclosure of `log 2` used by the log table is proved by `decide +kernel` from Mathlib's series bound
   (`Interval/Log.lean`);
 - the six block determinants of Lemma P for q = 3, 5 are evaluated exactly by `norm_num` (`NonVan/NonVanQ.lean`); for
