@@ -175,3 +175,15 @@ However, this tactic invocation changed the goal. Please use `change` instead fo
 
 Note: This linter can be disabled with `set_option linter.style.show false`
 ✔ [9066/9067] Built Chi2Irrational.TiQ.Cert.DataQ6L800 (41s)
+✖ [9067/9067] Building Chi2Irrational.TiQ.Cert.Q6L800 (15160s)
+trace: .> LEAN_PATH=C:\Users\Shawn Krisman\math\lean_chi2\.lake\packages\Cli\.lake\build\lib\lean;C:\Users\Shawn Krisman\math\lean_chi2\.lake\packages\batteries\.lake\build\lib\lean;C:\Users\Shawn Krisman\math\lean_chi2\.lake\packages\Qq\.lake\build\lib\lean;C:\Users\Shawn Krisman\math\lean_chi2\.lake\packages\aesop\.lake\build\lib\lean;C:\Users\Shawn Krisman\math\lean_chi2\.lake\packages\proofwidgets\.lake\build\lib\lean;C:\Users\Shawn Krisman\math\lean_chi2\.lake\packages\importGraph\.lake\build\lib\lean;C:\Users\Shawn Krisman\math\lean_chi2\.lake\packages\LeanSearchClient\.lake\build\lib\lean;C:\Users\Shawn Krisman\math\lean_chi2\.lake\packages\plausible\.lake\build\lib\lean;C:\Users\Shawn Krisman\math\lean_chi2\.lake\packages\mathlib\.lake\build\lib\lean;C:\Users\Shawn Krisman\math\lean_chi2_wt\tiq\.lake\build\lib\lean c:\Users\Shawn Krisman\.elan\toolchains\leanprover--lean4---v4.35.0\bin\lean.exe C:\Users\Shawn Krisman\math\lean_chi2_wt\tiq\Chi2Irrational\TiQ\Cert\Q6L800.lean -o C:\Users\Shawn Krisman\math\lean_chi2_wt\tiq\.lake\build\lib\lean\Chi2Irrational\TiQ\Cert\Q6L800.olean -i C:\Users\Shawn Krisman\math\lean_chi2_wt\tiq\.lake\build\lib\lean\Chi2Irrational\TiQ\Cert\Q6L800.ilean -c C:\Users\Shawn Krisman\math\lean_chi2_wt\tiq\.lake\build\ir\Chi2Irrational\TiQ\Cert\Q6L800.c --setup C:\Users\Shawn Krisman\math\lean_chi2_wt\tiq\.lake\build\ir\Chi2Irrational\TiQ\Cert\Q6L800.setup.json --json
+error: Chi2Irrational/TiQ/Cert/Q6L800.lean:90:11: Tactic `decide` proved that the proposition
+  data.K * data.s ≤ data.N * data.L
+is false
+Some required targets logged failures:
+- Chi2Irrational.TiQ.Cert.Q6L800
+error: build failed
+
+real	253m33.998s
+user	0m0.015s
+sys	0m0.000s
