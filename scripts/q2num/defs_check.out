@@ -1,0 +1,13 @@
+q=5 h=3: Lean replica == pilot: True; deg 3, lead v2 = -29296875/64
+q=5 h=5: Lean replica == pilot: True; deg 5, lead v2 = 281631946563720703125/1048576
+q=5 h=8: Lean replica == pilot: True; deg 8, lead v2 = 1098852454341214812671978506841696798801422119140625/720575940379
+q=7 h=3: Lean replica == pilot: True; deg 3, lead v2 = -605304105/64
+q=7 h=5: Lean replica == pilot: True; deg 5, lead v2 = 1267309845582446831262615/1048576
+q=7 h=8: Lean replica == pilot: True; deg 8, lead v2 = 2472485002450029860073392683761707954967151091586373519787025/720
+q=9 h=3: Lean replica == pilot: True; deg 3, lead v2 = -5811307335/64
+q=9 h=5: Lean replica == pilot: True; deg 5, lead v2 = 678413598368800696387885305/1048576
+q=9 h=8: Lean replica == pilot: True; deg 8, lead v2 = 23898998893690551553252097311904710648296376852832936824167267371
+q=41 h=3: Lean replica == pilot: True; deg 3, lead v2 = -4910729015909415/64
+q=41 h=5: Lean replica == pilot: True; deg 5, lead v2 = 19725509357747686189408813877175098278545945/1048576
+q=41 h=8: Lean replica == pilot: True; deg 8, lead v2 = 3349854431403886948369549149086749681075250461022487466424882059
+ALL OK
