@@ -1,0 +1,1 @@
+'Chi2Irr.TiQ.twoAdic_odd_t_proof' depends on axioms: [propext, Classical.choice, Quot.sound]

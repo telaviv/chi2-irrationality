@@ -1,0 +1,1209 @@
+⚠ [9046/9186] Replayed Chi2Irrational.PNT.Port.Sobolev
+warning: Chi2Irrational\PNT\Port\Sobolev.lean: imports `Mathlib.Analysis.Calculus.Deriv.Support` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+warning: Chi2Irrational\PNT\Port\Sobolev.lean: imports `Mathlib.Analysis.Distribution.SchwartzSpace.Deriv` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+warning: Chi2Irrational\PNT\Port\Sobolev.lean: imports `Mathlib.Order.Filter.ZeroAndBoundedAtFilter` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+⚠ [9047/9186] Replayed Chi2Irrational.PNT.Port.Fourier
+warning: Chi2Irrational\PNT\Port\Fourier.lean: imports `Mathlib.Analysis.Distribution.SchwartzSpace.Deriv` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+warning: Chi2Irrational\PNT\Port\Fourier.lean: imports `Mathlib.MeasureTheory.Integral.IntegralEqImproper` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+warning: Chi2Irrational\PNT\Port\Fourier.lean: imports `Mathlib.Topology.ContinuousMap.Bounded.Basic` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+warning: Chi2Irrational\PNT\Port\Fourier.lean: imports `Mathlib.Order.Filter.ZeroAndBoundedAtFilter` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+warning: Chi2Irrational\PNT\Port\Fourier.lean: imports `Mathlib.Analysis.Fourier.FourierTransformDeriv` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+⚠ [9048/9186] Replayed Chi2Irrational.PNT.Port.SmoothExistence
+warning: Chi2Irrational\PNT\Port\SmoothExistence.lean: imports `Mathlib.Geometry.Manifold.PartitionOfUnity` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+warning: Chi2Irrational\PNT\Port\SmoothExistence.lean: imports `Mathlib.Tactic.Bound` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+⚠ [9049/9186] Replayed Chi2Irrational.PNT.Port.Wiener
+warning: Chi2Irrational\PNT\Port\Wiener.lean: imports `Mathlib.Analysis.Fourier.RiemannLebesgueLemma` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+warning: Chi2Irrational\PNT\Port\Wiener.lean: imports `Mathlib.Analysis.Normed.Group.Tannery` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+warning: Chi2Irrational\PNT\Port\Wiener.lean: imports `Mathlib.Analysis.SumIntegralComparisons` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+warning: Chi2Irrational\PNT\Port\Wiener.lean: imports `Mathlib.NumberTheory.Chebyshev` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+warning: Chi2Irrational\PNT\Port\Wiener.lean: imports `Mathlib.NumberTheory.LSeries.PrimesInAP` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+warning: Chi2Irrational\PNT\Port\Wiener.lean: imports `Mathlib.NumberTheory.MulChar.Lemmas` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+warning: Chi2Irrational\PNT\Port\Wiener.lean: imports `Mathlib.Topology.EMetricSpace.BoundedVariation` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+warning: Chi2Irrational\PNT\Port\Wiener.lean: imports `Mathlib.Analysis.Convolution` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+warning: Chi2Irrational/PNT/Port/Wiener.lean:499:46: `Finset.sum_nonneg'` has been deprecated: Use `Finset.sum_nonneg` instead
+
+Note: The updated constant has a different type:
+  ∀ {ι : Type u_1} {N : Type u_5} [inst : AddCommMonoid N] [inst_1 : Preorder N] {f : ι → N} {s : Finset ι}
+    [AddLeftMono N], (∀ i ∈ s, 0 ≤ f i) → 0 ≤ ∑ i ∈ s, f i
+instead of
+  ∀ {ι : Type u_1} {N : Type u_5} [inst : AddCommMonoid N] [inst_1 : Preorder N] {f : ι → N} {s : Finset ι}
+    [AddLeftMono N], (∀ (i : ι), 0 ≤ f i) → 0 ≤ ∑ i ∈ s, f i
+warning: Chi2Irrational/PNT/Port/Wiener.lean:766:51: This simp argument is unused:
+  nnabla
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [a, Function.comp_def]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Chi2Irrational/PNT/Port/Wiener.lean:766:59: This simp argument is unused:
+  a
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [nnabla, Function.comp_def]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Chi2Irrational/PNT/Port/Wiener.lean:766:62: This simp argument is unused:
+  Function.comp_def
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [nnabla, a]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Chi2Irrational/PNT/Port/Wiener.lean:1070:59: `Finset.sum_nonneg'` has been deprecated: Use `Finset.sum_nonneg` instead
+
+Note: The updated constant has a different type:
+  ∀ {ι : Type u_1} {N : Type u_5} [inst : AddCommMonoid N] [inst_1 : Preorder N] {f : ι → N} {s : Finset ι}
+    [AddLeftMono N], (∀ i ∈ s, 0 ≤ f i) → 0 ≤ ∑ i ∈ s, f i
+instead of
+  ∀ {ι : Type u_1} {N : Type u_5} [inst : AddCommMonoid N] [inst_1 : Preorder N] {f : ι → N} {s : Finset ι}
+    [AddLeftMono N], (∀ (i : ι), 0 ≤ f i) → 0 ≤ ∑ i ∈ s, f i
+warning: Chi2Irrational/PNT/Port/Wiener.lean:1073:38: `Finset.sum_nonneg'` has been deprecated: Use `Finset.sum_nonneg` instead
+
+Note: The updated constant has a different type:
+  ∀ {ι : Type u_1} {N : Type u_5} [inst : AddCommMonoid N] [inst_1 : Preorder N] {f : ι → N} {s : Finset ι}
+    [AddLeftMono N], (∀ i ∈ s, 0 ≤ f i) → 0 ≤ ∑ i ∈ s, f i
+instead of
+  ∀ {ι : Type u_1} {N : Type u_5} [inst : AddCommMonoid N] [inst_1 : Preorder N] {f : ι → N} {s : Finset ι}
+    [AddLeftMono N], (∀ (i : ι), 0 ≤ f i) → 0 ≤ ∑ i ∈ s, f i
+warning: Chi2Irrational/PNT/Port/Wiener.lean:1230:4: syntax 'Mathlib.Tactic.Peel.peel' has been deprecated: use `gconvert` or `congr!` instead of `peel`
+
+Note: This linter can be disabled with `set_option linter.deprecated.syntax false`
+warning: Chi2Irrational/PNT/Port/Wiener.lean:2057:52: `Set.mem_setOf_eq` has been deprecated: Use `Set.mem_ofPred_eq` instead
+
+Hint: Replace the deprecated name:
+  m̵e̵m̵_̵s̵e̵t̵O̵f̵_̵e̵q̵m̲e̲m̲_̲o̲f̲P̲r̲e̲d̲_̲e̲q̲
+warning: Chi2Irrational/PNT/Port/Wiener.lean:2182:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Chi2Irrational/PNT/Port/Wiener.lean:2298:27: `if_false` has been deprecated: Use `ite_false` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵f̵a̵l̵s̵e̵i̲t̲e̲_̲f̲a̲l̲s̲e̲
+warning: Chi2Irrational/PNT/Port/Wiener.lean:2929:4: Try this: 
+  haveI̵
+
+The goal is a proposition, so `have` is preferred over `haveI`.
+The difference between `have` and `haveI` is that `haveI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+⚠ [9050/9186] Replayed Chi2Irrational.Interval.Basic
+warning: Chi2Irrational\Interval\Basic.lean: imports `Mathlib.Algebra.Order.Archimedean.Real.Basic` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+warning: Chi2Irrational\Interval\Basic.lean: imports `Mathlib.Data.Rat.Cast.Order` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+warning: Chi2Irrational\Interval\Basic.lean: imports `Mathlib.Data.Rat.Floor` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+warning: Chi2Irrational\Interval\Basic.lean: imports `Mathlib.Tactic.Linarith` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+warning: Chi2Irrational\Interval\Basic.lean: imports `Mathlib.Tactic.NormNum` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+warning: Chi2Irrational\Interval\Basic.lean: imports `Mathlib.Tactic.Positivity` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+⚠ [9051/9186] Replayed Chi2Irrational.Interval.Log
+warning: Chi2Irrational\Interval\Log.lean: imports `Mathlib.Analysis.SpecialFunctions.Log.Deriv` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+⚠ [9053/9186] Replayed Chi2Irrational.Analytic.SlotDet
+warning: Chi2Irrational\Analytic\SlotDet.lean: imports `Mathlib` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+warning: Chi2Irrational/Analytic/SlotDet.lean:30:6: `det_rows_sum` does not use the following hypothesis in its type:
+  • [DecidableEq κ] (#8)
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: Chi2Irrational/Analytic/SlotDet.lean:50:68: Variable name `hN` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hN
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Chi2Irrational/Analytic/SlotDet.lean:107:64: Variable name `hr1` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hr1
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Chi2Irrational/Analytic/SlotDet.lean:129:6: `sum_prod_fin` does not use the following hypothesis in its type:
+  • [DecidableEq κ] (#6)
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: Chi2Irrational/Analytic/SlotDet.lean:230:8: `simp` is a flexible tactic modifying `⊢`. Try `simp?` and use the suggested `simp only [...]`. Alternatively, use `suffices` to explicitly state the simplified form.
+
+Note: This linter can be disabled with `set_option linter.flexible false`
+info: Chi2Irrational/Analytic/SlotDet.lean:230:8: Try this:
+  [apply] simp only [↓reduceIte, norm_one, Nat.one_le_cast]
+info: Chi2Irrational/Analytic/SlotDet.lean:230:14: `exact_mod_cast (by omega : 1 ≤ h)`
+modifies the current goal, which was modified by the flexible tactic `simp` on line 230!
+⚠ [9054/9186] Replayed Chi2Irrational.Analytic.Polya
+warning: Chi2Irrational\Analytic\Polya.lean: imports `Mathlib` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+⚠ [9055/9186] Replayed Chi2Irrational.NonVan.LAdic
+warning: Chi2Irrational\NonVan\LAdic.lean: imports `Mathlib` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+⚠ [9056/9186] Replayed Chi2Irrational.PNT.Port.Consequences
+warning: Chi2Irrational\PNT\Port\Consequences.lean: imports `Mathlib.NumberTheory.Harmonic.Bounds` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+warning: Chi2Irrational/PNT/Port/Consequences.lean:35:30: please avoid 'open (scoped) Classical' statements: this can hide theorem statements which would be better stated with explicit decidability statements.
+Instead, use `open Classical in` for definitions or instances, the `classical` tactic for proofs.
+For theorem statements, either add missing decidability assumptions or use `open Classical in`.
+
+Note: This linter can be disabled with `set_option linter.style.openClassical false`
+warning: Chi2Irrational/PNT/Port/Consequences.lean:86:8: `Set.mem_setOf_eq` has been deprecated: Use `Set.mem_ofPred_eq` instead
+
+Hint: Replace the deprecated name:
+  S̵e̵t̵.̵m̵e̵m̵_̵s̵e̵t̵O̵f̵_̵e̵q̵S̲e̲t̲.̲m̲e̲m̲_̲o̲f̲P̲r̲e̲d̲_̲e̲q̲
+⚠ [9058/9186] Replayed Chi2Irrational.Q.Even.WNorm
+warning: Chi2Irrational\Q\Even\WNorm.lean: imports `Mathlib` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+warning: Chi2Irrational/Q/Even/WNorm.lean:27:65: `simp` is a flexible tactic modifying `⊢`. Try `simp?` and use the suggested `simp only [...]`. Alternatively, use `suffices` to explicitly state the simplified form.
+
+Note: This linter can be disabled with `set_option linter.flexible false`
+info: Chi2Irrational/Q/Even/WNorm.lean:27:65: Try this:
+  [apply] simp only [map_zero, padicNorm.zero, Nat.ofNat_pos, pow_pos, mul_nonneg_iff_of_pos_right]
+info: Chi2Irrational/Q/Even/WNorm.lean:27:71: `positivity`
+modifies the current goal, which was modified by the flexible tactic `simp` on line 27!
+⚠ [9059/9186] Replayed Chi2Irrational.Q.Even.CoreDet
+warning: Chi2Irrational\Q\Even\CoreDet.lean: imports `Mathlib` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+warning: Chi2Irrational/Q/Even/CoreDet.lean:40:6: `deriv_prod_eq_zero` does not use the following hypothesis in its type:
+  • [DecidableEq ι] (#6)
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+⚠ [9060/9186] Replayed Chi2Irrational.Q.Even.Count
+warning: Chi2Irrational\Q\Even\Count.lean: imports `Mathlib` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+⚠ [9061/9186] Replayed Chi2Irrational.Analytic.Andreief
+warning: Chi2Irrational\Analytic\Andreief.lean: imports `Mathlib` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+warning: Chi2Irrational/Analytic/Andreief.lean:18:0: automatically included section variable(s) unused in theorem `Chi2Irr.det_sum_rankOne_rows`:
+  [DecidableEq ι]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq ι] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Chi2Irrational/Analytic/Andreief.lean:18:6: `det_sum_rankOne_rows` does not use the following hypothesis in its type:
+  • [DecidableEq ι] (#8)
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: Chi2Irrational/Analytic/Andreief.lean:52:27: This simp argument is unused:
+  Function.id_comp
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Equiv.arrowCongr_symm, Equiv.arrowCongr_apply, Equiv.refl_symm, Equiv.coe_refl,
+    Function.comp_apply, id_eq, Equiv.symm_symm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Chi2Irrational/Analytic/Andreief.lean:39:8: `factorial_smul_det_sum_rankOne` does not use the following hypothesis in its type:
+  • [DecidableEq ι] (#8)
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+⚠ [9062/9186] Replayed Chi2Irrational.Analytic.PsiCalc
+warning: Chi2Irrational\Analytic\PsiCalc.lean: imports `Mathlib` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+warning: Chi2Irrational/Analytic/PsiCalc.lean:49:39: Variable name `y` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _y
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Chi2Irrational/Analytic/PsiCalc.lean:83:34: Variable name `hR` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hR
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+⚠ [9063/9186] Replayed Chi2Irrational.Analytic.StepMu
+warning: Chi2Irrational/Analytic/StepMu.lean:65:31: Variable name `hαβ` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hαβ
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Chi2Irrational/Analytic/StepMu.lean:177:24: Variable name `hh` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hh
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+⚠ [9064/9186] Replayed Chi2Irrational.Defs
+warning: Chi2Irrational\Defs.lean: imports `Mathlib` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+⚠ [9065/9186] Replayed Chi2Irrational.Machine
+warning: Chi2Irrational\Machine.lean: imports `Mathlib` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+⚠ [9067/9186] Replayed Chi2Irrational.Criterion
+warning: Chi2Irrational\Criterion.lean: imports `Mathlib` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+⚠ [9068/9186] Replayed Chi2Irrational.NonVan.Gram
+warning: Chi2Irrational/NonVan/Gram.lean:210:4: The `show` tactic should only be used to indicate intermediate goal states for readability.
+However, this tactic invocation changed the goal. Please use `change` instead for these purposes.
+
+Note: This linter can be disabled with `set_option linter.style.show false`
+⚠ [9069/9186] Replayed Chi2Irrational.Arith.Defs
+warning: Chi2Irrational\Arith\Defs.lean: imports `Mathlib` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+⚠ [9070/9186] Replayed Chi2Irrational.NonVan.Counting
+warning: Chi2Irrational/NonVan/Counting.lean:27:6: `padicNorm_prod_le_of_close` does not use the following hypothesis in its type:
+  • [DecidableEq ι] (#4)
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: Chi2Irrational/NonVan/Counting.lean:53:6: `padicNorm_deriv_le_of_close` does not use the following hypothesis in its type:
+  • [DecidableEq ι] (#4)
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+⚠ [9077/9186] Replayed Chi2Irrational.Analytic.Nodes
+warning: Chi2Irrational/Analytic/Nodes.lean:274:4: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+⚠ [9084/9186] Replayed Chi2Irrational.Q.Margin
+warning: Chi2Irrational\Q\Margin.lean: imports `Mathlib.Analysis.Complex.ExponentialBounds` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+⚠ [9086/9186] Replayed Chi2Irrational.Q.Even.Margin
+warning: Chi2Irrational\Q\Even\Margin.lean: imports `Mathlib.Analysis.Complex.ExponentialBounds` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+⚠ [9090/9186] Replayed Chi2Irrational.Analytic.Dual
+warning: Chi2Irrational/Analytic/Dual.lean:21:6: `sum_fiber` does not use the following hypothesis in its type:
+  • [DecidableEq n] (#3)
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: Chi2Irrational/Analytic/Dual.lean:27:6: `sum_fiber2` does not use the following hypothesis in its type:
+  • [DecidableEq n] (#3)
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: Chi2Irrational/Analytic/Dual.lean:144:61: `Set.mem_setOf_eq` has been deprecated: Use `Set.mem_ofPred_eq` instead
+
+Hint: Replace the deprecated name:
+  S̵e̵t̵.̵m̵e̵m̵_̵s̵e̵t̵O̵f̵_̵e̵q̵S̲e̲t̲.̲m̲e̲m̲_̲o̲f̲P̲r̲e̲d̲_̲e̲q̲
+warning: Chi2Irrational/Analytic/Dual.lean:144:17: This simp argument is unused:
+  mem_filter
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [mem_univ, true_and, coe_filter, Set.mem_setOf_eq] at hi hj
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Chi2Irrational/Analytic/Dual.lean:242:28: This simp argument is unused:
+  le_max_left
+
+Hint: Omit it from the simp argument list.
+  [apply] simp
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+ℹ [9091/9186] Replayed Chi2Irrational.Analytic.Discrete
+info: Chi2Irrational/Analytic/Discrete.lean:146:24: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+⚠ [9092/9186] Replayed Chi2Irrational.Arith.Gauss
+warning: Chi2Irrational/Arith/Gauss.lean:29:0: automatically included section variable(s) unused in theorem `Chi2Irr.GLe_mono`:
+  hp
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit hp in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Chi2Irrational/Arith/Gauss.lean:31:0: automatically included section variable(s) unused in theorem `Chi2Irr.GLe_zero`:
+  hp
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit hp in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Chi2Irrational/Arith/Gauss.lean:34:6: `MvPolynomial.coeff_add` has been deprecated: Use `AddMonoidAlgebra.coeff_add` instead
+
+Note: The updated constant has a different type:
+  ∀ {R : Type u_1} {M : Type u_4} [inst : Semiring R] (x y : AddMonoidAlgebra R M), (x + y).coeff = x.coeff + y.coeff
+instead of
+  ∀ {R : Type u} {σ : Type u_1} [inst : CommSemiring R] (m : σ →₀ ℕ) (p q : MvPolynomial σ R),
+    (p + q).coeff m = p.coeff m + q.coeff m
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.coeff_add` to `AddMonoidAlgebra.coeff_add x`).
+warning: Chi2Irrational/Arith/Gauss.lean:37:0: automatically included section variable(s) unused in theorem `Chi2Irr.GLe_neg`:
+  hp
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit hp in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Chi2Irrational/Arith/Gauss.lean:59:0: automatically included section variable(s) unused in theorem `Chi2Irr.GLe_C`:
+  hp
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit hp in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Chi2Irrational/Arith/Gauss.lean:71:0: automatically included section variable(s) unused in theorem `Chi2Irr.GLe_X`:
+  hp
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit hp in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Chi2Irrational/Arith/Gauss.lean:101:32: `mul_le_one₀` has been deprecated: No replacement, use constituent lemmas from proof.
+warning: Chi2Irrational/Arith/Gauss.lean:104:57: `mul_le_one₀` has been deprecated: No replacement, use constituent lemmas from proof.
+warning: Chi2Irrational/Arith/Gauss.lean:127:6: `Polynomial.finset_sum_coeff` has been deprecated: Use `Polynomial.finsetSum_coeff` instead
+
+Hint: Replace the deprecated name:
+  finset_̵s̵S̲um_coeff
+warning: Chi2Irrational/Arith/Gauss.lean:235:4: The `show` tactic should only be used to indicate intermediate goal states for readability.
+However, this tactic invocation changed the goal. Please use `change` instead for these purposes.
+
+Note: This linter can be disabled with `set_option linter.style.show false`
+warning: Chi2Irrational/Arith/Gauss.lean:241:2: The `show` tactic should only be used to indicate intermediate goal states for readability.
+However, this tactic invocation changed the goal. Please use `change` instead for these purposes.
+
+Note: This linter can be disabled with `set_option linter.style.show false`
+warning: Chi2Irrational/Arith/Gauss.lean:248:2: The `show` tactic should only be used to indicate intermediate goal states for readability.
+However, this tactic invocation changed the goal. Please use `change` instead for these purposes.
+
+Note: This linter can be disabled with `set_option linter.style.show false`
+warning: Chi2Irrational/Arith/Gauss.lean:258:2: The `show` tactic should only be used to indicate intermediate goal states for readability.
+However, this tactic invocation changed the goal. Please use `change` instead for these purposes.
+
+Note: This linter can be disabled with `set_option linter.style.show false`
+warning: Chi2Irrational/Arith/Gauss.lean:303:56: `Matrix.det_of_lowerTriangular` has been deprecated: Use `Matrix.det_of_isLowerTriangular` instead
+
+Hint: Replace the deprecated name:
+  Matrix.det_of_l̵i̲s̲L̲owerTriangular
+⚠ [9094/9186] Replayed Chi2Irrational.NonVan.ClassData
+warning: Chi2Irrational/NonVan/ClassData.lean:48:0: automatically included section variable(s) unused in theorem `Chi2Irr.idx_lt`:
+  hℓ
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit hℓ in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Chi2Irrational/NonVan/ClassData.lean:51:0: automatically included section variable(s) unused in theorem `Chi2Irr.idx_mod`:
+  hℓ
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit hℓ in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Chi2Irrational/NonVan/ClassData.lean:60:0: automatically included section variable(s) unused in theorem `Chi2Irr.pole_idx_sub`:
+  hℓ
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit hℓ in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Chi2Irrational/NonVan/ClassData.lean:98:6: Variable name `m` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _m
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Chi2Irrational/NonVan/ClassData.lean:158:0: automatically included section variable(s) unused in theorem `Chi2Irr.dPrime_idx_ne_zero`:
+  hℓ
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit hℓ in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Chi2Irrational/NonVan/ClassData.lean:167:0: automatically included section variable(s) unused in theorem `Chi2Irr.mem_closeSet`:
+  hℓ
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit hℓ in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+⚠ [9097/9186] Replayed Chi2Irrational.QZ.Margin
+warning: Chi2Irrational\QZ\Margin.lean: imports `Mathlib.Analysis.Complex.ExponentialBounds` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+⚠ [9106/9186] Replayed Chi2Irrational.Analytic.Helpers
+warning: Chi2Irrational/Analytic/Helpers.lean:110:29: `Set.mem_setOf_eq` has been deprecated: Use `Set.mem_ofPred_eq` instead
+
+Hint: Replace the deprecated name:
+  S̵e̵t̵.̵m̵e̵m̵_̵s̵e̵t̵O̵f̵_̵e̵q̵S̲e̲t̲.̲m̲e̲m̲_̲o̲f̲P̲r̲e̲d̲_̲e̲q̲
+⚠ [9107/9186] Replayed Chi2Irrational.Analytic.TheoremB
+warning: Chi2Irrational/Analytic/TheoremB.lean:59:51: Variable name `k` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _k
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+⚠ [9108/9186] Replayed Chi2Irrational.Arith.ClassBound
+warning: Chi2Irrational/Arith/ClassBound.lean:65:0: automatically included section variable(s) unused in theorem `Chi2Irr.mem_segF`:
+  hp
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit hp in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Chi2Irrational/Arith/ClassBound.lean:68:0: automatically included section variable(s) unused in theorem `Chi2Irr.segF_subset`:
+  hp
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit hp in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Chi2Irrational/Arith/ClassBound.lean:101:0: automatically included section variable(s) unused in theorem `Chi2Irr.padicNorm_pole_sub_same`:
+  hp2
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit hp2 in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Chi2Irrational/Arith/ClassBound.lean:142:0: automatically included section variable(s) unused in theorem `Chi2Irr.padicNorm_odd`:
+  hp2
+  hph
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit hp2 hph in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Chi2Irrational/Arith/ClassBound.lean:191:83: Variable name `k` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _k
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Chi2Irrational/Arith/ClassBound.lean:213:0: automatically included section variable(s) unused in theorem `Chi2Irr.eval_eCl_of_not_mem`:
+  hp
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit hp in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Chi2Irrational/Arith/ClassBound.lean:257:0: automatically included section variable(s) unused in theorem `Chi2Irr.eCl_mul`:
+  hp
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit hp in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Chi2Irrational/Arith/ClassBound.lean:387:0: automatically included section variable(s) unused in theorem `Chi2Irr.GLe_four`:
+  hp2
+  hph
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit hp2 hph in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Chi2Irrational/Arith/ClassBound.lean:538:2: The `show` tactic should only be used to indicate intermediate goal states for readability.
+However, this tactic invocation changed the goal. Please use `change` instead for these purposes.
+
+Note: This linter can be disabled with `set_option linter.style.show false`
+⚠ [9109/9186] Replayed Chi2Irrational.Arith.PoleOrder
+warning: Chi2Irrational/Arith/PoleOrder.lean:28:6: `MvPolynomial.coeff_add` has been deprecated: Use `AddMonoidAlgebra.coeff_add` instead
+
+Note: The updated constant has a different type:
+  ∀ {R : Type u_1} {M : Type u_4} [inst : Semiring R] (x y : AddMonoidAlgebra R M), (x + y).coeff = x.coeff + y.coeff
+instead of
+  ∀ {R : Type u} {σ : Type u_1} [inst : CommSemiring R] (m : σ →₀ ℕ) (p q : MvPolynomial σ R),
+    (p + q).coeff m = p.coeff m + q.coeff m
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.coeff_add` to `AddMonoidAlgebra.coeff_add x`).
+warning: Chi2Irrational/Arith/PoleOrder.lean:67:6: `MvPolynomial.coeff_X'` has been deprecated: Use `MvPolynomial.coeff_X` instead
+
+Hint: Replace the deprecated name:
+  MvPolynomial.coeff_X'̵
+warning: Chi2Irrational/Arith/PoleOrder.lean:74:6: `MvPolynomial.coeff_X'` has been deprecated: Use `MvPolynomial.coeff_X` instead
+
+Hint: Replace the deprecated name:
+  MvPolynomial.coeff_X'̵
+warning: Chi2Irrational/Arith/PoleOrder.lean:140:6: `Polynomial.finset_sum_coeff` has been deprecated: Use `Polynomial.finsetSum_coeff` instead
+
+Hint: Replace the deprecated name:
+  finset_̵s̵S̲um_coeff
+⚠ [9110/9186] Replayed Chi2Irrational.Arith.Lemma9
+warning: Chi2Irrational/Arith/Lemma9.lean:35:0: automatically included section variable(s) unused in theorem `Chi2Irr.nuL_le`:
+  hp
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit hp in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Chi2Irrational/Arith/Lemma9.lean:79:0: automatically included section variable(s) unused in theorem `Chi2Irr.sum_nuL`:
+  hp
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit hp in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Chi2Irrational/Arith/Lemma9.lean:325:0: automatically included section variable(s) unused in theorem `Chi2Irr.rk_injOn`:
+  hp
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit hp in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Chi2Irrational/Arith/Lemma9.lean:344:4: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Chi2Irrational/Arith/Lemma9.lean:364:0: automatically included section variable(s) unused in theorem `Chi2Irr.Bnn`:
+  hp
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit hp in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Chi2Irrational/Arith/Lemma9.lean:636:6: The `show` tactic should only be used to indicate intermediate goal states for readability.
+However, this tactic invocation changed the goal. Please use `change` instead for these purposes.
+
+Note: This linter can be disabled with `set_option linter.style.show false`
+warning: Chi2Irrational/Arith/Lemma9.lean:640:17: The `show` tactic should only be used to indicate intermediate goal states for readability.
+However, this tactic invocation changed the goal. Please use `change` instead for these purposes.
+
+Note: This linter can be disabled with `set_option linter.style.show false`
+⚠ [9111/9186] Replayed Chi2Irrational.Arith.TwoAdicBasis
+warning: Chi2Irrational/Arith/TwoAdicBasis.lean:316:21: Unused tactic linter: `push_cast` does nothing.
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Chi2Irrational/Arith/TwoAdicBasis.lean:325:4: Unused tactic linter: `push_cast` does nothing.
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Chi2Irrational/Arith/TwoAdicBasis.lean:344:79: Variable name `hc` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hc
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+⚠ [9112/9186] Replayed Chi2Irrational.NonVan.EntryBounds
+warning: Chi2Irrational/NonVan/EntryBounds.lean:28:0: automatically included section variable(s) unused in theorem `Chi2Irr.idx_mod_div`:
+  hℓ
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit hℓ in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+⚠ [9113/9186] Replayed Chi2Irrational.NonVan.Residues
+warning: Chi2Irrational/NonVan/Residues.lean:32:0: automatically included section variable(s) unused in theorem `Chi2Irr.prod_insert_rt`:
+  hℓ
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit hℓ in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Chi2Irrational/NonVan/Residues.lean:32:30: Variable name `hγ` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hγ
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Chi2Irrational/NonVan/Residues.lean:32:43: Variable name `p` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _p
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Chi2Irrational/NonVan/Residues.lean:39:0: automatically included section variable(s) unused in theorem `Chi2Irr.prod_insert_rt_X`:
+  hℓ
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit hℓ in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Chi2Irrational/NonVan/Residues.lean:39:24: Variable name `hγ` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hγ
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Chi2Irrational/NonVan/Residues.lean:39:37: Variable name `p` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _p
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Chi2Irrational/NonVan/Residues.lean:49:0: automatically included section variable(s) unused in theorem `Chi2Irr.close_member`:
+  p
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit p in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Chi2Irrational/NonVan/Residues.lean:67:0: automatically included section variable(s) unused in theorem `Chi2Irr.restProd_t_mem`:
+  hγ
+  p
+  ht
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit hγ p ht in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Chi2Irrational/NonVan/Residues.lean:86:0: automatically included section variable(s) unused in theorem `Chi2Irr.nu_eq_SL`:
+  ht
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit ht in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Chi2Irrational/NonVan/Residues.lean:86:41: Variable name `hb` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hb
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Chi2Irrational/NonVan/Residues.lean:96:0: automatically included section variable(s) unused in theorem `Chi2Irr.nu_eq_D`:
+  ht
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit ht in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Chi2Irrational/NonVan/Residues.lean:96:40: Variable name `hb` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hb
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Chi2Irrational/NonVan/Residues.lean:123:56: This simp argument is unused:
+  one_mul
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [eval_mul, eval_sub, eval_X, eval_C, derivative_add, derivative_mul, derivative_X, derivative_C,
+    derivative_X_pow, zero_mul, zero_add, add_zero, mul_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Chi2Irrational/NonVan/Residues.lean:124:49: This simp argument is unused:
+  map_ofNat
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [map_sub, map_add, map_mul, map_pow]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Chi2Irrational/NonVan/Residues.lean:126:6: Unused tactic linter: `rw [h2]` does nothing.
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Chi2Irrational/NonVan/Residues.lean:170:0: automatically included section variable(s) unused in theorem `Chi2Irr.t_small`:
+  p
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit p in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Chi2Irrational/NonVan/Residues.lean:173:0: automatically included section variable(s) unused in theorem `Chi2Irr.t_eq_ell_mul`:
+  p
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit p in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Chi2Irrational/NonVan/Residues.lean:178:0: automatically included section variable(s) unused in theorem `Chi2Irr.Tset_facts`:
+  hℓ2
+  ht
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit hℓ2 ht in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Chi2Irrational/NonVan/Residues.lean:285:0: automatically included section variable(s) unused in theorem `Chi2Irr.gpoly_split`:
+  hℓ2
+  ht
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit hℓ2 ht in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Chi2Irrational/NonVan/Residues.lean:299:0: automatically included section variable(s) unused in theorem `Chi2Irr.zlPoly_restProd`:
+  hγ
+  p
+  ht
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit hγ p ht in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Chi2Irrational/NonVan/Residues.lean:302:0: automatically included section variable(s) unused in theorem `Chi2Irr.eval_deriv_mem`:
+  hℓ2
+  hγ
+  p
+  ht
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit hℓ2 hγ p ht in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Chi2Irrational/NonVan/Residues.lean:305:0: automatically included section variable(s) unused in theorem `Chi2Irr.eval_deriv_DD_mem`:
+  hℓ2
+  hγ
+  p
+  ht
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit hℓ2 hγ p ht in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Chi2Irrational/NonVan/Residues.lean:309:0: automatically included section variable(s) unused in theorem `Chi2Irr.pole_idx_sub_small`:
+  hℓ2
+  hγ
+  p
+  ht
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit hℓ2 hγ p ht in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+⚠ [9115/9186] Replayed Chi2Irrational.QZ.Dual
+warning: Chi2Irrational/QZ/Dual.lean:110:28: This simp argument is unused:
+  le_max_left
+
+Hint: Omit it from the simp argument list.
+  [apply] simp
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+⚠ [9116/9186] Replayed Chi2Irrational.QZ.TheoremB
+warning: Chi2Irrational/QZ/TheoremB.lean:58:51: Variable name `k` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _k
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+⚠ [9117/9186] Replayed Chi2Irrational.TiQ.Free
+info: Chi2Irrational/TiQ/Free.lean:180:2: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+warning: Chi2Irrational/TiQ/Free.lean:304:13: This simp argument is unused:
+  Matrix.cons_val_zero
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Matrix.cons_val_one, Matrix.cons_val_fin_one, Algebra.algebraMap_eq_smul_one, Rat.smul_def,
+    mul_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Chi2Irrational/TiQ/Free.lean:304:35: This simp argument is unused:
+  Matrix.cons_val_one
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Matrix.cons_val_zero, Matrix.cons_val_fin_one, Algebra.algebraMap_eq_smul_one, Rat.smul_def,
+    mul_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Chi2Irrational/TiQ/Free.lean:304:56: This simp argument is unused:
+  Matrix.cons_val_fin_one
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Matrix.cons_val_zero, Matrix.cons_val_one, Algebra.algebraMap_eq_smul_one, Rat.smul_def, mul_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Chi2Irrational/TiQ/Free.lean:369:99: This simp argument is unused:
+  map_one
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.cons_val_fin_one, one_pow, mul_one,
+    one_mul] at this
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Chi2Irrational/TiQ/Free.lean:370:4: This simp argument is unused:
+  one_mul
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.cons_val_fin_one, one_pow, mul_one,
+    map_one] at this
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Chi2Irrational/TiQ/Free.lean:437:4: `simp [pow_succ, Complex.ext_iff] at h` is a flexible tactic modifying `h`. Try `simp?` and use the suggested `simp only [...]`. Alternatively, use `suffices` to explicitly state the simplified form.
+
+Note: This linter can be disabled with `set_option linter.flexible false`
+info: Chi2Irrational/TiQ/Free.lean:438:4: `(try obtain ⟨h1, h2⟩ := h)`
+uses `h`, which was modified by the flexible tactic `simp` on line 437!
+warning: Chi2Irrational/TiQ/Free.lean:437:4: `simp [pow_succ, Complex.ext_iff] at h` is a flexible tactic modifying `h`. Try `simp?` and use the suggested `simp only [...]`. Alternatively, use `suffices` to explicitly state the simplified form.
+
+Note: This linter can be disabled with `set_option linter.flexible false`
+info: Chi2Irrational/TiQ/Free.lean:438:4: `(try obtain ⟨h1, h2⟩ := h)`
+uses `h`, which was modified by the flexible tactic `simp` on line 437!
+warning: Chi2Irrational/TiQ/Free.lean:437:4: `simp [pow_succ, Complex.ext_iff] at h` is a flexible tactic modifying `h`. Try `simp?` and use the suggested `simp only [...]`. Alternatively, use `suffices` to explicitly state the simplified form.
+
+Note: This linter can be disabled with `set_option linter.flexible false`
+info: Chi2Irrational/TiQ/Free.lean:438:9: `obtain ⟨h1, h2⟩ := h`
+uses `h`, which was modified by the flexible tactic `simp` on line 437!
+warning: Chi2Irrational/TiQ/Free.lean:437:4: `simp [pow_succ, Complex.ext_iff] at h` is a flexible tactic modifying `h`. Try `simp?` and use the suggested `simp only [...]`. Alternatively, use `suffices` to explicitly state the simplified form.
+
+Note: This linter can be disabled with `set_option linter.flexible false`
+info: Chi2Irrational/TiQ/Free.lean:438:4: `(try obtain ⟨h1, h2⟩ := h)`
+uses `h`, which was modified by the flexible tactic `simp` on line 437!
+warning: Chi2Irrational/TiQ/Free.lean:437:4: `simp [pow_succ, Complex.ext_iff] at h` is a flexible tactic modifying `h`. Try `simp?` and use the suggested `simp only [...]`. Alternatively, use `suffices` to explicitly state the simplified form.
+
+Note: This linter can be disabled with `set_option linter.flexible false`
+info: Chi2Irrational/TiQ/Free.lean:438:4: `(try obtain ⟨h1, h2⟩ := h)`
+uses `h`, which was modified by the flexible tactic `simp` on line 437!
+warning: Chi2Irrational/TiQ/Free.lean:437:4: `simp [pow_succ, Complex.ext_iff] at h` is a flexible tactic modifying `h`. Try `simp?` and use the suggested `simp only [...]`. Alternatively, use `suffices` to explicitly state the simplified form.
+
+Note: This linter can be disabled with `set_option linter.flexible false`
+info: Chi2Irrational/TiQ/Free.lean:438:4: `(try obtain ⟨h1, h2⟩ := h)`
+uses `h`, which was modified by the flexible tactic `simp` on line 437!
+warning: Chi2Irrational/TiQ/Free.lean:437:4: `simp [pow_succ, Complex.ext_iff] at h` is a flexible tactic modifying `h`. Try `simp?` and use the suggested `simp only [...]`. Alternatively, use `suffices` to explicitly state the simplified form.
+
+Note: This linter can be disabled with `set_option linter.flexible false`
+info: Chi2Irrational/TiQ/Free.lean:438:4: `(try obtain ⟨h1, h2⟩ := h)`
+uses `h`, which was modified by the flexible tactic `simp` on line 437!
+warning: Chi2Irrational/TiQ/Free.lean:437:4: `simp [pow_succ, Complex.ext_iff] at h` is a flexible tactic modifying `h`. Try `simp?` and use the suggested `simp only [...]`. Alternatively, use `suffices` to explicitly state the simplified form.
+
+Note: This linter can be disabled with `set_option linter.flexible false`
+info: Chi2Irrational/TiQ/Free.lean:438:9: `obtain ⟨h1, h2⟩ := h`
+uses `h`, which was modified by the flexible tactic `simp` on line 437!
+warning: Chi2Irrational/TiQ/Free.lean:437:4: `simp [pow_succ, Complex.ext_iff] at h` is a flexible tactic modifying `h`. Try `simp?` and use the suggested `simp only [...]`. Alternatively, use `suffices` to explicitly state the simplified form.
+
+Note: This linter can be disabled with `set_option linter.flexible false`
+info: Chi2Irrational/TiQ/Free.lean:438:9: `obtain ⟨h1, h2⟩ := h`
+uses `h`, which was modified by the flexible tactic `simp` on line 437!
+warning: Chi2Irrational/TiQ/Free.lean:437:4: `simp [pow_succ, Complex.ext_iff] at h` is a flexible tactic modifying `h`. Try `simp?` and use the suggested `simp only [...]`. Alternatively, use `suffices` to explicitly state the simplified form.
+
+Note: This linter can be disabled with `set_option linter.flexible false`
+info: Chi2Irrational/TiQ/Free.lean:438:4: `(try obtain ⟨h1, h2⟩ := h)`
+uses `h`, which was modified by the flexible tactic `simp` on line 437!
+warning: Chi2Irrational/TiQ/Free.lean:437:4: `simp [pow_succ, Complex.ext_iff] at h` is a flexible tactic modifying `h`. Try `simp?` and use the suggested `simp only [...]`. Alternatively, use `suffices` to explicitly state the simplified form.
+
+Note: This linter can be disabled with `set_option linter.flexible false`
+info: Chi2Irrational/TiQ/Free.lean:438:4: `(try obtain ⟨h1, h2⟩ := h)`
+uses `h`, which was modified by the flexible tactic `simp` on line 437!
+warning: Chi2Irrational/TiQ/Free.lean:437:4: `simp [pow_succ, Complex.ext_iff] at h` is a flexible tactic modifying `h`. Try `simp?` and use the suggested `simp only [...]`. Alternatively, use `suffices` to explicitly state the simplified form.
+
+Note: This linter can be disabled with `set_option linter.flexible false`
+info: Chi2Irrational/TiQ/Free.lean:438:4: `(try obtain ⟨h1, h2⟩ := h)`
+uses `h`, which was modified by the flexible tactic `simp` on line 437!
+warning: Chi2Irrational/TiQ/Free.lean:437:4: `simp [pow_succ, Complex.ext_iff] at h` is a flexible tactic modifying `h`. Try `simp?` and use the suggested `simp only [...]`. Alternatively, use `suffices` to explicitly state the simplified form.
+
+Note: This linter can be disabled with `set_option linter.flexible false`
+info: Chi2Irrational/TiQ/Free.lean:438:4: `(try obtain ⟨h1, h2⟩ := h)`
+uses `h`, which was modified by the flexible tactic `simp` on line 437!
+warning: Chi2Irrational/TiQ/Free.lean:437:4: `simp [pow_succ, Complex.ext_iff] at h` is a flexible tactic modifying `h`. Try `simp?` and use the suggested `simp only [...]`. Alternatively, use `suffices` to explicitly state the simplified form.
+
+Note: This linter can be disabled with `set_option linter.flexible false`
+info: Chi2Irrational/TiQ/Free.lean:438:9: `obtain ⟨h1, h2⟩ := h`
+uses `h`, which was modified by the flexible tactic `simp` on line 437!
+warning: Chi2Irrational/TiQ/Free.lean:437:4: `simp [pow_succ, Complex.ext_iff] at h` is a flexible tactic modifying `h`. Try `simp?` and use the suggested `simp only [...]`. Alternatively, use `suffices` to explicitly state the simplified form.
+
+Note: This linter can be disabled with `set_option linter.flexible false`
+info: Chi2Irrational/TiQ/Free.lean:438:4: `(try obtain ⟨h1, h2⟩ := h)`
+uses `h`, which was modified by the flexible tactic `simp` on line 437!
+warning: Chi2Irrational/TiQ/Free.lean:437:4: `simp [pow_succ, Complex.ext_iff] at h` is a flexible tactic modifying `h`. Try `simp?` and use the suggested `simp only [...]`. Alternatively, use `suffices` to explicitly state the simplified form.
+
+Note: This linter can be disabled with `set_option linter.flexible false`
+info: Chi2Irrational/TiQ/Free.lean:438:4: `(try obtain ⟨h1, h2⟩ := h)`
+uses `h`, which was modified by the flexible tactic `simp` on line 437!
+warning: Chi2Irrational/TiQ/Free.lean:437:4: `simp [pow_succ, Complex.ext_iff] at h` is a flexible tactic modifying `h`. Try `simp?` and use the suggested `simp only [...]`. Alternatively, use `suffices` to explicitly state the simplified form.
+
+Note: This linter can be disabled with `set_option linter.flexible false`
+info: Chi2Irrational/TiQ/Free.lean:438:54: `first
+| (left; linarith)
+| (right; linarith)`
+uses `h`, which was modified by the flexible tactic `simp` on line 437!
+warning: Chi2Irrational/TiQ/Free.lean:437:4: `simp [pow_succ, Complex.ext_iff] at h` is a flexible tactic modifying `h`. Try `simp?` and use the suggested `simp only [...]`. Alternatively, use `suffices` to explicitly state the simplified form.
+
+Note: This linter can be disabled with `set_option linter.flexible false`
+info: Chi2Irrational/TiQ/Free.lean:438:54: `first
+| (left; linarith)
+| (right; linarith)`
+uses `h`, which was modified by the flexible tactic `simp` on line 437!
+warning: Chi2Irrational/TiQ/Free.lean:437:4: `simp [pow_succ, Complex.ext_iff] at h` is a flexible tactic modifying `h`. Try `simp?` and use the suggested `simp only [...]`. Alternatively, use `suffices` to explicitly state the simplified form.
+
+Note: This linter can be disabled with `set_option linter.flexible false`
+info: Chi2Irrational/TiQ/Free.lean:438:54: `first
+| (left; linarith)
+| (right; linarith)`
+uses `h`, which was modified by the flexible tactic `simp` on line 437!
+warning: Chi2Irrational/TiQ/Free.lean:437:4: `simp [pow_succ, Complex.ext_iff] at h` is a flexible tactic modifying `h`. Try `simp?` and use the suggested `simp only [...]`. Alternatively, use `suffices` to explicitly state the simplified form.
+
+Note: This linter can be disabled with `set_option linter.flexible false`
+info: Chi2Irrational/TiQ/Free.lean:438:54: `first
+| (left; linarith)
+| (right; linarith)`
+uses `h`, which was modified by the flexible tactic `simp` on line 437!
+warning: Chi2Irrational/TiQ/Free.lean:437:4: `simp [pow_succ, Complex.ext_iff] at h` is a flexible tactic modifying `h`. Try `simp?` and use the suggested `simp only [...]`. Alternatively, use `suffices` to explicitly state the simplified form.
+
+Note: This linter can be disabled with `set_option linter.flexible false`
+info: Chi2Irrational/TiQ/Free.lean:438:54: `first
+| (left; linarith)
+| (right; linarith)`
+uses `h`, which was modified by the flexible tactic `simp` on line 437!
+warning: Chi2Irrational/TiQ/Free.lean:437:4: `simp [pow_succ, Complex.ext_iff] at h` is a flexible tactic modifying `h`. Try `simp?` and use the suggested `simp only [...]`. Alternatively, use `suffices` to explicitly state the simplified form.
+
+Note: This linter can be disabled with `set_option linter.flexible false`
+info: Chi2Irrational/TiQ/Free.lean:438:54: `first
+| (left; linarith)
+| (right; linarith)`
+uses `h`, which was modified by the flexible tactic `simp` on line 437!
+warning: Chi2Irrational/TiQ/Free.lean:437:4: `simp [pow_succ, Complex.ext_iff] at h` is a flexible tactic modifying `h`. Try `simp?` and use the suggested `simp only [...]`. Alternatively, use `suffices` to explicitly state the simplified form.
+
+Note: This linter can be disabled with `set_option linter.flexible false`
+info: Chi2Irrational/TiQ/Free.lean:438:54: `first
+| (left; linarith)
+| (right; linarith)`
+uses `h`, which was modified by the flexible tactic `simp` on line 437!
+warning: Chi2Irrational/TiQ/Free.lean:437:4: `simp [pow_succ, Complex.ext_iff] at h` is a flexible tactic modifying `h`. Try `simp?` and use the suggested `simp only [...]`. Alternatively, use `suffices` to explicitly state the simplified form.
+
+Note: This linter can be disabled with `set_option linter.flexible false`
+info: Chi2Irrational/TiQ/Free.lean:438:54: `first
+| (left; linarith)
+| (right; linarith)`
+uses `h`, which was modified by the flexible tactic `simp` on line 437!
+warning: Chi2Irrational/TiQ/Free.lean:437:4: `simp [pow_succ, Complex.ext_iff] at h` is a flexible tactic modifying `h`. Try `simp?` and use the suggested `simp only [...]`. Alternatively, use `suffices` to explicitly state the simplified form.
+
+Note: This linter can be disabled with `set_option linter.flexible false`
+info: Chi2Irrational/TiQ/Free.lean:438:54: `first
+| (left; linarith)
+| (right; linarith)`
+uses `h`, which was modified by the flexible tactic `simp` on line 437!
+warning: Chi2Irrational/TiQ/Free.lean:437:4: `simp [pow_succ, Complex.ext_iff] at h` is a flexible tactic modifying `h`. Try `simp?` and use the suggested `simp only [...]`. Alternatively, use `suffices` to explicitly state the simplified form.
+
+Note: This linter can be disabled with `set_option linter.flexible false`
+info: Chi2Irrational/TiQ/Free.lean:438:54: `first
+| (left; linarith)
+| (right; linarith)`
+uses `h`, which was modified by the flexible tactic `simp` on line 437!
+warning: Chi2Irrational/TiQ/Free.lean:437:4: `simp [pow_succ, Complex.ext_iff] at h` is a flexible tactic modifying `h`. Try `simp?` and use the suggested `simp only [...]`. Alternatively, use `suffices` to explicitly state the simplified form.
+
+Note: This linter can be disabled with `set_option linter.flexible false`
+info: Chi2Irrational/TiQ/Free.lean:438:54: `first
+| (left; linarith)
+| (right; linarith)`
+uses `h`, which was modified by the flexible tactic `simp` on line 437!
+warning: Chi2Irrational/TiQ/Free.lean:437:4: `simp [pow_succ, Complex.ext_iff] at h` is a flexible tactic modifying `h`. Try `simp?` and use the suggested `simp only [...]`. Alternatively, use `suffices` to explicitly state the simplified form.
+
+Note: This linter can be disabled with `set_option linter.flexible false`
+info: Chi2Irrational/TiQ/Free.lean:438:54: `first
+| (left; linarith)
+| (right; linarith)`
+uses `h`, which was modified by the flexible tactic `simp` on line 437!
+⚠ [9118/9186] Replayed Chi2Irrational.Arith.QAdic
+warning: Chi2Irrational/Arith/QAdic.lean:260:14: `Polynomial.eval_finset_sum` has been deprecated: Use `Polynomial.eval_finsetSum` instead
+
+Hint: Replace the deprecated name:
+  e̵v̵a̵l̵_̵f̵i̵n̵s̵e̵t̵_̵s̵u̵m̵e̲v̲a̲l̲_̲f̲i̲n̲s̲e̲t̲S̲u̲m̲
+warning: Chi2Irrational/Arith/QAdic.lean:300:41: `Polynomial.eval_finset_sum` has been deprecated: Use `Polynomial.eval_finsetSum` instead
+
+Hint: Replace the deprecated name:
+  e̵v̵a̵l̵_̵f̵i̵n̵s̵e̵t̵_̵s̵u̵m̵e̲v̲a̲l̲_̲f̲i̲n̲s̲e̲t̲S̲u̲m̲
+warning: Chi2Irrational/Arith/QAdic.lean:302:42: `Polynomial.eval_finset_sum` has been deprecated: Use `Polynomial.eval_finsetSum` instead
+
+Hint: Replace the deprecated name:
+  e̵v̵a̵l̵_̵f̵i̵n̵s̵e̵t̵_̵s̵u̵m̵e̲v̲a̲l̲_̲f̲i̲n̲s̲e̲t̲S̲u̲m̲
+warning: Chi2Irrational/Arith/QAdic.lean:435:18: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: Chi2Irrational/Arith/QAdic.lean:435:14: Unused tactic linter: `<;>` should be replaced with `;` or be removed.
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Chi2Irrational/Arith/QAdic.lean:435:18: Unused tactic linter: `omega` does nothing.
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Chi2Irrational/Arith/QAdic.lean:499:15: This simp argument is unused:
+  neg_zero
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [zero_sub, zero_add]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Chi2Irrational/Arith/QAdic.lean:774:56: This simp argument is unused:
+  Matrix.head_cons
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Matrix.cons_val_zero, Matrix.cons_val_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+⚠ [9119/9186] Replayed Chi2Irrational.Arith.TwoAdicEntries
+warning: Chi2Irrational/Arith/TwoAdicEntries.lean:178:2: Unused tactic linter: `push_cast` does nothing.
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+⚠ [9120/9186] Replayed Chi2Irrational.Arith.TwoAdic
+warning: Chi2Irrational/Arith/TwoAdic.lean:34:6: `Polynomial.finset_sum_coeff` has been deprecated: Use `Polynomial.finsetSum_coeff` instead
+
+Hint: Replace the deprecated name:
+  finset_̵s̵S̲um_coeff
+info: Chi2Irrational/Arith/TwoAdic.lean:117:2: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+warning: Chi2Irrational/Arith/TwoAdic.lean:121:2: The `show` tactic should only be used to indicate intermediate goal states for readability.
+However, this tactic invocation changed the goal. Please use `change` instead for these purposes.
+
+Note: This linter can be disabled with `set_option linter.style.show false`
+⚠ [9122/9186] Replayed Chi2Irrational.Cert.Instance
+warning: Chi2Irrational/Cert/Instance.lean:204:4: The `show` tactic should only be used to indicate intermediate goal states for readability.
+However, this tactic invocation changed the goal. Please use `change` instead for these purposes.
+
+Note: This linter can be disabled with `set_option linter.style.show false`
+warning: Chi2Irrational/Cert/Instance.lean:239:4: The `show` tactic should only be used to indicate intermediate goal states for readability.
+However, this tactic invocation changed the goal. Please use `change` instead for these purposes.
+
+Note: This linter can be disabled with `set_option linter.style.show false`
+warning: Chi2Irrational/Cert/Instance.lean:251:2: The `show` tactic should only be used to indicate intermediate goal states for readability.
+However, this tactic invocation changed the goal. Please use `change` instead for these purposes.
+
+Note: This linter can be disabled with `set_option linter.style.show false`
+⚠ [9123/9186] Replayed Chi2Irrational.NonVan.Blocks
+warning: Chi2Irrational/NonVan/Blocks.lean:25:0: automatically included section variable(s) unused in theorem `Chi2Irr.Good.ne_two`:
+  hℓ
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit hℓ in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Chi2Irrational/NonVan/Blocks.lean:89:0: automatically included section variable(s) unused in theorem `Chi2Irr.E0_offdiag_eq`:
+  hℓ
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit hℓ in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Chi2Irrational/NonVan/Blocks.lean:93:0: automatically included section variable(s) unused in theorem `Chi2Irr.E0_diag_eq`:
+  hℓ
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit hℓ in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Chi2Irrational/NonVan/Blocks.lean:132:46: Variable name `hi` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hi
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+⚠ [9128/9186] Replayed Chi2Irrational.QZ.Shift
+warning: Chi2Irrational/QZ/Shift.lean:134:0: Please, write a comment here or remove this line, but do not place empty lines within commands!
+Context:
+                  ↓
+  ⏎      nlinarith⏎⏎    linarith⏎
+
+Note: This linter can be disabled with `set_option linter.style.emptyLine false`
+⚠ [9129/9186] Replayed Chi2Irrational.QZ.CertInstance
+warning: Chi2Irrational/QZ/CertInstance.lean:193:4: The `show` tactic should only be used to indicate intermediate goal states for readability.
+However, this tactic invocation changed the goal. Please use `change` instead for these purposes.
+
+Note: This linter can be disabled with `set_option linter.style.show false`
+warning: Chi2Irrational/QZ/CertInstance.lean:228:4: The `show` tactic should only be used to indicate intermediate goal states for readability.
+However, this tactic invocation changed the goal. Please use `change` instead for these purposes.
+
+Note: This linter can be disabled with `set_option linter.style.show false`
+warning: Chi2Irrational/QZ/CertInstance.lean:240:2: The `show` tactic should only be used to indicate intermediate goal states for readability.
+However, this tactic invocation changed the goal. Please use `change` instead for these purposes.
+
+Note: This linter can be disabled with `set_option linter.style.show false`
+⚠ [9132/9186] Replayed Chi2Irrational.TiQ.Analytic
+warning: Chi2Irrational/TiQ/Analytic.lean:152:4: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+⚠ [9134/9186] Replayed Chi2Irrational.Arith.Special
+warning: Chi2Irrational/Arith/Special.lean:114:2: Try this: 
+  haveI̵
+
+The goal is a proposition, so `have` is preferred over `haveI`.
+The difference between `have` and `haveI` is that `haveI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Chi2Irrational/Arith/Special.lean:182:2: Try this: 
+  haveI̵
+
+The goal is a proposition, so `have` is preferred over `haveI`.
+The difference between `have` and `haveI` is that `haveI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+⚠ [9137/9186] Replayed Chi2Irrational.NonVan.BlockMat
+warning: Chi2Irrational/NonVan/BlockMat.lean:172:8: Unused tactic linter: `ring` does nothing.
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Chi2Irrational/NonVan/BlockMat.lean:212:0: automatically included section variable(s) unused in theorem `Chi2Irr.t0_kap`:
+  hℓ
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit hℓ in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Chi2Irrational/NonVan/BlockMat.lean:212:14: Variable name `hℓ2` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hℓ2
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+⚠ [9143/9186] Replayed Chi2Irrational.TiQ.NonVan.Blocks
+warning: Chi2Irrational/TiQ/NonVan/Blocks.lean:31:0: automatically included section variable(s) unused in theorem `Chi2Irr.TiQ.Good.ne_two`:
+  hℓ
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit hℓ in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Chi2Irrational/TiQ/NonVan/Blocks.lean:75:0: automatically included section variable(s) unused in theorem `Chi2Irr.TiQ.E0_offdiag_eq`:
+  hℓ
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit hℓ in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Chi2Irrational/TiQ/NonVan/Blocks.lean:79:0: automatically included section variable(s) unused in theorem `Chi2Irr.TiQ.E0_diag_eq`:
+  hℓ
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit hℓ in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+⚠ [9150/9186] Replayed Chi2Irrational.NonVan.LemmaP
+warning: Chi2Irrational/NonVan/LemmaP.lean:54:2: The `show` tactic should only be used to indicate intermediate goal states for readability.
+However, this tactic invocation changed the goal. Please use `change` instead for these purposes.
+
+Note: This linter can be disabled with `set_option linter.style.show false`
+warning: Chi2Irrational/NonVan/LemmaP.lean:200:21: Variable name `hb` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hb
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+⚠ [9158/9186] Replayed Chi2Irrational.Q.Even.Terms
+warning: Chi2Irrational/Q/Even/Terms.lean:229:10: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+warning: Chi2Irrational/Q/Even/Terms.lean:229:22: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+warning: Chi2Irrational/Q/Even/Terms.lean:232:10: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+warning: Chi2Irrational/Q/Even/Terms.lean:232:22: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+warning: Chi2Irrational/Q/Even/Terms.lean:243:10: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+warning: Chi2Irrational/Q/Even/Terms.lean:247:10: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+⚠ [9160/9186] Replayed Chi2Irrational.TiQ.NonVan.BlockMat
+warning: Chi2Irrational/TiQ/NonVan/BlockMat.lean:145:8: Unused tactic linter: `ring` does nothing.
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Chi2Irrational/TiQ/NonVan/BlockMat.lean:159:8: Unused tactic linter: `ring` does nothing.
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+⚠ [9162/9186] Replayed Chi2Irrational.NonVan.NonVanQ
+warning: Chi2Irrational/NonVan/NonVanQ.lean:42:2: Try this: 
+  haveI̵
+
+The goal is a proposition, so `have` is preferred over `haveI`.
+The difference between `have` and `haveI` is that `haveI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+⚠ [9166/9186] Replayed Chi2Irrational.Q.Even.NuBound
+warning: Chi2Irrational/Q/Even/NuBound.lean:154:30: Variable name `hi` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hi
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Chi2Irrational/Q/Even/NuBound.lean:163:30: Variable name `hi` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hi
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+⚠ [9167/9186] Replayed Chi2Irrational.TiQ.NonVan.LemmaP
+warning: Chi2Irrational/TiQ/NonVan/LemmaP.lean:42:2: The `show` tactic should only be used to indicate intermediate goal states for readability.
+However, this tactic invocation changed the goal. Please use `change` instead for these purposes.
+
+Note: This linter can be disabled with `set_option linter.style.show false`
+warning: Chi2Irrational/TiQ/NonVan/LemmaP.lean:155:21: Variable name `hb` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hb
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+⚠ [9168/9186] Replayed Chi2Irrational.TiQ.NonVan.NonVanQ
+warning: Chi2Irrational/TiQ/NonVan/NonVanQ.lean:27:2: Try this: 
+  haveI̵
+
+The goal is a proposition, so `have` is preferred over `haveI`.
+The difference between `have` and `haveI` is that `haveI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+⚠ [9175/9186] Replayed Chi2Irrational.TiQ.Arith
+warning: Chi2Irrational/TiQ/Arith.lean:64:4: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+✔ [9182/9186] Built Chi2Irrational.QZ.CertQ175 (2115s)
+✔ [9183/9186] Built Chi2Irrational.QZ.Analytic (216s)
+✔ [9184/9186] Built Chi2Irrational.QZ.Interface (15s)
+✔ [9185/9186] Built Chi2Irrational (15s)
+Build completed successfully (9186 jobs).
+
+real	42m48.367s
+user	0m0.000s
+sys	0m0.030s

@@ -1,0 +1,45 @@
+q=5 h=1: Lean defs = pilot Ti machine: True;  = P_h(-q^2, qX) entries: True
+q=5 h=2: Lean defs = pilot Ti machine: True;  = P_h(-q^2, qX) entries: True
+q=5 h=3: Lean defs = pilot Ti machine: True;  = P_h(-q^2, qX) entries: True
+q=5 h=5: Lean defs = pilot Ti machine: True;  = P_h(-q^2, qX) entries: True
+q=5 h=8: Lean defs = pilot Ti machine: True;  = P_h(-q^2, qX) entries: True
+q=6 h=1: Lean defs = pilot Ti machine: True;  = P_h(-q^2, qX) entries: True
+q=6 h=2: Lean defs = pilot Ti machine: True;  = P_h(-q^2, qX) entries: True
+q=6 h=3: Lean defs = pilot Ti machine: True;  = P_h(-q^2, qX) entries: True
+q=6 h=5: Lean defs = pilot Ti machine: True;  = P_h(-q^2, qX) entries: True
+q=6 h=8: Lean defs = pilot Ti machine: True;  = P_h(-q^2, qX) entries: True
+q=7 h=1: Lean defs = pilot Ti machine: True;  = P_h(-q^2, qX) entries: True
+q=7 h=2: Lean defs = pilot Ti machine: True;  = P_h(-q^2, qX) entries: True
+q=7 h=3: Lean defs = pilot Ti machine: True;  = P_h(-q^2, qX) entries: True
+q=7 h=5: Lean defs = pilot Ti machine: True;  = P_h(-q^2, qX) entries: True
+q=7 h=8: Lean defs = pilot Ti machine: True;  = P_h(-q^2, qX) entries: True
+q=8 h=1: Lean defs = pilot Ti machine: True;  = P_h(-q^2, qX) entries: True
+q=8 h=2: Lean defs = pilot Ti machine: True;  = P_h(-q^2, qX) entries: True
+q=8 h=3: Lean defs = pilot Ti machine: True;  = P_h(-q^2, qX) entries: True
+q=8 h=5: Lean defs = pilot Ti machine: True;  = P_h(-q^2, qX) entries: True
+q=8 h=8: Lean defs = pilot Ti machine: True;  = P_h(-q^2, qX) entries: True
+Lemma 1 q=3 h=2 m=0: |A + Ti2 B - series| = 2.62e-40
+Lemma 1 q=3 h=2 m=1: |A + Ti2 B - series| = 7.08e-40
+Lemma 1 q=3 h=2 m=2: |A + Ti2 B - series| = 5.94e-40
+Lemma 1 q=3 h=3 m=0: |A + Ti2 B - series| = 2.03e-39
+Lemma 1 q=3 h=3 m=1: |A + Ti2 B - series| = 1.14e-38
+Lemma 1 q=3 h=3 m=2: |A + Ti2 B - series| = 3.03e-39
+Lemma 1 q=3 h=3 m=3: |A + Ti2 B - series| = 6.09e-38
+Lemma 1 q=3 h=3 m=4: |A + Ti2 B - series| = 4.51e-39
+Lemma 1 q=6 h=2 m=0: |A + Ti2 B - series| = 1.02e-39
+Lemma 1 q=6 h=2 m=1: |A + Ti2 B - series| = 4.33e-39
+Lemma 1 q=6 h=2 m=2: |A + Ti2 B - series| = 3.17e-39
+Lemma 1 q=6 h=3 m=0: |A + Ti2 B - series| = 1.92e-38
+Lemma 1 q=6 h=3 m=1: |A + Ti2 B - series| = 5.31e-38
+Lemma 1 q=6 h=3 m=2: |A + Ti2 B - series| = 5.39e-37
+Lemma 1 q=6 h=3 m=3: |A + Ti2 B - series| = 5.21e-37
+Lemma 1 q=6 h=3 m=4: |A + Ti2 B - series| = 1.46e-36
+Lemma 1 q=7 h=2 m=0: |A + Ti2 B - series| = 7.19e-40
+Lemma 1 q=7 h=2 m=1: |A + Ti2 B - series| = 5.02e-40
+Lemma 1 q=7 h=2 m=2: |A + Ti2 B - series| = 6.3e-39
+Lemma 1 q=7 h=3 m=0: |A + Ti2 B - series| = 1.26e-37
+Lemma 1 q=7 h=3 m=1: |A + Ti2 B - series| = 5.11e-38
+Lemma 1 q=7 h=3 m=2: |A + Ti2 B - series| = 7.84e-38
+Lemma 1 q=7 h=3 m=3: |A + Ti2 B - series| = 2.64e-36
+Lemma 1 q=7 h=3 m=4: |A + Ti2 B - series| = 2.7e-36
+ALL OK

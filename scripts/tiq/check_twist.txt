@@ -1,0 +1,67 @@
+ti q=2 h=2: entries and Delta agree: True
+chi q=2 h=2: entries and Delta agree: True
+ti q=2 h=3: entries and Delta agree: True
+chi q=2 h=3: entries and Delta agree: True
+ti q=2 h=5: entries and Delta agree: True
+chi q=2 h=5: entries and Delta agree: True
+ti q=2 h=8: entries and Delta agree: True
+chi q=2 h=8: entries and Delta agree: True
+ti q=2 h=12: entries and Delta agree: True
+chi q=2 h=12: entries and Delta agree: True
+ti q=3 h=2: entries and Delta agree: True
+chi q=3 h=2: entries and Delta agree: True
+ti q=3 h=3: entries and Delta agree: True
+chi q=3 h=3: entries and Delta agree: True
+ti q=3 h=5: entries and Delta agree: True
+chi q=3 h=5: entries and Delta agree: True
+ti q=3 h=8: entries and Delta agree: True
+chi q=3 h=8: entries and Delta agree: True
+ti q=3 h=12: entries and Delta agree: True
+chi q=3 h=12: entries and Delta agree: True
+ti q=5 h=2: entries and Delta agree: True
+chi q=5 h=2: entries and Delta agree: True
+ti q=5 h=3: entries and Delta agree: True
+chi q=5 h=3: entries and Delta agree: True
+ti q=5 h=5: entries and Delta agree: True
+chi q=5 h=5: entries and Delta agree: True
+ti q=5 h=8: entries and Delta agree: True
+chi q=5 h=8: entries and Delta agree: True
+ti q=5 h=12: entries and Delta agree: True
+chi q=5 h=12: entries and Delta agree: True
+ti q=6 h=2: entries and Delta agree: True
+chi q=6 h=2: entries and Delta agree: True
+ti q=6 h=3: entries and Delta agree: True
+chi q=6 h=3: entries and Delta agree: True
+ti q=6 h=5: entries and Delta agree: True
+chi q=6 h=5: entries and Delta agree: True
+ti q=6 h=8: entries and Delta agree: True
+chi q=6 h=8: entries and Delta agree: True
+ti q=6 h=12: entries and Delta agree: True
+chi q=6 h=12: entries and Delta agree: True
+ti q=7 h=2: entries and Delta agree: True
+chi q=7 h=2: entries and Delta agree: True
+ti q=7 h=3: entries and Delta agree: True
+chi q=7 h=3: entries and Delta agree: True
+ti q=7 h=5: entries and Delta agree: True
+chi q=7 h=5: entries and Delta agree: True
+ti q=7 h=8: entries and Delta agree: True
+chi q=7 h=8: entries and Delta agree: True
+ti q=7 h=12: entries and Delta agree: True
+chi q=7 h=12: entries and Delta agree: True
+ALL AGREE
+h=1 q0=2: parity True, twisted DeltaF at (q0, 1/(q0^2+1)) = DeltaT: True
+h=1 q0=3: parity True, twisted DeltaF at (q0, 1/(q0^2+1)) = DeltaT: True
+h=1 q0=6: parity True, twisted DeltaF at (q0, 1/(q0^2+1)) = DeltaT: True
+h=1 q0=7: parity True, twisted DeltaF at (q0, 1/(q0^2+1)) = DeltaT: True
+h=2 q0=2: parity True, twisted DeltaF at (q0, 1/(q0^2+1)) = DeltaT: True
+h=2 q0=3: parity True, twisted DeltaF at (q0, 1/(q0^2+1)) = DeltaT: True
+h=2 q0=6: parity True, twisted DeltaF at (q0, 1/(q0^2+1)) = DeltaT: True
+h=2 q0=7: parity True, twisted DeltaF at (q0, 1/(q0^2+1)) = DeltaT: True
+h=3 q0=2: parity True, twisted DeltaF at (q0, 1/(q0^2+1)) = DeltaT: True
+h=3 q0=3: parity True, twisted DeltaF at (q0, 1/(q0^2+1)) = DeltaT: True
+h=3 q0=6: parity True, twisted DeltaF at (q0, 1/(q0^2+1)) = DeltaT: True
+h=3 q0=7: parity True, twisted DeltaF at (q0, 1/(q0^2+1)) = DeltaT: True
+h=4 q0=2: parity True, twisted DeltaF at (q0, 1/(q0^2+1)) = DeltaT: True
+h=4 q0=3: parity True, twisted DeltaF at (q0, 1/(q0^2+1)) = DeltaT: True
+h=4 q0=6: parity True, twisted DeltaF at (q0, 1/(q0^2+1)) = DeltaT: True
+h=4 q0=7: parity True, twisted DeltaF at (q0, 1/(q0^2+1)) = DeltaT: True
