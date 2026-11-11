@@ -18,6 +18,7 @@ import Chi2Irrational.QZ.Arith
 import Chi2Irrational.QZ.NonVan
 import Chi2Irrational.QZ.Margin
 import Chi2Irrational.QZ.TwoAdic
+import Chi2Irrational.QZ.Analytic
 
 namespace Chi2Irr
 namespace QZ
@@ -50,7 +51,7 @@ theorem nonvan_z (q : ℕ) (hq : 5 ≤ q) (ho : Odd q) (a : ℤ) (b : ℕ) (hb :
 /-- **Analytic bound at `ζ = q/2`** (RESULT §3): the certificate at `w = 4/qB²` moved by the shift lemma. -/
 theorem analytic_z (q : ℕ) (hq : qB ≤ q) {δ : ℝ} (hδ : 0 < δ) : ∀ ε > 0, ∀ᶠ h : ℕ in atTop,
     |aeval (chi2 (1 / ((zq q : ℚ) : ℝ))) (DeltaZ (zq q) h)| ≤ Real.exp ((betaZ q + δ + ε) * (h : ℝ) ^ 2) :=
-  sorry
+  analytic_z_proof q hq hδ
 
 /-- **Margin** (RESULT §4). -/
 theorem margin_z (q : ℕ) (hq : qB ≤ q) (ho : Odd q) : alphaZ q + c2Num + betaZ q < 0 :=
