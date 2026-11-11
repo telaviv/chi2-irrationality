@@ -1,0 +1,15 @@
+✔ [9146/9157] Built Chi2Irrational.QZ.PoleExpansion (26s)
+✔ [9147/9157] Built Chi2Irrational.QZ.Nodes (26s)
+⚠ [9148/9157] Built Chi2Irrational.QZ.Dual (28s)
+⚠ [9149/9157] Built Chi2Irrational.QZ.TheoremB (39s)
+⚠ [9150/9157] Built Chi2Irrational.QZ.CertInstance (27s)
+⚠ [9151/9157] Built Chi2Irrational.QZ.Shift (43s)
+✔ [9152/9157] Built Chi2Irrational.QZ.CertDataQ177 (35s)
+✔ [9153/9157] Built Chi2Irrational.QZ.CertQ177 (974s)
+✔ [9154/9157] Built Chi2Irrational.QZ.Analytic (103s)
+✔ [9155/9157] Built Chi2Irrational.QZ.Interface (26s)
+Build completed successfully (9157 jobs).
+
+real	22m4.416s
+user	0m0.500s
+sys	0m2.311s
