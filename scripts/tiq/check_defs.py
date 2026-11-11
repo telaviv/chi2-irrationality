@@ -49,37 +49,39 @@ def AfunT(q, K, g, memo):
     return mu + 4 * sum(peval(g, pole(k)) * omega(K, k) * SpartT(q, k) for k in range(K))
 def BfunT(q, K, g):
     return -4 * sum(peval(g, pole(k)) * omega(K, k) * poleW(q, k) for k in range(K))
-ok = True
-for q in [2, 3, 5, 6, 7, 8]:
-    for h in [1, 2, 3, 5, 8]:
-        memo = {}
-        A = [AfunT(q, h, [Fr(0)] * m + [Fr(1)], memo) for m in range(2 * h - 1)]
-        B = [BfunT(q, h, [Fr(0)] * m + [Fr(1)]) for m in range(2 * h - 1)]
-        Ap, Bp = build_AB(q, h, -1)
-        e1 = all(fmpq(A[i].numerator, A[i].denominator) == Ap[i] and fmpq(B[i].numerator, B[i].denominator) == Bp[i]
-                 for i in range(2 * h - 1))
-        A2, B2 = build_Q(fmpq(-q * q), h)
-        e2 = all(fmpq(A[i].numerator, A[i].denominator) == A2[i] and fmpq(B[i].numerator, B[i].denominator) == q * B2[i]
-                 for i in range(2 * h - 1))
-        ok &= e1 and e2
-        print(f"q={q} h={h}: Lean defs = pilot Ti machine: {e1};  = P_h(-q^2, qX) entries: {e2}")
-# Lemma 1 for Ti: A(g) + Ti2(1/q) B(g) = sum_t w^t (g u/D)'(t), floats via mpmath
-from mpmath import mp, mpf, nsum, inf, diff
-mp.dps = 40
-for q in [3, 6, 7]:
-    z = mpf(1) / q
-    ti2 = nsum(lambda n: (-1) ** int(n) * z ** (2 * n + 1) / (2 * n + 1) ** 2, [0, inf])
-    for h in [2, 3]:
-        memo = {}
-        for m in range(2 * h - 1):
-            g = [Fr(0)] * m + [Fr(1)]
-            a = AfunT(q, h, g, memo); b = BfunT(q, h, g)
-            D = Dpoly(h)
-            f = lambda u: u ** m * u / sum(float(c) * u ** i if False else mpf(c.numerator) / c.denominator * u ** i for i, c in enumerate(D))
-            w = mpf(-1) / q ** 2
-            ser = nsum(lambda t: w ** t * diff(f, t), [1, inf])
-            lhs = mpf(a.numerator) / a.denominator + ti2 * mpf(b.numerator) / b.denominator
-            err = abs(lhs - ser)
-            ok &= err < mpf(10) ** -25
-            print(f"Lemma 1 q={q} h={h} m={m}: |A + Ti2 B - series| = {mp.nstr(err, 3)}")
-print("ALL OK" if ok else "MISMATCH")
+if __name__ == "__main__":
+    ok = True
+    for q in [2, 3, 5, 6, 7, 8]:
+        for h in [1, 2, 3, 5, 8]:
+            memo = {}
+            A = [AfunT(q, h, [Fr(0)] * m + [Fr(1)], memo) for m in range(2 * h - 1)]
+            B = [BfunT(q, h, [Fr(0)] * m + [Fr(1)]) for m in range(2 * h - 1)]
+            Ap, Bp = build_AB(q, h, -1)
+            e1 = all(fmpq(A[i].numerator, A[i].denominator) == Ap[i] and fmpq(B[i].numerator, B[i].denominator) == Bp[i]
+                     for i in range(2 * h - 1))
+            A2, B2 = build_Q(fmpq(-q * q), h)
+            e2 = all(fmpq(A[i].numerator, A[i].denominator) == A2[i] and fmpq(B[i].numerator, B[i].denominator) == q * B2[i]
+                     for i in range(2 * h - 1))
+            ok &= e1 and e2
+            print(f"q={q} h={h}: Lean defs = pilot Ti machine: {e1};  = P_h(-q^2, qX) entries: {e2}")
+    # Lemma 1 for Ti: A(g) + Ti2(1/q) B(g) = sum_t w^t (g u/D)'(t), floats via mpmath
+    from mpmath import mp, mpf, nsum, inf, diff
+    mp.dps = 40
+    for q in [3, 6, 7]:
+        z = mpf(1) / q
+        ti2 = nsum(lambda n: (-1) ** int(n) * z ** (2 * n + 1) / (2 * n + 1) ** 2, [0, inf])
+        for h in [2, 3]:
+            memo = {}
+            for m in range(2 * h - 1):
+                g = [Fr(0)] * m + [Fr(1)]
+                a = AfunT(q, h, g, memo); b = BfunT(q, h, g)
+                D = Dpoly(h)
+                f = lambda u: u ** m * u / sum(float(c) * u ** i if False else mpf(c.numerator) / c.denominator * u ** i for i, c in enumerate(D))
+                w = mpf(-1) / q ** 2
+                ser = nsum(lambda t: w ** t * diff(f, t), [1, inf])
+                lhs = mpf(a.numerator) / a.denominator + ti2 * mpf(b.numerator) / b.denominator
+                err = abs(lhs - ser)
+                ok &= err < mpf(10) ** -25
+                print(f"Lemma 1 q={q} h={h} m={m}: |A + Ti2 B - series| = {mp.nstr(err, 3)}")
+    print("ALL OK" if ok else "MISMATCH")
+
