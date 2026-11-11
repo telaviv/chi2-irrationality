@@ -56,7 +56,7 @@ Run `lake env lean Axioms.lean`. Every line should print `[propext, Classical.ch
 #print axioms Chi2Irr.Q.twoAdic_even_sharp
 #print axioms Chi2Irr.Q.cert_newQ
 #print axioms Chi2Irr.Q.margin_newQ
--- Theorem Q4′ (numerator 2): χ₂(2/q) for odd q ≥ 177
+-- Theorem Q4′ (numerator 2): χ₂(2/q) for odd q ≥ 175
 #print axioms Chi2Irr.QZ.theoremQ4num
 #print axioms Chi2Irr.QZ.map_DeltaF_Z
 #print axioms Chi2Irr.QZ.irrational_of_boundsZ

@@ -69,7 +69,7 @@ lemma chi2_two_div (q : ℕ) : chi2 (2 / (q : ℝ)) = chi2 (1 / ((zq q : ℚ) : 
     field_simp
 
 /-- **Theorem Q4′ (numerator 2).** `χ₂(2/q)` is irrational for every odd `q ≥ qB`. -/
-theorem theoremQ4num : ∀ q : ℕ, Odd q → 177 ≤ q → Irrational (chi2 (2 / (q : ℝ))) := by
+theorem theoremQ4num : ∀ q : ℕ, Odd q → 175 ≤ q → Irrational (chi2 (2 / (q : ℝ))) := by
   intro q ho hq
   have hqB : qB ≤ q := hq
   have h5 : 5 ≤ q := by omega

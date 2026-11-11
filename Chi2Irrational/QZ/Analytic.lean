@@ -1,13 +1,13 @@
 /-
 # Theorem Q4′ (numerator 2): the analytic bound (`pilot_chi2_2q/RESULT.md` §3)
 
-`analytic_z_proof`: the certificate at `w = 4/qB²` (`ζ_B = qB/2 = 177/2`, `QZ/CertQ177.lean`, `Φ ≤ PhiB = −4.005`)
+`analytic_z_proof`: the certificate at `w = 4/qB²` (`ζ_B = qB/2 = 175/2`, `QZ/CertQ175.lean`, `Φ ≤ PhiB = −4.003`)
 moved to `ζ = q/2` for every `q ≥ qB` by the shift lemma (`QZ/Shift.lean`, gain `½ log(ζ/ζ_B) = ½ log(q/qB)`), then
 Theorem B at `ζ` (`DualCertW.analyticZ`). This is the statement of the stub `analytic_z` in `QZ/Interface.lean`.
 -/
 import Chi2Irrational.QZ.Defs
 import Chi2Irrational.QZ.Shift
-import Chi2Irrational.QZ.CertQ177
+import Chi2Irrational.QZ.CertQ175
 
 namespace Chi2Irr
 namespace QZ
@@ -47,29 +47,29 @@ theorem analytic_of_certZ {ζ₀ : ℚ} (hζ₀ : 1 < ζ₀) (C : DualCertZ ζ�
   refine hh.trans (Real.exp_le_exp.mpr (mul_le_mul_of_nonneg_right ?_ (sq_nonneg _)))
   linarith
 
-/-- The base certificate sits at `ζ_B = zq qB = 177/2`. -/
-lemma cert_zeta : ((Cert.Q177.data.q : ℚ) / Cert.Q177.data.a) = zq qB := by
-  rw [show Cert.Q177.data.q = 177 from rfl, show Cert.Q177.data.a = 2 from rfl]
+/-- The base certificate sits at `ζ_B = zq qB = 175/2`. -/
+lemma cert_zeta : ((Cert.Q175.data.q : ℚ) / Cert.Q175.data.a) = zq qB := by
+  rw [show Cert.Q175.data.q = 175 from rfl, show Cert.Q175.data.a = 2 from rfl]
   norm_num [zq, qB]
 
 /-- The base certificate: `Φ ≤ PhiB`. -/
-lemma phi_Q177 : DualCertW.Phi (CDataZ.toCertZ Cert.Q177.valid) ≤ ((PhiB : ℚ) : ℝ) := by
-  have h := Cert.Q177.phi_le
-  have e : ((PhiB : ℚ) : ℝ) = -4005 / 1000 := by norm_num [PhiB]
+lemma phi_Q175 : DualCertW.Phi (CDataZ.toCertZ Cert.Q175.valid) ≤ ((PhiB : ℚ) : ℝ) := by
+  have h := Cert.Q175.phi_le
+  have e : ((PhiB : ℚ) : ℝ) = -4003 / 1000 := by norm_num [PhiB]
   rw [e]
   exact h
 
 /-- **Analytic bound at `ζ = q/2`** (RESULT §3): the statement of `analytic_z`. -/
 theorem analytic_z_proof (q : ℕ) (hq : qB ≤ q) {δ : ℝ} (hδ : 0 < δ) : ∀ ε > 0, ∀ᶠ h : ℕ in atTop,
     |aeval (chi2 (1 / ((zq q : ℚ) : ℝ))) (DeltaZ (zq q) h)| ≤ Real.exp ((betaZ q + δ + ε) * (h : ℝ) ^ 2) := by
-  have hv := Cert.Q177.valid
-  have hζ₀ : 1 < ((Cert.Q177.data.q : ℚ) / Cert.Q177.data.a) := CDataZ.one_lt_zeta hv
-  have hle : ((Cert.Q177.data.q : ℚ) / Cert.Q177.data.a) ≤ zq q := by
+  have hv := Cert.Q175.valid
+  have hζ₀ : 1 < ((Cert.Q175.data.q : ℚ) / Cert.Q175.data.a) := CDataZ.one_lt_zeta hv
+  have hle : ((Cert.Q175.data.q : ℚ) / Cert.Q175.data.a) ≤ zq q := by
     rw [cert_zeta]
     unfold zq
     have : (qB : ℚ) ≤ q := by exact_mod_cast hq
     linarith
-  have H := analytic_of_certZ hζ₀ (CDataZ.toCertZ hv) phi_Q177 hle hδ
+  have H := analytic_of_certZ hζ₀ (CDataZ.toCertZ hv) phi_Q175 hle hδ
   rw [cert_zeta] at H
   have hqB : (0 : ℝ) < qB := by norm_num [qB]
   have e : Real.log (((zq q : ℚ) : ℝ) / ((zq qB : ℚ) : ℝ)) = Real.log ((q : ℝ) / qB) := by

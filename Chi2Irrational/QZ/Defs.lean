@@ -28,10 +28,10 @@ noncomputable def alphaZ (q : ℕ) : ℝ := 133 / 60 + Real.log ((q : ℝ) ^ 2 -
 noncomputable def c2Num : ℝ := 4 / 3 * Real.log 2
 
 /-- The base point of the certificate: `w = 4/qB²`. -/
-def qB : ℕ := 177
+def qB : ℕ := 175
 
 /-- The certified exponent at the base point (a rational upper bound for the certificate's `Φ`). -/
-def PhiB : ℚ := -4005 / 1000
+def PhiB : ℚ := -4003 / 1000
 
 /-- The analytic constant at `q ≥ qB`: the base certificate, shifted. -/
 noncomputable def betaZ (q : ℕ) : ℝ := (PhiB : ℝ) - Real.log ((q : ℝ) / qB) / 2
