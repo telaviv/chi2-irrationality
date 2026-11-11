@@ -1,0 +1,17 @@
+q=2 h=2: det(A+Ti2 B) = -0.00317209032069, det HTT(T=400) rel.err = 1.81e-50, |cNT| <= bN: True
+q=2 h=3: det(A+Ti2 B) = -1.58057595767e-6, det HTT(T=400) rel.err = 7.93e-46, |cNT| <= bN: True
+q=2 h=4: det(A+Ti2 B) = 2.26944084553e-11, det HTT(T=400) rel.err = 2.78e-44, |cNT| <= bN: True
+q=2 h=5: det(A+Ti2 B) = 5.28040553306e-18, det HTT(T=400) rel.err = 9.6e-41, |cNT| <= bN: True
+q=3 h=2: det(A+Ti2 B) = -0.000749170237642, det HTT(T=400) rel.err = 1.43e-48, |cNT| <= bN: True
+q=3 h=3: det(A+Ti2 B) = -1.0324859668e-7, det HTT(T=400) rel.err = 1.52e-44, |cNT| <= bN: True
+q=3 h=4: det(A+Ti2 B) = 1.93418451247e-13, det HTT(T=400) rel.err = 2.05e-41, |cNT| <= bN: True
+q=3 h=5: det(A+Ti2 B) = 2.57072987898e-21, det HTT(T=400) rel.err = 7.88e-38, |cNT| <= bN: True
+q=6 h=2: det(A+Ti2 B) = -5.2658845235e-5, det HTT(T=400) rel.err = 5.93e-48, |cNT| <= bN: True
+q=6 h=3: det(A+Ti2 B) = -5.62063915149e-10, det HTT(T=400) rel.err = 5.85e-42, |cNT| <= bN: True
+q=6 h=4: det(A+Ti2 B) = 2.7493216253e-17, det HTT(T=400) rel.err = 7.2e-38, |cNT| <= bN: True
+q=6 h=5: det(A+Ti2 B) = -4.55095003547e-27, det HTT(T=400) rel.err = 2.56e-33, |cNT| <= bN: True
+q=7 h=2: det(A+Ti2 B) = -2.87328479875e-5, det HTT(T=400) rel.err = 4.0e-46, |cNT| <= bN: True
+q=7 h=3: det(A+Ti2 B) = -1.68797968392e-10, det HTT(T=400) rel.err = 2.39e-41, |cNT| <= bN: True
+q=7 h=4: det(A+Ti2 B) = 3.74890365709e-18, det HTT(T=400) rel.err = 2.95e-36, |cNT| <= bN: True
+q=7 h=5: det(A+Ti2 B) = -3.95459603726e-28, det HTT(T=400) rel.err = 3.67e-32, |cNT| <= bN: True
+ALL OK
