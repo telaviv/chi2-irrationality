@@ -1,3 +1,4 @@
 /.lake
 __pycache__/
 /paper/build/
+/paper_q/build/

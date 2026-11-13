@@ -1,17 +1,47 @@
-# χ₂(1/q) is irrational for every integer q ≥ 3 except possibly q = 4: a Lean 4 proof
+# Irrationality of χ₂(1/q), Ti₂(1/q) and χ₂(2/q): a Lean 4 proof
 
 This repository contains a complete, machine-checked proof in [Lean 4](https://lean-lang.org/) and
 [Mathlib](https://github.com/leanprover-community/mathlib4) of the following theorems. Here χ₂(z) = Σ_{n≥0}
-z^{2n+1}/(2n+1)² = ½(Li₂(z) − Li₂(−z)) is Legendre's chi function.
+z^{2n+1}/(2n+1)² = ½(Li₂(z) − Li₂(−z)) is Legendre's chi function and Ti₂(z) = Σ_{n≥0} (−1)ⁿ z^{2n+1}/(2n+1)² = Im Li₂(iz)
+is the inverse tangent integral.
 
 > **Theorem Q₄.** For every integer q ≥ 3 with q ≠ 4, the number χ₂(1/q) is irrational.
+
+> **Theorem T.** For every integer q ≥ 6, the number Ti₂(1/q) is irrational.
+> (`Chi2Irr.TiQ.theoremT`, files `Chi2Irrational/TiQ/*`.)
+
+> **Theorem Q4′ (numerator 2).** For every odd integer q ≥ 175, the number χ₂(2/q) is irrational.
+> (`Chi2Irr.QZ.theoremQ4num`, files `Chi2Irrational/QZ/*`.)
 
 > **Theorem Q.** For every integer q ≥ 3 with q ∉ {4, 6, 8, 10, 12}, the number χ₂(1/q) is irrational.
 
 > **Theorem (q = 3, 5).** χ₂(1/3) = 0.33762317823243597996… and χ₂(1/5) = 0.20090195660862019582… are irrational.
 
-> **Theorem Q4′ (numerator 2).** For every odd integer q ≥ 175, the number χ₂(2/q) is irrational.
-> (`Chi2Irr.QZ.theoremQ4num`, files `Chi2Irrational/QZ/*`.)
+## Papers
+
+* **"χ₂(1/3) and χ₂(1/5) are irrational"** ([`paper/chi2-irrationality.pdf`](paper/chi2-irrationality.pdf), source
+  `paper/main.tex`; also Hexagon 2610.00372v2). It proves the case q = 3, 5 in full. It is kept exactly as published and
+  does not describe the later theorems.
+* **"Irrationality of χ₂(1/q), Ti₂(1/q) and χ₂(2/q)"** ([`paper_q/`](paper_q/), source `paper_q/main.tex`, PDF
+  `paper_q/build/main.pdf` after `sh build.sh` in that folder). It proves Theorem Q₄ (its Theorem A), Theorem T (its
+  Theorem B) and Theorem Q4′ (its Theorem C) with one construction, and maps every step to the Lean declarations of
+  commit `7a2780c`. Theorem Q appears there only inside the proof of Theorem A. Not yet published.
+
+## Theorem T (Ti₂(1/q), q ≥ 6)
+
+The machine is the χ₂(1/q) machine with the signed weight w = −q⁻² (`TiQ/Machine.lean`). Its determinant is a
+coefficient twist of the symbolic χ₂ determinant, Δ^Ti_h(X; q) = Δ^χ_h(−iX; iq), realised over ℚ by `TiQ/Free.lean`
+(`parity_DeltaF`, `map_DeltaFT`); so the odd-prime bounds, Lemma 5, Lemma 4′ and Lemma 10_e transfer, with q² + 1 in place
+of q² − 1. At odd q, v₂(q² + 1) = 1 and the prime 2 costs ¼ log 2 (Lemma 10₁, `TiQ/TwoAdicNu1.lean`); this is why q = 3, 5
+are out of reach. Theorem B sees only |w|, so the certificates carry over (`TiQ/Analytic.lean`). Lemma P is a sign copy
+(`TiQ/NonVan/*`): the block determinants are the χ₂ ones at q² ↦ −q², nonzero for every q. One kernel-checked
+certificate, at q = 6 with L = 800 (`TiQ/Cert/*`, Φ ≤ −2.5671), is used at q = 6 and shifted to every q ≥ 7. Margins:
+−0.0029 at q = 6 (Lean proves ≤ −0.0025), ≤ −0.098 for odd q ≥ 7, ≤ −0.10 for even
+q ≥ 8. Source: `../handoff/log2log3/pilot_ti2q/RESULT.md`. Departures (all declared in the files): one q = 6 base in
+place of the source's q = 5, 8, 10, 12, 14 bases, and weaker entry bounds in Lemma 10₁ (same constant). Fidelity report:
+`FIDELITY_REFEREE_TIQ.md`.
+
+## Theorem Q4′ (χ₂(2/q), odd q ≥ 175)
 
 Theorem Q4′ is separate from the chain below. Its machine is the χ₂(1/q) machine read at the rational point ζ = q/2.
 The paper proof gives q ≥ 173; Lean's certificate format is coarser, so the base certificate sits at w = 4/175²
@@ -20,8 +50,9 @@ The paper proof gives q ≥ 173; Lean's certificate format is coarser, so the ba
 (same constant 4/3), the base at q = 175, and Lemma P transferred ℓ-adically from an integer q′ ≡ q/2 (mod ℓ^M)
 instead of being re-read at rational ζ. Fidelity report: `FIDELITY_REFEREE_Q2NUM.md`.
 
-Theorem Q₄ is the main result. Each theorem in this list contains the next one, and each is kept as its own Lean
-theorem:
+## Theorems Q₄, Q and q = 3, 5
+
+Each theorem in this chain contains the next one, and each is kept as its own Lean theorem:
 - the case q = 3, 5 was the first result of this repository and keeps its own proof;
 - Theorem Q covers every odd q ≥ 3 and every even q ≥ 14;
 - Theorem Q₄ adds q = 6, 8, 10, 12, using a sharper 2-adic bound for even q (Lemma 10_e, step 6 below), and reuses the
@@ -42,6 +73,15 @@ noncomputable def chi2 (z : ℝ) : ℝ := ∑' n : ℕ, chi2Term z n
 def Chi2Irr.Q.TheoremQ4 : Prop := ∀ q : ℕ, 3 ≤ q → q ≠ 4 → Irrational (chi2 (1 / (q : ℝ)))
 theorem Chi2Irr.Q.theoremQ4 : Chi2Irr.Q.TheoremQ4
 
+-- Chi2Irrational/TiQ/Defs.lean, Chi2Irrational/TiQ/Interface.lean
+noncomputable def Chi2Irr.TiQ.ti2Term (z : ℝ) (n : ℕ) : ℝ := (-1) ^ n * z ^ (2 * n + 1) / (2 * (n : ℝ) + 1) ^ 2
+noncomputable def Chi2Irr.TiQ.ti2 (z : ℝ) : ℝ := ∑' n : ℕ, ti2Term z n
+def Chi2Irr.TiQ.TheoremT : Prop := ∀ q : ℕ, 6 ≤ q → Irrational (ti2 (1 / (q : ℝ)))
+theorem Chi2Irr.TiQ.theoremT : Chi2Irr.TiQ.TheoremT
+
+-- Chi2Irrational/QZ/Interface.lean
+theorem Chi2Irr.QZ.theoremQ4num : ∀ q : ℕ, Odd q → 175 ≤ q → Irrational (chi2 (2 / (q : ℝ)))
+
 -- Chi2Irrational/Q/Defs.lean, Chi2Irrational/Q/Interface.lean
 def Chi2Irr.Q.TheoremQ : Prop :=
   ∀ q : ℕ, 3 ≤ q → q ∉ ({4, 6, 8, 10, 12} : Finset ℕ) → Irrational (chi2 (1 / (q : ℝ)))
@@ -56,38 +96,45 @@ theorem Chi2Irr.chi2_one_fifth_irrational : Chi2OneFifthIrrational
 
 ```
 'Chi2Irr.Q.theoremQ4' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Chi2Irr.TiQ.theoremT' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Chi2Irr.QZ.theoremQ4num' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Chi2Irr.Q.theoremQ' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Chi2Irr.chi2_one_third_irrational' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Chi2Irr.chi2_one_fifth_irrational' depends on axioms: [propext, Classical.choice, Quot.sound]
 ```
 
-The proof uses only Lean's three standard axioms. There is no `sorry`, no added `axiom` and no `native_decide`: every
-numerical certificate is evaluated by the Lean kernel. See [TRUST.md](TRUST.md).
-
-The paper "χ₂(1/3) and χ₂(1/5) are irrational" is [`paper/chi2-irrationality.pdf`](paper/chi2-irrationality.pdf)
-(source `paper/main.tex`). It proves the case q = 3, 5 in full and describes the formalisation of Theorems Q and Q₄,
-whose written proofs are not part of it.
+The proof uses only Lean's three standard axioms (`lake env lean Axioms.lean`, 61 declarations, run 2026-11-12:
+`scripts/axioms_paper_q.txt`). There is no `sorry`, no added `axiom` and no `native_decide`: every numerical certificate
+is evaluated by the Lean kernel. See [TRUST.md](TRUST.md).
 
 ## Context
 
-We know of no earlier proof that χ₂(1/q) is irrational for any small integer q.
+The written proofs and the novelty discussion are in `paper_q/main.tex` (§1.2), with the search record in
+`paper_q/NOVELTY_CHECK.md`.
 
-- **Large q.** χ₂(1/q) = (4q)⁻¹Φ(1/q², 2, ½) is a single value of Lerch's transcendent (a shift-½ dilogarithm at
-  1/q²). Irrationality for all sufficiently large q follows from Hata (J. Math. Pures Appl. 69, 1990) and from the
-  explicit criteria of David, Hirata-Kohno and Kawashima (Acta Arith. 206, 2022); by our evaluation the latter need
-  q ≥ 2949. So Theorem Q₄ is new for 3 ≤ q < 2949 **unless Hata's method reaches lower**: we have not read Hata 1990
-  and have not determined his explicit range for the shift ½. Hata's headline application (Li₂(1/Q) ∉ ℚ for Q ≥ 12)
-  is for the easier shift 0, so q = 3 (Q = q² = 9) is presumably outside his range; whether q = 5 (Q = 25) or larger
-  q are within it is open to us (heuristically q = 5 is not).
+- **Large q.** χ₂(1/q), Ti₂(1/q) and χ₂(2/q) are single values of a shift-½ dilogarithm (Lerch's transcendent) at the
+  points 1/q², −1/q² and 4/q². By our evaluation, the explicit criterion of David, Hirata-Kohno and Kawashima (Acta Arith.
+  206, 2022, Thm 2.1) covers χ₂(1/q) and Ti₂(1/q) for q ≥ 2949, and χ₂(2/q) for q ≥ 11,795 as printed (their proof as
+  written supports q ≥ 23,587). Hata (J. Math. Pures Appl. 69, 1990) also covers χ₂(1/q) and Ti₂(1/q) for all
+  sufficiently large q (secondhand: his theorem allows points 1/Q with Q < 0), but **we have not read Hata 1990** and do
+  not know his threshold for the shift ½; as reviewed, his theorem does not cover the point 4/q².
+- **New ranges, to our knowledge**, relative to the criteria we read: Theorem Q₄ for 6 ≤ q ≤ 2948 (q = 3, 5 are in the
+  first paper), Theorem T for 6 ≤ q ≤ 2948, Theorem Q4′ for 175 ≤ q < 11,795. For Q₄ and T this is subject to Hata's
+  threshold; a heuristic reconstruction of his method (an estimate, not a citation) puts it near q ≈ 55–85 for χ₂(1/q),
+  so the genuinely new range of Q₄ may be much shorter. `paper_q/HATA_TODO.md` lists what changes if Hata 1990 is read.
+- **Integer arguments.** Bahçıvan (Zenodo 24047688, unrefereed) proves irrationality of Ti_s(n), Re χ₂(n) and related
+  values for a density-one set of integers n, from the DHK criterion and reciprocity; via Ti₂(n) = Ti₂(1/n) + (π/2) log n
+  this gives Ti₂(1/n) ∉ ℚ on a non-explicit density-one set, deciding no individual n.
 - **Separate dilogarithm values do not suffice.** Li₂(−1/5) ∉ ℚ is due to Hata (Trans. AMS 336, 1993), and
   Li₂(1/5) ∉ ℚ was proved recently (Prellberg, arXiv:2609.06895; S. Liu's Lean repository
-  [Li2Rational](https://github.com/siqiliu-tsinghua/Li2Rational); both
-  unrefereed). Neither implies anything about the difference ½(Li₂(1/5) − Li₂(−1/5)) = χ₂(1/5).
+  [Li2Rational](https://github.com/siqiliu-tsinghua/Li2Rational); R. Zhang, Li₂(1/n) ∉ ℚ for every integer n ≠ 0,
+  Zenodo 23296411; all unrefereed). None implies anything about the difference ½(Li₂(1/5) − Li₂(−1/5)) = χ₂(1/5), or
+  about Ti₂(1/q) = Im Li₂(i/q).
 - **Identities do not suffice.** For example, Landen's identity gives χ₂(1/3) + χ₂(1/2) = π²/8 − ½ log 2 · log 3,
   and both χ₂(1/2) and log 2 · log 3 are open.
 
-Our search covered the web, arXiv and recent Lean repositories, but not MathSciNet or zbMATH. Please tell us if you know
-of prior work.
+Our search covered the web, arXiv, Zenodo and GitHub (repository and code search), but not MathSciNet or zbMATH. Please
+tell us if you know of prior work.
 
 ## Outline of the proof
 
@@ -214,21 +261,25 @@ You need [elan](https://github.com/leanprover/elan). The toolchain (Lean v4.35.0
 
 ```sh
 lake exe cache get                 # download prebuilt Mathlib
-LEAN_NUM_THREADS=4 lake build      # 9139 jobs
+LEAN_NUM_THREADS=4 lake build      # 9186 jobs
 lake env lean Axioms.lean          # print the axioms of the main theorems and their ingredients
 ```
 
 Before Theorem Q was added, a clean build took about 10 minutes on a desktop once Mathlib was cached. The kernel checks
 of the certificates added since then take 233 s (q = 14, `Cert/Q14.lean`), 502 s (q = 6), 191 s (q = 8), 170 s
-(q = 10) and 171 s (q = 12), about 21 minutes in all; the full build has not been re-timed.
+(q = 10) and 171 s (q = 12); about three hours for Theorem Q4′'s certificate (`QZ/CertQ175.lean`, 10697 s wall on a
+shared machine); and several hours for Theorem T's certificate (`TiQ/Cert/*`, cells split over four files). The full
+build has not been re-timed.
 The thread limit follows the author's larger Lean repositories, where a build at Lake's default concurrency once ran out
 of memory on Windows.
 
 The certificate data can be regenerated with `scripts/gen_cert.py` (Python with numpy, scipy and mpmath). The output is
 byte-identical to the committed `Cert/DataQ3.lean`, `Cert/DataQ5.lean`, `Cert/DataQ14.lean` and
 `Cert/DataQ6.lean`, …, `Cert/DataQ12.lean`; the commands are in TRUST.md (for q = 3, 5 also in the script's
-docstring). The checks made while porting to general q (denominators, 2-adic bounds, the shift lemma, the block
-determinants, Lemma 10_e, the margins) are in `scripts/q/`.
+docstring). Theorem T's data `TiQ/Cert/DataQ6L800.lean` comes from the same script, and Theorem Q4′'s
+`QZ/CertDataQ175.lean` from `scripts/q2num/gen_cert_z.py`. The checks made while porting to general q (denominators,
+2-adic bounds, the shift lemma, the block determinants, Lemma 10_e, the margins) are in `scripts/q/`, and those for
+Theorems T and Q4′ in `scripts/tiq/` and `scripts/q2num/`.
 
 ## Repository layout
 
@@ -247,18 +298,26 @@ Paths are relative to `Chi2Irrational/`.
 | `NonVan/` | Lemma P: ℓ-adic reduction, progressions, class blocks, nonvanishing for q = 3, 5 and the generic route `nonvan_of` |
 | `Q/` | Theorem Q: `Defs` (statement, constants), `Arith` (odd primes for general q), `TwoAdicEntries`, `TwoAdic` (Lemma 10 at general ν), `TwoAdicEven` (Lemma 10₀), `Shift` (shift lemma), `Analytic`, `NonVan` (block determinants in closed form), `Margin`, `Interface` (assembly) |
 | `Q/Even/` | Theorem Q₄: `Defs` (statement, constants), `WNorm`, `Terms`, `CoreDet`, `Count`, `NuBound`, `TwoAdicSharp` (Lemma 10_e), `Certs` (q = 6, 8, 10, 12), `Margin`, `Interface` (assembly) |
-| `../scripts/gen_cert.py` | generator for the certificate data (untrusted; see TRUST.md) |
+| `TiQ/` | Theorem T: `Defs` (Ti₂, statement, constants), `Machine`, `PoleSeries`, `PoleExpansion` (Lemma 1 at w = −q⁻²), `Free` (the coefficient twist), `Arith`, `TwoAdicEntries`, `TwoAdicNu1` (Lemma 10₁), `TwoAdicEven` (Lemma 10_e transferred), `NonVan/` (Lemma P with the χ₄ signs), `Analytic` (Theorem B for signed w), `Cert/`, `Certs` (q = 6, L = 800), `Margin`, `MainCond`, `Interface` |
+| `QZ/` | Theorem Q4′: `Defs`, `Machine` (the machine at rational ζ = q/2), `PoleExpansion`, `Arith`, `TwoAdicEntries`, `TwoAdic` (Lemma 10″), `NonVan` (Lemma P transferred ℓ-adically), `Nodes`, `Dual`, `TheoremB`, `Shift` (real weight), `CertInstance`, `CertDataQ175`, `CertQ175`, `Margin`, `MainCond`, `Interface` |
+| `../paper/` | the published paper on q = 3, 5 (unchanged) |
+| `../paper_q/` | the paper on Theorems Q₄, T, Q4′ (`main.tex`, `build.sh`), its referee report, novelty record and Hata to-do list |
+| `../scripts/gen_cert.py`, `../scripts/q2num/gen_cert_z.py` | generators for the certificate data (untrusted; see TRUST.md) |
 | `../scripts/q/` | checks made for Theorems Q and Q₄; `referee/` and `referee_q4/` hold the fidelity referees' independent recomputations |
+| `../scripts/tiq/`, `../scripts/q2num/` | checks made for Theorems T and Q4′ |
 | `../scripts/axioms_q.txt`, `../scripts/leanchecker_q.log` | axiom output and per-module `leanchecker` results for the build with Theorem Q |
 | `../scripts/axioms_q4.txt`, `../scripts/leanchecker_q4.log` | the same for the build with Theorem Q₄ |
+| `../scripts/axioms_paper_q.txt`, `../scripts/leanchecker_qz_tiq.log` | axiom output of the current tree (61 declarations) and the `leanchecker` replay of the `QZ/`, `TiQ/` modules (see TRUST.md) |
 | `../Axioms.lean` | axiom audit |
-| `../FIDELITY_REFEREE_Q.md` | AI referee report on the fidelity of the statement of Theorem Q |
-| `../FIDELITY_REFEREE_Q4.md` | AI referee report on the fidelity of the statement of Theorem Q₄ |
+| `../FIDELITY_REFEREE_Q.md`, `../FIDELITY_REFEREE_Q4.md` | AI referee reports on the fidelity of the statements of Theorems Q and Q₄ |
+| `../FIDELITY_REFEREE_TIQ.md`, `../FIDELITY_REFEREE_Q2NUM.md` | the same for Theorems T and Q4′ |
 
 Every Lean file starts with a docstring saying what it proves and how. The files under `Q/` cite `RESULT §n` (or
 `pilot_q/RESULT.md`), the working proof note of Theorem Q, and `CHI2_IRRATIONALITY §n`, the working proof note for
 q = 3, 5. The files under `Q/Even/` cite `pilot_qeven/RESULT.md`, the working proof note of Lemma 10_e and of
-q = 6, 8, 10, 12. These notes belong to the development history and are not part of this repository.
+q = 6, 8, 10, 12. The files under `TiQ/` and `QZ/` cite `pilot_ti2q/RESULT.md` and `pilot_chi2_2q/RESULT.md`. These notes
+belong to the development history and are not part of this repository; `paper_q/main.tex` is the written proof of all
+of them.
 
 ## Status and caveats
 
@@ -267,8 +326,9 @@ q = 6, 8, 10, 12. These notes belong to the development history and are not part
 - The construction, the proofs, the certificate programs and the Lean formalisation were produced largely by AI models
   (Claude, Anthropic), working under the direction of the author. Apart from the Lean kernel check, all verification so
   far has been done by AI systems.
-- The margins are thin: α + Φ ≈ −0.055 per h² for q = 3, −0.0282 for q = 14, and −0.0097 for q = 6, the thinnest in
-  the repository (Lean proves it as ≤ −0.00904). They are certified, not estimated.
+- The margins are thin: α + Φ ≈ −0.055 per h² for χ₂(1/3), −0.0282 for χ₂(1/14), −0.0097 for χ₂(1/6) (Lean proves
+  ≤ −0.00904), −0.0029 for Ti₂(1/6) (Lean proves ≤ −0.0025), and −0.0014 for χ₂(2/175), the thinnest in the repository
+  (Lean proves ≤ −0.00126). They are certified, not estimated.
 
 ## Acknowledgements
 

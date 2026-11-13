@@ -1,19 +1,26 @@
 # What you have to trust
 
+The written proofs are in two papers: `paper/` (q = 3, 5; published, unchanged) and `paper_q/` (Theorems Q₄, T and Q4′
+as Theorems A, B and C; its §13 maps every step to a Lean declaration of commit `7a2780c`).
+
 ## Axioms
 
 `lake env lean Axioms.lean` prints, for the main theorems and each of their main ingredients,
 
 ```
 'Chi2Irr.Q.theoremQ4' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Chi2Irr.TiQ.theoremT' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Chi2Irr.QZ.theoremQ4num' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Chi2Irr.Q.theoremQ' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Chi2Irr.chi2_one_third_irrational' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Chi2Irr.chi2_one_fifth_irrational' depends on axioms: [propext, Classical.choice, Quot.sound]
 ```
 
-and the same list for each of the 41 declarations in `Axioms.lean` (50 with Theorem Q4′, `Chi2Irr.QZ.theoremQ4num`
-and its ingredients: `scripts/q2num/runs/axioms_q2num.txt`) (the output of the run with Theorem Q₄ is
-`scripts/axioms_q4.txt`; that of the earlier run with Theorem Q, 37 declarations, is `scripts/axioms_q.txt`). These are Lean's three standard axioms, the same ones Mathlib uses. The project contains no
+and the same list for each of the 61 declarations in `Axioms.lean`. The output of the current tree (commit `7a2780c`,
+run 2026-11-12) is `scripts/axioms_paper_q.txt`; it was produced in a worktree at commit `54a3d5b`, whose tree is
+identical to that of `7a2780c`, because this checkout's `.lake` holds an older build. Earlier runs:
+`scripts/q2num/runs/axioms_q2num.txt` (50 declarations, with Theorem Q4′), `scripts/axioms_q4.txt` (41, with
+Theorem Q₄), `scripts/axioms_q.txt` (37, with Theorem Q). These are Lean's three standard axioms, the same ones Mathlib uses. The project contains no
 `sorry`, no `axiom` declaration, no `native_decide` and no `implemented_by`, so nothing relies on the compiler. Every
 proof is checked by the kernel:
 - the dual certificates of Theorem B are decidable statements about rational data, proved by `decide +kernel`
@@ -26,9 +33,20 @@ proof is checked by the kernel:
   (`Interval/Log.lean`);
 - the six block determinants of Lemma P for q = 3, 5 are evaluated exactly by `norm_num` (`NonVan/NonVanQ.lean`); for
   Theorem Q, `Q/NonVan.lean` computes the three block determinants as rational functions of q and proves their
-  numerators nonzero for every integer q ≥ 2.
+  numerators nonzero for every integer q ≥ 2; for Theorem T, `TiQ/NonVan/NonVanT.lean` does the same for the Ti blocks
+  (the χ₂ determinants at q² ↦ −q²); for Theorem Q4′, `QZ/NonVan.lean` evaluates them at ζ = q/2 (integers `nS`, `nL`,
+  `nD`, nonzero for q ≥ 5);
+- Theorem T's certificate (`TiQ/Cert/Q6L800.lean` and `TiQ/Cert/Q6L800Cells{A,B,C,D}.lean`, data
+  `TiQ/Cert/DataQ6L800.lean`) and Theorem Q4′'s certificate (`QZ/CertQ175.lean`, data `QZ/CertDataQ175.lean`) are proved
+  by `decide +kernel` in the same way; `TiQ/Cert/DataQ6L800.lean` sets `maxRecDepth` on its literals.
 
 ## Environment replay
+
+**Theorems T and Q4′ (2026-11-12), partial.** The modules under `QZ/` and `TiQ/` were replayed with the command below,
+on the tree of commit `7a2780c` (in the worktree at `54a3d5b`, identical tree): 40 modules pass, 0 fail (3189 s,
+`scripts/leanchecker_qz_tiq.log`). **Not yet replayed:** the seven modules containing the `decide +kernel` proofs of
+the two new certificates (`QZ/CertQ175.lean`, `TiQ/Certs.lean`, `TiQ/Cert/Q6L800.lean`, `TiQ/Cert/Q6L800Cells{A,B,C,D}.lean`),
+since each replay repeats hours of kernel evaluation; they are checked by the kernel during `lake build`.
 
 **Theorem Q₄ (2026-11-09).** After the files for even q were added (91 modules), every module was replayed again with
 the command below (`scripts/leanchecker_q4.log`): all 91 modules pass (3611 s ≈ 60 min).
@@ -61,20 +79,27 @@ The kernel checks the proof. It cannot check that the statements mean what we cl
 | `Chi2Irrational/Statement.lean` | `Chi2OneThirdIrrational := Irrational (chi2 (1/3))`, `Chi2OneFifthIrrational := Irrational (chi2 (1/5))` |
 | `Chi2Irrational/Q/Defs.lean` | `Q.TheoremQ := ∀ q : ℕ, 3 ≤ q → q ∉ ({4, 6, 8, 10, 12} : Finset ℕ) → Irrational (chi2 (1 / (q : ℝ)))` (proved as `Q.theoremQ` in `Q/Interface.lean`) |
 | `Chi2Irrational/Q/Even/Defs.lean` | `Q.TheoremQ4 := ∀ q : ℕ, 3 ≤ q → q ≠ 4 → Irrational (chi2 (1 / (q : ℝ)))` (proved as `Q.theoremQ4` in `Q/Even/Interface.lean`) |
+| `Chi2Irrational/TiQ/Defs.lean` | `TiQ.ti2Term z n := (−1)^n · z^(2n+1) / (2n+1)²`, `TiQ.ti2 z := ∑' n, ti2Term z n` (`summable_ti2Term` for `|z| ≤ 1`), and `TiQ.TheoremT := ∀ q : ℕ, 6 ≤ q → Irrational (ti2 (1 / (q : ℝ)))` (proved as `TiQ.theoremT` in `TiQ/Interface.lean`) |
+| `Chi2Irrational/QZ/Interface.lean` | `QZ.theoremQ4num : ∀ q : ℕ, Odd q → 175 ≤ q → Irrational (chi2 (2 / (q : ℝ)))` (statement written in the theorem itself; `Odd` is Mathlib's) |
 
 `Irrational` is Mathlib's (`x ∉ Set.range ((↑) : ℚ → ℝ)`). In `TheoremQ` and `TheoremQ4`, `1 / (q : ℝ)` is real division after the cast
 ℕ → ℝ, and |1/q| ≤ 1/3, so `summable_chi2Term` applies and `chi2` is again the genuine sum of the series (in any case a
 non-summable `tsum` is 0, which is rational).
 
+In `TheoremT`, |1/q| ≤ 1/6 and `summable_ti2Term` applies; in `theoremQ4num`, `2 / (q : ℝ)` is real division and
+|2/q| ≤ 2/175.
+
 The main theorems are stated about these definitions directly (`Arith/Assembly.lean` for q = 3, 5, `Q/Interface.lean`
-for Theorem Q, `Q/Even/Interface.lean` for Theorem Q₄). Everything in between (the machine Δ_h, the denominators, the
-certificates, for Theorem Q the constants `oddPart`, `alphaCore`, `c2Odd`, `c2Even`, `betaOdd`, `betaEven` of
-`Q/Defs.lean`, and for Theorem Q₄ the constants `cE`, `c2EvenSharp`, `PhiT` and the set `newQ` of `Q/Even/Defs.lean`) is
+for Theorem Q, `Q/Even/Interface.lean` for Theorem Q₄, `TiQ/Interface.lean` for Theorem T, `QZ/Interface.lean` for
+Theorem Q4′). Everything in between (the machines Δ_h, `DeltaT`, `DeltaZ`, the denominators, the certificates, for
+Theorem Q the constants `oddPart`, `alphaCore`, `c2Odd`, `c2Even`, `betaOdd`, `betaEven` of `Q/Defs.lean`, for Theorem Q₄
+the constants `cE`, `c2EvenSharp`, `PhiT` and the set `newQ` of `Q/Even/Defs.lean`, for Theorem T `alphaCoreT`, `c2TiOdd`,
+`PhiT6`, `betaT` of `TiQ/Defs.lean`, and for Theorem Q4′ `alphaZ`, `c2Num`, `qB`, `PhiB`, `betaZ` of `QZ/Defs.lean`) is
 internal to the proof and does not need to be trusted: a wrong internal definition could make the proof fail, not make a statement weaker.
 
 ## Generated files
 
-Seven Lean files contain literal data produced by a script. The script and its output are **untrusted inputs**: every
+Nine Lean files contain literal data produced by a script. The scripts and their output are **untrusted inputs**: every
 number is re-checked by the kernel, so a wrong value makes the build fail; it cannot make a false theorem true.
 
 | data | Lean file | generator |
@@ -86,10 +111,13 @@ number is re-checked by the kernel, so a wrong value makes the build fail; it ca
 | dual certificate for q = 8 (log table of 1204 entries, 50 density cells, 400 cell bounds) | `Cert/DataQ8.lean` | `python scripts/gen_cert.py 8 200 4 50 2 1 Chi2Irrational/Cert/DataQ8.lean Q8` |
 | dual certificate for q = 10 (log table of 1204 entries, 46 density cells, 400 cell bounds) | `Cert/DataQ10.lean` | `python scripts/gen_cert.py 10 200 4 46 2 1 Chi2Irrational/Cert/DataQ10.lean Q10` |
 | dual certificate for q = 12 (log table of 1204 entries, 46 density cells, 400 cell bounds) | `Cert/DataQ12.lean` | `python scripts/gen_cert.py 12 200 4 46 2 1 Chi2Irrational/Cert/DataQ12.lean Q12` |
+| Theorem T: dual certificate for q = 6, L = 800 (log table of 4804 entries, 108 density cells, 1600 cell bounds) | `TiQ/Cert/DataQ6L800.lean` | `scripts/gen_cert.py 6 800 8 108 2 2` (header of the file); the proof files are split by `scripts/tiq/gen_cert_proof_t6.py` |
+| Theorem Q4′: dual certificate at w = (2/175)² (log table of 4804 entries, 70 density cells, 1200 cell bounds) | `QZ/CertDataQ175.lean` | `scripts/q2num/gen_cert_z.py 2 175 1200 12 70 1 1`; proof file by `scripts/q2num/gen_cert_proof_z.py` |
 
-The script optimises a step density in floating point, rounds it to dyadic rationals, and then replicates the Lean
-interval arithmetic exactly in Python fractions, so that every kernel check passes. Re-running it reproduces all seven
-files byte for byte (re-checked for q = 6, 8, 10, 12 on 2026-11-09).
+The scripts optimise a step density in floating point, round it to dyadic rationals, and then replicate the Lean
+interval arithmetic exactly in Python fractions, so that every kernel check passes. Re-running `gen_cert.py` reproduces
+the first seven files byte for byte (re-checked for q = 6, 8, 10, 12 on 2026-11-09); the reproducibility of the last two
+has not been re-checked.
 
 ## How a certificate is checked
 
@@ -108,11 +136,16 @@ into a `DualCert`, to which Theorem B (`Analytic/TheoremB.lean`) applies. The ce
 - `PhiQ < −2.385` for q = 5;
 - `PhiQ = −3.0372394… < −3.03` for q = 14;
 - `PhiQ = −2.5635463… < −2.56` for q = 6, `−2.7264892… < −2.72` for q = 8, `−2.8528812… < −2.85` for q = 10 and
-  `−2.9535971… < −2.95` for q = 12.
+  `−2.9535971… < −2.95` for q = 12;
+- `PhiQ = −2.5671799991… ≤ −2.5671` for Theorem T's certificate at q = 6 (`TiQ/Cert/Q6L800.lean`, `phiQ_le`);
+- `PhiQ = −4.0033242421… ≤ −4.003` for Theorem Q4′'s certificate at w = (2/175)² (`QZ/CertInstance.lean` defines
+  `CDataZ`, with log w = 2 log 2 − 2 log 175; `QZ/CertQ175.lean` checks it).
 
 For Theorem Q the q = 3 and q = 14 certificates are moved to every odd q ≥ 3 and every even q ≥ 14 by the shift lemma
 (`Q/Shift.lean`), which is proved, not computed. For Theorem Q₄ the certificates at q = 6, 8, 10, 12 are used directly
-at their own q, with no shift.
+at their own q, with no shift. For Theorem T the q = 6 certificate is used at q = 6 and shifted to every q ≥ 7; a
+`DualCert q` sees only |w| = q⁻², so it applies to the signed weight w = −q⁻² (`TiQ/Analytic.lean`, `abs_WT`). For
+Theorem Q4′ the certificate at q = 175 is shifted to every odd q ≥ 175 at real weight (`QZ/Shift.lean`).
 
 ## Who checked what
 
@@ -134,11 +167,29 @@ the same Δ_h as Theorem Q and counts the 2-adic share of the gain once, and tha
 axioms or trusted code. It recomputed the four margins in interval arithmetic and the four certificate exponents exactly
 from the data files, by code that shares nothing with the project's scripts (`scripts/q/referee_q4/`).
 
+For Theorem T, the written proof (`pilot_ti2q/RESULT.md`) was read by one AI gate referee (PASS WITH FIXES, fixes
+applied), with independent code. The fidelity of the Lean statement was checked by an independent AI referee,
+`FIDELITY_REFEREE_TIQ.md` (PASS WITH NOTES). It checked that `ti2` is the inverse tangent integral and its `tsum` is
+genuine, that `TheoremT` is exactly "Ti₂(1/q) ∉ ℚ for every q ≥ 6" with no hidden hypotheses, that the constants match
+the written proof, that the Ti machine is tied to `ti2` by a proof (`Lam_eqT`, `aeval_ti2_DeltaT`), and that there are
+no escape hatches. Its process notes (uncommitted files and no recorded axiom audit at the time) were resolved before the
+merge: the axiom audit is `scripts/tiq/axioms_full.txt` and, for the current tree, `scripts/axioms_paper_q.txt`.
+
+For Theorem Q4′, the written proof (`pilot_chi2_2q/RESULT.md`) was read by one AI gate referee (PASS WITH FIXES, fixes
+applied), who also produced an independent certificate of the q = 173 base. The fidelity of the Lean statement was
+checked by an independent AI referee, `FIDELITY_REFEREE_Q2NUM.md` (PASS WITH REMARKS; no code change). It checked the
+statement and the bridge `chi2_two_div`, that `DeltaZ` is the χ₂(1/q) machine at ζ = q/2 (`DeltaZ_natCast` holds by
+`rfl`), that the constants match the written proof with base 175 in place of 173, and recomputed the margin and the
+certificate exponent.
+
+The paper `paper_q/` was reviewed as a whole by one further AI referee (`paper_q/REFEREE.md`).
+
 Apart from the Lean kernel check, **no human has reviewed the mathematics or the Lean code**.
 
 ## Cost
 
 With Mathlib cached, `lake build` took about 10 minutes on a desktop (8 minutes on the author's machine) before Theorem Q
-was added. `LEAN_NUM_THREADS=4 lake build` of the current version runs 9139 jobs. The kernel checks of the
+was added. `LEAN_NUM_THREADS=4 lake build` of the current version runs 9186 jobs. The kernel checks of the
 certificates for general q take 233 s (q = 14, `Cert/Q14.lean`), 502 s (q = 6), 191 s (q = 8), 170 s (q = 10) and
-171 s (q = 12). The full build has not been re-timed.
+171 s (q = 12); Theorem Q4′'s certificate (`QZ/CertQ175.lean`) took 10697 s wall on a shared machine, and Theorem T's
+certificate (`TiQ/Cert/*`) takes several hours. The full build has not been re-timed.
