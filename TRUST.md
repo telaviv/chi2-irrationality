@@ -9,6 +9,7 @@ as Theorems A, B and C; its §13 maps every step to a Lean declaration of commit
 
 ```
 'Chi2Irr.Q.theoremQ4' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Chi2Irr.TiQ.theoremT5' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Chi2Irr.TiQ.theoremT' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Chi2Irr.QZ.theoremQ4num' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Chi2Irr.Q.theoremQ' depends on axioms: [propext, Classical.choice, Quot.sound]
@@ -80,6 +81,7 @@ The kernel checks the proof. It cannot check that the statements mean what we cl
 | `Chi2Irrational/Q/Defs.lean` | `Q.TheoremQ := ∀ q : ℕ, 3 ≤ q → q ∉ ({4, 6, 8, 10, 12} : Finset ℕ) → Irrational (chi2 (1 / (q : ℝ)))` (proved as `Q.theoremQ` in `Q/Interface.lean`) |
 | `Chi2Irrational/Q/Even/Defs.lean` | `Q.TheoremQ4 := ∀ q : ℕ, 3 ≤ q → q ≠ 4 → Irrational (chi2 (1 / (q : ℝ)))` (proved as `Q.theoremQ4` in `Q/Even/Interface.lean`) |
 | `Chi2Irrational/TiQ/Defs.lean` | `TiQ.ti2Term z n := (−1)^n · z^(2n+1) / (2n+1)²`, `TiQ.ti2 z := ∑' n, ti2Term z n` (`summable_ti2Term` for `|z| ≤ 1`), and `TiQ.TheoremT := ∀ q : ℕ, 6 ≤ q → Irrational (ti2 (1 / (q : ℝ)))` (proved as `TiQ.theoremT` in `TiQ/Interface.lean`) |
+| `Chi2Irrational/TiQ/Interface5.lean` | `TiQ.TheoremT5 := ∀ q : ℕ, 5 ≤ q → Irrational (ti2 (1 / (q : ℝ)))` (proved as `TiQ.theoremT5`; same `ti2` as Theorem T) |
 | `Chi2Irrational/QZ/Interface.lean` | `QZ.theoremQ4num : ∀ q : ℕ, Odd q → 175 ≤ q → Irrational (chi2 (2 / (q : ℝ)))` (statement written in the theorem itself; `Odd` is Mathlib's) |
 
 `Irrational` is Mathlib's (`x ∉ Set.range ((↑) : ℚ → ℝ)`). In `TheoremQ` and `TheoremQ4`, `1 / (q : ℝ)` is real division after the cast
@@ -99,7 +101,7 @@ internal to the proof and does not need to be trusted: a wrong internal definiti
 
 ## Generated files
 
-Nine Lean files contain literal data produced by a script. The scripts and their output are **untrusted inputs**: every
+Ten Lean files contain literal data produced by a script. The scripts and their output are **untrusted inputs**: every
 number is re-checked by the kernel, so a wrong value makes the build fail; it cannot make a false theorem true.
 
 | data | Lean file | generator |
@@ -112,6 +114,7 @@ number is re-checked by the kernel, so a wrong value makes the build fail; it ca
 | dual certificate for q = 10 (log table of 1204 entries, 46 density cells, 400 cell bounds) | `Cert/DataQ10.lean` | `python scripts/gen_cert.py 10 200 4 46 2 1 Chi2Irrational/Cert/DataQ10.lean Q10` |
 | dual certificate for q = 12 (log table of 1204 entries, 46 density cells, 400 cell bounds) | `Cert/DataQ12.lean` | `python scripts/gen_cert.py 12 200 4 46 2 1 Chi2Irrational/Cert/DataQ12.lean Q12` |
 | Theorem T: dual certificate for q = 6, L = 800 (log table of 4804 entries, 108 density cells, 1600 cell bounds) | `TiQ/Cert/DataQ6L800.lean` | `scripts/gen_cert.py 6 800 8 108 2 2` (header of the file); the proof files are split by `scripts/tiq/gen_cert_proof_t6.py` |
+| Theorem T₅: dual certificate for q = 5, L = 200 (log table of 1204 entries, 115 density cells, 400 cell bounds) | `Cert/DataQ5L200.lean` | `python scripts/gen_cert.py 5 200 2 115 2 2 Chi2Irrational/Cert/DataQ5L200.lean Q5L200` |
 | Theorem Q4′: dual certificate at w = (2/175)² (log table of 4804 entries, 70 density cells, 1200 cell bounds) | `QZ/CertDataQ175.lean` | `scripts/q2num/gen_cert_z.py 2 175 1200 12 70 1 1`; proof file by `scripts/q2num/gen_cert_proof_z.py` |
 
 The scripts optimise a step density in floating point, round it to dyadic rationals, and then replicate the Lean
@@ -138,6 +141,7 @@ into a `DualCert`, to which Theorem B (`Analytic/TheoremB.lean`) applies. The ce
 - `PhiQ = −2.5635463… < −2.56` for q = 6, `−2.7264892… < −2.72` for q = 8, `−2.8528812… < −2.85` for q = 10 and
   `−2.9535971… < −2.95` for q = 12;
 - `PhiQ = −2.5671799991… ≤ −2.5671` for Theorem T's certificate at q = 6 (`TiQ/Cert/Q6L800.lean`, `phiQ_le`);
+- `PhiQ = −2.4435517556… ≤ −2.44` for Theorem T₅'s certificate at q = 5, L = 200 (`Cert/Q5L200.lean`; kernel check 461 s);
 - `PhiQ = −4.0033242421… ≤ −4.003` for Theorem Q4′'s certificate at w = (2/175)² (`QZ/CertInstance.lean` defines
   `CDataZ`, with log w = 2 log 2 − 2 log 175; `QZ/CertQ175.lean` checks it).
 

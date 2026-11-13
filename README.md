@@ -7,6 +7,9 @@ is the inverse tangent integral.
 
 > **Theorem Q₄.** For every integer q ≥ 3 with q ≠ 4, the number χ₂(1/q) is irrational.
 
+> **Theorem T₅.** For every integer q ≥ 5, the number Ti₂(1/q) is irrational.
+> (`Chi2Irr.TiQ.theoremT5`, files `Chi2Irrational/TiQ/Interface5.lean`, `Chi2Irrational/TiQ/M/*`.)
+
 > **Theorem T.** For every integer q ≥ 6, the number Ti₂(1/q) is irrational.
 > (`Chi2Irr.TiQ.theoremT`, files `Chi2Irrational/TiQ/*`.)
 
@@ -25,7 +28,8 @@ is the inverse tangent integral.
 * **"Irrationality of χ₂(1/q), Ti₂(1/q) and χ₂(2/q)"** ([`paper_q/`](paper_q/), source `paper_q/main.tex`, PDF
   `paper_q/build/main.pdf` after `sh build.sh` in that folder). It proves Theorem Q₄ (its Theorem A), Theorem T (its
   Theorem B) and Theorem Q4′ (its Theorem C) with one construction, and maps every step to the Lean declarations of
-  commit `7a2780c`. Theorem Q appears there only inside the proof of Theorem A. Not yet published.
+  commit `7a2780c`. Theorem Q appears there only inside the proof of Theorem A. Not yet published. Theorem T₅ (the case
+  q = 5) is not in either paper yet; its written proof is the working note `pilot_ti2_q5/RESULT.md` (Lemma M).
 
 ## Theorem T (Ti₂(1/q), q ≥ 6)
 
@@ -40,6 +44,21 @@ certificate, at q = 6 with L = 800 (`TiQ/Cert/*`, Φ ≤ −2.5671), is used at 
 q ≥ 8. Source: `../handoff/log2log3/pilot_ti2q/RESULT.md`. Departures (all declared in the files): one q = 6 base in
 place of the source's q = 5, 8, 10, 12, 14 bases, and weaker entry bounds in Lemma 10₁ (same constant). Fidelity report:
 `FIDELITY_REFEREE_TIQ.md`.
+
+## Theorem T₅ (Ti₂(1/q), q ≥ 5)
+
+Theorem T₅ adds q = 5 to Theorem T; for q ≥ 6 it calls `theoremT`. At q = 5 the 2-adic bound of Lemma 10₁ (¼ log 2) is
+too weak, and Lemma M (`TiQ/M/*`) replaces it: at odd q, n₂(h) ≤ h²/8 + O(h log h), i.e. ⅛ log 2. The written proof
+(`../handoff/log2log3/pilot_ti2_q5/RESULT.md`, one AI gate referee) uses a 2-adic number θ₂ and a 2h-row Cauchy–Binet
+expansion; the Lean proof is rational throughout:
+- `TiQ/M/Defs.lean`: the binomial basis `Cb s`, the truncated Mahler functional `MB`, a rational stand-in `theta` for θ₂;
+- `TiQ/M/Gram.lean`: Δ^Ti_h = (Π i!)² det(Em + (X − θ) AᵀOA) and a 3h × 3h block matrix with the same determinant;
+- `TiQ/M/Binom.lean`, `BoundB.lean`, `Trunc.lean`, `BoundA.lean`: the entry bounds (C), (B), the truncation error, (A);
+- `TiQ/M/Final.lean`: one Leibniz bound with integer row/column potentials (crossover at h/4) and the asymptotics.
+The analytic input is a new kernel-checked certificate at q = 5 with grid L = 200 (`Cert/DataQ5L200.lean`,
+`Cert/Q5L200.lean`, Φ ≤ −2.4435517… ≤ −2.44); the old q = 5 certificate (Φ ≤ −2.385) is too coarse. Margin at q = 5:
+alphaCoreT 5 + ⅛ log 2 − 2.44 = −0.0319… (Lean proves < 0 with elementary logarithm bounds). Departure from the source:
+RESULT's Arb certificate gives margin −0.0436; Lean's coarser certificate gives −0.0319.
 
 ## Theorem Q4′ (χ₂(2/q), odd q ≥ 175)
 
@@ -79,6 +98,10 @@ noncomputable def Chi2Irr.TiQ.ti2 (z : ℝ) : ℝ := ∑' n : ℕ, ti2Term z n
 def Chi2Irr.TiQ.TheoremT : Prop := ∀ q : ℕ, 6 ≤ q → Irrational (ti2 (1 / (q : ℝ)))
 theorem Chi2Irr.TiQ.theoremT : Chi2Irr.TiQ.TheoremT
 
+-- Chi2Irrational/TiQ/Interface5.lean
+def Chi2Irr.TiQ.TheoremT5 : Prop := ∀ q : ℕ, 5 ≤ q → Irrational (ti2 (1 / (q : ℝ)))
+theorem Chi2Irr.TiQ.theoremT5 : Chi2Irr.TiQ.TheoremT5
+
 -- Chi2Irrational/QZ/Interface.lean
 theorem Chi2Irr.QZ.theoremQ4num : ∀ q : ℕ, Odd q → 175 ≤ q → Irrational (chi2 (2 / (q : ℝ)))
 
@@ -96,6 +119,7 @@ theorem Chi2Irr.chi2_one_fifth_irrational : Chi2OneFifthIrrational
 
 ```
 'Chi2Irr.Q.theoremQ4' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Chi2Irr.TiQ.theoremT5' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Chi2Irr.TiQ.theoremT' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Chi2Irr.QZ.theoremQ4num' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Chi2Irr.Q.theoremQ' depends on axioms: [propext, Classical.choice, Quot.sound]
@@ -294,11 +318,12 @@ Paths are relative to `Chi2Irrational/`.
 | `Arith/` | the arithmetic bound: free ring, Gauss norms, class bound, Lemmas 4′, 5, 9, 10, the denominator, final assembly (q = 3, 5) |
 | `PNT/` | prime number theorem (θ(x) ~ x) and prime sums with step weights |
 | `Analytic/` | Theorem B: node expansion, slot determinants, lattice energy inequality, discretization |
-| `Interval/`, `Cert/` | rational interval arithmetic, log enclosures, and the seven kernel-checked dual certificates (q = 3, 5, 14 and q = 6, 8, 10, 12) |
+| `Interval/`, `Cert/` | rational interval arithmetic, log enclosures, and the kernel-checked dual certificates (q = 3, 5, 14, q = 6, 8, 10, 12, and q = 5 with L = 200 for Theorem T₅) |
 | `NonVan/` | Lemma P: ℓ-adic reduction, progressions, class blocks, nonvanishing for q = 3, 5 and the generic route `nonvan_of` |
 | `Q/` | Theorem Q: `Defs` (statement, constants), `Arith` (odd primes for general q), `TwoAdicEntries`, `TwoAdic` (Lemma 10 at general ν), `TwoAdicEven` (Lemma 10₀), `Shift` (shift lemma), `Analytic`, `NonVan` (block determinants in closed form), `Margin`, `Interface` (assembly) |
 | `Q/Even/` | Theorem Q₄: `Defs` (statement, constants), `WNorm`, `Terms`, `CoreDet`, `Count`, `NuBound`, `TwoAdicSharp` (Lemma 10_e), `Certs` (q = 6, 8, 10, 12), `Margin`, `Interface` (assembly) |
 | `TiQ/` | Theorem T: `Defs` (Ti₂, statement, constants), `Machine`, `PoleSeries`, `PoleExpansion` (Lemma 1 at w = −q⁻²), `Free` (the coefficient twist), `Arith`, `TwoAdicEntries`, `TwoAdicNu1` (Lemma 10₁), `TwoAdicEven` (Lemma 10_e transferred), `NonVan/` (Lemma P with the χ₄ signs), `Analytic` (Theorem B for signed w), `Cert/`, `Certs` (q = 6, L = 800), `Margin`, `MainCond`, `Interface` |
+| `TiQ/M/`, `TiQ/Interface5.lean` | Theorem T₅: Lemma M (`Defs`, `Binom`, `Gram`, `BoundB`, `Trunc`, `BoundA`, `Final`) and the assembly for q ≥ 5 |
 | `QZ/` | Theorem Q4′: `Defs`, `Machine` (the machine at rational ζ = q/2), `PoleExpansion`, `Arith`, `TwoAdicEntries`, `TwoAdic` (Lemma 10″), `NonVan` (Lemma P transferred ℓ-adically), `Nodes`, `Dual`, `TheoremB`, `Shift` (real weight), `CertInstance`, `CertDataQ175`, `CertQ175`, `Margin`, `MainCond`, `Interface` |
 | `../paper/` | the published paper on q = 3, 5 (unchanged) |
 | `../paper_q/` | the paper on Theorems Q₄, T, Q4′ (`main.tex`, `build.sh`), its referee report, novelty record and Hata to-do list |
@@ -327,7 +352,7 @@ of them.
   (Claude, Anthropic), working under the direction of the author. Apart from the Lean kernel check, all verification so
   far has been done by AI systems.
 - The margins are thin: α + Φ ≈ −0.055 per h² for χ₂(1/3), −0.0282 for χ₂(1/14), −0.0097 for χ₂(1/6) (Lean proves
-  ≤ −0.00904), −0.0029 for Ti₂(1/6) (Lean proves ≤ −0.0025), and −0.0014 for χ₂(2/175), the thinnest in the repository
+  ≤ −0.00904), −0.0029 for Ti₂(1/6) (Lean proves ≤ −0.0025), −0.0319 for Ti₂(1/5), and −0.0014 for χ₂(2/175), the thinnest in the repository
   (Lean proves ≤ −0.00126). They are certified, not estimated.
 
 ## Acknowledgements

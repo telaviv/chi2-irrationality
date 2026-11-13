@@ -78,3 +78,15 @@ Run `lake env lean Axioms.lean`. Every line should print `[propext, Classical.ch
 #print axioms Chi2Irr.TiQ.margin_t_odd
 #print axioms Chi2Irr.TiQ.margin_t_even
 #print axioms Chi2Irr.TiQ.map_DeltaFT
+-- Theorem T₅: Ti₂(1/q) ∉ ℚ for q ≥ 5 (Lemma M at odd q, the q = 5 certificate)
+#print axioms Chi2Irr.TiQ.theoremT5
+#print axioms Chi2Irr.TiQ.twoAdic_odd_M
+#print axioms Chi2Irr.TiQ.cert_t5
+#print axioms Chi2Irr.TiQ.margin_t5
+#print axioms Chi2Irr.TiQ.M.DeltaT_eq_Cb
+#print axioms Chi2Irr.TiQ.M.det_block
+#print axioms Chi2Irr.TiQ.M.boundA
+#print axioms Chi2Irr.TiQ.M.Om_bound
+#print axioms Chi2Irr.TiQ.M.Am_bound
+#print axioms Chi2Irr.TiQ.M.err_bound
+#print axioms Chi2Irr.TiQ.M.twoAdic_DeltaT_M

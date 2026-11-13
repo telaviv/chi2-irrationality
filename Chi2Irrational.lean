@@ -69,3 +69,4 @@ import Chi2Irrational.Q.Interface
 import Chi2Irrational.Q.Even.Interface
 import Chi2Irrational.QZ.Interface
 import Chi2Irrational.TiQ.Interface
+import Chi2Irrational.TiQ.Interface5
