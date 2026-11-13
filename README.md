@@ -36,8 +36,8 @@ is the inverse tangent integral.
 The machine is the χ₂(1/q) machine with the signed weight w = −q⁻² (`TiQ/Machine.lean`). Its determinant is a
 coefficient twist of the symbolic χ₂ determinant, Δ^Ti_h(X; q) = Δ^χ_h(−iX; iq), realised over ℚ by `TiQ/Free.lean`
 (`parity_DeltaF`, `map_DeltaFT`); so the odd-prime bounds, Lemma 5, Lemma 4′ and Lemma 10_e transfer, with q² + 1 in place
-of q² − 1. At odd q, v₂(q² + 1) = 1 and the prime 2 costs ¼ log 2 (Lemma 10₁, `TiQ/TwoAdicNu1.lean`); this is why q = 3, 5
-are out of reach. Theorem B sees only |w|, so the certificates carry over (`TiQ/Analytic.lean`). Lemma P is a sign copy
+of q² − 1. At odd q, v₂(q² + 1) = 1 and the prime 2 costs ¼ log 2 (Lemma 10₁, `TiQ/TwoAdicNu1.lean`); with that bound q = 3, 5
+are out of reach (q = 5 is recovered by Lemma M, Theorem T₅ below; q = 3 stays out). Theorem B sees only |w|, so the certificates carry over (`TiQ/Analytic.lean`). Lemma P is a sign copy
 (`TiQ/NonVan/*`): the block determinants are the χ₂ ones at q² ↦ −q², nonzero for every q. One kernel-checked
 certificate, at q = 6 with L = 800 (`TiQ/Cert/*`, Φ ≤ −2.5671), is used at q = 6 and shifted to every q ≥ 7. Margins:
 −0.0029 at q = 6 (Lean proves ≤ −0.0025), ≤ −0.098 for odd q ≥ 7, ≤ −0.10 for even
@@ -127,8 +127,8 @@ theorem Chi2Irr.chi2_one_fifth_irrational : Chi2OneFifthIrrational
 'Chi2Irr.chi2_one_fifth_irrational' depends on axioms: [propext, Classical.choice, Quot.sound]
 ```
 
-The proof uses only Lean's three standard axioms (`lake env lean Axioms.lean`, 61 declarations, run 2026-11-12:
-`scripts/axioms_paper_q.txt`). There is no `sorry`, no added `axiom` and no `native_decide`: every numerical certificate
+The proof uses only Lean's three standard axioms (`lake env lean Axioms.lean`, 72 declarations, run 2026-11-13:
+`scripts/axioms_t5.txt`; the 61-declaration run of commit `7a2780c` is `scripts/axioms_paper_q.txt`). There is no `sorry`, no added `axiom` and no `native_decide`: every numerical certificate
 is evaluated by the Lean kernel. See [TRUST.md](TRUST.md).
 
 ## Context
@@ -332,15 +332,17 @@ Paths are relative to `Chi2Irrational/`.
 | `../scripts/tiq/`, `../scripts/q2num/` | checks made for Theorems T and Q4′ |
 | `../scripts/axioms_q.txt`, `../scripts/leanchecker_q.log` | axiom output and per-module `leanchecker` results for the build with Theorem Q |
 | `../scripts/axioms_q4.txt`, `../scripts/leanchecker_q4.log` | the same for the build with Theorem Q₄ |
-| `../scripts/axioms_paper_q.txt`, `../scripts/leanchecker_qz_tiq.log` | axiom output of the current tree (61 declarations) and the `leanchecker` replay of the `QZ/`, `TiQ/` modules (see TRUST.md) |
+| `../scripts/axioms_paper_q.txt`, `../scripts/leanchecker_qz_tiq.log` | axiom output of commit `7a2780c` (61 declarations) and the `leanchecker` replay of its `QZ/`, `TiQ/` modules (see TRUST.md) |
+| `../scripts/axioms_t5.txt` | axiom output of the current tree, with Theorem T₅ (72 declarations) |
 | `../Axioms.lean` | axiom audit |
 | `../FIDELITY_REFEREE_Q.md`, `../FIDELITY_REFEREE_Q4.md` | AI referee reports on the fidelity of the statements of Theorems Q and Q₄ |
-| `../FIDELITY_REFEREE_TIQ.md`, `../FIDELITY_REFEREE_Q2NUM.md` | the same for Theorems T and Q4′ |
+| `../FIDELITY_REFEREE_TIQ.md`, `../FIDELITY_REFEREE_Q2NUM.md`, `../FIDELITY_REFEREE_T5.md` | the same for Theorems T, Q4′ and T₅ |
 
 Every Lean file starts with a docstring saying what it proves and how. The files under `Q/` cite `RESULT §n` (or
 `pilot_q/RESULT.md`), the working proof note of Theorem Q, and `CHI2_IRRATIONALITY §n`, the working proof note for
 q = 3, 5. The files under `Q/Even/` cite `pilot_qeven/RESULT.md`, the working proof note of Lemma 10_e and of
-q = 6, 8, 10, 12. The files under `TiQ/` and `QZ/` cite `pilot_ti2q/RESULT.md` and `pilot_chi2_2q/RESULT.md`. These notes
+q = 6, 8, 10, 12. The files under `TiQ/` and `QZ/` cite `pilot_ti2q/RESULT.md` and `pilot_chi2_2q/RESULT.md`, and those under `TiQ/M/` cite
+`pilot_ti2_q5/RESULT.md` (Lemma M). These notes
 belong to the development history and are not part of this repository; `paper_q/main.tex` is the written proof of all
 of them.
 

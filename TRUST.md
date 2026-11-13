@@ -17,8 +17,9 @@ as Theorems A, B and C; its §13 maps every step to a Lean declaration of commit
 'Chi2Irr.chi2_one_fifth_irrational' depends on axioms: [propext, Classical.choice, Quot.sound]
 ```
 
-and the same list for each of the 61 declarations in `Axioms.lean`. The output of the current tree (commit `7a2780c`,
-run 2026-11-12) is `scripts/axioms_paper_q.txt`; it was produced in a worktree at commit `54a3d5b`, whose tree is
+and the same list for each of the 72 declarations in `Axioms.lean`. The output of the current tree, with Theorem T₅
+(run 2026-11-13), is `scripts/axioms_t5.txt`. The output for commit `7a2780c` (61 declarations, run 2026-11-12) is
+`scripts/axioms_paper_q.txt`; it was produced in a worktree at commit `54a3d5b`, whose tree is
 identical to that of `7a2780c`, because this checkout's `.lake` holds an older build. Earlier runs:
 `scripts/q2num/runs/axioms_q2num.txt` (50 declarations, with Theorem Q4′), `scripts/axioms_q4.txt` (41, with
 Theorem Q₄), `scripts/axioms_q.txt` (37, with Theorem Q). These are Lean's three standard axioms, the same ones Mathlib uses. The project contains no
@@ -39,9 +40,13 @@ proof is checked by the kernel:
   `nD`, nonzero for q ≥ 5);
 - Theorem T's certificate (`TiQ/Cert/Q6L800.lean` and `TiQ/Cert/Q6L800Cells{A,B,C,D}.lean`, data
   `TiQ/Cert/DataQ6L800.lean`) and Theorem Q4′'s certificate (`QZ/CertQ175.lean`, data `QZ/CertDataQ175.lean`) are proved
-  by `decide +kernel` in the same way; `TiQ/Cert/DataQ6L800.lean` sets `maxRecDepth` on its literals.
+  by `decide +kernel` in the same way; `TiQ/Cert/DataQ6L800.lean` sets `maxRecDepth` on its literals; so is Theorem T₅'s
+  certificate (`Cert/Q5L200.lean`, data `Cert/DataQ5L200.lean`, no options set);
 
 ## Environment replay
+
+**Theorem T₅ (2026-11-13).** The new modules (`TiQ/M/*`, `TiQ/Interface5.lean`, `Cert/{DataQ5L200,Q5L200}.lean`) have
+**not** been replayed with `leanchecker`; they are checked by the kernel during `lake build` (9196 jobs, 2026-11-13).
 
 **Theorems T and Q4′ (2026-11-12), partial.** The modules under `QZ/` and `TiQ/` were replayed with the command below,
 on the tree of commit `7a2780c` (in the worktree at `54a3d5b`, identical tree): 40 modules pass, 0 fail (3189 s,
@@ -96,7 +101,8 @@ for Theorem Q, `Q/Even/Interface.lean` for Theorem Q₄, `TiQ/Interface.lean` fo
 Theorem Q4′). Everything in between (the machines Δ_h, `DeltaT`, `DeltaZ`, the denominators, the certificates, for
 Theorem Q the constants `oddPart`, `alphaCore`, `c2Odd`, `c2Even`, `betaOdd`, `betaEven` of `Q/Defs.lean`, for Theorem Q₄
 the constants `cE`, `c2EvenSharp`, `PhiT` and the set `newQ` of `Q/Even/Defs.lean`, for Theorem T `alphaCoreT`, `c2TiOdd`,
-`PhiT6`, `betaT` of `TiQ/Defs.lean`, and for Theorem Q4′ `alphaZ`, `c2Num`, `qB`, `PhiB`, `betaZ` of `QZ/Defs.lean`) is
+`PhiT6`, `betaT` of `TiQ/Defs.lean`, for Theorem Q4′ `alphaZ`, `c2Num`, `qB`, `PhiB`, `betaZ` of `QZ/Defs.lean`, and for Theorem T₅ `PhiT5` and everything in
+`TiQ/M/` (`Cb`, `fd`, `MB`, `theta`, `Em`, `Am`, `Om`, the potentials `rP`, `cP`)) is
 internal to the proof and does not need to be trusted: a wrong internal definition could make the proof fail, not make a statement weaker.
 
 ## Generated files
@@ -185,6 +191,12 @@ checked by an independent AI referee, `FIDELITY_REFEREE_Q2NUM.md` (PASS WITH REM
 statement and the bridge `chi2_two_div`, that `DeltaZ` is the χ₂(1/q) machine at ζ = q/2 (`DeltaZ_natCast` holds by
 `rfl`), that the constants match the written proof with base 175 in place of 173, and recomputed the margin and the
 certificate exponent.
+
+For Theorem T₅, the written proof of Lemma M (`pilot_ti2_q5/RESULT.md`) was read by one AI gate referee (PASS WITH FIXES,
+fixes applied), with independent code. The Lean route differs (rational θ, one Leibniz bound with potentials on a block
+matrix in place of the 2h-row Cauchy–Binet); its fidelity was checked by an independent AI referee,
+`FIDELITY_REFEREE_T5.md` (PASS WITH FIXES; documentation only, applied), who recomputed the q = 5 certificate exponent
+exactly and the margin. Lemma M as formalised has not been read by a human.
 
 The paper `paper_q/` was reviewed as a whole by one further AI referee (`paper_q/REFEREE.md`).
 

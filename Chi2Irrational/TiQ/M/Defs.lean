@@ -12,8 +12,10 @@ rational throughout:
   `Λ_X(Cb i · Cb j) = Em + (X − θ)·(Aᵀ O A)` with `Em = A + θ·B` on `Cb i · Cb j`, `Am n i = Δ^n_k Cb_i(x_k)|_{k=0}` and
   `Om n n′ = Σ_k β_k C(k,n) C(k,n′)`;
 * instead of the 2h-row Cauchy–Binet of RESULT §1 step 4, one Leibniz bound with row/column potentials on a
-  `3h × 3h` block matrix whose determinant is `det(Em + (X − θ) AᵀOA)` (`TiQ/M/Gram.lean`, `TiQ/M/Final.lean`); its
-  tropical value equals RESULT's subset bound exactly (checked for h ≤ 48).
+  `3h × 3h` block matrix whose determinant is `det(Em + (X − θ) AᵀOA)` (`TiQ/M/Gram.lean`, `TiQ/M/Final.lean`). With
+  RESULT's bound (A), `2^{i+j+1−h}`, its tropical value equals RESULT's subset bound exactly (checked for h ≤ 48); the
+  formal bound (A) (`boundA`, `2^{i+j+2−h}`) is weaker by one, so the proved exponent `n2M` exceeds RESULT's bound by
+  `O(h)` (about `h/4`). The limit constant `⅛ log 2` is unchanged.
 -/
 import Chi2Irrational.TiQ.TwoAdicNu1
 import Mathlib.Algebra.Group.ForwardDiff
