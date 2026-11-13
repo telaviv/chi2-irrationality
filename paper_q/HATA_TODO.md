@@ -16,8 +16,11 @@ Background estimate (not a citation; quoted in the paper as a heuristic since th
 reconstruction of Hata's method at shift ½ and Q = +q² (`handoff/log2log3/pilot_q/hata/RESULT.md`) suggests q₀ ≈ 55–85
 for χ₂(1/q); it says nothing about Q = −q², where his unshifted thresholds are better (Q ≤ −8 against Q ≥ 12).
 
-Also secondhand: Hata, Trans. AMS 336 (1993) (bib `Hata1993`), "reportedly Li₂(1/q) ∉ ℚ for q ≥ 7 and q ≤ −5"; the paper
-says it was not consulted (§1.2, bullet "Single dilogarithm values"). It does not affect any novelty range.
+Hata, Trans. AMS 336 (1993) (bib `Hata1993`) was **read on 2026-11-12** (copy supplied by the owner). Theorem 1.1:
+L₂(1/k) ∉ ℚ for k ∈ (−∞, −5] ∪ [7, ∞), plus linear independence of 1, log(1 − 1/k), L₂(1/k); unshifted dilogarithm only,
+via Legendre-type polynomials B_{l,m,n}. Its §1 confirms firsthand that Hata 1990 (its ref. [8], JMPA 69) proved
+L₂(1/k) ∉ ℚ for k ∈ (−∞, −8] ∪ [12, ∞). It gives no shift-½ threshold, so the items below are unchanged. The paper now
+cites it firsthand (§1.2, bullets "Hata's criterion" and "Single dilogarithm values").
 
 ## Marked spots in `main.tex` (search for `% HATA-`)
 
