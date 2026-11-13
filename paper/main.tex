@@ -66,9 +66,7 @@ the size of $\Delta_h(\chi_2(1/q))$ by a discrete log-gas argument against an ex
 and prove that $\Delta_h(a/b)\ne0$ for every rational $a/b$ and infinitely many $h$, through a reduction modulo
 an auxiliary prime $\ell=h/3$. The margins are below $-0.054$ ($q=3$) and $-0.256$ ($q=5$) per $h^2$. The whole
 proof, including the prime number theorem and both numerical certificates, has been formalised in Lean~4 with Mathlib
-and checked by the Lean kernel, using only Lean's three standard axioms. The same repository also contains a formal
-proof, by the same method together with a sharper $2$-adic bound for even $q$, that $\chi_2(1/q)$ is irrational for
-every integer $q\ge3$ with $q\ne4$.
+and checked by the Lean kernel, using only Lean's three standard axioms.
 \end{abstract}
 
 \maketitle
@@ -192,10 +190,6 @@ certificates and the block determinants. The proof depends only on Lean's three 
 (\lean{propext}, \lean{Classical.choice}, \lean{Quot.sound}). It contains no \lean{sorry} and no
 \lean{native\_decide}: every proof, including every computation, is checked by the kernel. The repository is
 \url{https://github.com/telaviv/chi2-irrationality} \cite{Chi2Repo}; Section~\ref{sec:lean} describes it.
-The repository also proves, in Lean and with the same three axioms, that $\chi_2(1/q)\notin\QQ$ for every integer
-$q\ge3$ with $q\ne4$ (Theorem~\ref{thm:Q4} in Section~\ref{sec:leanQ4}), by way of the intermediate
-Theorem~\ref{thm:Q} ($q\notin\{4,6,8,10,12\}$, Section~\ref{sec:leanQ}). Their written proofs are not part of this
-paper: Sections~\ref{sec:leanQ} and~\ref{sec:leanQ4} only list what changes for general $q$.
 
 The prose proof below is self-contained and can be read without the formalisation, except that two
 kinds of finite computation are only described, not reproduced: the two dual certificates (Theorem~\ref{thm:cert}),
@@ -1157,9 +1151,7 @@ shows that $\chi_2(1/3)$ and $\chi_2(1/5)$ are irrational. \qed
 \subsection{What is formalised}
 The repository \url{https://github.com/telaviv/chi2-irrationality} \cite{Chi2Repo} contains a proof of
 Theorem~\ref{thm:main} in Lean~4 \cite{LeanFour} (version v4.35.0) with Mathlib \cite{Mathlib} (version v4.35.0
-\cite{Mathlib4}). It has 91 Lean files under \lean{Chi2Irrational\slash{}}, with about $22{,}000$ lines; 61 of them
-(about $18{,}000$ lines) make up the proof of Theorem~\ref{thm:main}, 12 extend it to general $q$
-(Section~\ref{sec:leanQ}), and the other 18 cover the even values $q=6,8,10,12$ (Section~\ref{sec:leanQ4}). The formalisation covers every step of the proof,
+\cite{Mathlib4}). It has 61 Lean files under \lean{Chi2Irrational\slash{}}, with about $18{,}000$ lines. The formalisation covers every step of the proof,
 including the parts that a written proof would cite: the prime number theorem, the Andreief identity, the lattice
 energy inequality, both dual certificates and the block determinants. Paths below are relative to the folder
 \lean{Chi2Irrational\slash{}}, and all declarations are in the namespace \lean{Chi2Irr}.
@@ -1185,14 +1177,9 @@ The command \lean{lake env lean Axioms.lean} prints
 'Chi2Irr.chi2\_one\_third\_irrational' depends on axioms:\\
 \hspace*{2em}[propext, Classical.choice, Quot.sound]\\
 'Chi2Irr.chi2\_one\_fifth\_irrational' depends on axioms:\\
-\hspace*{2em}[propext, Classical.choice, Quot.sound]\\
-'Chi2Irr.Q.theoremQ' depends on axioms:\\
-\hspace*{2em}[propext, Classical.choice, Quot.sound]\\
-'Chi2Irr.Q.theoremQ4' depends on axioms:\\
 \hspace*{2em}[propext, Classical.choice, Quot.sound]
 \end{quote}
-(the last two for Theorems~\ref{thm:Q} and~\ref{thm:Q4}, Sections~\ref{sec:leanQ} and~\ref{sec:leanQ4}) and the same
-list for each of the 41 declarations listed in \lean{Axioms.lean}. These are Lean's three standard axioms,
+and the same list for each of the main ingredients listed in \lean{Axioms.lean}. These are Lean's three standard axioms,
 which Mathlib also uses. The development contains no \lean{sorry}, no added axiom, no \lean{native\_decide} and no
 \lean{implemented\_by}, so no step relies on compiled code.
 
@@ -1225,8 +1212,7 @@ Thm.~\ref{thm:nonvan} & \lean{nonvan\_of}, \lean{nonvan\_three}, \lean{nonvan\_f
 Section~\ref{sec:proof} & \lean{margin\_three}, \lean{margin\_five}, \lean{boundsThree}, \lean{boundsFive}, \lean{chi2\_one\_third\_irrational}, \lean{chi2\_one\_fifth\_irrational} (\lean{Arith\slash{}Assembly})\\
 \bottomrule
 \end{tabular}
-\caption{Formal counterparts of the main steps of the proof of Theorem~\ref{thm:main}. Those of
-Theorem~\ref{thm:Q} are in Table~\ref{tab:leanQ}.}\label{tab:lean}
+\caption{Formal counterparts of the main steps.}\label{tab:lean}
 \end{table}
 
 A few arguments are organised differently in the formalisation.
@@ -1248,182 +1234,28 @@ A few arguments are organised differently in the formalisation.
   Section~\ref{sec:analytic}. Both Theorem~\ref{thm:B} and the certificates use these closed forms.
 \end{itemize}
 
-\subsection{General \texorpdfstring{$q$}{q}}\label{sec:leanQ}
-The repository also contains a formal proof of the following extension of Theorem~\ref{thm:main}.
-
-\begin{theorem}\label{thm:Q}
-For every integer $q\ge3$ with $q\notin\{4,6,8,10,12\}$, the number $\chi_2(1/q)$ is irrational.
-\end{theorem}
-
-In Lean (\lean{Q\slash{}Defs.lean} and \lean{Q\slash{}Interface.lean}, namespace \lean{Chi2Irr.Q}):
-\begin{quote}\ttfamily\footnotesize
-def TheoremQ : Prop :=\\
-\hspace*{2em}$\forall$ q : $\mathbb{N}$, 3 $\le$ q $\to$\\
-\hspace*{4em}q $\notin$ ($\{$4, 6, 8, 10, 12$\}$ : Finset $\mathbb{N}$) $\to$\\
-\hspace*{4em}Irrational (chi2 (1 / (q : $\mathbb{R}$)))\\[2pt]
-theorem theoremQ : TheoremQ
-\end{quote}
-Here $1/q$ is real division after the cast $\NN\to\RR$, and $|1/q|\le\frac13$, so \lean{chi2} is again the genuine sum
-of the series. \lean{TheoremQ} uses only \lean{chi2} and Mathlib's definitions; the constants of \lean{Q\slash{}Defs.lean}
-are internal to the proof.
-
-The written proof of Theorem~\ref{thm:Q} is not part of this paper. The construction of Section~\ref{sec:construction},
-Theorem~\ref{thm:conditional} and Theorem~\ref{thm:B} hold for every $q\ge2$, in the paper and in Lean, and the
-arguments of Sections~\ref{sec:arith1}--\ref{sec:nonvan} carry over with the following changes, each formalised in the
-files under \lean{Q\slash{}} (Table~\ref{tab:leanQ}).
-\begin{itemize}
-\item \emph{Odd primes.} Write $q'$ and $q''$ for the odd parts of $q$ and $q^2-1$. The odd primes cost at most
-  $\frac{133}{60}+\frac14\log q''-\frac13\log q'$ per $h^2$: Lemmas~\ref{lem:poleorder} and~\ref{lem:nine} for odd
-  $p\mid q^2-1$, and Lemma~\ref{lem:qadic} prime by prime for odd $p\mid q$, with multiplicity $v_p(q)$.
-\item \emph{The prime $2$.} For odd $q$, Lemma~\ref{lem:two} holds with the exponent $(\nu-2)\beta_h+h(\lfloor\log_2h\rfloor+6)$,
-  where $\nu=v_2(q^2-1)\ge3$; the proof is the same, with $v_2(\Omega_b)=-\nu(b+1)$. For even $q$, a cruder Gauss
-  bound in the anchored basis gives the $2$-adic exponent $2\lfloor h/2\rfloor(\lfloor h/2\rfloor+1)-v_2(q)a_h\le
-  h^2/2+h-v_2(q)a_h$. Altogether the arithmetic constant is
-  $\alpha(q)=\frac{133}{60}\mp\frac12\log2+\frac14\log(q^2-1)-\frac13\log q$, with the sign $-$ for odd $q$ and $+$
-  for even $q$; for $q=3,5$ this is $\alpha_q$.
-\item \emph{Size.} The functional depends on $q$ only through $w=q^{-2}$, and lowering $w$ to $w'$ subtracts
-  $x\log(w/w')$ from the external field $V$. Since the density of a certificate is at most $2$, a dual certificate
-  for $q_0$ yields one for every $q\ge q_0$ whose exponent is smaller by $\frac12\log(q/q_0)$, up to an arbitrarily small
-  loss in the discretised form used in Lean (\lean{Q.DualCert.shift}). Odd $q$ use the certificate for $q=3$ of
-  Theorem~\ref{thm:cert}, so $\Phi\le-2.078-\frac12\log(q/3)$. Even $q\ge14$ use a further kernel-checked certificate
-  for $q=14$ (\lean{Cert\slash{}DataQ14.lean}, \lean{Cert\slash{}Q14.lean}: $L=200$, $40$ density cells, exponent
-  $-3.0372394\ldots$, used as $\Phi\le-3.03$), so $\Phi\le-3.03-\frac12\log(q/14)$.
-\item \emph{Nonvanishing.} The three block determinants of Section~\ref{sec:nonvan} are rational functions of $q$,
-  \begin{gather*}
-    \frac{8q^6(9q^2+1)}{9(q^2-1)},\qquad
-    \frac{8q^2(16200q^6-10575q^4-6352q^2+905)}{2025(q^2-1)},\\
-    -\frac{q^4(16200q^6-51075q^4+28523q^2+420)}{135(q^2-1)^2},
-  \end{gather*}
-  whose numerators do not vanish at any integer $q\ge2$.
-\item \emph{Margins.} By closed forms valid for all $q$, the margin is at most
-  $\frac{133}{60}-2.078-\frac12\log2+\frac16\log3<-0.023$ for odd $q\ge3$ and at most
-  $\frac{133}{60}-3.03+\frac76\log2<-0.0046$ for even $q\ge14$. The actual worst cases are $-0.0543$ at $q=3$ and
-  $-0.0282$ at $q=14$.
-\end{itemize}
-The formal proof departs from its written source in three ways, none of which loses anything that is claimed. For odd
-$q$ it uses the certificate for $q=3$ above instead of a sharper one with $\Phi\le-2.0987$. For even $q$ it uses its
-own certificate for $q=14$ instead of the sharper certificates of the written proof ($\Phi\le-3.0444$ and
-$\Phi\le-3.0498$), so the margin at $q=14$ is $-0.0282$ instead of $-0.0426$. And its even $2$-adic exponent is
-$h^2/2+O(h)$ instead of $\lfloor h^2/2\rfloor-h$, with the same limit.
-
-For even $q\le12$ the $2$-adic cost $(\frac12-\frac13v_2(q))\log2$ of the bound above is too large, and the margin is
-positive. Section~\ref{sec:leanQ4} replaces it by a sharper bound, which reaches $q=6,8,10,12$.
-
-\subsection{The even values \texorpdfstring{$q=6,8,10,12$}{q=6,8,10,12}}\label{sec:leanQ4}
-The repository also contains a formal proof of the following extension of Theorem~\ref{thm:Q}.
-
-\begin{theorem}\label{thm:Q4}
-For every integer $q\ge3$ with $q\ne4$, the number $\chi_2(1/q)$ is irrational.
-\end{theorem}
-
-In Lean (\lean{Q\slash{}Even\slash{}Defs.lean} and \lean{Q\slash{}Even\slash{}Interface.lean}, namespace
-\lean{Chi2Irr.Q}):
-\begin{quote}\ttfamily\footnotesize
-def TheoremQ4 : Prop :=\\
-\hspace*{2em}$\forall$ q : $\mathbb{N}$, 3 $\le$ q $\to$ q $\ne$ 4 $\to$\\
-\hspace*{4em}Irrational (chi2 (1 / (q : $\mathbb{R}$)))\\[2pt]
-theorem theoremQ4 : TheoremQ4
-\end{quote}
-The proof of \lean{theoremQ4} applies Theorem~\ref{thm:Q} to every $q\notin\{4,6,8,10,12\}$. For $q=6,8,10,12$ it runs
-the proof of Theorem~\ref{thm:Q} with two changes, formalised in the files under \lean{Q\slash{}Even\slash{}}
-(Table~\ref{tab:leanQ}); the written proof of these changes is not part of this paper.
-\begin{itemize}
-\item \emph{The prime $2$ for even $q$.} Let $e=v_2(q)\ge1$. On $\QQ[[q]][X]$ the weighted Gauss valuation
-  $v_e(\sum c_{n,j}q^nX^j)=\inf_{n,j}(v_2(c_{n,j})+en)$ is ultrametric and satisfies $v_e(fg)\ge v_e(f)+v_e(g)$. After the
-  odd factor $(q^2-1)^{\beta_h}$ of Lemma~\ref{lem:poleorder} is cleared, it bounds the $2$-adic size of $\Delta_h(X)$ at
-  the integer $q$. Bounding $v_e$ of every term of the slot expansion of Lemma~\ref{lem:qadic} gives the $2$-adic
-  exponent
-  \[
-    -e\,a_h+c(e)\,h^2+O(h\log h),\qquad c(e)=\frac{6-4e}{3(3e+8)},
-  \]
-  so $c(1)=\frac2{33}$, $c(2)=-\frac1{21}$ and $c(3)=-\frac2{17}$, in place of the constant $\frac12$ of the bound of
-  Section~\ref{sec:leanQ}. The term bound uses the prices of the node and pole slots, the exact $2$-adic sizes of the
-  slot weights, and the $2$-adic size of the Vandermonde factors, which have derivative rows at the doubled nodes. The
-  arithmetic constant for even $q$ becomes
-  $\alpha_e(q)=\frac{133}{60}+c(e)\log2+\frac14\log(q^2-1)-\frac13\log q$.
-\item \emph{Size.} Each of $q=6,8,10,12$ has its own kernel-checked certificate, used at that $q$ without a shift
-  (\lean{Cert\slash{}DataQ6.lean}, \dots, \lean{Cert\slash{}DataQ12.lean}; $L=400$ and $54$ density cells for $q=6$,
-  $L=200$ and $50$, $46$, $46$ cells for $q=8,10,12$). The exponents are $-2.5635463\ldots$, $-2.7264892\ldots$,
-  $-2.8528812\ldots$ and $-2.9535971\ldots$, used as $\Phi\le-2.56$, $-2.72$, $-2.85$ and $-2.95$.
-\item \emph{Margins.} The margins $\alpha_e(q)+\Phi$ are $-0.0097$, $-0.2422$, $-0.2101$ and $-0.3539$ for
-  $q=6,8,10,12$. Lean proves the weaker bounds $-0.00904$, $-0.238$, $-0.203$ and $-0.304$ with elementary logarithm
-  bounds. The margin at $q=6$ is the thinnest in the repository.
-\end{itemize}
-The formal proof departs from its written source in two ways, neither of which loses anything that is claimed. Its count
-of the $2$-adic valuations runs through the Andreief expansion of the truncated slot matrix of Lemma~\ref{lem:qadic}
-and a $2$-adic bound for Vandermonde determinants with derivative rows, instead of a confluent Cauchy--Binet formula;
-its $O(h\log h)$ terms are cruder, and the leading constant $c(e)$ is the same. And its certificates are weaker than
-those of the written proof ($\Phi\le-2.5704$, $-2.7418$, $-2.8694$, $-2.9710$), so its margins are smaller than the
-written proof's $-0.0202$, $-0.2641$, $-0.2295$ and $-0.3750$.
-
-The case $q=4$ stays open: our computations give the margin $+0.090$ there even with the sharper $2$-adic bound and the
-best certificate we have, and the machine would need $c(2)<-0.177$. The case $q=2$ is discussed in
-Section~\ref{sec:remarks}. For $q\ge2949$ the irrationality of $\chi_2(1/q)$ follows from the criterion of David,
-Hirata-Kohno and Kawashima \cite{DHK2022} (Section~\ref{sec:intro}). Below that we know of no earlier proof, with the
-caveat of Section~\ref{sec:intro}: we have not determined the range of Hata's method \cite{Hata1990} for the shift
-$\frac12$, and it may reach lower.
-
-\begin{table}[ht]
-\centering\small
-\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.27\textwidth}>{\raggedright\arraybackslash}p{0.69\textwidth}@{}}
-\toprule
-Theorems~\ref{thm:Q}, \ref{thm:Q4} & Lean declaration (file) \\
-\midrule
-statement, assembly & \lean{Q.TheoremQ}, \lean{Q.alphaCore}, \lean{Q.c2Odd}, \lean{Q.c2Even}, \lean{Q.betaOdd}, \lean{Q.betaEven} (\lean{Q\slash{}Defs}); \lean{Q.exists\_bounds}, \lean{Q.theoremQ} (\lean{Q\slash{}Interface})\\
-odd primes & \lean{Q.denq}, \lean{Q.denq\_int}, \lean{Q.arith\_q\_proof} (\lean{Q\slash{}Arith})\\
-prime $2$, odd $q$ & \lean{Q.V2\_entry} (\lean{Q\slash{}TwoAdicEntries}); \lean{Q.twoAdic\_Delta}, \lean{Q.twoAdic\_odd\_proof} (\lean{Q\slash{}TwoAdic})\\
-prime $2$, even $q$ & \lean{Q.GLeX\_DeltaF\_two}, \lean{Q.twoAdic\_even\_proof} (\lean{Q\slash{}TwoAdicEven})\\
-size & \lean{Q.DualCert.shift} (\lean{Q\slash{}Shift}); \lean{Cert.Q14.phi\_le} (\lean{Cert\slash{}Q14}); \lean{Q.analytic\_odd\_proof}, \lean{Q.analytic\_even\_proof} (\lean{Q\slash{}Analytic})\\
-nonvanishing & \lean{Q.det\_MS\_q}, \lean{Q.det\_ML\_q}, \lean{Q.det\_MD\_q}, \lean{Q.nonvan\_q\_proof} (\lean{Q\slash{}NonVan})\\
-margins & \lean{Q.margin\_odd\_proof}, \lean{Q.margin\_even\_proof} (\lean{Q\slash{}Margin})\\
-\midrule
-statement, assembly (Thm.~\ref{thm:Q4}) & \lean{Q.TheoremQ4}, \lean{Q.cE}, \lean{Q.c2EvenSharp}, \lean{Q.PhiT}, \lean{Q.newQ} (\lean{Q\slash{}Even\slash{}Defs}); \lean{Q.irrational\_newQ}, \lean{Q.theoremQ4} (\lean{Q\slash{}Even\slash{}Interface})\\
-prime $2$, even $q$, sharp & \lean{Q.WLe} (\lean{Q\slash{}Even\slash{}WNorm}); \lean{Q.WLe\_term} (\lean{Q\slash{}Even\slash{}Terms}); \lean{Q.CoreDet.padicNorm\_detR\_le} (\lean{Q\slash{}Even\slash{}CoreDet}); \lean{Q.sum\_cntL\_ge}, \lean{Q.large\_node} (\lean{Q\slash{}Even\slash{}Count}); \lean{Q.nu\_ge} (\lean{Q\slash{}Even\slash{}NuBound}); \lean{Q.padicNorm\_Delta\_of\_WLe}, \lean{Q.twoAdic\_even\_sharp\_proof} (\lean{Q\slash{}Even\slash{}TwoAdicSharp})\\
-size, $q=6,8,10,12$ & \lean{Cert.Q6.phi\_le}, \dots, \lean{Cert.Q12.phi\_le} (\lean{Cert\slash{}Q6}--\lean{Cert\slash{}Q12}); \lean{Q.cert\_newQ\_proof} (\lean{Q\slash{}Even\slash{}Certs})\\
-margins, $q=6,8,10,12$ & \lean{Q.margin\_newQ\_proof} (\lean{Q\slash{}Even\slash{}Margin})\\
-\bottomrule
-\end{tabular}
-\caption{Formal counterparts of the steps of Theorems~\ref{thm:Q} and~\ref{thm:Q4}.}\label{tab:leanQ}
-\end{table}
-
 \subsection{How the certificates are checked}
-The dual certificates are records of rational data (\lean{Cert\slash{}DataQ3.lean}, \lean{Cert\slash{}DataQ5.lean},
-for Theorem~\ref{thm:Q} \lean{Cert\slash{}DataQ14.lean}, and for Theorem~\ref{thm:Q4} \lean{Cert\slash{}DataQ6.lean},
-\dots, \lean{Cert\slash{}DataQ12.lean}): the
+The dual certificates are records of rational data (\lean{Cert\slash{}DataQ3.lean}, \lean{Cert\slash{}DataQ5.lean}): the
 log table as a list of integers in units of $2^{-40}$, the heights $c_j$, the bounds $S_k$, $\lambda$ and $E_{\mathrm{lo}}$.
-\lean{CData.Valid} collects every check of Section~\ref{sec:cert} as a Boolean computation, and \lean{Cert\slash{}Q3.lean},
-\lean{Cert\slash{}Q5.lean}, \lean{Cert\slash{}Q14.lean} and \lean{Cert\slash{}Q6.lean}, \dots, \lean{Cert\slash{}Q12.lean}
-prove it by \lean{decide +kernel}, i.e.\ by evaluation in the Lean kernel. The interval
+\lean{CData.Valid} collects every check of Section~\ref{sec:cert} as a Boolean computation, and \lean{Cert\slash{}Q3.lean}
+and \lean{Cert\slash{}Q5.lean} prove it by \lean{decide +kernel}, i.e.\ by evaluation in the Lean kernel. The interval
 arithmetic (\lean{Interval\slash{}}) has exact rational endpoints (only the log-table entries and the enclosure of $\log2$
 are dyadic by construction), and its soundness lemmas turn
 \lean{check = true} into real inequalities; the enclosure of $\log2$ is itself checked by \lean{decide +kernel}
 against Mathlib's series bound. The data were produced by the script \lean{scripts\slash{}gen\_cert.py}, which is not
 trusted: a wrong value would make the build fail but could not make a false statement provable. Re-running the
-script reproduces all seven data files byte for byte. The six block determinants of Theorem~\ref{thm:nonvan} are evaluated
+script reproduces both data files byte for byte. The six block determinants of Theorem~\ref{thm:nonvan} are evaluated
 exactly by \lean{norm\_num}.
 
 \subsection{Cost}
-With Mathlib's prebuilt cache, a clean build of the proof of Theorem~\ref{thm:main} takes about ten minutes on a
-desktop computer, and the two kernel-checked certificates are a small part of it. The files for Theorem~\ref{thm:Q} add
-the kernel check of the certificate for $q=14$, which alone takes about four minutes, and those for
-Theorem~\ref{thm:Q4} add the kernel checks of the certificates for $q=6,8,10,12$, about seventeen minutes in all
-($502$, $191$, $170$ and $171$ seconds).
+With Mathlib's prebuilt cache, a clean build of the project takes about ten minutes on a desktop computer. The two
+kernel-checked certificates are a small part of it.
 
 \subsection{What has to be trusted}
 Beyond the Lean kernel and the three axioms, the reader has to trust that the definitions displayed above express
-Theorems~\ref{thm:main}, \ref{thm:Q} and~\ref{thm:Q4}, and the Mathlib definitions they use (real numbers, \lean{tsum},
-\lean{Irrational}, finite sets of natural numbers). Nothing
-else, in particular no numerical data and no generating script, needs to be trusted. To avoid trusting the
-elaborator's handling of the environment, we replayed every declaration of the $61$ project modules of the proof of
-Theorem~\ref{thm:main} through the
-kernel with \lean{leanchecker} (the \lean{lean4checker} tool shipped with the Lean toolchain), run on each module
-against the compiled environment of its imports; it reported no errors.
-After the files of Theorem~\ref{thm:Q} were added, every declaration of all $73$ project modules was replayed in the
-same way on 9 November 2026; all modules passed, in about $41$ minutes in total.
-After the files of Theorem~ef{thm:Q4} were added, every declaration of all $91$ project modules was replayed in the
-same way on 9 November 2026; all modules passed, in about $60$ minutes in total.
-Mathlib itself was not replayed from scratch
-(\lean{--fresh}). Apart from the check
+Theorem~\ref{thm:main}, and the Mathlib definitions they use (real numbers, \lean{tsum}, \lean{Irrational}). Nothing
+else, in particular no numerical data and no generating script, needs to be trusted. A reader who does not want to
+trust the elaborator's environment handling can replay the environment with \lean{lean4checker}; we have not done so. Apart from the check
 by the Lean kernel, all verification of the formalisation so far was carried out by AI systems; no human expert has
 yet reviewed the Lean code.
 
@@ -1447,16 +1279,9 @@ Lemma~\ref{lem:nine} decay slowly relative to the margin for $q=3$. The irration
 \subsection{Other values of \texorpdfstring{$q$}{q}}
 The construction works verbatim for every integer $q\ge2$. The arithmetic part is
 $\frac{133}{60}+c_2(q)\log2+\sum_{p\mid q^2-1,\,p\text{ odd}}\frac{v_p(q^2-1)}4\log p-\frac13\log q$, where $c_2(q)$ is the
-$2$-adic constant: $c_2=\frac14(v_2(q^2-1)-2)$ for odd $q$, and for even $q$ either $c_2=\frac12$ with the cruder
-bound of Section~\ref{sec:leanQ} or $c_2=c(v_2(q))$ with the sharper bound of Section~\ref{sec:leanQ4}. The primes dividing $q^2-1$ cost about $\frac12\log q$, and the analytic part gains
-$\frac12\log(q/q_0)$ by the shift of Section~\ref{sec:leanQ} from a certificate for $q_0$, so the margin falls like $-\frac13\log q$, the gain at the
-prime $q$. With these constants made explicit the method proves Theorem~\ref{thm:Q}: $\chi_2(1/q)\notin\QQ$ for every
-integer $q\ge3$ outside $\{4,6,8,10,12\}$, formalised in Lean as \lean{Chi2Irr.Q.theoremQ}. The margins are given by
-closed forms, below $-0.023$ for every odd $q\ge3$ and below $-0.0046$ for every even $q\ge14$; $q=3$ is the hardest odd
-case and $q=14$ the hardest even one. With the sharper $2$-adic bound and direct certificates the method also proves
-$q=6,8,10,12$, so Theorem~\ref{thm:Q4}: $\chi_2(1/q)\notin\QQ$ for every integer $q\ge3$ with $q\ne4$, formalised as
-\lean{Chi2Irr.Q.theoremQ4} (Section~\ref{sec:leanQ4}). Its thinnest margin is $-0.0097$, at $q=6$. The value $q=4$
-remains open: there the margin is positive even with the sharper bound.
+$2$-adic constant ($c_2=\frac14$ when $v_2(q^2-1)=3$). The analytic part improves as $q$ grows [numerical]. We expect the method to prove $\chi_2(1/q)\notin\QQ$ for
+every $q\ge3$ once these constants are made explicit, with $q=3$ the hardest case [heuristic]. We have not carried
+this out.
 
 \subsection{\texorpdfstring{$\chi_2(1/2)$}{chi2(1/2)}}
 At $q=2$ ($w=\frac14$) the same construction fails [numerical]. The analytic part is only about $C(\frac14)\approx-1.744$,
