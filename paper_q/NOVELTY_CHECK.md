@@ -270,3 +270,11 @@ above:
   (HATA_TODO.md); its threshold at Q = −q² would have to be ≤ 25 to cover q = 5.
 
 Verdict for q = 5: **CLEAR** (no prior or concurrent result found), with the same Hata caveat as for 6 ≤ q ≤ 2948.
+
+## Addendum 2026-11-13: Hexagon
+
+Hexagon (hexagonmath.org), an active venue for AI-generated results in this area, was not covered above. Searched
+2026-11-13 (site search) for irrational, irrationality, inverse tangent, dilogarithm, Legendre, Hankel, Li2, chi2, Ti2,
+Hata, Lerch and polylogarithm. The only χ₂ or Ti₂ irrationality results are our own: 2610.00372v2 (χ₂(1/3), χ₂(1/5))
+and 2611.00265v1 (χ₂ and Ti₂ at units of real quadratic fields). Nothing on χ₂(1/q), Ti₂(1/q) or χ₂(2/q) for
+integer q. Verdicts A, B and C are unchanged: **CLEAR**.
