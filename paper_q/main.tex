@@ -66,7 +66,7 @@ approximation, logarithmic potential theory, formal verification, Lean}
 \begin{abstract}
 Let $\chi_2(z)=\sum_{n\ge0}z^{2n+1}/(2n+1)^2$ be Legendre's chi function and
 $\Ti_2(z)=\sum_{n\ge0}(-1)^nz^{2n+1}/(2n+1)^2$ the inverse tangent integral. We prove three theorems: $\chi_2(1/q)$ is
-irrational for every integer $q\ge3$ with $q\ne4$; $\Ti_2(1/q)$ is irrational for every integer $q\ge6$; and
+irrational for every integer $q\ge3$ with $q\ne4$; $\Ti_2(1/q)$ is irrational for every integer $q\ge5$; and
 $\chi_2(2/q)$ is irrational for every odd integer $q\ge175$. All three come from one construction: the Hankel
 determinants of a moment functional with half-integer poles and geometric weight $w$, read at $w=q^{-2}$, $w=-q^{-2}$
 and $w=4q^{-2}$. Their denominators are bounded prime by prime, their size by a discrete log-gas argument against
@@ -102,7 +102,7 @@ For every integer $q\ge3$ with $q\ne4$, the number $\chi_2(1/q)$ is irrational.
 \end{mainthm}
 
 \begin{mainthm}\label{thm:B}
-For every integer $q\ge6$, the number $\Ti_2(1/q)$ is irrational.
+For every integer $q\ge5$, the number $\Ti_2(1/q)$ is irrational.
 \end{mainthm}
 
 \begin{mainthm}\label{thm:C}
@@ -170,7 +170,7 @@ rational point of size about $q^{-2}$.
 % HATA-2 (begin)
 \emph{Novelty.} To our knowledge, and relative to the criteria we have read, the following ranges are new:
 Theorem~\ref{thm:A} for $6\le q\le2948$ (the cases $q=3,5$ are in \cite{Chi2Paper}); Theorem~\ref{thm:B} for
-$6\le q\le2948$; and Theorem~\ref{thm:C} for $175\le q<11{,}795$. For Theorems~\ref{thm:A} and~\ref{thm:B} this is
+$5\le q\le2948$; and Theorem~\ref{thm:C} for $175\le q<11{,}795$. For Theorems~\ref{thm:A} and~\ref{thm:B} this is
 subject to the threshold of \cite{Hata1990} for the shift $\frac12$, which we could not check: if that threshold is
 below $q$, the corresponding values are covered by Hata's theorem. By the heuristic estimate above, the range that is
 genuinely new for Theorem~\ref{thm:A} may be much shorter than $6\le q\le2948$, perhaps $q\lesssim85$ or less; for
@@ -215,6 +215,7 @@ lists the arithmetic constants.
 \ref{thm:A}, even $q$ & $q^{-2}$ & $\frac14\log(q^2-1)-\frac13\log\odd(q)$ & $(\frac12-\frac e3)\log2$ & \ref{lem:ten0}\\
  & & & or $(c(e)-\frac e3)\log2$ & \ref{lem:tene}\\
 \ref{thm:B}, odd $q$ & $-q^{-2}$ & $\frac14\log\frac{q^2+1}2-\frac13\log q$ & $\frac14\log2$ & \ref{lem:ten1}\\
+ & & & or $\frac18\log2$ & \ref{lem:M}\\
 \ref{thm:B}, even $q$ & $-q^{-2}$ & $\frac14\log(q^2+1)-\frac13\log\odd(q)$ & $(c(e)-\frac e3)\log2$ & \ref{cor:teneTi}\\
 \ref{thm:C}, odd $q$ & $4q^{-2}$ & $\frac14\log(q^2-4)-\frac13\log q$ & $\frac43\log2$ & \ref{lem:tenZ}\\
 \bottomrule
@@ -232,8 +233,10 @@ case, and needs a separate lemma in each:
 \item for odd $q$ in Theorem~\ref{thm:A}, the bound of \cite{Chi2Paper} at general $\nu=v_2(q^2-1)\ge3$;
 \item for even $q$, a weighted Gauss valuation on the reflected expansion of the functional, which gives the constant
   $c(e)$; it is what brings $q=6,8,10,12$ within reach;
-\item for $\Ti_2$ at odd $q$, $\nu=v_2(q^2+1)=1$, so $\Ti_2(1/q)$ pays $\frac12\log2$ more than $\chi_2(1/q)$; this
-  is why $q=3,5$ are out of reach for $\Ti_2$;
+\item for $\Ti_2$ at odd $q$, $\nu=v_2(q^2+1)=1$, so the $2$-part of $q^2+1$ saves only $\frac14\log2$ and
+  $\Ti_2(1/q)$ pays $\frac12\log2$ more in total than $\chi_2(1/q)$ (entry bounds in the anchored basis cost
+  $\frac14\log2$); a change to the binomial basis halves the cost of the prime $2$ to $\frac18\log2$
+  (Lemma~\ref{lem:M}), which brings $q=5$ within reach ($q=3$ stays out);
 \item for $\chi_2(2/q)$ the numerator costs at least $\log2$ per $h^2$ (we prove $n_2\ge h^2-h$) and at most
   $\frac43\log2$, which the analytic side pays only from $q\approx175$ on.
 \end{itemize}
@@ -1034,6 +1037,7 @@ $1/14^2$ & $-3.03$ & Thm.~\ref{thm:A}, even $q\ge14$\\
 $1/6^2$, $1/8^2$ & $-2.56$, $-2.72$ & Thm.~\ref{thm:A}, $q=6,8$\\
 $1/10^2$, $1/12^2$ & $-2.85$, $-2.95$ & Thm.~\ref{thm:A}, $q=10,12$\\
 $1/6^2$ (finer) & $-2.5671$ & Thm.~\ref{thm:B}, all $q\ge6$\\
+$1/5^2$ & $-2.44$ & Thm.~\ref{thm:B}, $q=5$\\
 $4/175^2$ & $-4.003$ & Thm.~\ref{thm:C}, odd $q\ge175$\\
 \bottomrule
 \end{tabular}
@@ -1075,6 +1079,7 @@ $1/8^2$ & $1/200$ & $[0,2]$ ($400$) & $50\times\frac1{50}$ & $1$ & $1204$ & $-2.
 $1/10^2$ & $1/200$ & $[0,2]$ ($400$) & $46\times\frac1{50}$ & $1$ & $1204$ & $-2.8528812\ldots$\\
 $1/12^2$ & $1/200$ & $[0,2]$ ($400$) & $46\times\frac1{50}$ & $1$ & $1204$ & $-2.9535971\ldots$\\
 $1/6^2$ (finer) & $1/800$ & $[0,2]$ ($1600$) & $108\times\frac1{100}$ & $2$ & $4804$ & $-2.5671799\ldots$\\
+$1/5^2$ & $1/200$ & $[0,2]$ ($400$) & $115\times\frac1{100}$ & $2$ & $1204$ & $-2.4435517\ldots$\\
 $4/175^2$ & $1/1200$ & $[0,1]$ ($1200$) & $70\times\frac1{100}$ & $1$ & $4804$ & $-4.0033242\ldots$\\
 \bottomrule
 \end{tabular}
@@ -1505,6 +1510,108 @@ So for odd $q$ the prime $2$ costs $\frac14\log2$, and the arithmetic constant i
 Compared with \eqref{eq:alphaodd}, $\Ti_2(1/q)$ pays $\frac12\log2+\frac14\log\frac{q^2+1}{q^2-1}$ more than
 $\chi_2(1/q)$ at odd $q$.
 
+\subsection{The prime 2 at odd \texorpdfstring{$q$}{q}: the binomial basis}
+With Lemma~\ref{lem:ten1} the margin at $q=5$ is positive ($+0.055$ with the certificate $\Phi\le-2.44$ of
+Theorem~\ref{thm:cert}, $+0.043$ with the ball-arithmetic certificate of the remark after the proof of
+Theorem~\ref{thm:B}), and no bound on the entries of the anchored basis can do better: their tropical maximum is
+$\approx h^2/4$, and the true $2$-adic size of $\Delta^{\Ti}_h$ comes from cancellation. Exact computations give
+$-\min_kv_2([X^k]\Delta^{\Ti}_h)\approx h^2/8$. The next lemma proves this leading constant by changing to the binomial
+basis, where the cancellation becomes a factorisation.
+
+\begin{lemma}[Lemma~M]\label{lem:M}
+Let $q\ge3$ be odd. Then $n_2(h):=-\min_kv_2\bigl([X^k]\Delta^{\Ti}_h\bigr)$ satisfies
+$n_2(h)\le\frac{h^2}8+O(h\log h)$. So the prime $2$ costs at most $\frac18\log2$ per $h^2$.
+\end{lemma}
+
+\emph{Notation.} $C_s(u)=u(u-1)\cdots(u-s+1)/s!$ is the binomial polynomial: it has degree $s$ and leading coefficient
+$1/s!$, it is integer-valued on $\ZZ_{\ge0}$, and $C_{s+1}(u+1)=C_{s+1}(u)+C_s(u)$ (Pascal). For $F\colon\ZZ_{\ge0}\to\QQ$,
+$\Delta^bF(0)$ is the iterated forward difference. Put $B_0:=16h+16$,
+\[
+  \mathbb M(F):=\sum_{b<B_0}\Omega_b\,\Delta^bF(0),\qquad f_k(t):=-\frac1{(t-x_k)^2},
+\]
+\[
+  \tilde\theta:=\frac{4-\mathbb M(f_0)}{4q}\in\QQ .
+\]
+Here $\tilde\theta$ is an auxiliary rational number, not the target $\Ti_2(1/q)$. By \eqref{eq:newton},
+$\mu(R)=\mathbb M(R')$ for every polynomial $R$ of degree $\le B_0$. (The written proof in our working notes uses the
+$2$-adic limit $\theta_2$ of $\tilde\theta$ and the untruncated sum; the truncation keeps everything rational.)
+
+\begin{proof}
+\emph{Step 1: the binomial Gram matrix.} By \eqref{eq:gram} with $a_i=b_i=C_i$,
+$\Delta^{\Ti}_h=(\prod_{i<h}i!)^2\det(\Lambda_X(C_iC_j))_{i,j<h}$. For $k<h$, Newton's formula gives
+$C_i(x_k)=\sum_{n<h}\binom kn\mathcal A_{ni}$ with $\mathcal A_{ni}:=\Delta^n_k[C_i(x_k)](0)$. Since $B(g)=\sum_k\beta_kg(x_k)$
+with $\beta_k=-4\omega_k(-1)^kq^{2k+1}$, we get $B(C_iC_j)=(\mathcal A^{\mathsf T}\mathcal O\mathcal A)_{ij}$ with
+$\mathcal O_{nn'}:=\sum_{k<h}\beta_k\binom kn\binom k{n'}$. As $\Lambda_X=(A+\tilde\theta B)+(X-\tilde\theta)B$,
+\[
+  \Lambda_X(C_iC_j)=E_{ij}+(X-\tilde\theta)(\mathcal A^{\mathsf T}\mathcal O\mathcal A)_{ij},\qquad
+  E_{ij}:=A(C_iC_j)+\tilde\theta B(C_iC_j).
+\]
+By the Schur complement, $\det(E+(X-\tilde\theta)\mathcal A^{\mathsf T}\mathcal O\mathcal A)=\det\mathcal N$ for the
+$3h\times3h$ matrix
+$\mathcal N=\begin{pmatrix}E&\mathcal A^{\mathsf T}&0\\0&1&-(X-\tilde\theta)\mathcal O\\-\mathcal A&0&1\end{pmatrix}$ over
+$\QQ[X]$.
+
+\emph{Step 2: the entries of $\mathcal A$: $|\mathcal A_{ni}|_2\le2^{2(i-n)}$, and $\mathcal A_{ni}=0$ for $n>i$.} Since
+$x_{k+1}=x_k-1$, Pascal gives $C_i(x_{k+1})-C_i(x_k)=-C_{i-1}(x_{k+1})$, so $\mathcal A_{ni}=(-1)^nC_{i-n}(x_n)$ for $n\le i$
+and $\mathcal A_{ni}=0$ for $n>i$. And $C_s(x_k)=\prod_{l<s}\bigl(-\frac{2k+2l+1}2\bigr)/s!$ has $|\cdot|_2\le2^{2s}$.
+
+\emph{Step 3: the entries of $\mathcal O$: $|\mathcal O_{nn'}|_2\le2^{n+n'-1}$.} With $K=h-1$ and $Q=q^2$,
+$D'(x_k)=(-1)^kk!(K-k)!$ gives $\beta_k=\frac{2q}{K!}\binom Kk(2k+1)Q^k$. From
+$\sum_k\binom Kk\binom ksQ^k=\binom KsQ^s(1+Q)^{K-s}$ and $k\binom ks=s\binom ks+(s+1)\binom k{s+1}$, the number
+$T_s:=\sum_k\beta_k\binom ks$ is $\frac{2q}{K!}$ times an integer combination of $\binom KsQ^s(1+Q)^{K-s}$ and
+$2\binom K{s+1}Q^{s+1}(1+Q)^{K-s-1}$ (with coefficients $2s+1$ and $s+1$); as $v_2(1+Q)=1$ and $v_2(K!)\le K$,
+$v_2(T_s)\ge1-s$. Finally $\binom kn\binom k{n'}=\sum_{s\le n+n'}c_s\binom ks$ with $c_s\in\ZZ$ (the forward differences of an
+integer-valued polynomial of degree $n+n'$), so $v_2(\mathcal O_{nn'})\ge1-n-n'$.
+
+\emph{Step 4: the rational $\tilde\theta$.} As $f_{k+1}(t)=f_k(t+1)$, $\Delta^bf_{k+1}(0)=\Delta^bf_k(0)+\Delta^{b+1}f_k(0)$,
+and $\Omega_{b-1}=(w^{-1}-1)\Omega_b$ ($b\ge2$), $\Omega_0=(w^{-1}-1)\Omega_1-1$ give
+\[
+  \mathbb M(f_{k+1})=-q^2\,\mathbb M(f_k)+\frac4{(2k+3)^2}+(-q^2-1)\,\Omega_{B_0}\,\Delta^{B_0}f_k(0).
+\]
+The pole values $D_k:=4S^{\Ti}_k(q)-4\tilde\theta(-1)^kq^{2k+1}$ satisfy $D_{k+1}=-q^2D_k+4/(2k+3)^2$, and
+$D_0=\mathbb M(f_0)$ by the choice of $\tilde\theta$. Here $v_2(-q^2-1)=1$, $v_2(\Omega_{B_0})=-(B_0+1)$, and
+$v_2(\Delta^{B_0}f_k(0))\ge B_0+2+v_2(B_0!)$ (the proof of Lemma~\ref{lem:fdseq}, as $f_k(t)=-4(2k+1+2t)^{-2}$), with
+$v_2(B_0!)\ge B_0/2$. By induction on $k$, $|D_k-\mathbb M(f_k)|_2\le2^{-(8h+8)}$ for all $k$. Also
+$v_2(\mathbb M(f_0))\ge1$, so $|\tilde\theta|_2\le2$.
+
+\emph{Step 5: the entries of $E$: $|E_{ij}|_2\le2^{i+j+2-h}$.} Let $g=C_iC_j$ and $R_g=(gu)\operatorname{div}D$. By
+definition $E_{ij}=\mu(R_g)+\sum_kg(x_k)\omega_kD_k$. Split $D_k=\mathbb M(f_k)+e_k$. The error terms have
+$|g(x_k)\omega_ke_k|_2\le2^{2i+2j}\cdot2^h\cdot2^{-8h-8}\le2^{i+j+2-h}$ (Step~2, $v_2(\omega_k)\ge-h$, Step~4). The rest is
+$\mu(R_g)+\sum_kg(x_k)\omega_k\mathbb M(f_k)=\mathbb M(F)$, where $F(t)=(gu/D)'(t)$ by partial fractions; here $(F_1/F_2)'(t)$
+means $(F_1'(t)F_2(t)-F_1(t)F_2'(t))/F_2(t)^2$, so no analysis is needed. Since $|\Omega_b|_2=2^{b+1}$, it suffices to show
+$|\Delta^bF(0)|_2\le2^{i+j+1-h-b}$ for $b<B_0$. Write $D(u)=2^{-h}P(2u)$ with $P(T)=\prod_{k<h}(T+2k+1)$, $P(0)$ odd. With
+$U:=1-P/P(0)=T\,V$ and $Y:=P(0)^{-1}\sum_{m<M}U^m$ one has $PY=1-T^MV^M$, with $2$-integral coefficients, so
+\[
+  \frac{g(u)\,u}{D(u)}=2^h\,g(u)\,u\,Y(2u)+2^{h+M}\,\frac{g(u)\,u^{M+1}V(2u)^M}{P(2u)} .
+\]
+The polynomial part is $\sum_m2^{h+m}\sigma_mu^{m+1}g$ with $\sigma_m$ $2$-integral. For an integer-valued polynomial $G$ of
+degree $\le d$, $|\Delta^bG'(0)|_2\le2^{d-b}$: write $G=\sum_sc_sC_s$ with $c_s\in\ZZ$, and use
+$\Delta^bC_s'(0)=C_{s-b}'(0)=(-1)^{s-b-1}/(s-b)$ for $b<s$ (Pascal, differentiated), and $0$ for $b\ge s$. With
+$d=m+1+i+j$ this gives $2^{i+j+1-h-b}$. For the tail take $M=B_0+2h+1$: at a node $t$, $P(2t)$ is odd; the numerator
+$g(u)\,u^{M+1}V(2u)^M$ is an integer there, and its derivative has $|\cdot|_2\le2^{2h}$: the factor $u^{M+1}V(2u)^M$
+has integer coefficients, $g(t)\in\ZZ$, and $|g'(t)|_2\le2^{i+j}\le2^{2h}$ by the derivative bound just proved (with
+$b=0$, applied to $G(x)=g(t+x)$). So the tail contributes at most $2^{2h-h-M}\le2^{i+j+1-h-b}$.
+
+\emph{Step 6: one Leibniz bound with potentials.} Put $\alpha=-\lfloor h/2\rfloor$, $\gamma=2-h+\lfloor h/2\rfloor$ and
+$\beta=\alpha-\lfloor h/4\rfloor$, and give the rows of $\mathcal N$ the exponents $\max(i+\alpha,2i+\beta)$ ($E$-rows,
+$i<h$), $\max(2n+\beta,n)$ (middle rows) and $-2n-\beta$ (bottom rows), and the columns the exponents
+$\max(j+\gamma,2j+\beta)$ ($E$-columns, $j<h$), $-2n-\beta$ (middle columns) and $\max(2n+\beta,n)$ (right columns). By
+Steps~2--5, and since the coefficients of $-(X-\tilde\theta)\mathcal O_{nn'}$ are $-\mathcal O_{nn'}$ and
+$\tilde\theta\mathcal O_{nn'}$, every entry of $\mathcal N$ has coefficients of $2$-adic size at most
+$2^{\text{row}+\text{column}}$. Lemma~\ref{lem:leibniz} bounds the coefficients of $\det\mathcal N$ by $2^{S_h}$, where $S_h$
+is the sum of all the exponents. Writing $\max(x,y)=y+(x-y)_+$ and summing,
+$2S_h\le4h(h-1)-4hr+p(p+1)+p'(p'+1)+2r(r+1)$ with $r=-\beta$, $p=\lfloor h/4\rfloor$, $p'=\gamma-\beta$, and this is at most
+$\frac94h^2+13$. With $v_2(i!)\ge i-1-\log_2i$, $n_2(h)\le S_h-2\sum_{i<h}v_2(i!)\le\frac{h^2}8+O(h\log h)$.
+\end{proof}
+
+\begin{remark}
+The crossover of the potentials at $h/4$ is the extremal configuration of the proof in our working notes: a quarter of
+the slots at node levels, three quarters at pole levels. With the sharper bound $|E_{ij}|_2\le2^{i+j+1-h}$ of those notes,
+the tropical value of the Leibniz bound for $\mathcal N$ equals their subset bound exactly (we checked this for
+$h\le48$); the version above is weaker by $O(h)$. Exact computations at $q=3,5$ give $n_2(h)=h^2/8+O(h)$ for $h\le80$, so
+the constant $\frac18$ appears to be sharp.
+\end{remark}
+
 \subsection{The prime 2 at even \texorpdfstring{$q$}{q}}
 
 \begin{corollary}[Lemma~$10_e$ for $\Ti_2$]\label{cor:teneTi}
@@ -1544,7 +1651,12 @@ Corollary~\ref{cor:nonvanA}.
 \end{proof}
 
 \subsection{Proof of Theorem~\ref{thm:B}}
-Let $q\ge6$. Theorem~\ref{thm:size} applies with $W=|w|=q^{-2}$: the certificates see only $|w|$. We use the finer
+Let $q\ge5$. Theorem~\ref{thm:size} applies with $W=|w|=q^{-2}$: the certificates see only $|w|$. For $q=5$ we use
+Lemma~\ref{lem:M} and the certificate at $W=1/25$ of Theorem~\ref{thm:cert} ($\Phi\le-2.44$):
+\[
+  \frac{133}{60}+\frac14\log13-\frac13\log5+\frac18\log2-2.44=-0.0319\ldots .
+\]
+For $q\ge6$ we use the finer
 certificate at $W=1/36$ of Theorem~\ref{thm:cert} ($\Phi\le-2.5671$) directly at $q=6$ and shifted by
 Lemma~\ref{lem:shift} for $q\ge7$, $\beta=-2.5671-\frac12\log\frac q6+\delta$. With $\log(q^2+1)\le2\log q+q^{-2}$:
 \begin{itemize}
@@ -1558,8 +1670,9 @@ Lemma~\ref{lem:shift} for $q\ge7$, $\beta=-2.5671-\frac12\log\frac q6+\delta$. W
 With $\delta=10^{-4}$ all margins are negative, and Theorem~\ref{thm:conditional} gives Theorem~\ref{thm:B}. \qed
 
 \begin{remark}
-The margin at $q=6$ is about $-0.003$ per $h^2$ (only Theorem~\ref{thm:C} at $q=175$, about $-0.0014$, is
-thinner). It rests on the exact leading constant
+For odd $q\ge7$ Lemma~\ref{lem:ten1} suffices, and the formal proof uses it there; Lemma~\ref{lem:M} would give larger
+margins. At $q=5$ a finer ball-arithmetic certificate ($\Phi\le-2.4516816$) gives $-0.0436$. The margin at $q=6$ is
+about $-0.003$ per $h^2$ (only Theorem~\ref{thm:C} at $q=175$, about $-0.0014$, is thinner). It rests on the exact leading constant
 $c(1)=\frac2{33}$ of Lemma~\ref{lem:tene}; with $c=\frac14$ the margin would be $+0.13$. A finer certificate in ball
 arithmetic ($\Phi\le-2.5704$) gives $-0.0063$.
 \end{remark}
@@ -1675,13 +1788,12 @@ arithmetic constants and the best certificate (or the equilibrium constant $C(W)
   computations give about $-0.025$ at $h=160$. So $q=4$ needs a different construction.
 \item \emph{$\chi_2(1/2)$.} The margin is about $+0.52$ \cite[\S11.4]{Chi2Paper}; the analytic constant $C(\frac14)\approx-1.744$ is
   the obstruction.
-\item \emph{$\Ti_2(1/q)$ for $q\le5$.} The margins are $+0.327$ ($q=3$), $+0.121$ ($q=4$) and $+0.043$ ($q=5$). At odd $q$ the
-  cause is $\nu=v_2(q^2+1)=1$, which costs $\frac12\log2$ more than for $\chi_2$. For $q=5$ a $2$-adic constant
-  $c_2(1)<0.188$ in place of the $\frac14$ of Lemma~\ref{lem:ten1} would suffice; the exact $2$-adic valuations at
-  $h\le64$ give $n_2/h^2\approx0.125$. Entrywise bounds in the anchored basis cannot do this (their tropical maximum is
-  $\approx h^2/4$), so it would need a cancellation argument like that of Lemma~\ref{lem:tene}. The size bound sees only
-  $|w|$, and the true determinants are smaller (Section~\ref{sec:analytic}); a signed version of Theorem~\ref{thm:size}
-  could also help. For $q=3,4$ even ideal ingredients do not seem to suffice, and $q=2$ fails for $\chi_2$ already.
+\item \emph{$\Ti_2(1/q)$ for $q\le4$.} With Lemma~\ref{lem:M} the margin at $q=3$ is $+0.241$, and at $q=4$ (even, where
+Lemma~\ref{lem:tene} already applies) it is $+0.121$. Improving the $2$-adic bound cannot close either gap: at $q=3$
+removing the prime $2$ altogether ($\frac18\log2\approx0.087$) leaves $+0.154$, and at $q=4$ the even constant $c(2)$ would
+have to drop far below what exact computations show, as for $\chi_2(1/4)$ above. The size bound sees only $|w|$, and the true determinants at $w<0$ are smaller
+(Section~\ref{sec:analytic}), so a signed version of Theorem~\ref{thm:size} is the remaining lever; $q=2$ fails for $\chi_2$
+already.
 \item \emph{$\chi_2(2/q)$ below $173$.} Proposition~\ref{prop:floor} is proved: no $2$-adic lemma can give less than $\log2$
   per $h^2$ for this machine. With $c_2=\log2$ and the equilibrium constant, the margin is positive for odd $q\lesssim87$
   (it changes sign between $81$ and $101$); with the measured $2$-adic constant (about $1.18\log2$ at $h=64$) the sign
@@ -1697,12 +1809,12 @@ arithmetic constants and the best certificate (or the equilibrium constant $C(W)
 % ===========================================================================
 
 \subsection{What is formalised}
-The repository \url{https://github.com/telaviv/chi2-irrationality} \cite{Chi2Repo}, at commit \lean{7a2780c} of branch
-\lean{main} (full hash \lean{7a2780c73c5d84fc41e3ea49f56dabf7e13b0235}), contains proofs of Theorems~\ref{thm:A},
+The repository \url{https://github.com/telaviv/chi2-irrationality} \cite{Chi2Repo}, at commit \lean{cef469e} of branch
+\lean{main} (full hash \lean{cef469ef846a2a3967d2d441e331254bd82898e2}), contains proofs of Theorems~\ref{thm:A},
 \ref{thm:B} and~\ref{thm:C} in Lean~4 \cite{LeanFour} (version v4.35.0) with Mathlib \cite{Mathlib} (version v4.35.0
 \cite{Mathlib4}). The same repository contains the formalisation of \cite{Chi2Paper} ($q=3,5$), on which the present
 one builds, and an intermediate theorem ($\chi_2(1/q)\notin\QQ$ for $q\ge3$, $q\notin\{4,6,8,10,12\}$), which the proof of
-Theorem~\ref{thm:A} reuses. It has 138 Lean files under \lean{Chi2Irrational\slash{}}, including the certificate data.
+Theorem~\ref{thm:A} reuses. It has 148 Lean files under \lean{Chi2Irrational\slash{}}, including the certificate data.
 Paths below are relative to \lean{Chi2Irrational\slash{}}, and all declarations are in the namespace \lean{Chi2Irr}.
 Every step of the proofs of Theorems~\ref{thm:A}--\ref{thm:C} is formalised, including the prime number theorem, the Andreief identity, the lattice
 energy inequality, all dual certificates and the block determinants.
@@ -1722,14 +1834,14 @@ noncomputable def ti2 (z : $\mathbb{R}$) : $\mathbb{R}$ := $\sum$' n : $\mathbb{
 def TheoremQ4 : Prop := $\forall$ q : $\mathbb{N}$, 3 $\le$ q $\to$ q $\ne$ 4 $\to$\\
 \hspace*{2em}Irrational (chi2 (1 / (q : $\mathbb{R}$)))\\
 theorem theoremQ4 : TheoremQ4\\[2pt]
--- TiQ/Defs.lean, TiQ/Interface.lean (namespace TiQ)\\
-def TheoremT : Prop := $\forall$ q : $\mathbb{N}$, 6 $\le$ q $\to$ Irrational (ti2 (1 / (q : $\mathbb{R}$)))\\
-theorem theoremT : TheoremT\\[2pt]
+-- TiQ/Interface5.lean (namespace TiQ)\\
+def TheoremT5 : Prop := $\forall$ q : $\mathbb{N}$, 5 $\le$ q $\to$ Irrational (ti2 (1 / (q : $\mathbb{R}$)))\\
+theorem theoremT5 : TheoremT5\\[2pt]
 -- QZ/Interface.lean (namespace QZ)\\
 theorem theoremQ4num : $\forall$ q : $\mathbb{N}$, Odd q $\to$ 175 $\le$ q $\to$\\
 \hspace*{2em}Irrational (chi2 (2 / (q : $\mathbb{R}$)))
 \end{quote}
-So Theorem~\ref{thm:A} is \lean{Q.theoremQ4}, Theorem~\ref{thm:B} is \lean{TiQ.theoremT} and Theorem~\ref{thm:C} is
+So Theorem~\ref{thm:A} is \lean{Q.theoremQ4}, Theorem~\ref{thm:B} is \lean{TiQ.theoremT5} (which uses \lean{TiQ.theoremT}, the case $q\ge6$, from \lean{TiQ\slash{}Interface.lean}) and Theorem~\ref{thm:C} is
 \lean{QZ.theoremQ4num}. Here $\sum'$ is Mathlib's unconditional sum (\lean{tsum}); \lean{summable\_chi2Term} and
 \lean{TiQ.summable\_ti2Term} prove that the series converge absolutely for $|z|\le1$, so \lean{chi2 z} and \lean{ti2 z}
 are the genuine values. \lean{Irrational x} is Mathlib's predicate $x\notin\QQ$, and $1/(q:\RR)$, $2/(q:\RR)$ are real
@@ -1737,15 +1849,15 @@ divisions after the cast $\NN\to\RR$. The statements do not involve the machine,
 make a proof fail but could not change what is proved.
 
 \subsection{Axioms}
-The command \lean{lake env lean Axioms.lean} prints, for $61$ declarations (the three theorems above, the theorems of
+The command \lean{lake env lean Axioms.lean} prints, for $72$ declarations (the three theorems above, the theorems of
 \cite{Chi2Paper}, and the main ingredients of each),
 \begin{quote}\ttfamily\small
 'Chi2Irr.Q.theoremQ4' depends on axioms: [propext, Classical.choice, Quot.sound]\\
-'Chi2Irr.TiQ.theoremT' depends on axioms: [propext, Classical.choice, Quot.sound]\\
+'Chi2Irr.TiQ.theoremT5' depends on axioms: [propext, Classical.choice, Quot.sound]\\
 'Chi2Irr.QZ.theoremQ4num' depends on axioms: [propext, Classical.choice, Quot.sound]
 \end{quote}
-and the same list for each of the other $58$ (run on 2026-11-12 on the tree of the commit above; the output is
-\lean{scripts\slash{}axioms\_paper\_q.txt}, added to the repository after that commit together with this paper). These are Lean's three standard axioms, which Mathlib also uses. The
+and the same list for each of the other $69$ (run on 2026-11-13 on the tree of the commit above; the output is
+\lean{scripts\slash{}axioms\_t5.txt}). These are Lean's three standard axioms, which Mathlib also uses. The
 development contains no \lean{sorry}, no added axiom, no \lean{native\_decide} and no \lean{implemented\_by}.
 
 \subsection{Correspondence with the paper}
@@ -1806,8 +1918,12 @@ Cor.~\ref{cor:teneTi} & \lean{TiQ.twoAdic\_even\_t\_proof} (\lean{TiQ\slash{}Two
 Prop.~\ref{prop:nonvanB} & \lean{TiQ.block\_SL}, \lean{TiQ.block\_D} (\lean{TiQ\slash{}NonVan\slash{}BlockMat}); \lean{TiQ.lemmaP} (\lean{TiQ\slash{}NonVan\slash{}LemmaP}); \lean{TiQ.nonvan\_t\_proof} (\lean{TiQ\slash{}NonVan\slash{}NonVanT})\\
 Thm.~\ref{thm:size} at $w<0$ & \lean{TiQ.abs\_WT}, \lean{TiQ.analytic\_t\_proof} (\lean{TiQ\slash{}Analytic})\\
 certificate $W=1/36$ & \lean{TiQ.cert\_t6\_proof} (\lean{TiQ\slash{}Certs}; data and checks \lean{TiQ\slash{}Cert\slash{}})\\
-margins & \lean{TiQ.margin\_t6\_proof}, \lean{TiQ.margin\_t\_odd\_proof}, \lean{TiQ.margin\_t\_even\_proof} (\lean{TiQ\slash{}Margin})\\
-Theorem~\ref{thm:B} & \lean{TiQ.irrational\_of\_boundsT} (\lean{TiQ\slash{}MainCond}); \lean{TiQ.theoremT} (\lean{TiQ\slash{}Interface})\\
+Lemma~\ref{lem:M}, Steps 1--2 & \lean{TiQ.M.DeltaT\_eq\_Cb}, \lean{TiQ.M.BfunT\_Cb}, \lean{TiQ.M.HM\_eq}, \lean{TiQ.M.det\_block} (\lean{TiQ\slash{}M\slash{}Gram}); \lean{TiQ.M.Am\_zero}, \lean{TiQ.M.Am\_bound} (\lean{TiQ\slash{}M\slash{}Binom})\\
+Lemma~\ref{lem:M}, Steps 3--5 & \lean{TiQ.M.Om\_bound} (\lean{TiQ\slash{}M\slash{}BoundB}); \lean{TiQ.M.fd\_deriv\_intval} (\lean{TiQ\slash{}M\slash{}Binom}); \lean{TiQ.M.MB\_poly}, \lean{TiQ.M.err\_bound}, \lean{TiQ.M.theta\_bound} (\lean{TiQ\slash{}M\slash{}Trunc}); \lean{TiQ.M.boundA} (\lean{TiQ\slash{}M\slash{}BoundA})\\
+Lemma~\ref{lem:M}, Step 6 & \lean{TiQ.M.det\_PNz}, \lean{TiQ.M.Nblk\_entry}, \lean{TiQ.M.twoAdic\_DeltaT\_M}, \lean{TiQ.M.eventually\_n2M\_le} (\lean{TiQ\slash{}M\slash{}Final}); \lean{TiQ.twoAdic\_odd\_M} (\lean{TiQ\slash{}Interface5})\\
+certificate $W=1/25$ & \lean{TiQ.cert\_t5} (\lean{TiQ\slash{}Interface5}; data and checks \lean{Cert\slash{}DataQ5L200}, \lean{Cert\slash{}Q5L200})\\
+margins & \lean{TiQ.margin\_t5} (\lean{TiQ\slash{}Interface5}); \lean{TiQ.margin\_t6\_proof}, \lean{TiQ.margin\_t\_odd\_proof}, \lean{TiQ.margin\_t\_even\_proof} (\lean{TiQ\slash{}Margin})\\
+Theorem~\ref{thm:B} & \lean{TiQ.irrational\_of\_boundsT} (\lean{TiQ\slash{}MainCond}); \lean{TiQ.theoremT} (\lean{TiQ\slash{}Interface}, $q\ge6$); \lean{TiQ.theoremT5} (\lean{TiQ\slash{}Interface5})\\
 \bottomrule
 \end{tabular}
 \caption{Formal counterparts for Theorem~\ref{thm:B}.}\label{tab:leanB}
@@ -1845,14 +1961,20 @@ The formal proofs follow the written ones. The differences are these; none weake
   $\beta_h=\lfloor h^2/4\rfloor$ is not formalised; the proofs use $4\beta_h\le h^2+2h$.
 \item \emph{Shift and margins.} The shift lemma is formalised in the discretised form of Lemma~\ref{lem:shift}. The margins
   are proved with elementary bounds for logarithms, so the formal margins are slightly weaker: for instance $-0.00904$ at
-  $q=6$ for Theorem~\ref{thm:A}, about $-0.0025$ at $q=6$ for Theorem~\ref{thm:B}, and $-0.00126$ for Theorem~\ref{thm:C}.
+  $q=6$ for Theorem~\ref{thm:A}, about $-0.0025$ at $q=6$ and $-0.019$ at $q=5$ for Theorem~\ref{thm:B}, and $-0.00126$ for Theorem~\ref{thm:C}.
+\item \emph{Lemma~\ref{lem:M}.} The formal proof is Steps 1--6 above (rational $\tilde\theta$, binomial basis, the
+  block matrix $\mathcal N$ and one Leibniz bound with potentials). These differ from our working notes, not from the
+  Lean: the notes use the $2$-adic $\theta_2$ and a Cauchy--Binet expansion over $2h$ rows, with the sharper bound
+  $|E_{ij}|_2\le2^{i+j+1-h}$; with that bound the tropical value of the Leibniz bound for $\mathcal N$ equals the notes'
+  bound. Step~5 proves $2^{i+j+2-h}$ (one weaker), so the proved exponent exceeds the notes' by $O(h)$; the limit
+  constant $\frac18\log2$ is the same. Lemma~\ref{lem:M} is used formally only at $q=5$.
 \item \emph{Not formalised.} Proposition~\ref{prop:floor}, the remarks (including Remark~\ref{rem:173} on $q=173$)
   and Section~\ref{sec:limits}; none of them is used in the proofs of the theorems.
 \end{itemize}
 
 \subsection{How the certificates are checked}
 A dual certificate is a record of rational data (for example \lean{Cert\slash{}DataQ14.lean},
-\lean{TiQ\slash{}Cert\slash{}DataQ6L800.lean}, \lean{QZ\slash{}CertDataQ175.lean}): the log table as a list of integers in units of
+\lean{TiQ\slash{}Cert\slash{}DataQ6L800.lean}, \lean{Cert\slash{}DataQ5L200.lean}, \lean{QZ\slash{}CertDataQ175.lean}): the log table as a list of integers in units of
 $2^{-40}$, the heights $c_j$, the bounds $S_k$, $\lambda$ and $E_{\mathrm{lo}}$. A Boolean predicate (\lean{Cert.CData.Valid},
 \lean{QZ.CDataZ.Valid}) collects every check of Section~\ref{sec:cert}, and the certificate files prove it by
 \lean{decide +kernel}, i.e.\ by evaluation in the Lean kernel; soundness lemmas turn it into a \lean{DualCert}. The data were
@@ -1865,13 +1987,13 @@ and at $q/2$ (\lean{QZ\slash{}NonVan}) by exact computation.
 With elan installed:
 \begin{quote}\ttfamily\small
 git clone https://github.com/telaviv/chi2-irrationality\\
-cd chi2-irrationality \&\& git checkout 7a2780c\\
+cd chi2-irrationality \&\& git checkout cef469e\\
 lake exe cache get\\
 LEAN\_NUM\_THREADS=4 lake build\\
 lake env lean Axioms.lean
 \end{quote}
-The build has $9186$ jobs. Most of its time is spent in the kernel checks of the certificates: a few minutes each for
-$W=1/14^2$ and $W=1/6^2,\dots,1/12^2$, about three hours for $W=4/175^2$ ($10{,}697$\,s wall time on a shared machine), and
+The build has $9196$ jobs. Most of its time is spent in the kernel checks of the certificates: a few minutes each for
+$W=1/14^2$, $W=1/6^2,\dots,1/12^2$ and $W=1/5^2$ ($461$\,s), about three hours for $W=4/175^2$ ($10{,}697$\,s wall time on a shared machine), and
 several hours for the finer certificate at $W=1/36$, whose cells are split over four files. To avoid trusting the
 elaborator's handling of the stored environment, each module can be replayed through the kernel with \lean{leanchecker}:
 \begin{quote}\ttfamily\small
@@ -1882,9 +2004,11 @@ Each module is replayed against the compiled environment of its imports, so Math
 formalisation of \cite{Chi2Paper} and the intermediate theorem (91 modules), all modules passed on 2026-11-09. For the
 modules of Theorems~\ref{thm:B} and~\ref{thm:C} (\lean{TiQ\slash{}}, \lean{QZ\slash{}}), $40$ modules passed on 2026-11-12
 ($3189$\,s, log \lean{scripts\slash{}leanchecker\_qz\_tiq.log}); the seven modules that contain the \lean{decide +kernel}
-proofs of the two new certificates (\lean{QZ\slash{}CertQ175.lean}, \lean{TiQ\slash{}Certs.lean} and the five files of
+proofs of the two certificates of Theorems~\ref{thm:B} ($q\ge6$) and~\ref{thm:C} (\lean{QZ\slash{}CertQ175.lean}, \lean{TiQ\slash{}Certs.lean} and the five files of
 \lean{TiQ\slash{}Cert\slash{}} other than the data) were not replayed, because each would repeat hours of kernel evaluation;
-they are checked by the kernel during \lean{lake build}.
+they are checked by the kernel during \lean{lake build}. The modules added for Lemma~\ref{lem:M} and $q=5$
+(\lean{TiQ\slash{}M\slash{}}, \lean{TiQ\slash{}Interface5.lean}, \lean{Cert\slash{}DataQ5L200.lean}, \lean{Cert\slash{}Q5L200.lean}) have not
+been replayed.
 
 \subsection{What has to be trusted}
 Beyond the Lean kernel and the three axioms, the reader has to trust that the definitions displayed above express
@@ -1898,11 +2022,13 @@ The research, the construction, the proofs, the certificate programs, the Lean f
 the text of this paper were produced largely by AI models (Claude, Anthropic), working under the direction of the author.
 Apart from the check by the Lean kernel, all verification so far, including the internal reviews of the argument by AI
 referees, was carried out by AI systems. The written proofs of the new ingredients (the extension of the construction to
-general $q$, Lemma~\ref{lem:tene}, the case of $\Ti_2$ and the case of $\chi_2(2/q)$) were each checked by one AI referee,
+general $q$, Lemma~\ref{lem:tene}, the case of $\Ti_2$ including Lemma~\ref{lem:M}, and the case of $\chi_2(2/q)$) were
+each checked by one AI referee,
 at a single gate, with independent implementations of the machine. Several written proofs here follow the formal proofs
-rather than those working notes (Lemma~\ref{lem:tene}, Lemma~\ref{lem:tenZ}, Proposition~\ref{prop:nonvanC}, and
-Theorem~\ref{thm:size} at $w<0$); as written proofs these were checked by the Lean kernel and by the whole-paper referee
-only. The fidelity of each Lean statement was checked by an independent AI referee, and the text of this paper was
+rather than those working notes (Lemma~\ref{lem:tene}, Lemma~\ref{lem:tenZ},
+Proposition~\ref{prop:nonvanC}, and Theorem~\ref{thm:size} at $w<0$); as written proofs these were checked by the Lean kernel and by the whole-paper referee
+only. Lemma~\ref{lem:M} (added after the whole-paper review) also follows the formal proof; as written it was checked by
+the Lean kernel and by one AI referee of the changed sections, and its source proof by one AI gate referee. The fidelity of each Lean statement was checked by an independent AI referee, and the text of this paper was
 reviewed as a whole by one further AI referee. No MathSciNet
 search or expert query has been made. No human expert has yet reviewed the mathematics or the Lean code; we would be
 grateful for corrections. The prime number theorem in the formalisation is ported from the PrimeNumberTheoremAnd project of

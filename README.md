@@ -26,10 +26,9 @@ is the inverse tangent integral.
   `paper/main.tex`; also Hexagon 2610.00372v2). It proves the case q = 3, 5 in full. It is kept exactly as published and
   does not describe the later theorems.
 * **"Irrationality of χ₂(1/q), Ti₂(1/q) and χ₂(2/q)"** ([`paper_q/`](paper_q/), source `paper_q/main.tex`, PDF
-  `paper_q/build/main.pdf` after `sh build.sh` in that folder). It proves Theorem Q₄ (its Theorem A), Theorem T (its
-  Theorem B) and Theorem Q4′ (its Theorem C) with one construction, and maps every step to the Lean declarations of
-  commit `7a2780c`. Theorem Q appears there only inside the proof of Theorem A. Not yet published. Theorem T₅ (the case
-  q = 5) is not in either paper yet; its written proof is the working note `pilot_ti2_q5/RESULT.md` (Lemma M).
+  `paper_q/build/main.pdf` after `sh build.sh` in that folder). It proves Theorem Q₄ (its Theorem A), Theorem T₅ (its
+  Theorem B, q ≥ 5, including Lemma M) and Theorem Q4′ (its Theorem C) with one construction, and maps every step to
+  the Lean declarations of commit `cef469e`. Theorems Q and T appear there only inside the proofs. Not yet published.
 
 ## Theorem T (Ti₂(1/q), q ≥ 6)
 

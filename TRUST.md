@@ -1,7 +1,7 @@
 # What you have to trust
 
-The written proofs are in two papers: `paper/` (q = 3, 5; published, unchanged) and `paper_q/` (Theorems Q₄, T and Q4′
-as Theorems A, B and C; its §13 maps every step to a Lean declaration of commit `7a2780c`).
+The written proofs are in two papers: `paper/` (q = 3, 5; published, unchanged) and `paper_q/` (Theorems Q₄, T₅ and Q4′
+as Theorems A, B and C; its §13 maps every step to a Lean declaration of commit `cef469e`).
 
 ## Axioms
 

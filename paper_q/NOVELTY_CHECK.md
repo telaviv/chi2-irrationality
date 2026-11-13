@@ -253,3 +253,20 @@ about DHK, not a search question; the paper already discusses it.
     or at least that the difference is irrational.
 * **Nothing newer supersedes either.** The only new-to-us related item is Zenodo 23021891 (09-28, §2), which is older
   than both and weaker than Zhang.
+
+## Addendum 2026-11-13: Theorem B at q = 5 (Ti₂(1/5) ∉ ℚ)
+
+Theorem B now covers q ≥ 5 (Lemma M, `Chi2Irr.TiQ.theoremT5`). A quick check for the new value, on top of the q ≥ 6 sweep
+above:
+* GitHub (gh CLI, 2026-11-13): repository searches `"inverse tangent integral" irrational`, `Ti2 irrational 1/5`,
+  `"Ti_2(1/5)"`, `arctan dilogarithm irrational`: 0 hits each. Code searches `"ti2" Irrational lean`, `"Ti₂(1/5)"`,
+  `"inverse tangent integral" irrational`: 0 hits; `ti2Term`: two unrelated hits. Caveat: the code index does not yet
+  contain our own recent files (control `theoremQ4num`: 0 hits), so code search may miss very recent repositories.
+* Zenodo (API, most recent): `"inverse tangent integral"`, `"Ti_2" irrational`, `arctangent dilogarithm irrationality`:
+  no irrationality result for Ti₂ at any point (hits are identities, closed forms, unrelated topics).
+* arXiv (API): `all:"inverse tangent integral"`: newest is Vlachopulos 2605.01830 (identities, already in our notes);
+  `irrationality AND "inverse tangent"`: 0 hits.
+* DHK 2022 Thm 2.1 needs q ≥ 2949; Bahçıvan's density-one result decides no individual q. Hata 1990 is still unread
+  (HATA_TODO.md); its threshold at Q = −q² would have to be ≤ 25 to cover q = 5.
+
+Verdict for q = 5: **CLEAR** (no prior or concurrent result found), with the same Hata caveat as for 6 ≤ q ≤ 2948.
